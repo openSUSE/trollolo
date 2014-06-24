@@ -1,0 +1,10 @@
+#!/usr/bin/ruby
+
+config_path = "/tmp/test-trollolorc-#{rand(100000)}"
+bin_path = File.expand_path('../../../bin/trollolo',__FILE__)
+
+ENV["TROLLOLO_CONFIG_PATH"] = config_path
+
+cmd = "#{bin_path} #{ARGV.join(" ")}"
+
+exec(cmd)
