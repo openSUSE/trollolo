@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Cornelius Schumacher']
   s.email       = ['cschum@suse.de']
-  s.homepage    = "http://trollolo.example.com"
+  s.homepage    = "https://github.com/openSUSE/trollolo"
   s.summary     = "Trello command line client"
   s.description = "Trollolo is a command line tool to access Trello and support tasks like generation of burndown charts."
 
