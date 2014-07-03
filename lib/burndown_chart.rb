@@ -93,6 +93,14 @@ class BurndownChart
   end
   
   def write_data filename
+    @data["days"].each do |day|
+      [ "story_points_extra", "tasks_extra" ].each do |key|
+        if day[key] && day[key]["done"] == 0
+          day.delete key
+        end
+      end
+    end
+
     File.open( filename, "w" ) do |file|
       file.write @data.to_yaml
     end

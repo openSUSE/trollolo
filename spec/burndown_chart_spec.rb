@@ -157,6 +157,57 @@ describe BurndownChart do
 
       expect(File.read(write_path)).to eq File.read(read_path)
     end
+
+    it "doesn't write extra entries with 0 values" do
+      raw_data = [
+        {
+          "date" => '2014-04-24',
+          "story_points" =>
+          {
+            "total" => 30,
+            "open" => 21
+          },
+          "tasks" =>
+          {
+            "total" => 26,
+            "open" => 19
+          },
+          "story_points_extra" =>
+          {
+            "done" => 0
+          },
+          "tasks_extra" =>
+          {
+            "done" => 0
+          }
+        }
+      ]
+      @chart.data["days"] = raw_data
+
+      write_path = given_dummy_file
+      @chart.write_data(write_path)
+
+      expected_file_content = <<EOT
+---
+meta:
+  board_id:
+  sprint: 1
+  total_days: 9
+  weekend_lines:
+  - 3.5
+  - 7.5
+days:
+- date: '2014-04-24'
+  story_points:
+    total: 30
+    open: 21
+  tasks:
+    total: 26
+    open: 19
+EOT
+      expect(File.read(write_path)).to eq expected_file_content
+    end
+
   end
   
   describe "commands" do
