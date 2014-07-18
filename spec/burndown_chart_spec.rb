@@ -183,6 +183,7 @@ describe BurndownChart do
         }
       ]
       @chart.data["days"] = raw_data
+      @chart.data["meta"]["board_id"] = "1234"
 
       write_path = given_dummy_file
       @chart.write_data(write_path)
@@ -190,7 +191,7 @@ describe BurndownChart do
       expected_file_content = <<EOT
 ---
 meta:
-  board_id:
+  board_id: '1234'
   sprint: 1
   total_days: 9
   weekend_lines:
@@ -217,8 +218,8 @@ EOT
       path = given_directory
       @chart.setup(path,"myboardid")
       
-      expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be_true
-      expect(File.exist?(File.join(path,"create_burndown"))).to be_true
+      expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
+      expect(File.exist?(File.join(path,"create_burndown"))).to be true
       
       chart = BurndownChart.new(@settings)
       chart.read_data(File.join(path,"burndown-data-01.yaml"))

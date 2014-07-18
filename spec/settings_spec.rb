@@ -10,7 +10,7 @@ describe Settings do
     end
     
     it "is not verbose by default" do
-      @settings.verbose.should be_false
+      expect(@settings.verbose).to be false
     end
     
     it "reads config file" do
