@@ -212,9 +212,31 @@ class Cli < Thor
   desc "plot", "Plot burndown chart"
   def plot(sprint_number)
     process_global_options options
-
     plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
     system "python #{plot_helper} #{sprint_number}"
+  end
+
+  desc "backup", "Create backup of board"
+  option "board-id", :desc => "Id of Trello board", :required => true
+  def backup
+    process_global_options options
+    b = Backup.new @@settings
+    b.backup(options["board-id"])
+  end
+
+  desc "list_backups", "List all backups"
+  def list_backups
+    b = Backup.new @@settings
+    b.list.each do |backup|
+      puts backup
+    end
+  end
+
+  desc "show_backup", "Show backup of board"
+  option "board-id", :desc => "Id of Trello board", :required => true
+  def show_backup
+    b = Backup.new @@settings
+    b.show(options["board-id"])
   end
 
   private

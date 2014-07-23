@@ -15,4 +15,10 @@ describe Cli do
     @cli.fetch_burndown_data
   end
   
+  it "backups board" do
+    expect_any_instance_of(Backup).to receive(:backup)
+    @cli.options = {"board-id" => "1234"}
+    @cli.backup
+  end
+
 end

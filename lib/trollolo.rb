@@ -29,6 +29,7 @@ require_relative 'trello'
 require_relative 'card'
 require_relative 'burndown_chart'
 require_relative 'burndown_data'
+require_relative 'backup'
 
 class TrolloloError < StandardError
 end

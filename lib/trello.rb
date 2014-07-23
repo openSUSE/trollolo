@@ -26,6 +26,21 @@ class Trello
     @developer_public_key = settings.fetch(:developer_public_key)
     @member_token         = settings.fetch(:member_token)
     @board_id             = settings.fetch(:board_id)
+    @verbose              = settings.fetch(:verbose, false)
+  end
+
+  def full_board
+    path = "/1/boards/#{@board_id}?lists=all&cards=all&key=#{@developer_public_key}&token=#{@member_token}"
+
+    uri = URI("https://trello.com" + path)
+
+    if @verbose
+      STDERR.puts "GET #{uri}"
+    end
+
+    resp = Net::HTTP.get_response(uri)
+
+    JSON.parse resp.body
   end
 
   def lists
