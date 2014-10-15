@@ -137,4 +137,23 @@ class BurndownChart
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
   end
+
+  def create_next_sprint(burndown_dir)
+    Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
+      file =~ /burndown-data-(.*).yaml/
+      current_sprint = $1.to_i
+      if current_sprint > sprint
+        self.sprint = current_sprint
+      end
+    end
+    burndown_data_path = File.join(burndown_dir, burndown_data_filename)
+    begin
+      read_data burndown_data_path
+      self.sprint = self.sprint + 1
+      @data["days"] = []
+      write_data File.join(burndown_dir, burndown_data_filename)
+    rescue Errno::ENOENT
+      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
+    end
+  end
 end

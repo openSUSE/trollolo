@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 include GivenFilesystemSpecHelpers
 
 describe BurndownChart do
-  
+
   before(:each) do
     @settings = dummy_settings
     @burndown_data = BurndownData.new(@settings)
@@ -213,7 +213,7 @@ EOT
   
   describe "commands" do
     use_given_filesystem(keep_files: true)
-    
+
     describe "setup" do
       it "initializes new chart" do
         path = given_directory
@@ -277,6 +277,30 @@ EOT
         after.read_data(File.join(path,'burndown-data-02.yaml'))
 
         expect(after.days.size).to eq before.days.size + 1
+      end
+    end
+
+    describe "create_next_sprint" do
+      it "create new sprint file" do
+        path = given_directory_from_data("burndown_dir")
+        chart = BurndownChart.new(@settings)
+        chart.create_next_sprint(path)
+
+        next_sprint_file = File.join(path, "burndown-data-03.yaml")
+        expect(File.exist?(next_sprint_file)).to be true
+
+        expected_file_content = <<EOT
+---
+meta:
+  board_id: myboardid
+  sprint: 3
+  total_days: 9
+  weekend_lines:
+  - 3.5
+  - 7.5
+days: []
+EOT
+        expect(File.read(next_sprint_file)).to eq expected_file_content
       end
     end
   end

@@ -1,7 +1,7 @@
 ---
 meta:
   board_id: "myboardid"
-  sprint: 1
+  sprint: 2
   total_days: 9
   weekend_lines:
   - 3.5

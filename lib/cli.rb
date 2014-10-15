@@ -200,14 +200,18 @@ class Cli < Thor
     chart.setup(options[:output],options["board-id"])
   end
   
-  desc "burndown <command>", "Create burndown chart"
+  desc "burndown", "Update burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => true
-  def burndown command=nil
+  option :new_sprint, :aliases => :n, :desc => "Create new sprint"
+  def burndown
     process_global_options options
     require_trello_credentials
 
     chart = BurndownChart.new @@settings
     begin
+      if options[:new_sprint]
+        chart.create_next_sprint(options[:output])
+      end
       chart.update(options[:output])
     rescue TrolloloError => e
       STDERR.puts e
