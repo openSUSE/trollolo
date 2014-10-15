@@ -13,8 +13,8 @@ describe BurndownChart do
   describe "initializer" do
     it "sets initial meta data" do
       expect(@chart.data["meta"]["sprint"]).to eq 1
-      expect(@chart.data["meta"]["total_days"]).to eq 9
-      expect(@chart.data["meta"]["weekend_lines"]).to eq [3.5, 7.5]
+      expect(@chart.data["meta"]["total_days"]).to eq 10
+      expect(@chart.data["meta"]["weekend_lines"]).to eq [3.5, 8.5]
     end
   end
   
@@ -193,10 +193,10 @@ describe BurndownChart do
 meta:
   board_id: '1234'
   sprint: 1
-  total_days: 9
+  total_days: 10
   weekend_lines:
   - 3.5
-  - 7.5
+  - 8.5
 days:
 - date: '2014-04-24'
   story_points:

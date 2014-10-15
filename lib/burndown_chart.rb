@@ -27,8 +27,8 @@ class BurndownChart
       "meta" => {
         "board_id" => nil,
         "sprint" => 1,
-        "total_days" => 9,
-        "weekend_lines" => [ 3.5, 7.5 ]
+        "total_days" => 10,
+        "weekend_lines" => [ 3.5, 8.5 ]
       },
       "days" => []
     }
