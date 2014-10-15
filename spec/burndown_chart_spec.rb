@@ -214,66 +214,70 @@ EOT
   describe "commands" do
     use_given_filesystem(keep_files: true)
     
-    it "initializes new chart" do
-      path = given_directory
-      @chart.setup(path,"myboardid")
-      
-      expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
-      expect(File.exist?(File.join(path,"create_burndown"))).to be true
-      
-      chart = BurndownChart.new(@settings)
-      chart.read_data(File.join(path,"burndown-data-01.yaml"))
-      
-      expect(chart.board_id).to eq "myboardid"
+    describe "setup" do
+      it "initializes new chart" do
+        path = given_directory
+        @chart.setup(path,"myboardid")
+
+        expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
+        expect(File.exist?(File.join(path,"create_burndown"))).to be true
+
+        chart = BurndownChart.new(@settings)
+        chart.read_data(File.join(path,"burndown-data-01.yaml"))
+
+        expect(chart.board_id).to eq "myboardid"
+      end
     end
     
-    it "updates chart with latest data" do
-      card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
-          
-      stub_request(:any,card_url_match).to_return(:status => 200,
-        :body => load_test_file("cards.json"), :headers => {})
+    describe "update" do
+      it "updates chart with latest data" do
+        card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
 
-      list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
-          
-      stub_request(:any,list_url_match).to_return(:status => 200,
-        :body => load_test_file("lists.json"), :headers => {})
+        stub_request(:any,card_url_match).to_return(:status => 200,
+          :body => load_test_file("cards.json"), :headers => {})
 
-      path = given_directory_from_data("burndown_dir")
+        list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
 
-      before = BurndownChart.new(@settings)
-      before.read_data(File.join(path,'burndown-data-02.yaml'))
-      
-      @chart.update(path)
+        stub_request(:any,list_url_match).to_return(:status => 200,
+          :body => load_test_file("lists.json"), :headers => {})
 
-      after = BurndownChart.new(@settings)
-      after.read_data(File.join(path,'burndown-data-02.yaml'))
-      
-      expect(after.days.size).to eq before.days.size + 1
-    end
+        path = given_directory_from_data("burndown_dir")
 
-    it "overwrites data on same date" do
-      card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
-          
-      stub_request(:any,card_url_match).to_return(:status => 200,
-        :body => load_test_file("cards.json"), :headers => {})
+        before = BurndownChart.new(@settings)
+        before.read_data(File.join(path,'burndown-data-02.yaml'))
 
-      list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
-          
-      stub_request(:any,list_url_match).to_return(:status => 200,
-        :body => load_test_file("lists.json"), :headers => {})
+        @chart.update(path)
 
-      path = given_directory_from_data("burndown_dir")
+        after = BurndownChart.new(@settings)
+        after.read_data(File.join(path,'burndown-data-02.yaml'))
 
-      before = BurndownChart.new(@settings)
-      before.read_data(File.join(path,'burndown-data-02.yaml'))
-      
-      @chart.update(path)
-      @chart.update(path)
+        expect(after.days.size).to eq before.days.size + 1
+      end
 
-      after = BurndownChart.new(@settings)
-      after.read_data(File.join(path,'burndown-data-02.yaml'))
-      
-      expect(after.days.size).to eq before.days.size + 1
+      it "overwrites data on same date" do
+        card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
+
+        stub_request(:any,card_url_match).to_return(:status => 200,
+          :body => load_test_file("cards.json"), :headers => {})
+
+        list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
+
+        stub_request(:any,list_url_match).to_return(:status => 200,
+          :body => load_test_file("lists.json"), :headers => {})
+
+        path = given_directory_from_data("burndown_dir")
+
+        before = BurndownChart.new(@settings)
+        before.read_data(File.join(path,'burndown-data-02.yaml'))
+
+        @chart.update(path)
+        @chart.update(path)
+
+        after = BurndownChart.new(@settings)
+        after.read_data(File.join(path,'burndown-data-02.yaml'))
+
+        expect(after.days.size).to eq before.days.size + 1
+      end
     end
   end
   
