@@ -114,8 +114,6 @@ class BurndownChart
     self.board_id = board_id
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
-    FileUtils.cp(File.expand_path("../../templates/create_burndown",__FILE__),
-      burndown_dir)
   end
   
   def update(burndown_dir)

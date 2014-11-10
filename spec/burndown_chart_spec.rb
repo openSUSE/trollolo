@@ -220,7 +220,6 @@ EOT
         @chart.setup(path,"myboardid")
 
         expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
-        expect(File.exist?(File.join(path,"create_burndown"))).to be true
 
         chart = BurndownChart.new(@settings)
         chart.read_data(File.join(path,"burndown-data-01.yaml"))

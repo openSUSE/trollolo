@@ -223,7 +223,7 @@ class Cli < Thor
   def plot(sprint_number)
     process_global_options options
 
-    plot_helper = File.expand_path("../../templates/create_burndown", __FILE__ )
+    plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
     system "python #{plot_helper} #{sprint_number}"
   end
 
