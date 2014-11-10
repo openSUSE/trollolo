@@ -39,7 +39,10 @@ for day in burndown["days"]:
 
   if "story_points_extra" in day or "tasks_extra" in day:
     x_days_extra.append(current_day)
-    y_tasks_done_extra.append(-day["tasks_extra"]["done"])
+    tasks = 0
+    if day.has_key("tasks_extra"):
+      tasks = -day["tasks_extra"]["done"]
+    y_tasks_done_extra.append(tasks)
     points = 0
     if day.has_key("story_points_extra"):
       points = -day["story_points_extra"]["done"]
