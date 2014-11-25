@@ -1,5 +1,7 @@
 # Trollolo
 
+[![Build Status](https://travis-ci.org/openSUSE/trollolo.svg?branch=master)](https://travis-ci.org/openSUSE/trollolo)
+
 Command line tool to extract data from Trello, in particular for creating
 burndown charts.
 
