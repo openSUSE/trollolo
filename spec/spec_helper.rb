@@ -1,7 +1,12 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require_relative '../lib/trollolo'
 
 require 'given_filesystem/spec_helpers'
 require 'webmock/rspec'
+
+WebMock.disable_net_connect!(:allow => "codeclimate.com")
 
 bin_path = File.expand_path( "../../bin/", __FILE__ )
 
