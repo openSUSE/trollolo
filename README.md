@@ -1,6 +1,8 @@
 # Trollolo
 
 [![Build Status](https://travis-ci.org/openSUSE/trollolo.svg?branch=master)](https://travis-ci.org/openSUSE/trollolo)
+[![Code Climate](https://codeclimate.com/github/openSUSE/trollolo/badges/gpa.svg)](https://codeclimate.com/github/openSUSE/trollolo)
+[![Test Coverage](https://codeclimate.com/github/openSUSE/trollolo/badges/coverage.svg)](https://codeclimate.com/github/openSUSE/trollolo)
 
 Command line tool to extract data from Trello, in particular for creating
 burndown charts.
