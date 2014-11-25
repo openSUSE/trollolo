@@ -63,6 +63,14 @@ For correct generation of the burndown chart, the Trello board has to follow
 a few convention. They are described in the section `CONVENTIONS for SCRUM
 BOARDS`.
 
+### plot -- Plot burndown chart
+
+`trollolo plot <sprint-number>`
+
+Plot the burndown chart for given sprint. This command assumes that you are in
+the burndown directory (initially created with `burndown-init`) and that the
+corresponding file `burndown-data-<sprint-number>.yaml` exists there.
+
 ### fetch-burndown-data -- Read data for burndown chart
 
 `trollolo fetch-burndown-data --board-id=<board id>`
