@@ -59,9 +59,9 @@ class Cli < Thor
 
   no_tasks{
     def name_to_points(card_name)
-      card_name =~ /^\((\d+)\)/
+      card_name =~ /^\(([\d.]+)\)/
       return nil if $1.nil?
-      story_points = $1.to_i
+      story_points = $1.to_f
       return story_points
     end
   }

@@ -40,8 +40,8 @@ class Card
     card = Card.new
 
     title = json["name"]
-    if title =~ /^\((\d+)\)/
-      card.sp = $1.to_i
+    if title =~ /^\(([\d.]+)\)/
+      card.sp = $1.to_f
     end
 
     labels = json["labels"]
