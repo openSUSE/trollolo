@@ -57,6 +57,15 @@ class Cli < Thor
     end
   end
 
+  no_tasks{
+    def name_to_points(card_name)
+      card_name =~ /^\((\d+)\)/
+      return nil if $1.nil?
+      story_points = $1.to_i
+      return story_points
+    end
+  }
+
   desc "get-cards", "Get cards"
   option "board-id", :desc => "Id of Trello board", :required => true
   def get_cards
@@ -94,7 +103,7 @@ class Cli < Thor
           next
         end
         
-        if name !~ /^\(\d+\)/
+        if name_to_points(name).nil?
           next
         end
         
@@ -116,25 +125,19 @@ class Cli < Thor
       puts "Todo"
       cards_todo.each do |card|
         puts "  #{card["name"]}"
-        card["name"] =~ /^\((\d+)\)/
-        story_points = $1.to_i
-        story_points_todo += story_points
+        story_points_todo += name_to_points(card["name"])
       end
 
       puts "Doing"
       cards_doing.each do |card|
         puts "  #{card["name"]}"
-        card["name"] =~ /^\((\d+)\)/
-        story_points = $1.to_i
-        story_points_doing += story_points
+        story_points_doing += name_to_points(card["name"])
       end
 
       puts "Done"
       cards_done.each do |card|
         puts "  #{card["name"]}"
-        card["name"] =~ /^\((\d+)\)/
-        story_points = $1.to_i
-        story_points_done += story_points
+        story_points_done += name_to_points(card["name"])
       end
       
       puts
