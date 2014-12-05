@@ -43,11 +43,9 @@ class Cli < Thor
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new @@settings
-    trello.board_id = options["board-id"]
-    
+    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
     lists = trello.lists
-    
+
     if @@settings.raw
       puts JSON.pretty_generate lists
     else
@@ -63,8 +61,7 @@ class Cli < Thor
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new @@settings
-    trello.board_id = options["board-id"]
+    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
     
     cards = trello.cards
 
@@ -151,8 +148,7 @@ class Cli < Thor
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new @@settings
-    trello.board_id = options["board-id"]
+    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
     
     data = trello.checklists
 
