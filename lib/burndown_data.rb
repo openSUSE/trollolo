@@ -45,10 +45,12 @@ class BurndownData
     @extra_story_points = Result.new
     @extra_tasks = Result.new
   end
-  
-  def fetch_todo_list_id
-    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
+  def trello
+    Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
+  end
+
+  def fetch_todo_list_id
     lists = trello.lists
     lists.each do |l|
       if l["name"] =~ /^Sprint Backlog$/
@@ -58,10 +60,8 @@ class BurndownData
 
     raise "Unable to find sprint backlog column on sprint board"
   end
-  
-  def fetch_doing_list_id
-    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
+  def fetch_doing_list_id
     lists = trello.lists
     lists.each do |l|
       if l["name"] =~ /^Doing$/
@@ -71,10 +71,8 @@ class BurndownData
 
     raise "Unable to find doing column on sprint board"
   end
-  
-  def fetch_done_list_id
-    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
+  def fetch_done_list_id
     lists = trello.lists
     last_sprint = nil
     lists.each do |l|
@@ -85,7 +83,7 @@ class BurndownData
         end
       end
     end
-    
+
     id = last_sprint[:id]
     if !id
       raise "Unable to find done column on sprint board"
@@ -94,8 +92,6 @@ class BurndownData
   end
   
   def fetch
-    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
-    
     cards = trello.cards
 
     todo_list_id = fetch_todo_list_id
