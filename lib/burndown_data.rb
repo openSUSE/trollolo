@@ -47,8 +47,7 @@ class BurndownData
   end
   
   def fetch_todo_list_id
-    trello = Trello.new @settings
-    trello.board_id = @board_id
+    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
     lists = trello.lists
     lists.each do |l|
@@ -61,8 +60,7 @@ class BurndownData
   end
   
   def fetch_doing_list_id
-    trello = Trello.new @settings
-    trello.board_id = @board_id
+    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
     lists = trello.lists
     lists.each do |l|
@@ -75,8 +73,7 @@ class BurndownData
   end
   
   def fetch_done_list_id
-    trello = Trello.new @settings
-    trello.board_id = @board_id
+    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
 
     lists = trello.lists
     last_sprint = nil
@@ -97,8 +94,7 @@ class BurndownData
   end
   
   def fetch
-    trello = Trello.new @settings
-    trello.board_id = @board_id
+    trello = Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
     
     cards = trello.cards
 
