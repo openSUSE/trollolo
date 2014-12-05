@@ -39,6 +39,8 @@ class Trello
     get "checklists"
   end
 
+  private
+
   def get resource
     path = "/1/boards/#{board_id}/#{resource}?key=#{developer_public_key}&token=#{member_token}"
 
