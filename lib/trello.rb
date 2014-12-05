@@ -46,6 +46,8 @@ class Trello
     "/1/boards/#{board_id}/#{resource}?key=#{developer_public_key}&token=#{member_token}"
   end
 
+  # FIXME: we should handle time-outs gracefully.
+
   def get resource
     resp = http_client.get resource_url(resource)
     unless resp.code == "200"
