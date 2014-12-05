@@ -18,11 +18,15 @@
 class Trello
 
   attr_accessor :board_id
-  
+
+  attr_reader   :developer_public_key, :member_token
+
   def initialize settings
-    @settings = settings
+    @developer_public_key = settings.fetch(:developer_public_key)
+    @member_token         = settings.fetch(:member_token)
+    @board_id             = settings.fetch(:board_id)
   end
-  
+
   def lists
     get "lists"
   end
@@ -34,9 +38,9 @@ class Trello
   def checklists
     get "checklists"
   end
-  
-  def get resource    
-    path = "/1/boards/#{@board_id}/#{resource}?key=#{@settings.developer_public_key}&token=#{@settings.member_token}"
+
+  def get resource
+    path = "/1/boards/#{board_id}/#{resource}?key=#{developer_public_key}&token=#{member_token}"
 
     http = Net::HTTP.new "trello.com", 443
     http.use_ssl = true

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Trello do
 
-  let(:trello) { t = Trello.new(dummy_settings); t.board_id = "myboard"; t }
+  let(:trello) { Trello.new(board_id: "myboard", developer_public_key: "mykey", member_token: "mytoken") }
 
   describe "lists" do
     it "returns a list of cards" do
