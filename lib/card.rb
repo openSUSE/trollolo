@@ -18,7 +18,13 @@
 class Card
 
   attr_accessor :sp, :tasks, :tasks_done
-  
+
+  def self.name_to_points(card_name)
+    card_name =~ /^\(([\d.]+)\)/
+    return nil if $1.nil?
+    $1.to_f
+  end
+
   def initialize
     @sp = nil
     @extra = false
@@ -40,9 +46,7 @@ class Card
     card = Card.new
 
     title = json["name"]
-    if title =~ /^\(([\d.]+)\)/
-      card.sp = $1.to_f
-    end
+    card.sp = name_to_points(title)
 
     labels = json["labels"]
     labels.each do |label|
