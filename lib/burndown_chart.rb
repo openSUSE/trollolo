@@ -18,7 +18,7 @@
 class BurndownChart
 
   attr_accessor :data
-  
+
   def initialize(settings)
     @settings = settings
     @burndown_data = BurndownData.new settings
@@ -33,27 +33,27 @@ class BurndownChart
       "days" => []
     }
   end
-  
+
   def sprint
     @data["meta"]["sprint"]
   end
-  
+
   def sprint= s
     @data["meta"]["sprint"] = s
   end
-  
+
   def board_id
     @data["meta"]["board_id"]
   end
-  
+
   def board_id= id
     @data["meta"]["board_id"] = id
   end
-  
+
   def days
     @data["days"]
   end
-  
+
   def add_data(burndown_data, date)
     new_entry = {
       "date" => date.to_s,
@@ -87,11 +87,11 @@ class BurndownChart
     end
     @data["days"] = new_days
   end
-  
+
   def read_data filename
     @data = YAML.load_file filename
   end
-  
+
   def write_data filename
     @data["days"].each do |day|
       [ "story_points_extra", "tasks_extra" ].each do |key|
@@ -105,25 +105,31 @@ class BurndownChart
       file.write @data.to_yaml
     end
   end
-  
+
   def burndown_data_filename
     "burndown-data-#{sprint.to_s.rjust(2,"0")}.yaml"
   end
-  
+
   def setup(burndown_dir, board_id)
     self.board_id = board_id
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
   end
-  
-  def update(burndown_dir)
+
+  def last_sprint(burndown_dir)
+    last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
       current_sprint = $1.to_i
-      if current_sprint > sprint
-        self.sprint = current_sprint
+      if current_sprint > last_sprint
+        last_sprint = current_sprint
       end
     end
+    last_sprint
+  end
+
+  def update(burndown_dir)
+    self.sprint = last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
     begin
       read_data burndown_data_path
@@ -137,13 +143,7 @@ class BurndownChart
   end
 
   def create_next_sprint(burndown_dir)
-    Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
-      file =~ /burndown-data-(.*).yaml/
-      current_sprint = $1.to_i
-      if current_sprint > sprint
-        self.sprint = current_sprint
-      end
-    end
+    self.sprint = last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
     begin
       read_data burndown_data_path
