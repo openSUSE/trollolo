@@ -191,7 +191,7 @@ class Cli < Thor
   end
   
   desc "burndown", "Update burndown chart"
-  option :output, :aliases => :o, :desc => "Output directory", :required => true
+  option :output, :aliases => :o, :desc => "Output directory", :required => false
   option :new_sprint, :aliases => :n, :desc => "Create new sprint"
   def burndown
     process_global_options options
@@ -200,9 +200,9 @@ class Cli < Thor
     chart = BurndownChart.new @@settings
     begin
       if options[:new_sprint]
-        chart.create_next_sprint(options[:output])
+        chart.create_next_sprint(options[:output] || Dir.pwd)
       end
-      chart.update(options[:output])
+      chart.update(options[:output] || Dir.pwd)
     rescue TrolloloError => e
       STDERR.puts e
       exit 1
