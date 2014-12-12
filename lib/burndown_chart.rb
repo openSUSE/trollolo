@@ -54,8 +54,8 @@ class BurndownChart
     @data["days"]
   end
 
-  def add_data(burndown_data, date)
-    new_entry = {
+  def initialize_entry(burndown_data, date)
+    {
       "date" => date.to_s,
       "story_points" => {
         "total" => burndown_data.story_points.total,
@@ -72,20 +72,25 @@ class BurndownChart
         "done" => burndown_data.extra_tasks.done
       }
     }
-    new_days = Array.new
-    replaced_entry = false
-    @data["days"].each do |entry|
-      if entry["date"] == date.to_s
-        new_days.push(new_entry)
-        replaced_entry = true
-      else
-        new_days.push(entry)
-      end
+  end
+
+  def replace_entry(date, new_entry)
+    days.each_with_index do |entry, idx|
+      days[idx] = new_entry if entry["date"] == date.to_s
     end
-    if !replaced_entry
-      new_days.push(new_entry)
+  end
+
+  def entry_exists?(date)
+    days.any? { |entry| entry["date"] == date.to_s }
+  end
+
+  def add_data(burndown_data, date)
+    new_entry = initialize_entry(burndown_data, date)
+    if entry_exists?(date)
+      replace_entry(date, new_entry)
+    else
+      days.push(new_entry)
     end
-    @data["days"] = new_days
   end
 
   def read_data filename
