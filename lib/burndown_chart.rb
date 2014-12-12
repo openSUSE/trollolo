@@ -131,6 +131,7 @@ class BurndownChart
       @burndown_data.fetch
       add_data(@burndown_data, Date.today)
       write_data burndown_data_path
+      puts "Updated data for sprint #{self.sprint}"
     rescue Errno::ENOENT
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
