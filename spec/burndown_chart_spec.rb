@@ -235,6 +235,23 @@ EOT
       end
     end
 
+    describe "load_last_sprint" do
+      let(:path) { given_directory_from_data("burndown_dir") }
+      it "loads the burndown form the 2nd sprint into data" do
+        @chart.load_last_sprint(path)
+        expect(@chart.data).to eq({"meta"=>
+                                   {"board_id"=>"myboardid",
+                                    "sprint"=>2,
+                                    "total_days"=>9,
+                                    "weekend_lines"=>[3.5, 7.5]},
+                                   "days"=>[]})
+      end
+
+      it "returns the path of the last sprint" do
+        expect(@chart.load_last_sprint(path)).to eq(File.join(path,"burndown-data-02.yaml"))
+      end
+    end
+
     describe "update" do
       it "updates chart with latest data" do
         card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/

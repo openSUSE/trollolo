@@ -106,8 +106,12 @@ class BurndownChart
       end
     end
 
-    File.open( filename, "w" ) do |file|
-      file.write @data.to_yaml
+    begin
+      File.open( filename, "w" ) do |file|
+        file.write @data.to_yaml
+      end
+    rescue Errno::ENOENT
+      raise TrolloloError.new( "'#{filename}' not found" )
     end
   end
 
@@ -133,30 +137,25 @@ class BurndownChart
     last_sprint
   end
 
-  def update(burndown_dir)
+  def load_last_sprint(burndown_dir)
     self.sprint = last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
-    begin
-      read_data burndown_data_path
-      @burndown_data.board_id = board_id
-      @burndown_data.fetch
-      add_data(@burndown_data, Date.today)
-      write_data burndown_data_path
-    rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
-    end
+    read_data burndown_data_path
+    return burndown_data_path
+  end
+
+  def update(burndown_dir)
+    burndown_data_path = load_last_sprint(burndown_dir)
+    @burndown_data.board_id = board_id
+    @burndown_data.fetch
+    add_data(@burndown_data, Date.today)
+    write_data burndown_data_path
   end
 
   def create_next_sprint(burndown_dir)
-    self.sprint = last_sprint(burndown_dir)
-    burndown_data_path = File.join(burndown_dir, burndown_data_filename)
-    begin
-      read_data burndown_data_path
-      self.sprint = self.sprint + 1
-      @data["days"] = []
-      write_data File.join(burndown_dir, burndown_data_filename)
-    rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
-    end
+    load_last_sprint(burndown_dir)
+    self.sprint = self.sprint + 1
+    @data["days"] = []
+    write_data File.join(burndown_dir, burndown_data_filename)
   end
 end
