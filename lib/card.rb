@@ -17,7 +17,7 @@
 
 class Card
 
-  attr_accessor :sp, :tasks, :tasks_done
+  attr_accessor :meta, :sp, :tasks, :tasks_done
 
   def self.name_to_points(card_name)
     card_name =~ /^\(([\d.]+)\)/
@@ -27,6 +27,7 @@ class Card
 
   def initialize
     @sp = nil
+    @meta = nil
     @extra = false
   end
   
@@ -47,6 +48,19 @@ class Card
 
     title = json["name"]
     card.sp = name_to_points(title)
+    if title =~ /^Sprint (\d+)/
+      begin
+        sprint = $1.to_i
+        yaml = json["desc"].sub(%r{```[^\n]*\n([^`]*)```}, "\\1") # drop markdown code tag
+        meta = YAML.load(yaml) # throws an exception for invalid yaml
+        if meta
+          meta["sprint"] = sprint
+          card.meta = meta
+        end
+      rescue Exception=>e
+        puts e.inspect
+      end
+    end
 
     labels = json["labels"]
     labels.each do |label|

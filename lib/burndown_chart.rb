@@ -55,6 +55,12 @@ class BurndownChart
   end
   
   def add_data(burndown_data, date)
+    if burndown_data.meta
+      m = burndown_data.meta
+      if m["sprint"] == @data["meta"]["sprint"].to_i
+        @data["meta"] = @data["meta"].merge(m)
+      end
+    end
     new_entry = {
       "date" => date.to_s,
       "story_points" => {

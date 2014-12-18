@@ -50,6 +50,10 @@ class BurndownData
     Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
   end
 
+  def meta
+    @meta
+  end
+
   def fetch_list_id_regexp(regexp)
     lists = trello.lists
     lists.each do |l|
@@ -135,6 +139,9 @@ class BurndownData
           tasks_done += card.tasks_done
         end
       elsif list_id == done_list_id
+        if card.meta
+          @meta=card.meta
+        end
         if card.has_sp?
           if card.extra?
             extra_sp_total += card.sp
