@@ -16,8 +16,6 @@ with open('burndown-data-' + sprint + '.yaml', 'r') as f:
 meta = burndown["meta"]
 
 total_days = meta["total_days"]
-weekend_line1 = meta["weekend_lines"][0]
-weekend_line2 = meta["weekend_lines"][1]
 
 current_day = 1
 x_days = []
@@ -86,8 +84,8 @@ plt.plot([1, total_days] , [y_open_story_points[0], 0], color='grey')
 plt.plot([0, total_days + 1], [0, 0], color='blue', linestyle=':')
 
 # Weekend lines
-plt.plot([weekend_line1, weekend_line1], [ymin+1, ymax-1], color='grey', linestyle=':')
-plt.plot([weekend_line2, weekend_line2], [ymin+1, ymax-1], color='grey', linestyle=':')
+for weekend_line in meta["weekend_lines"]:
+  plt.plot([weekend_line, weekend_line], [ymin+1, ymax-1], color='grey', linestyle=':')
 
 # Story points
 plt.ylabel('Story Points', color='black')
