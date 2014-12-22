@@ -90,6 +90,9 @@ create a nice chart from it. It will show the chart and also create a file
 `burndown-SPRINT_NUMBER.png` you can upload as cover graphics to a card on your
 Trello board.
 
+Some more info can be found in the command line help with `trollolo help` and
+`trollolo help burndown`.
+
 ### Example
 
 ![Burndown example](https://raw.githubusercontent.com/openSUSE/trollolo/master/examples/burndown-26.png)
