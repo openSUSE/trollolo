@@ -19,6 +19,15 @@ functions work see the Trollolo man page. There is an
 [example Trello board](https://trello.com/b/CRdddpdy/trollolo-testing-board)
 which demonstrates the expected structure.
 
+## Installation
+
+You can install Trollolo as gem with `gem install trollolo`.
+
+For the chart generation you will need a working matplotlib installation and
+the python module to read YAML. On openSUSE you can get that with
+
+    zypper install python-matplotlib python-matplotlib-tk python-PyYAML
+
 ## Configuration
 
 Trollolo reads a configuration file `.trollolorc` in the home directory of the
