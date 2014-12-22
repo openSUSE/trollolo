@@ -42,3 +42,51 @@ For creating a member token go follow the
 in the Trello API documentation.
 
 The board id is the cryptic string in the URL of your board.
+
+## Creating burndown charts
+
+Trollolo implements a simple work flow for creating burndown charts from the
+data on a Trello board. It fetches the data from Trello, stores and processes
+it locally, and generates charts which can then be uploaded as graphics to
+Trello again.
+
+At the moment it only needs read-only access to the Trello board from which it
+reads the data. In the future it would be great, if it could also write back
+the generated data and results to make it even more automatic.
+
+The work flow goes as follows:
+
+Create an initial working directory for the burndown chart generation:
+
+    trollolo burndown-init --board-id=MYBOARDID --output=WORKING_DIR
+
+This will create a directory WORKING_DIR and put an initial data file there,
+which contains the meta data. The file is called `burndown-data-1.yaml`. You
+might want to keep this file in a git repository for safe storage and history.
+
+After each daily go to the working directory and call:
+
+    trollolo burndown
+
+This will get the current data from the Trello board and update the data file
+with the data from the current day. If there already was some data in the file
+for the same day it will be overridden.
+
+When the sprint is over and you want to start with the next sprint, go to the
+working directory and call:
+
+    trollolo burndown --new-sprint
+
+This will create a new data file for the next sprint number and populate it
+with initial data taken from the Trello board. You are ready to go for the
+sprint now and can continue with calling `trollolo burndown` after each daily.
+
+To generate the actual burndown chart, go to the working directory and call:
+
+    trollolo plot SPRINT_NUMBER
+
+This will take the data from the file `burndown-data-SPRINT_NUMBER.yaml` and
+create a nice chart from it. It will show the chart and also create a file
+`burndown-SPRINT_NUMBER.png` you can upload as cover graphics to a card on your
+Trello board.
+
