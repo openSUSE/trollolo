@@ -17,7 +17,7 @@
 
 class Card
 
-  attr_accessor :meta, :sp, :tasks, :tasks_done
+  attr_accessor :meta, :sp, :tasks, :tasks_done, :title, :description
 
   def self.name_to_points(card_name)
     card_name =~ /^\(([\d.]+)\)/
@@ -56,20 +56,10 @@ class Card
   def self.parse json
     card = Card.new
 
-    title = json["name"]
-    card.sp = name_to_points(title)
-    if title =~ /^Sprint (\d+)/
-      begin
-        sprint = $1.to_i
-        meta = self.parse_yaml_from_description(json["desc"])
-        if meta
-          meta["sprint"] = sprint
-          card.meta = meta
-        end
-      rescue Exception=>e
-        puts e.inspect
-      end
-    end
+    card.title = json["name"]
+    card.description = json["desc"]
+
+    card.sp = name_to_points(card.title)
 
     labels = json["labels"]
     labels.each do |label|

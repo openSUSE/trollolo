@@ -1,0 +1,61 @@
+{
+  "id": "5319c0409a567dc62b68aa6b",
+  "checkItemStates": [
+    {
+      "idCheckItem": "5319c052d86da6cb6fa2a9e0",
+      "state": "complete"
+    },
+    {
+      "idCheckItem": "5319c0548163d08c11d36a07",
+      "state": "complete"
+    },
+    {
+      "idCheckItem": "5319c0562fef3bc511c79279",
+      "state": "complete"
+    }
+  ],
+  "closed": false,
+  "dateLastActivity": "2014-03-07T12:49:44.474Z",
+  "desc": "my description",
+  "descData": null,
+  "email": null,
+  "idBoard": "53186e8391ef8671265eba9d",
+  "idList": "5319bf045c6ef0092c55331e",
+  "idMembersVoted": [
+
+  ],
+  "idShort": 8,
+  "idAttachmentCover": null,
+  "manualCoverAttachment": false,
+  "idLabels": [
+
+  ],
+  "name": "(2) P2: Create Scrum columns",
+  "pos": 327679,
+  "shortLink": "afmNzjbW",
+  "badges": {
+    "votes": 0,
+    "viewingMemberVoted": false,
+    "subscribed": false,
+    "fogbugz": "",
+    "checkItems": 3,
+    "checkItemsChecked": 2,
+    "comments": 0,
+    "attachments": 0,
+    "description": false,
+    "due": null
+  },
+  "due": null,
+  "idChecklists": [
+    "5319c04d592a9182153db831"
+  ],
+  "idMembers": [
+
+  ],
+  "labels": [
+
+  ],
+  "shortUrl": "https://trello.com/c/afmNzjbW",
+  "subscribed": false,
+  "url": "https://trello.com/c/afmNzjbW/8-2-p2-create-scrum-columns"
+}

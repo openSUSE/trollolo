@@ -46,4 +46,27 @@ EOT
       expect(meta["weekend_lines"]).to eq([1.5, 6.5])
     end
   end
+
+  describe ".parse" do
+    before(:each) do
+      json = JSON.parse(load_test_file("card.json"))
+      @card = Card.parse(json)
+    end
+
+    it "parses title" do
+      expect(@card.title).to eq "(2) P2: Create Scrum columns"
+    end
+
+    it "parses description" do
+      expect(@card.description).to eq "my description"
+    end
+
+    it "parses open tasks" do
+      expect(@card.tasks).to eq 3
+    end
+
+    it "parses done tasks" do
+      expect(@card.tasks_done).to eq 2
+    end
+  end
 end

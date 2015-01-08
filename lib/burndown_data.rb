@@ -139,9 +139,18 @@ class BurndownData
           tasks_done += card.tasks_done
         end
       elsif list_id == done_list_id
-        if card.meta
-          @meta=card.meta
+        if card.title =~ /^Sprint (\d+)/
+          begin
+            sprint = $1.to_i
+            @meta = Card.parse_yaml_from_description(card.description)
+            if @meta
+              @meta["sprint"] = sprint
+            end
+          rescue Exception=>e
+            puts e.inspect
+          end
         end
+
         if card.has_sp?
           if card.extra?
             extra_sp_total += card.sp
