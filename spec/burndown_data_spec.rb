@@ -31,6 +31,30 @@ describe BurndownData do
     end
   end
 
+  describe "#find_list_by_title" do
+    before(:each) do
+      list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
+
+      stub_request(:any,list_url_match).to_return(:status => 200,
+        :body => load_test_file("lists.json"), :headers => {})
+    end
+
+    it "returns list id for title matching string" do
+      expect( @burndown.find_list_by_title("Done Sprint 9") ).
+        to eq "5319bf045c6ef0092c55331e"
+    end
+
+    it "doesn't return list id if title doesn't match string" do
+      expect( @burndown.find_list_by_title("Sprint 9") ).
+        to be(nil)
+    end
+
+    it "returns list id for title matching regexp" do
+      expect( @burndown.find_list_by_title(/Sprint 9$/) ).
+        to eq "5319bf045c6ef0092c55331e"
+    end
+  end
+
   describe "#fetch_todo_list_id" do
     it "returns list id" do
       list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
