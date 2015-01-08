@@ -144,6 +144,16 @@ describe BurndownData do
       expect( @burndown.extra_tasks.open ).to eq 1
       expect( @burndown.extra_tasks.done ).to eq 0
     end
+
+    it "returns meta data" do
+      @burndown.fetch
+
+      expect( @burndown.meta ).to eq({
+        "sprint" => 10,
+        "total_days" => 18,
+        "weekend_lines" => [1.5, 6.5, 11.5, 16.5]
+      })
+    end
   end
   
 end
