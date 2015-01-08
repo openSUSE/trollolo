@@ -92,11 +92,13 @@ class BurndownData
 
     todo_list_id = fetch_todo_list_id
     doing_list_id = fetch_doing_list_id
+    blocked_list_id = fetch_list_id_regexp("^Blocked")
     done_list_id = fetch_done_list_id
     
     if @settings.verbose
       puts "Todo list: #{todo_list_id}"
       puts "Doing list: #{doing_list_id}"
+      puts "Blocked list: #{blocked_list_id}"
       puts "Done list: #{done_list_id}"
     end
 
@@ -117,7 +119,7 @@ class BurndownData
       
       list_id = c["idList"]
 
-      if list_id == todo_list_id || list_id == doing_list_id
+      if list_id == todo_list_id || list_id == doing_list_id || list_id == blocked_list_id
         if card.has_sp?
           if card.extra?
             extra_sp_total += card.sp
