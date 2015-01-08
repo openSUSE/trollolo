@@ -140,14 +140,10 @@ class BurndownData
         end
       elsif list_id == done_list_id
         if card.title =~ /^Sprint (\d+)/
-          begin
-            sprint = $1.to_i
-            @meta = Card.parse_yaml_from_description(card.description)
-            if @meta
-              @meta["sprint"] = sprint
-            end
-          rescue Exception=>e
-            puts e.inspect
+          sprint = $1.to_i
+          @meta = Card.parse_yaml_from_description(card.description)
+          if @meta
+            @meta["sprint"] = sprint
           end
         end
 
