@@ -50,26 +50,22 @@ class BurndownData
     Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
   end
 
-  def fetch_todo_list_id
+  def fetch_list_id_regexp(regexp)
     lists = trello.lists
     lists.each do |l|
-      if l["name"] =~ /^Sprint Backlog$/
+      if l["name"] =~ /#{regexp}/
         return l["id"]
       end
     end
+    return nil
+  end
 
-    raise "Unable to find sprint backlog column on sprint board"
+  def fetch_todo_list_id
+    return(fetch_list_id_regexp("^Sprint Backlog$") or raise "Unable to find sprint backlog column on sprint board")
   end
 
   def fetch_doing_list_id
-    lists = trello.lists
-    lists.each do |l|
-      if l["name"] =~ /^Doing$/
-        return l["id"]
-      end
-    end
-
-    raise "Unable to find doing column on sprint board"
+    return(fetch_list_id_regexp("^Doing$") or raise "Unable to find doing column on sprint board")
   end
 
   def fetch_done_list_id
