@@ -65,11 +65,11 @@ class BurndownData
   end
 
   def fetch_todo_list_id
-    return(find_list_by_title("Sprint Backlog") or raise "Unable to find sprint backlog column on sprint board")
+    find_list_by_title("Sprint Backlog") or raise "Unable to find sprint backlog column on sprint board"
   end
 
   def fetch_doing_list_id
-    return(find_list_by_title("Doing") or raise "Unable to find doing column on sprint board")
+    find_list_by_title("Doing") or raise "Unable to find doing column on sprint board"
   end
 
   def fetch_done_list_id
