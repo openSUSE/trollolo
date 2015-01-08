@@ -54,13 +54,16 @@ class BurndownChart
     @data["days"]
   end
   
-  def add_data(burndown_data, date)
+  def merge_meta_data_from_board(burndown_data)
     if burndown_data.meta
       m = burndown_data.meta
       if m["sprint"] == @data["meta"]["sprint"].to_i
         @data["meta"] = @data["meta"].merge(m)
       end
     end
+  end
+
+  def add_data(burndown_data, date)
     new_entry = {
       "date" => date.to_s,
       "story_points" => {
@@ -135,6 +138,7 @@ class BurndownChart
       read_data burndown_data_path
       @burndown_data.board_id = board_id
       @burndown_data.fetch
+      merge_meta_data_from_board(@burndown_data)
       add_data(@burndown_data, Date.today)
       write_data burndown_data_path
       puts "Updated data for sprint #{self.sprint}"

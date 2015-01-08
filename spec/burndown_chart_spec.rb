@@ -304,4 +304,32 @@ EOT
     end
   end
   
+  describe "reads meta data from board" do
+    use_given_filesystem
+
+    it "merges meta data from board if present" do
+      card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
+
+      stub_request(:any,card_url_match).to_return(:status => 200,
+        :body => load_test_file("cards.json"), :headers => {})
+
+      list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
+
+      stub_request(:any,list_url_match).to_return(:status => 200,
+        :body => load_test_file("lists.json"), :headers => {})
+
+      chart = BurndownChart.new(@settings)
+      chart.read_data(given_file("burndown-data-10.yaml"))
+
+      expect(chart.data["meta"]["weekend_lines"]).to eq([3.5, 8.5])
+
+      burndown = BurndownData.new(@settings)
+      burndown.board_id = "myboardid"
+      burndown.fetch
+
+      chart.merge_meta_data_from_board(burndown)
+
+      expect(chart.data["meta"]["weekend_lines"]).to eq([1.5, 6.5, 11.5, 16.5])
+    end
+  end
 end

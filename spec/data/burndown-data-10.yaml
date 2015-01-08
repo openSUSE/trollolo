@@ -1,0 +1,9 @@
+---
+meta:
+  board_id: "myboardid"
+  sprint: 10
+  total_days: 9
+  weekend_lines:
+  - 3.5
+  - 8.5
+days: []
