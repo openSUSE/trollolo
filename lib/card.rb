@@ -43,6 +43,16 @@ class Card
     @extra = true
   end
   
+  def self.parse_yaml_from_description(description)
+    description =~ /```yaml(.*)\n([^`]*)```/m
+    yaml = $1
+    if yaml
+      return YAML.load(yaml) # throws an exception for invalid yaml
+    else
+      return nil
+    end
+  end
+
   def self.parse json
     card = Card.new
 
@@ -51,8 +61,7 @@ class Card
     if title =~ /^Sprint (\d+)/
       begin
         sprint = $1.to_i
-        yaml = json["desc"].sub(%r{```[^\n]*\n([^`]*)```}, "\\1") # drop markdown code tag
-        meta = YAML.load(yaml) # throws an exception for invalid yaml
+        meta = self.parse_yaml_from_description(json["desc"])
         if meta
           meta["sprint"] = sprint
           card.meta = meta
