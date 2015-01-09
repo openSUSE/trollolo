@@ -28,6 +28,20 @@ EOT
       expect(meta["weekend_lines"]).to eq([1.5, 6.5])
     end
 
+    it "parses description only having unmarked YAML" do
+      description = <<EOT
+```
+total_days: 18
+weekend_lines:
+  - 1.5
+  - 6.5
+```
+EOT
+      meta = Card.parse_yaml_from_description(description)
+      expect(meta["total_days"]).to eq(18)
+      expect(meta["weekend_lines"]).to eq([1.5, 6.5])
+    end
+
     it "parses description having YAML and text" do
       description = <<EOT
 This is some text

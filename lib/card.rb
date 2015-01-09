@@ -44,8 +44,8 @@ class Card
   end
   
   def self.parse_yaml_from_description(description)
-    description =~ /```yaml(.*)\n([^`]*)```/m
-    yaml = $1
+    description =~ /```(yaml)?\n(.*)```/m
+    yaml = $2
     if yaml
       return YAML.load(yaml) # throws an exception for invalid yaml
     else
