@@ -214,6 +214,26 @@ EOT
     puts "   Total: #{burndown.fast_lane_cards.total}"
   end
   
+  desc "burndowns", "run multiple burndowns"
+  option "board-list", :desc => "path to board-list.yaml", :required => true
+  option :plot, :type => :boolean, :desc => "also plot the new data"
+  def burndowns
+    process_global_options options
+    board_list = YAML.load_file(options["board-list"])
+    board_list.keys.each do |name|
+      board = board_list[name]
+      destdir = name
+      chart = BurndownChart.new @@settings
+      if ! File.directory?(destdir)
+        if destdir =~ /[^[:alnum:]. _]/ # sanitize
+          raise "invalid character in team name"
+        end
+        chart.setup(destdir, board["boardid"])
+      end
+      chart.update(destdir, options[:plot])
+    end
+  end
+
   desc "burndown-init", "Initialize burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => true
   option "board-id", :desc => "Id of Trello board", :required => true
