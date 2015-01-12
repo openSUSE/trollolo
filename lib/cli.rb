@@ -211,9 +211,10 @@ class Cli < Thor
   end
   
   desc "plot SPRINT-NUMBER", "Plot burndown chart for given sprint"
+  option :output, :aliases => :o, :desc => "Output directory", :required => false
   def plot(sprint_number)
     process_global_options options
-    BurndownChart.plot(sprint_number)
+    BurndownChart.plot(sprint_number, options[:output])
   end
 
   desc "backup", "Create backup of board"
