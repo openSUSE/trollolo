@@ -94,6 +94,10 @@ To generate the actual burndown chart, go to the working directory and call:
 
     trollolo plot SPRINT_NUMBER
 
+or fetch and plot data in one step with:
+
+    trollolo burndown --plot
+
 This will take the data from the file `burndown-data-SPRINT_NUMBER.yaml` and
 create a nice chart from it. It will show the chart and also create a file
 `burndown-SPRINT_NUMBER.png` you can upload as cover graphics to a card on your
