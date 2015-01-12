@@ -193,6 +193,7 @@ class Cli < Thor
   desc "burndown", "Update burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => false
   option :new_sprint, :aliases => :n, :desc => "Create new sprint"
+  option :plot, :type => :boolean, :desc => "also plot the new data"
   def burndown
     process_global_options options
     require_trello_credentials
@@ -202,7 +203,7 @@ class Cli < Thor
       if options[:new_sprint]
         chart.create_next_sprint(options[:output] || Dir.pwd)
       end
-      chart.update(options[:output] || Dir.pwd)
+      chart.update(options[:output] || Dir.pwd, options[:plot])
     rescue TrolloloError => e
       STDERR.puts e
       exit 1
