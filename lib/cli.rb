@@ -212,8 +212,7 @@ class Cli < Thor
   desc "plot SPRINT-NUMBER", "Plot burndown chart for given sprint"
   def plot(sprint_number)
     process_global_options options
-    plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
-    system "python #{plot_helper} #{sprint_number}"
+    BurndownChart.plot(sprint_number)
   end
 
   desc "backup", "Create backup of board"
