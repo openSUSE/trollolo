@@ -209,7 +209,7 @@ class Cli < Thor
     end
   end
   
-  desc "plot", "Plot burndown chart"
+  desc "plot SPRINT-NUMBER", "Plot burndown chart for given sprint"
   def plot(sprint_number)
     process_global_options options
     plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
