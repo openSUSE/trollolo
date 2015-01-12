@@ -109,6 +109,11 @@ class BurndownChart
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
   end
+
+  def self.plot(sprint_number)
+    plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
+    system "python #{plot_helper} #{sprint_number}"
+  end
   
   def update(burndown_dir)
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
