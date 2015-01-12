@@ -20,7 +20,8 @@
 # or interaction with the files used to generate burndown charts.
 class BurndownData
 
-  attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks
+  attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks,
+    :date_time
   attr_accessor :board_id
   
   class Result
@@ -177,6 +178,8 @@ class BurndownData
     
     @extra_tasks.done = extra_tasks_done
     @extra_tasks.open = extra_tasks_total - extra_tasks_done
+
+    @date_time = DateTime.now
   end
 
 end

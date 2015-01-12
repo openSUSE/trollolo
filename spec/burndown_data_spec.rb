@@ -154,6 +154,16 @@ describe BurndownData do
         "weekend_lines" => [1.5, 6.5, 11.5, 16.5]
       })
     end
+
+    it "saves date and time" do
+      expected_date_time = DateTime.parse("2015-01-12T13:57:16+01:00")
+
+      allow(DateTime).to receive(:now).and_return(expected_date_time)
+
+      @burndown.fetch
+
+      expect(@burndown.date_time).to eq(expected_date_time)
+    end
   end
   
 end
