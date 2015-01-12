@@ -3,12 +3,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import yaml
+import os
 
-if len(sys.argv) != 2:
-  print "Usage: machinery-burndown.py <sprint-number>"
+if len(sys.argv) < 2 or len(sys.argv) > 3:
+  print "Usage: machinery-burndown.py <sprint-number> [working-dir]"
   sys.exit(1)
 
 sprint = sys.argv[1]
+if len(sys.argv) > 2:
+  working_dir = sys.argv[2]
+  os.chdir(working_dir)
 
 with open('burndown-data-' + sprint + '.yaml', 'r') as f:
   burndown = yaml.load(f)
