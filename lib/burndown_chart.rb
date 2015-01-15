@@ -109,8 +109,13 @@ class BurndownChart
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
   end
+
+  def self.plot(sprint_number, working_dir=".")
+    plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
+    system "python #{plot_helper} #{sprint_number} #{working_dir}"
+  end
   
-  def update(burndown_dir)
+  def update(burndown_dir, with_plot=false)
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
       current_sprint = $1.to_i
@@ -127,6 +132,9 @@ class BurndownChart
       add_data(@burndown_data)
       write_data burndown_data_path
       puts "Updated data for sprint #{self.sprint}"
+      if with_plot
+        BurndownChart.plot(self.sprint, burndown_dir)
+      end
     rescue Errno::ENOENT
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
