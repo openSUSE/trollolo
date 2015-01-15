@@ -65,23 +65,7 @@ class BurndownChart
 
   def add_data(burndown_data)
     date = burndown_data.date_time.to_date
-    new_entry = {
-      "date" => date.to_s,
-      "story_points" => {
-        "total" => burndown_data.story_points.total,
-        "open" => burndown_data.story_points.open
-      },
-      "tasks" => {
-        "total" => burndown_data.tasks.total,
-        "open" => burndown_data.tasks.open
-      },
-      "story_points_extra" => {
-        "done" => burndown_data.extra_story_points.done
-      },
-      "tasks_extra" => {
-        "done" => burndown_data.extra_tasks.done
-      }
-    }
+    new_entry = burndown_data.to_hash
     new_days = Array.new
     replaced_entry = false
     @data["days"].each do |entry|

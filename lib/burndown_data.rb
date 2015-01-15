@@ -47,6 +47,26 @@ class BurndownData
     @extra_tasks = Result.new
   end
 
+  def to_hash
+    {
+      "date" => date_time.to_date.to_s,
+      "story_points" => {
+        "total" => story_points.total,
+        "open" => story_points.open
+      },
+      "tasks" => {
+        "total" => tasks.total,
+        "open" => tasks.open
+      },
+      "story_points_extra" => {
+        "done" => extra_story_points.done
+      },
+      "tasks_extra" => {
+        "done" => extra_tasks.done
+      }
+    }
+  end
+
   def trello
     Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
   end

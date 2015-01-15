@@ -31,6 +31,40 @@ describe BurndownData do
     end
   end
 
+  describe "#to_hash" do
+    it "converts to hash" do
+      @burndown.story_points.open = 1
+      @burndown.story_points.done = 2
+      @burndown.tasks.open = 3
+      @burndown.tasks.done = 4
+      @burndown.extra_story_points.open = 5
+      @burndown.extra_story_points.done = 6
+      @burndown.extra_tasks.open = 7
+      @burndown.extra_tasks.done = 8
+      @burndown.date_time = DateTime.parse("2015-01-15")
+
+      expected_hash = {
+        "date" => "2015-01-15",
+        "story_points" => {
+          "total" => 3,
+          "open" => 1
+        },
+        "tasks" => {
+          "total" => 7,
+          "open" => 3
+        },
+        "story_points_extra" => {
+          "done" => 6
+        },
+        "tasks_extra" => {
+          "done" => 8
+        }
+      }
+
+      expect(@burndown.to_hash).to eq(expected_hash)
+    end
+  end
+
   describe "#find_list_by_title" do
     before(:each) do
       list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
@@ -165,5 +199,4 @@ describe BurndownData do
       expect(@burndown.date_time).to eq(expected_date_time)
     end
   end
-  
 end
