@@ -63,7 +63,8 @@ class BurndownChart
     end
   end
 
-  def add_data(burndown_data, date)
+  def add_data(burndown_data)
+    date = burndown_data.date_time.to_date
     new_entry = {
       "date" => date.to_s,
       "story_points" => {
@@ -139,7 +140,7 @@ class BurndownChart
       @burndown_data.board_id = board_id
       @burndown_data.fetch
       merge_meta_data_from_board(@burndown_data)
-      add_data(@burndown_data, Date.today)
+      add_data(@burndown_data)
       write_data burndown_data_path
       puts "Updated data for sprint #{self.sprint}"
     rescue Errno::ENOENT

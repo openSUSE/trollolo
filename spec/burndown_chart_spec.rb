@@ -65,8 +65,9 @@ describe BurndownChart do
       @burndown_data.story_points.done = 7
       @burndown_data.tasks.open = 10
       @burndown_data.tasks.done = 11
+      @burndown_data.date_time = DateTime.parse("2014-05-30")
 
-      @chart.add_data(@burndown_data,Date.parse("2014-05-30"))
+      @chart.add_data(@burndown_data)
       
       expect( @chart.data["days"].first["story_points"] ).to eq(
         {
@@ -95,8 +96,9 @@ describe BurndownChart do
       @burndown_data.extra_story_points.done = 3
       @burndown_data.extra_tasks.open = 5
       @burndown_data.extra_tasks.done = 2
-      
-      @chart.add_data(@burndown_data,Date.parse("2014-05-30"))
+      @burndown_data.date_time = DateTime.parse("2014-05-30")
+
+      @chart.add_data(@burndown_data)
       
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["date"] ).to eq ( "2014-05-30" )
@@ -123,8 +125,9 @@ describe BurndownChart do
       @burndown_data.story_points.done = 7
       @burndown_data.tasks.open = 10
       @burndown_data.tasks.done = 11
-      
-      @chart.add_data(@burndown_data,Date.parse("2014-05-30"))
+      @burndown_data.date_time = DateTime.parse("2014-05-30")
+
+      @chart.add_data(@burndown_data)
       
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["story_points"] ).to eq ( {
@@ -133,7 +136,7 @@ describe BurndownChart do
       } )
 
       @burndown_data.story_points.done = 8
-      @chart.add_data(@burndown_data,Date.parse("2014-05-30"))
+      @chart.add_data(@burndown_data)
       
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["story_points"] ).to eq ( {
