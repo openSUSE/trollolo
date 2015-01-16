@@ -18,7 +18,7 @@
 class BurndownChart
 
   attr_accessor :data
-  
+
   def initialize(settings)
     @settings = settings
     @burndown_data = BurndownData.new settings
@@ -33,27 +33,27 @@ class BurndownChart
       "days" => []
     }
   end
-  
+
   def sprint
     @data["meta"]["sprint"]
   end
-  
+
   def sprint= s
     @data["meta"]["sprint"] = s
   end
-  
+
   def board_id
     @data["meta"]["board_id"]
   end
-  
+
   def board_id= id
     @data["meta"]["board_id"] = id
   end
-  
+
   def days
     @data["days"]
   end
-  
+
   def merge_meta_data_from_board(burndown_data)
     if burndown_data.meta
       m = burndown_data.meta
@@ -76,16 +76,31 @@ class BurndownChart
         new_days.push(entry)
       end
     end
-    if !replaced_entry
-      new_days.push(new_entry)
-    end
-    @data["days"] = new_days
   end
-  
+
+  def replace_entry(date, new_entry)
+    days.each_with_index do |entry, idx|
+      days[idx] = new_entry if entry["date"] == date.to_s
+    end
+  end
+
+  def entry_exists?(date)
+    days.any? { |entry| entry["date"] == date.to_s }
+  end
+
+  def add_data(burndown_data)
+    new_entry =burndown_data.to_hash
+    if entry_exists?(burndown_data.date_time.to_date)
+      replace_entry(burndown_data.date_time.to_date, new_entry)
+    else
+      days.push(new_entry)
+    end
+  end
+
   def read_data filename
     @data = YAML.load_file filename
   end
-  
+
   def write_data filename
     @data["days"].each do |day|
       [ "story_points_extra", "tasks_extra" ].each do |key|
@@ -95,59 +110,62 @@ class BurndownChart
       end
     end
 
-    File.open( filename, "w" ) do |file|
-      file.write @data.to_yaml
+    begin
+      File.open( filename, "w" ) do |file|
+        file.write @data.to_yaml
+      end
+    rescue Errno::ENOENT
+      raise TrolloloError.new( "'#{filename}' not found" )
     end
   end
-  
+
   def burndown_data_filename
     "burndown-data-#{sprint.to_s.rjust(2,"0")}.yaml"
   end
-  
+
   def setup(burndown_dir, board_id)
     self.board_id = board_id
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
   end
-  
-  def update(burndown_dir)
+
+  def last_sprint(burndown_dir)
+    last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
       current_sprint = $1.to_i
-      if current_sprint > sprint
-        self.sprint = current_sprint
+      if current_sprint > last_sprint
+        last_sprint = current_sprint
       end
     end
+    last_sprint
+  end
+
+  def load_last_sprint(burndown_dir)
+    self.sprint = last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
     begin
       read_data burndown_data_path
-      @burndown_data.board_id = board_id
-      @burndown_data.fetch
-      merge_meta_data_from_board(@burndown_data)
-      add_data(@burndown_data)
-      write_data burndown_data_path
-      puts "Updated data for sprint #{self.sprint}"
     rescue Errno::ENOENT
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
+    return burndown_data_path
+  end
+
+  def update(burndown_dir)
+    burndown_data_path = load_last_sprint(burndown_dir)
+    @burndown_data.board_id = board_id
+    @burndown_data.fetch
+    @burndown_data.date_time = DateTime.now
+    add_data(@burndown_data)
+    write_data burndown_data_path
+    puts "Updated data for sprint #{self.sprint}"
   end
 
   def create_next_sprint(burndown_dir)
-    Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
-      file =~ /burndown-data-(.*).yaml/
-      current_sprint = $1.to_i
-      if current_sprint > sprint
-        self.sprint = current_sprint
-      end
-    end
-    burndown_data_path = File.join(burndown_dir, burndown_data_filename)
-    begin
-      read_data burndown_data_path
-      self.sprint = self.sprint + 1
-      @data["days"] = []
-      write_data File.join(burndown_dir, burndown_data_filename)
-    rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
-    end
+    load_last_sprint(burndown_dir)
+    self.sprint = self.sprint + 1
+    @data["days"] = []
+    write_data File.join(burndown_dir, burndown_data_filename)
   end
 end

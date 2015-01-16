@@ -17,10 +17,10 @@ describe BurndownChart do
       expect(@chart.data["meta"]["weekend_lines"]).to eq [3.5, 8.5]
     end
   end
-  
+
   describe "data" do
     use_given_filesystem
-    
+
     before(:each) do
       @raw_data = [
         {
@@ -68,7 +68,7 @@ describe BurndownChart do
       @burndown_data.date_time = DateTime.parse("2014-05-30")
 
       @chart.add_data(@burndown_data)
-      
+
       expect( @chart.data["days"].first["story_points"] ).to eq(
         {
           "total" => 23,
@@ -80,14 +80,14 @@ describe BurndownChart do
           "open" => 10
         } )
     end
-    
+
     it "returns sprint number" do
       expect(@chart.sprint).to eq 1
     end
-    
+
     it "adds data" do
       @chart.data["days"] = @raw_data
-      
+
       @burndown_data.story_points.open = 16
       @burndown_data.story_points.done = 7
       @burndown_data.tasks.open = 10
@@ -99,7 +99,7 @@ describe BurndownChart do
       @burndown_data.date_time = DateTime.parse("2014-05-30")
 
       @chart.add_data(@burndown_data)
-      
+
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["date"] ).to eq ( "2014-05-30" )
       expect( @chart.data["days"].last["story_points"] ).to eq ( {
@@ -120,7 +120,7 @@ describe BurndownChart do
 
     it "replaces data of same day" do
       @chart.data["days"] = @raw_data
-      
+
       @burndown_data.story_points.open = 16
       @burndown_data.story_points.done = 7
       @burndown_data.tasks.open = 10
@@ -128,7 +128,7 @@ describe BurndownChart do
       @burndown_data.date_time = DateTime.parse("2014-05-30")
 
       @chart.add_data(@burndown_data)
-      
+
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["story_points"] ).to eq ( {
         "total" => 23,
@@ -137,7 +137,7 @@ describe BurndownChart do
 
       @burndown_data.story_points.done = 8
       @chart.add_data(@burndown_data)
-      
+
       expect( @chart.data["days"].count ).to eq 3
       expect( @chart.data["days"].last["story_points"] ).to eq ( {
         "total" => 24,
@@ -150,7 +150,7 @@ describe BurndownChart do
 
       expect(@chart.data["days"]).to eq @raw_data
     end
-    
+
     it "writes data" do
       read_path = given_file('burndown-data.yaml')
       @chart.read_data(read_path)
@@ -213,7 +213,7 @@ EOT
     end
 
   end
-  
+
   describe "commands" do
     use_given_filesystem(keep_files: true)
 
@@ -230,7 +230,31 @@ EOT
         expect(chart.board_id).to eq "myboardid"
       end
     end
-    
+
+    describe "last_sprint" do
+      it "gets the last sprint based on the burndown files" do
+        path = given_directory_from_data("burndown_dir")
+        expect(@chart.last_sprint(path)).to eq(2)
+      end
+    end
+
+    describe "load_last_sprint" do
+      let(:path) { given_directory_from_data("burndown_dir") }
+      it "loads the burndown form the 2nd sprint into data" do
+        @chart.load_last_sprint(path)
+        expect(@chart.data).to eq({"meta"=>
+                                   {"board_id"=>"myboardid",
+                                    "sprint"=>2,
+                                    "total_days"=>9,
+                                    "weekend_lines"=>[3.5, 7.5]},
+                                   "days"=>[]})
+      end
+
+      it "returns the path of the last sprint" do
+        expect(@chart.load_last_sprint(path)).to eq(File.join(path,"burndown-data-02.yaml"))
+      end
+    end
+
     describe "update" do
       it "updates chart with latest data" do
         card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
@@ -306,7 +330,7 @@ EOT
       end
     end
   end
-  
+
   describe "reads meta data from board" do
     use_given_filesystem
 
