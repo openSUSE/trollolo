@@ -162,20 +162,26 @@ class Cli < Thor
     puts "Story points:"
     puts "   Open: #{burndown.story_points.open}"
     puts "   Done: #{burndown.story_points.done}"
-    puts "  Total: #{burndown.story_points.total}"    
+    puts "   Total: #{burndown.story_points.total}"
+    puts
     puts "Tasks:"
     puts "   Open: #{burndown.tasks.open}"
     puts "   Done: #{burndown.tasks.done}"
-    puts "  Total: #{burndown.tasks.total}"    
+    puts "   Total: #{burndown.tasks.total}"
     puts
     puts "Extra story points:"
     puts "   Open: #{burndown.extra_story_points.open}"
     puts "   Done: #{burndown.extra_story_points.done}"
-    puts "  Total: #{burndown.extra_story_points.total}"    
+    puts "   Total: #{burndown.extra_story_points.total}"
     puts "Extra tasks:"
     puts "   Open: #{burndown.extra_tasks.open}"
     puts "   Done: #{burndown.extra_tasks.done}"
-    puts "  Total: #{burndown.extra_tasks.total}"
+    puts "   Total: #{burndown.extra_tasks.total}"
+    puts
+    puts "FastLane Cards:"
+    puts "   Open: #{burndown.fast_lane_cards.open}"
+    puts "   Done: #{burndown.fast_lane_cards.done}"
+    puts "   Total: #{burndown.fast_lane_cards.total}"
   end
   
   desc "burndown-init", "Initialize burndown chart"

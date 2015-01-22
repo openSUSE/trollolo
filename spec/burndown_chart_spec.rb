@@ -8,6 +8,7 @@ describe BurndownChart do
     @settings = dummy_settings
     @burndown_data = BurndownData.new(@settings)
     @chart = BurndownChart.new(@settings)
+    full_board_mock
   end
 
   describe "initializer" do
@@ -257,16 +258,6 @@ EOT
 
     describe "update" do
       it "updates chart with latest data" do
-        card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
-
-        stub_request(:any,card_url_match).to_return(:status => 200,
-          :body => load_test_file("cards.json"), :headers => {})
-
-        list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
-
-        stub_request(:any,list_url_match).to_return(:status => 200,
-          :body => load_test_file("lists.json"), :headers => {})
-
         path = given_directory_from_data("burndown_dir")
 
         before = BurndownChart.new(@settings)
@@ -281,16 +272,6 @@ EOT
       end
 
       it "overwrites data on same date" do
-        card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
-
-        stub_request(:any,card_url_match).to_return(:status => 200,
-          :body => load_test_file("cards.json"), :headers => {})
-
-        list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
-
-        stub_request(:any,list_url_match).to_return(:status => 200,
-          :body => load_test_file("lists.json"), :headers => {})
-
         path = given_directory_from_data("burndown_dir")
 
         before = BurndownChart.new(@settings)
@@ -330,21 +311,12 @@ EOT
       end
     end
   end
+  
+  describe "reads meta data from the board" do
 
-  describe "reads meta data from board" do
     use_given_filesystem
 
     it "merges meta data from board if present" do
-      card_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/cards\?-*/
-
-      stub_request(:any,card_url_match).to_return(:status => 200,
-        :body => load_test_file("cards.json"), :headers => {})
-
-      list_url_match = /https:\/\/trello.com\/1\/boards\/myboardid\/lists\?-*/
-
-      stub_request(:any,list_url_match).to_return(:status => 200,
-        :body => load_test_file("lists.json"), :headers => {})
-
       chart = BurndownChart.new(@settings)
       chart.read_data(given_file("burndown-data-10.yaml"))
 

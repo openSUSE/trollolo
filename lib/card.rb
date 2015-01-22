@@ -17,32 +17,55 @@
 
 class Card
 
-  attr_accessor :meta, :sp, :tasks, :tasks_done, :title, :description
+  # Assuming we have card titles as follows '(8) This is the card name'
+  ESTIMATED_REGEX     = /\A\(([\d.]+)\)/
+  SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
-  def self.name_to_points(card_name)
-    card_name =~ /^\(([\d.]+)\)/
-    return nil if $1.nil?
-    $1.to_f
+  def initialize(trello_card)
+    @trello_card = trello_card
   end
 
-  def initialize
-    @sp = nil
-    @meta = nil
-    @extra = false
+  def estimated?
+    name =~ ESTIMATED_REGEX
   end
-  
-  def has_sp?
-    @sp != nil
+
+  def story_points
+    return 0.0 unless estimated?
+    name.match(ESTIMATED_REGEX).captures.first.to_f
   end
-  
+
+  def tasks_done
+    @trello_card.badges['checkItemsChecked'].to_f
+  end
+  # TODO: cleanup
+  alias_method :done_tasks, :tasks_done
+
+  def tasks
+    @trello_card.badges['checkItems'].to_f
+  end
+
   def extra?
-    @extra
+    self.card_labels.any? do |label|
+      label['name'].include?('BelowWaterline') ||
+          label['name'].include?('Under waterline')
+    end
   end
-  
-  def set_extra
-    @extra = true
+
+  def meta_card?
+    name =~ SPRINT_NUMBER_REGEX
   end
-  
+
+  def sprint_number
+    raise ArgumentError unless meta_card?
+    name.match(SPRINT_NUMBER_REGEX).captures.first.to_i
+  end
+
+  def fast_lane?
+    # TODO: move to settings
+    self.card_labels.map{|l| l['name']}.include?('FastLane')
+  end
+
+  #TODO: rethink storage for meta data for sprint
   def self.parse_yaml_from_description(description)
     description =~ /```(yaml)?\n(.*)```/m
     yaml = $2
@@ -53,25 +76,12 @@ class Card
     end
   end
 
-  def self.parse json
-    card = Card.new
+  def self.parse(json)
+    Card.new(Trello::Card.new(json))
+  end
 
-    card.title = json["name"]
-    card.description = json["desc"]
-
-    card.sp = name_to_points(card.title)
-
-    labels = json["labels"]
-    labels.each do |label|
-      if label["name"] == "Under waterline"
-        card.set_extra
-      end
-    end
-
-    card.tasks = json["badges"]["checkItems"]
-    card.tasks_done = json["badges"]["checkItemsChecked"]
-
-    card
+  def method_missing(*args)
+    @trello_card.send(*args)
   end
 
 end

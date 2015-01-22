@@ -1,16 +1,22 @@
 require "spec_helper"
 
 describe Card do
+
+  let(:trello_card) { double(name: "(3) P1: Refactor cards") }
+  subject { described_class.new(trello_card) }
+
   it "extracts single digit story point value from card name" do
-    expect(Card.name_to_points("(3) P1: Refactor cards")).to eq(3)
+    expect(subject.story_points).to eq(3)
   end
 
   it "extracts double digit story point value from card name" do
-    expect(Card.name_to_points("(13) P1: Refactor cards")).to eq(13)
+    allow(trello_card).to receive(:name).and_return "(13) P1: Refactor cards"
+    expect(subject.story_points).to eq(13)
   end
 
   it "extracts fractional story point value from card name" do
-    expect(Card.name_to_points("(0.5) P1: Refactor cards")).to eq(0.5)
+    allow(trello_card).to receive(:name).and_return "(0.5) P1: Refactor cards"
+    expect(subject.story_points).to eq(0.5)
   end
 
   describe "#parse_yaml_from_description" do
@@ -68,11 +74,11 @@ EOT
     end
 
     it "parses title" do
-      expect(@card.title).to eq "(2) P2: Create Scrum columns"
+      expect(@card.name).to eq "(2) P2: Create Scrum columns"
     end
 
     it "parses description" do
-      expect(@card.description).to eq "my description"
+      expect(@card.desc).to eq "my description"
     end
 
     it "parses open tasks" do

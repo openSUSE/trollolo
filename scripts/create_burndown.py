@@ -27,6 +27,8 @@ x_days_extra = []
 x_day_extra_start = []
 y_story_points_done_extra = [0]
 y_tasks_done_extra = [0]
+x_fast_lane = []
+y_fast_lane = []
 
 for day in burndown["days"]:
   x_days.append(current_day)
@@ -45,6 +47,10 @@ for day in burndown["days"]:
     if day.has_key("story_points_extra"):
       points = -day["story_points_extra"]["done"]
     y_story_points_done_extra.append(points)
+
+  if day.has_key("fast_lane"):
+    x_fast_lane.append(current_day)
+    y_fast_lane.append(day["fast_lane"]["open"])
 
   current_day += 1
 
@@ -92,6 +98,9 @@ plt.ylabel('Story Points', color='black')
 plt.plot(x_days, y_open_story_points, 'ko-', linewidth=2)
 if x_days_extra:
   plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
+
+# Fast Lane
+plt.plot(x_fast_lane, y_fast_lane, 'go-', linewidth=1, color='red')
 
 # Tasks
 plt.twinx()
