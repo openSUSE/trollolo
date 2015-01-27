@@ -214,14 +214,13 @@ EOT
     puts "   Total: #{burndown.fast_lane_cards.total}"
   end
 
-  desc "get-board-list", "Get board-list.yaml from meta trello board"
-  option "board-id", :desc => "Id of Trello board", :required => true
-  def get_board_list
+  no_commands{
+  def get_board_list_obj(boardid)
     process_global_options options
     require_trello_credentials
 
-    trello = TrelloWrapper.new(options["board-id"], @@settings)
-    board = trello.board
+    trello = TrelloWrapper.new(@@settings)
+    board = trello.board(boardid)
     teams_column = board.columns.detect {|c| c.name == "Teams"}
     boardinfos={}
     teams_column.committed_cards.each do |card|
@@ -231,6 +230,15 @@ EOT
         boardinfos[name] = boardinfo
       end
     end
+    return boardinfos
+  end }
+
+  desc "get-board-list", "Get board-list.yaml from meta trello board"
+  option "board-id", :desc => "Id of Trello board", :required => true
+  def get_board_list
+    process_global_options options
+    require_trello_credentials
+    boardinfos = get_board_list_obj(options["board-id"])
     puts boardinfos.to_yaml
   end
 

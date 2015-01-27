@@ -40,6 +40,14 @@
     "subscribed": false
   },
   {
+    "pos": 55555,
+    "subscribed": false,
+    "name": "Teams",
+    "closed": false,
+    "id": "54ad4482f56efc7af052a072",
+    "idBoard": "53186e8391ef8671265eba9d"
+  },
+  {
     "id": "5319bc0aa338308d42f108d6",
     "name": "Legend",
     "closed": false,

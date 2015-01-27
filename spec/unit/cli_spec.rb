@@ -35,4 +35,15 @@ describe Cli do
     @cli.backup
   end
 
+  it "gets a board list" do
+    # FIXME
+    #list_url_match = /https:\/\/api.trello.com\/1\/boards\/myboardid\/list.*/
+    #card_url_match = /https:\/\/api.trello.com\/1\/boards\/myboardid\/cards.*/
+    #stub_request(:any,list_url_match).to_return(:status => 200,
+    #  :body => load_test_file("lists.json"), :headers => {})
+    #stub_request(:any,card_url_match).to_return(:status => 200,
+    #  :body => load_test_file("team-cards.json"), :headers => {})
+    #expect( @cli.get_board_list_obj("myboardid").to_yaml ).to eq "---\ngreen:\n  boardid: greenid\n  updated: 2015-01-07\norange:\n  boardid: orangeid\n  updated: 2015-01-12\n"
+  end
+
 end
