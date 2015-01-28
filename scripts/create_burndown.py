@@ -3,18 +3,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import yaml
+import argparse
 import os
 
-if len(sys.argv) < 2 or len(sys.argv) > 3:
-  print "Usage: machinery-burndown.py <sprint-number> [working-dir]"
-  sys.exit(1)
+epilog = "Look at https://github.com/openSUSE/trollolo for details"
+description = "Generates Scrum Burndown Chart from YML file"
 
-sprint = sys.argv[1]
-if len(sys.argv) > 2:
-  working_dir = sys.argv[2]
-  os.chdir(working_dir)
+parser = argparse.ArgumentParser(epilog=epilog, description=description)
+parser.add_argument('sprint', metavar='NUM', help='Sprint Number')
+parser.add_argument('--working-dir', help='Location of data to process')
+parser.add_argument('--no-arrow', action='store_true', help='Disable arrow with already done tasks in the start of a Sprint')
+parser.add_argument('--with-fast-lane', action='store_true', help='Disable arrow with already done tasks in the start of a Sprint')
+args = parser.parse_args()
 
-with open('burndown-data-' + sprint + '.yaml', 'r') as f:
+if args.working_dir:
+  os.chdir(args.working_dir)
+
+with open('burndown-data-' + args.sprint + '.yaml', 'r') as f:
   burndown = yaml.load(f)
 
 meta = burndown["meta"]
@@ -26,6 +31,7 @@ x_days = []
 y_open_story_points = []
 y_open_tasks = []
 total_tasks = []
+total_fast_lane = []
 total_story_points = []
 x_days_extra = []
 x_day_extra_start = []
@@ -55,6 +61,7 @@ for day in burndown["days"]:
   if day.has_key("fast_lane"):
     x_fast_lane.append(current_day)
     y_fast_lane.append(day["fast_lane"]["open"])
+    total_fast_lane.append(day["fast_lane"]["total"])
 
   current_day += 1
 
@@ -86,7 +93,7 @@ plt.xkcd()
 plt.figure(1, figsize=(11, 6))
 
 # Title of the burndown chart
-plt.suptitle('Sprint ' + sprint, fontsize='large')
+plt.suptitle('Sprint ' + args.sprint, fontsize='large')
 
 plt.xlabel('Days')
 plt.axis([0, total_days + 1, ymin, ymax])
@@ -104,7 +111,8 @@ if x_days_extra:
   plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
 
 # Fast Lane
-plt.plot(x_fast_lane, y_fast_lane, 'go-', linewidth=1, color='red')
+if args.with_fast_lane:
+  plt.plot(x_fast_lane, y_fast_lane, 'go-', linewidth=1, color='red')
 
 # Tasks
 plt.twinx()
@@ -143,10 +151,24 @@ if len(total_story_points) > 1:
   if len(effective_new_story_points) > 0:
     plt.bar(effective_new_story_points_days, effective_new_story_points, .2, color='black')
 
+# Calculation of new fast lane cards
+if len(total_fast_lane) > 1 and args.with_fast_lane:
+  new_fast_lane_cards = [0]
+  for i in range(1, len(total_fast_lane)):
+    new_fast_lane_cards.append(total_fast_lane[i] - total_fast_lane[i - 1])
+  effective_new_fast_lane_days = []
+  effective_new_fast_lane_cards = []
+  for i in range(len(new_fast_lane_cards)):
+    if new_fast_lane_cards[i] > 0:
+      effective_new_fast_lane_days.append(i + 0.1 + 1)
+      effective_new_fast_lane_cards.append(new_fast_lane_cards[i])
+  if len(effective_new_fast_lane_cards) > 0:
+    plt.bar(effective_new_fast_lane_days, effective_new_fast_lane_cards, .2, color='red')
+
 # Draw arrow showing already done tasks at begin of sprint
 tasks_done = burndown["days"][0]["tasks"]["total"] - burndown["days"][0]["tasks"]["open"]
 
-if tasks_done > 5:
+if tasks_done > 5 and not args.no_arrow:
   plt.annotate("", 
 	       xy=(x_days[0], scalefactor * y_open_story_points[0] - 0.5 ), xycoords='data',
 	       xytext=(x_days[0], y_open_tasks[0] + 0.5), textcoords='data',
@@ -158,5 +180,5 @@ if tasks_done > 5:
 	  )
 
 # Save the burndown chart
-plt.savefig('burndown-' + sprint + '.png',bbox_inches='tight')
+plt.savefig('burndown-' + args.sprint + '.png',bbox_inches='tight')
 plt.show()
