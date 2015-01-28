@@ -14,24 +14,29 @@
 #
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
+require 'trello'
 
-require 'thor'
-require 'json'
-require 'yaml'
-require 'erb'
+class TrelloWrapper
 
-require_relative 'version'
-require_relative 'cli'
-require_relative 'settings'
-require_relative 'column'
-require_relative 'card'
-require_relative 'scrum_board'
-require_relative 'result'
-require_relative 'trello_wrapper'
-require_relative 'burndown_chart'
-require_relative 'burndown_data'
-require_relative 'backup'
+  attr_accessor :board
 
+  def initialize(board_id, settings)
+    @board_id = board_id
+    @settings = settings
+    init_trello
+  end
 
-class TrolloloError < StandardError
+  def board
+    @board ||= ScrumBoard.new(Trello::Board.find(@board_id), @settings)
+  end
+
+  private
+
+  def init_trello
+    Trello.configure do |config|
+      config.developer_public_key = @settings.developer_public_key
+      config.member_token         = @settings.member_token
+    end
+  end
+
 end

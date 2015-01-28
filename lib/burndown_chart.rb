@@ -63,21 +63,6 @@ class BurndownChart
     end
   end
 
-  def add_data(burndown_data)
-    date = burndown_data.date_time.to_date
-    new_entry = burndown_data.to_hash
-    new_days = Array.new
-    replaced_entry = false
-    @data["days"].each do |entry|
-      if entry["date"] == date.to_s
-        new_days.push(new_entry)
-        replaced_entry = true
-      else
-        new_days.push(entry)
-      end
-    end
-  end
-
   def replace_entry(date, new_entry)
     days.each_with_index do |entry, idx|
       days[idx] = new_entry if entry["date"] == date.to_s
@@ -89,7 +74,7 @@ class BurndownChart
   end
 
   def add_data(burndown_data)
-    new_entry =burndown_data.to_hash
+    new_entry = burndown_data.to_hash
     if entry_exists?(burndown_data.date_time.to_date)
       replace_entry(burndown_data.date_time.to_date, new_entry)
     else

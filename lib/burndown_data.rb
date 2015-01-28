@@ -20,35 +20,34 @@
 # or interaction with the files used to generate burndown charts.
 class BurndownData
 
-  attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks,
-    :date_time
-  attr_accessor :board_id
-  
   class Result
     attr_accessor :open, :done
-    
+
     def initialize
       @open = 0
       @done = 0
     end
-    
+
     def total
       @open + @done
     end
   end
 
-  def initialize settings
-    @settings = settings
+  attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks,
+                :board_id, :fast_lane_cards, :date_time
+  attr_reader :meta
 
-    @story_points = Result.new
-    @tasks = Result.new
-
+  def initialize(settings)
+    @settings           = settings
+    @story_points       = Result.new
+    @tasks              = Result.new
     @extra_story_points = Result.new
-    @extra_tasks = Result.new
+    @extra_tasks        = Result.new
+    @fast_lane_cards    = Result.new
   end
 
   def to_hash
-    {
+    base = {
       "date" => date_time.to_date.to_s,
       "story_points" => {
         "total" => story_points.total,
@@ -65,141 +64,43 @@ class BurndownData
         "done" => extra_tasks.done
       }
     }
+    if fast_lane_cards.total > 0
+      base.merge("fast_lane" => {
+                     "total" => fast_lane_cards.total,
+                     "open" => fast_lane_cards.open
+                 })
+    else
+      base
+    end
   end
 
   def trello
-    Trello.new(board_id: @board_id, developer_public_key: @settings.developer_public_key, member_token: @settings.member_token)
+    @trello ||= TrelloWrapper.new(@board_id, @settings)
   end
 
-  def meta
-    @meta
-  end
-
-  def find_list_by_title(expression)
-    lists = trello.lists
-    lists.each do |l|
-      if expression.match(l["name"])
-        return l["id"]
-      end
-    end
-    return nil
-  end
-
-  def fetch_todo_list_id
-    find_list_by_title("Sprint Backlog") or raise "Unable to find sprint backlog column on sprint board"
-  end
-
-  def fetch_doing_list_id
-    find_list_by_title("Doing") or raise "Unable to find doing column on sprint board"
-  end
-
-  def fetch_done_list_id
-    lists = trello.lists
-    last_sprint = nil
-    lists.each do |l|
-      if l["name"] =~ /^Done Sprint (.*)$/
-        sprint = $1.to_i
-        if !last_sprint || sprint > last_sprint[:number]
-          last_sprint = { :number => sprint, :id => l["id"] }
-        end
-      end
-    end
-
-    id = last_sprint[:id]
-    if !id
-      raise "Unable to find done column on sprint board"
-    end
-    id
-  end
-  
   def fetch
-    cards = trello.cards
+    get_meta
+    @story_points.done       = trello.board.done_story_points
+    @story_points.open       = trello.board.open_story_points
+    @tasks.open              = trello.board.tasks - trello.board.closed_tasks
+    @tasks.done              = trello.board.closed_tasks
+    @extra_story_points.done = trello.board.extra_done_story_points
+    @extra_story_points.open = trello.board.extra_open_story_points
+    @extra_tasks.done        = trello.board.extra_closed_tasks
+    @extra_tasks.open        = trello.board.extra_tasks - trello.board.extra_closed_tasks
+    @fast_lane_cards.done    = trello.board.done_fast_lane_cards_count
+    @fast_lane_cards.open    = trello.board.open_fast_lane_cards_count
+    @date_time               = DateTime.now
+  end
 
-    todo_list_id = fetch_todo_list_id
-    doing_list_id = fetch_doing_list_id
-    blocked_list_id = find_list_by_title(/^Blocked/)
-    done_list_id = fetch_done_list_id
-    
-    if @settings.verbose
-      puts "Todo list: #{todo_list_id}"
-      puts "Doing list: #{doing_list_id}"
-      puts "Blocked list: #{blocked_list_id}"
-      puts "Done list: #{done_list_id}"
-    end
+  private
 
-    sp_total = 0
-    sp_done = 0
-    
-    extra_sp_total = 0
-    extra_sp_done = 0
-
-    tasks_total = 0
-    tasks_done = 0
-    
-    extra_tasks_total = 0
-    extra_tasks_done = 0
-    
-    cards.each do |c|
-      card = Card.parse c
-      
-      list_id = c["idList"]
-
-      if list_id == todo_list_id || list_id == doing_list_id || list_id == blocked_list_id
-        if card.has_sp?
-          if card.extra?
-            extra_sp_total += card.sp
-          else
-            sp_total += card.sp
-          end
-        end
-        if card.extra?
-          extra_tasks_total += card.tasks
-          extra_tasks_done += card.tasks_done
-        else
-          tasks_total += card.tasks
-          tasks_done += card.tasks_done
-        end
-      elsif list_id == done_list_id
-        if card.title =~ /^Sprint (\d+)/
-          sprint = $1.to_i
-          @meta = Card.parse_yaml_from_description(card.description)
-          if @meta
-            @meta["sprint"] = sprint
-          end
-        end
-
-        if card.has_sp?
-          if card.extra?
-            extra_sp_total += card.sp
-            extra_sp_done += card.sp
-          else
-            sp_total += card.sp
-            sp_done += card.sp
-          end
-        end
-        if card.extra?
-          extra_tasks_total += card.tasks
-          extra_tasks_done += card.tasks_done
-        else
-          tasks_total += card.tasks
-          tasks_done += card.tasks_done
-        end
-      end
-    end
-    
-    @story_points.done = sp_done
-    @story_points.open = sp_total - sp_done
-    
-    @tasks.done = tasks_done
-    @tasks.open = tasks_total - tasks_done
-
-    @extra_story_points.done = extra_sp_done
-    @extra_story_points.open = extra_sp_total - extra_sp_done
-    
-    @extra_tasks.done = extra_tasks_done
-    @extra_tasks.open = extra_tasks_total - extra_tasks_done
-
-    @date_time = DateTime.now
+  def get_meta
+    meta_cards = trello.board.meta_cards
+    return unless meta_cards.any?
+    current_sprint_meta_card = meta_cards.max_by(&:sprint_number)
+    @meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc)
+    @meta['sprint'] = current_sprint_meta_card.sprint_number
   end
 
 end

@@ -11,15 +11,12 @@ class Backup
     backup_path = File.join(@directory, board_id)
     FileUtils.mkdir_p(backup_path)
 
-    trello = Trello.new(board_id: board_id,
-      developer_public_key: @settings.developer_public_key,
-      member_token: @settings.member_token,
-      verbose: @settings.verbose)
+    trello = TrelloWrapper.new(board_id, @settings)
 
-    data = trello.full_board
+    data = trello.board.backup
 
-    File.open(File.join(backup_path,"board.json"), "w") do |f|
-      f.write(JSON.pretty_generate(data))
+    File.open(File.join(backup_path, "board.json"), "w") do |f|
+      f.write(data)
     end
   end
 

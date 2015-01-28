@@ -1,8 +1,5 @@
 require_relative 'spec_helper'
 
-require "aruba/api"
-
-include Aruba::Api
 include GivenFilesystemSpecHelpers
 
 def trollolo_cmd

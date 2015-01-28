@@ -17,8 +17,9 @@
 
 class Settings
 
-  attr_accessor :verbose, :raw
-  attr_accessor :developer_public_key, :member_token
+  attr_accessor :developer_public_key, :member_token, :verbose, :raw,
+                :not_done_columns, :todo_column, :done_column_name_regex,
+                :todo_column_name_regex
 
   def initialize config_file_path
     @config_file_path = config_file_path
@@ -26,8 +27,12 @@ class Settings
       @config = YAML.load_file(config_file_path)
 
       if @config
-        @developer_public_key = @config["developer_public_key"]
-        @member_token = @config["member_token"]
+        @developer_public_key   = @config["developer_public_key"]
+        @member_token           = @config["member_token"]
+        @not_done_columns       = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
+        @todo_column            = @config["todo_column"].freeze
+        @done_column_name_regex = @config["done_column_name_regex"].freeze || /\ADone Sprint (\d+)\Z/
+        @todo_column_name_regex = @config["todo_column_name_regex"].freeze || /\ATo Do\Z/
       else
         raise "Couldn't read config data from '#{config_file_path}'"
       end

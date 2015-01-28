@@ -12,12 +12,10 @@ describe Backup do
     use_given_filesystem(keep_files: true)
 
     before(:each) do
+      full_board_mock
       @backup = Backup.new(dummy_settings)
       @directory = given_directory
       @backup.directory = @directory
-      stub_request(:get, "https://trello.com/1/boards/123?lists=all&cards=all&key=mykey&token=mytoken").
-        with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-        to_return(:status => 200, :body => load_test_file("board.json"), :headers => {})
     end
 
     it "backups board" do
