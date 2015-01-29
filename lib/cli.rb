@@ -215,12 +215,14 @@ class Cli < Thor
       exit 1
     end
   end
-  
-  desc "plot SPRINT-NUMBER", "Plot burndown chart for given sprint"
+
+  desc "plot SPRINT-NUMBER [--output] [--no-tasks] [--with-fast-lane]", "Plot burndown chart for given sprint"
   option :output, :aliases => :o, :desc => "Output directory", :required => false
+  option 'with-fast-lane', :desc => "Plot Fast Lane with new cards bars", :required => false, :type => :boolean
+  option 'no-tasks', :desc => "Do not plot tasks line", :required => false, :type => :boolean
   def plot(sprint_number)
     process_global_options options
-    BurndownChart.plot(sprint_number, options[:output])
+    BurndownChart.plot(sprint_number, options)
   end
 
   desc "backup", "Create backup of board"

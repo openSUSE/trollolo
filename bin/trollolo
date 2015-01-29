@@ -26,7 +26,7 @@ Cli.settings = Settings.new(config_path)
 ENV["THOR_DEBUG"] = "1"
 begin
   Cli.check_unknown_options!
-  result = Cli.start ARGV
+  Cli.start
 rescue Thor::Error => e
   STDERR.puts e
   exit 1

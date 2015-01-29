@@ -114,9 +114,10 @@ class BurndownChart
     write_data File.join(burndown_dir, burndown_data_filename)
   end
 
-  def self.plot(sprint_number, working_dir=".")
+  def self.plot(sprint_number, options)
     plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
-    system "python #{plot_helper} #{sprint_number} #{working_dir}"
+    cli_switches = options.keys.map{|k| k.dup.prepend('--')}
+    system "python #{plot_helper} #{sprint_number} #{cli_switches.join(' ')}"
   end
   
   def last_sprint(burndown_dir)
