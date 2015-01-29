@@ -22,13 +22,13 @@ meta = burndown["meta"]
 total_days = meta["total_days"]
 
 current_day = 1
+extra_day = 0
 x_days = []
 y_open_story_points = []
 y_open_tasks = []
 total_tasks = []
 total_story_points = []
 x_days_extra = []
-x_day_extra_start = []
 y_story_points_done_extra = [0]
 y_tasks_done_extra = [0]
 x_fast_lane = []
@@ -59,8 +59,9 @@ for day in burndown["days"]:
   current_day += 1
 
 # Add a day at the beginning of the extra days, so the curve starts at zero
-if x_days_extra:
+if x_days_extra and not burndown["days"][0].has_key("tasks_extra"):
   x_days_extra = [x_days_extra[0] - 1] + x_days_extra
+  extra_day = 1
 
 scalefactor = float(total_tasks[0]) / float(y_open_story_points[0])
 
@@ -100,8 +101,9 @@ for weekend_line in meta["weekend_lines"]:
 # Story points
 plt.ylabel('Story Points', color='black')
 plt.plot(x_days, y_open_story_points, 'ko-', linewidth=2)
-if x_days_extra:
-  plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
+if x_days_extra and extra_day == 0:
+  del y_story_points_done_extra[0]
+plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
 
 # Fast Lane
 plt.plot(x_fast_lane, y_fast_lane, 'go-', linewidth=1, color='red')
@@ -112,8 +114,9 @@ plt.ylabel('Tasks', color='green')
 plt.tick_params(axis='y', colors='green')
 plt.axis([0, total_days + 1, ymin*scalefactor, ymax * scalefactor])
 plt.plot(x_days, y_open_tasks, 'go-', linewidth=2)
-if x_days_extra:
-  plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
+if x_days_extra and extra_day == 0:
+  del y_tasks_done_extra[0]
+plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
 
 # Calculation of new tasks
 if len(total_tasks) > 1:
@@ -146,14 +149,32 @@ if len(total_story_points) > 1:
 # Draw arrow showing already done tasks at begin of sprint
 tasks_done = burndown["days"][0]["tasks"]["total"] - burndown["days"][0]["tasks"]["open"]
 
-if tasks_done > 5:
+if tasks_done:
   plt.annotate("", 
 	       xy=(x_days[0], scalefactor * y_open_story_points[0] - 0.5 ), xycoords='data',
 	       xytext=(x_days[0], y_open_tasks[0] + 0.5), textcoords='data',
 	       arrowprops=dict(arrowstyle="<|-|>", connectionstyle="arc3", color='green')
 	      )
 
-  plt.text(0.7, y_open_story_points[0], str(tasks_done) + " tasks done",
+  y_text = (scalefactor * y_open_story_points[0] + y_open_story_points[0]) / 2
+  plt.text(0.7, y_text, str(int(tasks_done)) + " tasks done",
+	   rotation='vertical', verticalalignment='center', color='green'
+	  )
+
+if burndown["days"][0].has_key("tasks_extra"):
+  tasks_done_extra = burndown["days"][0]["tasks_extra"]["done"]
+
+  plt.annotate("",
+	       xy=(x_days[0], scalefactor * y_story_points_done_extra[0] - 0.5 ), xycoords='data',
+	       xytext=(x_days[0], 0.5 - tasks_done_extra), textcoords='data',
+	       arrowprops=dict(arrowstyle="<|-|>", connectionstyle="arc3", color='green')
+	      )
+
+  y_text = - tasks_done_extra / 2
+  plt.text(0.4, y_text, str(int(tasks_done_extra)) + " extra",
+	   rotation='vertical', verticalalignment='center', color='green'
+	  )
+  plt.text(0.7, y_text, "tasks done",
 	   rotation='vertical', verticalalignment='center', color='green'
 	  )
 
