@@ -12,20 +12,22 @@ description = "Generates Scrum Burndown Chart from YML file"
 parser = argparse.ArgumentParser(epilog=epilog, description=description)
 parser.add_argument('sprint', metavar='NUM', help='Sprint Number')
 parser.add_argument('--working-dir', help='Location of data to process')
-parser.add_argument('--no-arrow', action='store_true', help='Disable arrow with already done tasks in the start of a Sprint')
-parser.add_argument('--with-fast-lane', action='store_true', help='Disable arrow with already done tasks in the start of a Sprint')
+parser.add_argument('--no-tasks', action='store_true', help='Disable Tasks line in the chart', default=False)
+parser.add_argument('--with-fast-lane', action='store_true', help='Draw line for Fast Lane cards', default=False)
+parser.add_argument('--verbose', action='store_true', help='Verbose Output', default=False)
 args = parser.parse_args()
 
 if args.working_dir:
   os.chdir(args.working_dir)
 
+if args.verbose:
+  print args
+
 with open('burndown-data-' + args.sprint + '.yaml', 'r') as f:
   burndown = yaml.load(f)
 
 meta = burndown["meta"]
-
 total_days = meta["total_days"]
-
 current_day = 1
 x_days = []
 y_open_story_points = []
@@ -47,6 +49,8 @@ for day in burndown["days"]:
   total_tasks.append(day["tasks"]["total"])
   total_story_points.append(day["story_points"]["total"])
 
+  # TODO: refactor to not to draw 0 extra Story Points Line if one task
+  # in extra card been done. Example http://imagebin.suse.de/1785/img
   if "story_points_extra" in day or "tasks_extra" in day:
     x_days_extra.append(current_day)
     tasks = 0
@@ -115,16 +119,17 @@ if args.with_fast_lane:
   plt.plot(x_fast_lane, y_fast_lane, 'go-', linewidth=1, color='red')
 
 # Tasks
-plt.twinx()
-plt.ylabel('Tasks', color='green')
-plt.tick_params(axis='y', colors='green')
-plt.axis([0, total_days + 1, ymin*scalefactor, ymax * scalefactor])
-plt.plot(x_days, y_open_tasks, 'go-', linewidth=2)
-if x_days_extra:
-  plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
+if not args.no_tasks:
+  plt.twinx()
+  plt.ylabel('Tasks', color='green')
+  plt.tick_params(axis='y', colors='green')
+  plt.axis([0, total_days + 1, ymin*scalefactor, ymax * scalefactor])
+  plt.plot(x_days, y_open_tasks, 'go-', linewidth=2)
+  if x_days_extra:
+    plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
 
 # Calculation of new tasks
-if len(total_tasks) > 1:
+if len(total_tasks) > 1 and not args.no_tasks:
   new_tasks = [0]
   for i in range(1, len(total_tasks)):
     new_tasks.append(total_tasks[i] - total_tasks[i - 1])
@@ -168,7 +173,7 @@ if len(total_fast_lane) > 1 and args.with_fast_lane:
 # Draw arrow showing already done tasks at begin of sprint
 tasks_done = burndown["days"][0]["tasks"]["total"] - burndown["days"][0]["tasks"]["open"]
 
-if tasks_done > 5 and not args.no_arrow:
+if tasks_done > 5 and not args.no_tasks:
   plt.annotate("", 
 	       xy=(x_days[0], scalefactor * y_open_story_points[0] - 0.5 ), xycoords='data',
 	       xytext=(x_days[0], y_open_tasks[0] + 0.5), textcoords='data',
