@@ -228,6 +228,8 @@ class Cli < Thor
   option "board-id", :desc => "Id of Trello board", :required => true
   def backup
     process_global_options options
+    require_trello_credentials
+
     b = Backup.new @@settings
     b.backup(options["board-id"])
   end
