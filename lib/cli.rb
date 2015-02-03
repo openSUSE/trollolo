@@ -210,6 +210,7 @@ class Cli < Thor
         chart.create_next_sprint(options[:output] || Dir.pwd)
       end
       chart.update(options[:output] || Dir.pwd, options[:plot])
+      puts "Updated data for sprint #{chart.sprint}"
     rescue TrolloloError => e
       STDERR.puts e
       exit 1

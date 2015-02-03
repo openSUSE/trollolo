@@ -149,7 +149,6 @@ class BurndownChart
     @burndown_data.date_time = DateTime.now
     add_data(@burndown_data)
     write_data burndown_data_path
-    puts "Updated data for sprint #{self.sprint}"
     if with_plot
       BurndownChart.plot(self.sprint, burndown_dir)
     end
