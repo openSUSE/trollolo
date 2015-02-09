@@ -11,5 +11,7 @@ webmock_mapping.each do |mapping|
   url = mapping[:path] + parameters_as_string(mapping)
   file = mapping[:file]
 
-  puts "#{trollolo_bin} get-raw #{url} >#{spec_data_dir}/#{file}"
+  cmd = "#{trollolo_bin} get-raw '#{url}' >#{spec_data_dir}/#{file}"
+  puts cmd
+  system cmd
 end
