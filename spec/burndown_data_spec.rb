@@ -6,7 +6,7 @@ describe BurndownData do
   
   before(:each) do
     @burndown = BurndownData.new(dummy_settings)
-    @burndown.board_id = "myboardid"
+    @burndown.board_id = "53186e8391ef8671265eba9d"
     full_board_mock
   end
 

@@ -221,14 +221,14 @@ EOT
     describe "setup" do
       it "initializes new chart" do
         path = given_directory
-        @chart.setup(path,"myboardid")
+        @chart.setup(path,"53186e8391ef8671265eba9d")
 
         expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
 
         chart = BurndownChart.new(@settings)
         chart.read_data(File.join(path,"burndown-data-01.yaml"))
 
-        expect(chart.board_id).to eq "myboardid"
+        expect(chart.board_id).to eq "53186e8391ef8671265eba9d"
       end
     end
 
@@ -244,7 +244,7 @@ EOT
       it "loads the burndown form the 2nd sprint into data" do
         @chart.load_last_sprint(path)
         expect(@chart.data).to eq({"meta"=>
-                                   {"board_id"=>"myboardid",
+                                   {"board_id"=>"53186e8391ef8671265eba9d",
                                     "sprint"=>2,
                                     "total_days"=>9,
                                     "weekend_lines"=>[3.5, 7.5]},
@@ -299,7 +299,7 @@ EOT
         expected_file_content = <<EOT
 ---
 meta:
-  board_id: myboardid
+  board_id: 53186e8391ef8671265eba9d
   sprint: 3
   total_days: 9
   weekend_lines:
@@ -323,7 +323,7 @@ EOT
       expect(chart.data["meta"]["weekend_lines"]).to eq([3.5, 8.5])
 
       burndown = BurndownData.new(@settings)
-      burndown.board_id = "myboardid"
+      burndown.board_id = "53186e8391ef8671265eba9d"
       burndown.fetch
 
       chart.merge_meta_data_from_board(burndown)

@@ -1,7 +1,7 @@
 def webmock_mapping
   [
     {
-      path: 'boards/myboardid',
+      path: 'boards/53186e8391ef8671265eba9d',
       file: 'board.json'
     },
     {
