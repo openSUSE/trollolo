@@ -54,7 +54,13 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    url = "https://api.trello.com/1/#{url_fragment}&key=#{@@settings.developer_public_key}&token=#{@@settings.member_token}"
+    url = "https://api.trello.com/1/#{url_fragment}"
+    if url_fragment =~ /\?/
+      url += "&"
+    else
+      url += "?"
+    end
+    url += "key=#{@@settings.developer_public_key}&token=#{@@settings.member_token}"
     STDERR.puts "Calling #{url}"
 
     response = Net::HTTP.get_response(URI.parse(url))
