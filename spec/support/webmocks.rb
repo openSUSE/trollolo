@@ -1,11 +1,15 @@
 def webmock_mapping
   [
     {
-      url: %r{https://api.trello.com/1/boards/.*\?key=.*&token=.*\Z},
+      url: 'https://api.trello.com/1/boards/myboardid?key=mykey&token=mytoken',
       file: 'board.json'
     },
     {
-      url: %r{https://api.trello.com/1/boards/.*/lists\?filter=open&key=.*&token=.*\Z},
+      url: 'https://api.trello.com/1/boards/123?key=mykey&token=mytoken',
+      file: 'board.json'
+    },
+    {
+      url: 'https://api.trello.com/1/boards/53186e8391ef8671265eba9d/lists?filter=open&key=mykey&token=mytoken',
       file: 'lists.json'
     },
     {
@@ -21,7 +25,7 @@ def webmock_mapping
       file: '53186e8391ef8671265eba9e_list.json'
     },
     {
-      url: %r{https://api.trello.com/1/boards/.*\?cards=all&key=.*&lists=all&token=.*},
+      url: 'https://api.trello.com/1/boards/53186e8391ef8671265eba9d?cards=all&key=mykey&lists=all&token=mytoken',
       file: 'board.json'
     }
   ]
