@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require_relative "webmocks"
+
+trollolo_bin = File.expand_path("../../../bin/trollolo", __FILE__)
+spec_data_dir = File.expand_path("../../data", __FILE__)
+
+STDERR.puts "Updating web mock data"
+
+webmock_mapping.each do |mapping|
+  url = mapping[:path] + parameters_as_string(mapping)
+  file = mapping[:file]
+
+  puts "#{trollolo_bin} get-raw #{url} >#{spec_data_dir}/#{file}"
+end
