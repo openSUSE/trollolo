@@ -34,11 +34,9 @@ class Card
     name.match(ESTIMATED_REGEX).captures.first.to_f
   end
 
-  def tasks_done
+  def done_tasks
     @trello_card.badges['checkItemsChecked'].to_f
   end
-  # TODO: cleanup
-  alias_method :done_tasks, :tasks_done
 
   def tasks
     @trello_card.badges['checkItems'].to_f

@@ -33,7 +33,7 @@ class Column
   end
 
   def done_tasks
-    cards.map(&:tasks_done).sum
+    cards.map(&:done_tasks).sum
   end
 
   def extra_cards

@@ -86,7 +86,7 @@ EOT
     end
 
     it "parses done tasks" do
-      expect(@card.tasks_done).to eq 2
+      expect(@card.done_tasks).to eq 2
     end
   end
 end
