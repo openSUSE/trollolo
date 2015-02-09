@@ -47,23 +47,30 @@ def webmock_mapping
   ]
 end
 
-def mapping_url(mapping)
-  url = "https://api.trello.com/1/" + mapping[:path]
-
-  parameters = [ "key=mykey", "token=mytoken" ]
+def parameters_as_string(mapping, parameters = nil)
+  parameters ||= []
   if mapping[:parameters]
     mapping[:parameters].each do |key, value|
       parameters.push("#{key}=#{value}")
     end
   end
-  url += "?" + parameters.join("&")
+  if !parameters.empty?
+    parameters_string = "?" + parameters.join("&")
+  else
+    parameters_string = ""
+  end
+  parameters_string
+end
 
-  url
+def mapping_url(mapping, parameters = nil)
+  url = "https://api.trello.com/1/" + mapping[:path]
+  url += parameters_as_string(mapping, parameters)
 end
 
 def full_board_mock
   webmock_mapping.each do |mapping|
-    stub_request(:get, mapping_url(mapping))
+    url = mapping_url(mapping, [ "key=mykey", "token=mytoken" ])
+    stub_request(:get, url)
       .to_return(:status => 200, :body => load_test_file(mapping[:file]))
   end
 end
