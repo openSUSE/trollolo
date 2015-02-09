@@ -1,50 +1,50 @@
 [
   {
-    "pos": 16384,
-    "subscribed": false,
+    "id": "53186e8391ef8671265eba9e",
     "name": "Sprint Backlog",
     "closed": false,
-    "id": "53186e8391ef8671265eba9e",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 16384,
+    "subscribed": false
   },
   {
-    "pos": 32768,
-    "subscribed": false,
+    "id": "53186e8391ef8671265eba9f",
     "name": "Doing",
     "closed": false,
-    "id": "53186e8391ef8671265eba9f",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 32768,
+    "subscribed": false
   },
   {
-    "pos": 36864,
-    "subscribed": false,
+    "id": "5319bf088cdf9cd82be336b0",
     "name": "Done Sprint 10",
     "closed": false,
-    "id": "5319bf088cdf9cd82be336b0",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 36864,
+    "subscribed": false
   },
   {
-    "pos": 40960,
-    "subscribed": false,
+    "id": "5319bf045c6ef0092c55331e",
     "name": "Done Sprint 9",
     "closed": false,
-    "id": "5319bf045c6ef0092c55331e",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 40960,
+    "subscribed": false
   },
   {
-    "pos": 49152,
-    "subscribed": false,
+    "id": "53186e8391ef8671265ebaa0",
     "name": "Done Sprint 8",
     "closed": false,
-    "id": "53186e8391ef8671265ebaa0",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 49152,
+    "subscribed": false
   },
   {
-    "pos": 114688,
-    "subscribed": false,
+    "id": "5319bc0aa338308d42f108d6",
     "name": "Legend",
     "closed": false,
-    "id": "5319bc0aa338308d42f108d6",
-    "idBoard": "53186e8391ef8671265eba9d"
+    "idBoard": "53186e8391ef8671265eba9d",
+    "pos": 114688,
+    "subscribed": false
   }
 ]

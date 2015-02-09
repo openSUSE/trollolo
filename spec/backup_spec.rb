@@ -47,15 +47,16 @@ Trollolo Testing Board
     (2) P2: Fill Doing column
   Done Sprint 10
     Burndown chart
+    Sprint 10
     (3) P3: Fill Done columns
   Done Sprint 9
     Burndown chart
-    Sprint 2
+    Sprint 9
     (2) P1: Explain purpose
     (2) P2: Create Scrum columns
   Done Sprint 8
     Burndown chart
-    Sprint 1
+    Sprint 8
     (1) P1: Create Trello Testing Board
     (5) P2: Add fancy background
     (1) P4: Add legend
