@@ -5,10 +5,6 @@ def webmock_mapping
       file: 'board.json'
     },
     {
-      path: 'boards/53186e8391ef8671265eba9d',
-      file: 'board.json'
-    },
-    {
       path: 'boards/53186e8391ef8671265eba9d/lists',
       parameters: {
         "filter" => "open"
