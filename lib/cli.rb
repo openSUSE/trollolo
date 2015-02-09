@@ -37,6 +37,30 @@ class Cli < Thor
     end
   end
 
+  desc "get-raw [URL-FRAGMENT]", "Get raw JSON from Trello API"
+  long_desc <<EOT
+Get raw JSON from Trello using the given URL fragment. Trollolo adds the server
+part and API version as well as the credentials from the Trollolo configuration.
+
+As example, the command
+
+  trollolo get-raw lists/53186e8391ef8671265eba9f/cards?filter=open
+
+evaluates to the access of
+
+  https://api.trello.com/1/lists/53186e8391ef8671265eba9f/cards?filter=open&key=xxx&token=yyy
+EOT
+  def get_raw(url_fragment)
+    process_global_options options
+    require_trello_credentials
+
+    url = "https://api.trello.com/1/#{url_fragment}&key=#{@@settings.developer_public_key}&token=#{@@settings.member_token}"
+    STDERR.puts "Calling #{url}"
+
+    Net::HTTP.get_print(URI.parse(url))
+    puts
+  end
+
   desc "get-lists", "Get lists"
   option "board-id", :desc => "Id of Trello board", :required => true
   def get_lists
