@@ -57,8 +57,8 @@ EOT
     url = "https://api.trello.com/1/#{url_fragment}&key=#{@@settings.developer_public_key}&token=#{@@settings.member_token}"
     STDERR.puts "Calling #{url}"
 
-    Net::HTTP.get_print(URI.parse(url))
-    puts
+    response = Net::HTTP.get_response(URI.parse(url))
+    print JSON.pretty_generate(JSON.parse(response.body))
   end
 
   desc "get-lists", "Get lists"
