@@ -53,6 +53,7 @@ y_story_points_done_extra = []
 y_tasks_done_extra = []
 x_fast_lane = []
 y_fast_lane = []
+max_story_points = 0
 
 for day in burndown["days"]:
   x_days.append(current_day)
@@ -60,6 +61,7 @@ for day in burndown["days"]:
   y_open_tasks.append(day["tasks"]["open"])
   total_tasks.append(day["tasks"]["total"])
   total_story_points.append(day["story_points"]["total"])
+  max_story_points = max(max_story_points, day["story_points"]["total"])
 
   # TODO: refactor to not to draw 0 extra Story Points Line if one task
   # in extra card been done. Example http://imagebin.suse.de/1785/img
@@ -88,12 +90,12 @@ if x_days_extra and not burndown["days"][0].has_key("tasks_extra"):
   y_tasks_done_extra = [0] + y_tasks_done_extra
   extra_day = 1
 
-scalefactor = float(total_tasks[0]) / float(y_open_story_points[0])
+scalefactor = float(total_tasks[0]) / float(max_story_points)
 
 # Calculate minimum and maximum 'y' values for the axis
 ymin_t_extra = 0
 ymin_s_extra = 0
-ymax = y_open_story_points[0] + 3
+ymax = max_story_points + 3
 
 if len(y_tasks_done_extra) > 0:
   ymin_t_extra = y_tasks_done_extra[len(y_tasks_done_extra) -1] -3
@@ -116,7 +118,7 @@ plt.suptitle('Sprint ' + args.sprint, fontsize='large')
 
 plt.xlabel('Days')
 plt.axis([0, total_days + 1, ymin, ymax])
-plt.plot([1, total_days] , [y_open_story_points[0], 0], color='grey')
+plt.plot([1, total_days] , [max_story_points, 0], color='grey')
 plt.plot([0, total_days + 1], [0, 0], color='blue', linestyle=':')
 
 # Weekend lines
@@ -191,12 +193,12 @@ tasks_done = burndown["days"][0]["tasks"]["total"] - burndown["days"][0]["tasks"
 
 if tasks_done > 0 and not args.no_tasks:
   plt.annotate("",
-	       xy=(x_days[0], scalefactor * y_open_story_points[0] - 0.5 ), xycoords='data',
+	       xy=(x_days[0], scalefactor * max_story_points - 0.5 ), xycoords='data',
 	       xytext=(x_days[0], y_open_tasks[0] + 0.5), textcoords='data',
 	       arrowprops=dict(arrowstyle="<|-|>", connectionstyle="arc3", color='green')
 	      )
 
-  y_text = (scalefactor * y_open_story_points[0] + y_open_story_points[0]) / 2
+  y_text = ((scalefactor + 1) * max_story_points ) / 2
   plt.text(0.7, y_text, str(int(tasks_done)) + " tasks done",
 	   rotation='vertical', verticalalignment='center', color='green'
 	  )
