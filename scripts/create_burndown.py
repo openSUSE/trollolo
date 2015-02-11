@@ -199,9 +199,9 @@ if tasks_done > 0 and not args.no_tasks:
 	       arrowprops=dict(arrowstyle="<|-|>", connectionstyle="arc3", color='green')
 	      )
 
-  y_text = ((scalefactor + 1) * max_story_points ) / 2
+  y_text = scalefactor * max_story_points
   plt.text(0.7, y_text, str(int(tasks_done)) + " tasks done",
-	   rotation='vertical', verticalalignment='center', color='green'
+	   rotation='vertical', verticalalignment='top', color='green'
 	  )
 
 if burndown["days"][0].has_key("tasks_extra") and not args.no_tasks:
