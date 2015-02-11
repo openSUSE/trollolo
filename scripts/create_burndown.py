@@ -127,6 +127,7 @@ for weekend_line in meta["weekend_lines"]:
 
 # Story points
 plt.ylabel('Story Points', color='black')
+y_open_story_points[0]=total_story_points[0] # avoid hiding points
 plt.plot(x_days, y_open_story_points, 'ko-', linewidth=2)
 
 if len(x_days_extra) > 0:
