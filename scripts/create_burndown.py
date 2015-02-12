@@ -29,8 +29,8 @@ y_open_tasks = []
 total_tasks = []
 total_story_points = []
 x_days_extra = []
-y_story_points_done_extra = [0]
-y_tasks_done_extra = [0]
+y_story_points_done_extra = []
+y_tasks_done_extra = []
 x_fast_lane = []
 y_fast_lane = []
 
@@ -61,6 +61,8 @@ for day in burndown["days"]:
 # Add a day at the beginning of the extra days, so the curve starts at zero
 if x_days_extra and not burndown["days"][0].has_key("tasks_extra"):
   x_days_extra = [x_days_extra[0] - 1] + x_days_extra
+  y_story_points_done_extra = [0] + y_story_points_done_extra
+  y_tasks_done_extra = [0] + y_tasks_done_extra
   extra_day = 1
 
 scalefactor = float(total_tasks[0]) / float(y_open_story_points[0])
@@ -101,8 +103,6 @@ for weekend_line in meta["weekend_lines"]:
 # Story points
 plt.ylabel('Story Points', color='black')
 plt.plot(x_days, y_open_story_points, 'ko-', linewidth=2)
-if x_days_extra and extra_day == 0:
-  del y_story_points_done_extra[0]
 plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
 
 # Fast Lane
@@ -114,8 +114,6 @@ plt.ylabel('Tasks', color='green')
 plt.tick_params(axis='y', colors='green')
 plt.axis([0, total_days + 1, ymin*scalefactor, ymax * scalefactor])
 plt.plot(x_days, y_open_tasks, 'go-', linewidth=2)
-if x_days_extra and extra_day == 0:
-  del y_tasks_done_extra[0]
 plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
 
 # Calculation of new tasks
