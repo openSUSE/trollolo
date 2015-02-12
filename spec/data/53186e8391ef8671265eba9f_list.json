@@ -5,10 +5,14 @@
       {
         "idCheckItem": "5319c20b30a984c645c687ac",
         "state": "complete"
+      },
+      {
+        "idCheckItem": "54d8d6905a4c941656e68ac6",
+        "state": "complete"
       }
     ],
     "closed": false,
-    "dateLastActivity": "2014-03-07T12:57:01.715Z",
+    "dateLastActivity": "2015-02-09T15:47:39.045Z",
     "desc": "",
     "descData": null,
     "email": null,
@@ -40,7 +44,8 @@
     },
     "due": null,
     "idChecklists": [
-      "5319c1cd55ed32bd2bb998eb"
+      "5319c1cd55ed32bd2bb998eb",
+      "54d8d6905a4c941656e68ac5"
     ],
     "idMembers": [
 

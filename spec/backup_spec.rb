@@ -22,7 +22,7 @@ describe Backup do
       @backup.backup("53186e8391ef8671265eba9d")
       backup_file = File.join(@directory, "53186e8391ef8671265eba9d", "board.json")
       expect(File.exist?(backup_file)).to be true
-      expect(File.read(backup_file)).to eq load_test_file("board.json").chomp
+      expect(File.read(backup_file)).to eq load_test_file("full-board.json").chomp
     end
 
     it "lists backups" do

@@ -38,7 +38,7 @@ def webmock_mapping
         "cards" => "all",
         "lists" => "all"
       },
-      file: 'board.json'
+      file: 'full-board.json'
     }
   ]
 end
