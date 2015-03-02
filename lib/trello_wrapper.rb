@@ -20,14 +20,17 @@ class TrelloWrapper
 
   attr_accessor :board
 
-  def initialize(board_id, settings)
-    @board_id = board_id
+  def initialize(settings)
     @settings = settings
     init_trello
   end
 
-  def board
-    @board ||= ScrumBoard.new(Trello::Board.find(@board_id), @settings)
+  def board(board_id)
+    @board ||= ScrumBoard.new(Trello::Board.find(board_id), @settings)
+  end
+
+  def organization(org_id)
+    Trello::Organization.find(org_id)
   end
 
   private

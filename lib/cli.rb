@@ -279,6 +279,36 @@ EOT
     b.show(options["board-id"])
   end
 
+  desc "organization", "Show organization info"
+  option "org-name", :desc => "Name of organization", :required => true
+  def organization
+    process_global_options options
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+
+    o = trello.organization(options["org-name"])
+
+    puts "Display Name: #{o.display_name}"
+    puts "Home page: #{o.url}"
+  end
+
+  desc "organization_members", "Show organization members"
+  option "org-name", :desc => "Name of organization", :required => true
+  def organization_members
+    process_global_options options
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+
+    members = trello.organization(options["org-name"]).members
+    members.sort! { |a,b| a.username <=> b.username }
+
+    members.each do |member|
+      puts "#{member.username} (#{member.full_name})"
+    end
+  end
+
   private
   
   def process_global_options options

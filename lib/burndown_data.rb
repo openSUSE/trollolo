@@ -75,28 +75,32 @@ class BurndownData
   end
 
   def trello
-    @trello ||= TrelloWrapper.new(@board_id, @settings)
+    @trello ||= TrelloWrapper.new(@settings)
+  end
+
+  def board
+    trello.board(@board_id)
   end
 
   def fetch
     get_meta
-    @story_points.done       = trello.board.done_story_points
-    @story_points.open       = trello.board.open_story_points
-    @tasks.open              = trello.board.tasks - trello.board.closed_tasks
-    @tasks.done              = trello.board.closed_tasks
-    @extra_story_points.done = trello.board.extra_done_story_points
-    @extra_story_points.open = trello.board.extra_open_story_points
-    @extra_tasks.done        = trello.board.extra_closed_tasks
-    @extra_tasks.open        = trello.board.extra_tasks - trello.board.extra_closed_tasks
-    @fast_lane_cards.done    = trello.board.done_fast_lane_cards_count
-    @fast_lane_cards.open    = trello.board.open_fast_lane_cards_count
+    @story_points.done       = board.done_story_points
+    @story_points.open       = board.open_story_points
+    @tasks.open              = board.tasks - board.closed_tasks
+    @tasks.done              = board.closed_tasks
+    @extra_story_points.done = board.extra_done_story_points
+    @extra_story_points.open = board.extra_open_story_points
+    @extra_tasks.done        = board.extra_closed_tasks
+    @extra_tasks.open        = board.extra_tasks - board.extra_closed_tasks
+    @fast_lane_cards.done    = board.done_fast_lane_cards_count
+    @fast_lane_cards.open    = board.open_fast_lane_cards_count
     @date_time               = DateTime.now
   end
 
   private
 
   def get_meta
-    meta_cards = trello.board.meta_cards
+    meta_cards = board.meta_cards
     return unless meta_cards.any?
     current_sprint_meta_card = meta_cards.max_by(&:sprint_number)
     @meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc)
