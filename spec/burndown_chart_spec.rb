@@ -257,32 +257,24 @@ EOT
     end
 
     describe "update" do
+
+      let(:path) { given_directory_from_data("burndown_dir") }
+      let(:options) { {'output' => path} }
+      let(:before) { BurndownChart.new(@settings) }
+      let(:after) { BurndownChart.new(@settings) }
+
       it "updates chart with latest data" do
-        path = given_directory_from_data("burndown_dir")
-
-        before = BurndownChart.new(@settings)
         before.read_data(File.join(path,'burndown-data-02.yaml'))
-
-        @chart.update(path)
-
-        after = BurndownChart.new(@settings)
+        @chart.update(options)
         after.read_data(File.join(path,'burndown-data-02.yaml'))
-
         expect(after.days.size).to eq before.days.size + 1
       end
 
       it "overwrites data on same date" do
-        path = given_directory_from_data("burndown_dir")
-
-        before = BurndownChart.new(@settings)
         before.read_data(File.join(path,'burndown-data-02.yaml'))
-
-        @chart.update(path)
-        @chart.update(path)
-
-        after = BurndownChart.new(@settings)
+        @chart.update(options)
+        @chart.update(options)
         after.read_data(File.join(path,'burndown-data-02.yaml'))
-
         expect(after.days.size).to eq before.days.size + 1
       end
     end
@@ -311,7 +303,7 @@ EOT
       end
     end
   end
-  
+
   describe "reads meta data from the board" do
 
     use_given_filesystem
@@ -330,5 +322,46 @@ EOT
 
       expect(chart.data["meta"]["weekend_lines"]).to eq([1.5, 6.5, 11.5, 16.5])
     end
+  end
+
+  describe '.plot' do
+
+    it 'sends joined parsed options to python script' do
+      allow(described_class).to receive(:process_options).and_return(%w{ --test 1 --no-blah })
+      allow(described_class).to receive(:plot_helper).and_return('mescript')
+      expect(described_class).to receive(:system).with('python mescript 42 --test 1 --no-blah')
+      described_class.plot(42, {foo: 1, bar: 2})
+    end
+
+  end
+
+  describe '.plot_helper' do
+
+    it 'expands path to burndown generator' do
+      expect(described_class.plot_helper).to include('scripts/create_burndown.py')
+    end
+
+  end
+
+  describe '.process_options' do
+
+    it 'builds an array of switches for burndown chart based on input hash' do
+      test_hash = { 'no-tasks' => true }
+      expect(described_class.send(:process_options, test_hash)).to eq %w{ --no-tasks }
+      test_hash = { 'with-fast-lane' => true }
+      expect(described_class.send(:process_options, test_hash)).to eq %w{ --with-fast-lane }
+      test_hash = { 'output' => 'fanagoro' }
+      expect(described_class.send(:process_options, test_hash)).to eq [ '--output fanagoro' ]
+      test_hash = {}
+      expect(described_class.send(:process_options, test_hash)).to eq [ ]
+      test_hash = {
+        'no-tasks'       => true,
+        'with-fast-lane' => true,
+        'output'         => 'fanagoro',
+        'verbose'        => true
+      }
+      expect(described_class.send(:process_options, test_hash)).to eq ['--no-tasks', '--with-fast-lane', '--output fanagoro', '--verbose']
+    end
+
   end
 end

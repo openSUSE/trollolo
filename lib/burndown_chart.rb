@@ -14,7 +14,6 @@
 #
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
-
 class BurndownChart
 
   attr_accessor :data
@@ -114,11 +113,32 @@ class BurndownChart
     write_data File.join(burndown_dir, burndown_data_filename)
   end
 
-  def self.plot(sprint_number, working_dir=".")
-    plot_helper = File.expand_path("../../scripts/create_burndown.py", __FILE__ )
-    system "python #{plot_helper} #{sprint_number} #{working_dir}"
+  class << self
+
+    def plot_helper
+      File.expand_path('../../scripts/create_burndown.py', __FILE__ )
+    end
+
+    def plot(sprint_number, options)
+      sprint_number = sprint_number.to_s.rjust(2, '0')
+      cli_switches = process_options(options)
+      system "python #{plot_helper} #{sprint_number} #{cli_switches.join(' ')}"
+    end
+
+    private
+
+    def process_options(hash)
+      return [] unless hash
+      [].tap do |cli_switches|
+        cli_switches << '--no-tasks'                 if hash['no-tasks']
+        cli_switches << '--with-fast-lane'           if hash['with-fast-lane']
+        cli_switches << "--output #{hash['output']}" if hash['output']
+        cli_switches << '--verbose'                  if hash['verbose']
+      end
+    end
+
   end
-  
+
   def last_sprint(burndown_dir)
     last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
@@ -142,15 +162,15 @@ class BurndownChart
     return burndown_data_path
   end
 
-  def update(burndown_dir, with_plot=false)
-    burndown_data_path = load_last_sprint(burndown_dir)
+  def update(options)
+    burndown_data_path = load_last_sprint(options['output'] || Dir.pwd)
     @burndown_data.board_id = board_id
     @burndown_data.fetch
     @burndown_data.date_time = DateTime.now
     add_data(@burndown_data)
     write_data burndown_data_path
-    if with_plot
-      BurndownChart.plot(self.sprint, burndown_dir)
+    if options[:plot]
+      BurndownChart.plot(self.sprint, options)
     end
   end
 
@@ -160,4 +180,5 @@ class BurndownChart
     @data["days"] = []
     write_data File.join(burndown_dir, burndown_data_filename)
   end
+
 end
