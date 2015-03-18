@@ -38,7 +38,9 @@ class Backup
       lists[list["id"]] = []
     end
     board["cards"].each do |card|
-      lists[card["idList"]].push(card)
+      if lists[card["idList"]]
+        lists[card["idList"]].push(card)
+      end
     end
 
     board["lists"].each do |list|
