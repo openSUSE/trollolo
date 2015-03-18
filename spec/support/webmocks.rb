@@ -12,27 +12,6 @@ def webmock_mapping
       file: 'lists.json'
     },
     {
-      path: 'lists/53186e8391ef8671265eba9f/cards',
-      parameters: {
-        "filter" => "open"
-      },
-      file: '53186e8391ef8671265eba9f_list.json'
-    },
-    {
-      path: 'lists/5319bf088cdf9cd82be336b0/cards',
-      parameters: {
-        "filter" => "open"
-      },
-      file: '5319bf088cdf9cd82be336b0_list.json'
-    },
-    {
-      path: 'lists/53186e8391ef8671265eba9e/cards',
-      parameters: {
-        "filter" => "open"
-      },
-      file: '53186e8391ef8671265eba9e_list.json'
-    },
-    {
       path: 'boards/53186e8391ef8671265eba9d',
       parameters: {
         "cards" => "open",
