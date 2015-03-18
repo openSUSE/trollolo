@@ -2,21 +2,26 @@ require "spec_helper"
 
 describe Card do
 
-  let(:trello_card) { double(name: "(3) P1: Refactor cards") }
-  subject { described_class.new(trello_card) }
+  describe "parses name" do
+    before(:each) do
+      allow_any_instance_of(Card).to receive(:init_data)
+      @card = Card.new(double, double)
+    end
 
-  it "extracts single digit story point value from card name" do
-    expect(subject.story_points).to eq(3)
-  end
+    it "extracts single digit story point value from card name" do
+      allow(@card).to receive(:name).and_return("(3) P1: Refactor cards")
+      expect(@card.story_points).to eq(3)
+    end
 
-  it "extracts double digit story point value from card name" do
-    allow(trello_card).to receive(:name).and_return "(13) P1: Refactor cards"
-    expect(subject.story_points).to eq(13)
-  end
+    it "extracts double digit story point value from card name" do
+      allow(@card).to receive(:name).and_return "(13) P1: Refactor cards"
+      expect(@card.story_points).to eq(13)
+    end
 
-  it "extracts fractional story point value from card name" do
-    allow(trello_card).to receive(:name).and_return "(0.5) P1: Refactor cards"
-    expect(subject.story_points).to eq(0.5)
+    it "extracts fractional story point value from card name" do
+      allow(@card).to receive(:name).and_return "(0.5) P1: Refactor cards"
+      expect(@card.story_points).to eq(0.5)
+    end
   end
 
   describe "#parse_yaml_from_description" do
@@ -64,29 +69,6 @@ EOT
       meta = Card.parse_yaml_from_description(description)
       expect(meta["total_days"]).to eq(18)
       expect(meta["weekend_lines"]).to eq([1.5, 6.5])
-    end
-  end
-
-  describe ".parse" do
-    before(:each) do
-      json = JSON.parse(load_test_file("card.json"))
-      @card = Card.parse(json)
-    end
-
-    it "parses title" do
-      expect(@card.name).to eq "(2) P2: Create Scrum columns"
-    end
-
-    it "parses description" do
-      expect(@card.desc).to eq "my description"
-    end
-
-    it "parses open tasks" do
-      expect(@card.tasks).to eq 3
-    end
-
-    it "parses done tasks" do
-      expect(@card.done_tasks).to eq 2
     end
   end
 end

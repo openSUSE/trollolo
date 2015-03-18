@@ -8,18 +8,27 @@ class ScrumBoard
   def initialize(trello_board, settings)
     @trello_board = trello_board
     @settings     = settings
+
+    @board_data = retrieve_data
+  end
+
+  def retrieve_data
+    JSON.parse(@trello_board.client.get("/boards/#{@trello_board.id}?" +
+      "lists=all&cards=all"))
   end
 
   def columns
-    @columns ||= @trello_board.lists.map{|x| Column.new(x)}
+    @columns ||= @board_data["lists"].map{|x| Column.new(@board_data, x["id"])}
   end
 
   def done_column
     begin
-      columns.select{|c| c.name =~ @settings.done_column_name_regex }
-          .max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
-    rescue
-      raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
+      done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
+      if done_columns.empty?
+        raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
+      else
+        done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
+      end
     end
   end
 
@@ -103,8 +112,7 @@ class ScrumBoard
     scrum_cards.select{|c| c.meta_card? }
   end
 
-  def method_missing(*args)
-    @trello_board.send(*args)
+  def id
+    @board_data["id"]
   end
-
 end

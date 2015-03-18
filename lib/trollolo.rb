@@ -20,6 +20,7 @@ require 'json'
 require 'yaml'
 require 'erb'
 
+require_relative 'array'
 require_relative 'version'
 require_relative 'cli'
 require_relative 'settings'

@@ -1,19 +1,19 @@
 require 'spec_helper'
 
 describe ScrumBoard do
-
-  let(:settings) { dummy_settings }
-  let(:trello_board) { double('Trello Board') }
-
-  subject { described_class.new(trello_board, settings) }
-
   describe '#done_column' do
+    before(:each) do
+      allow_any_instance_of(ScrumBoard).to receive(:retrieve_data).
+        and_return(JSON.parse(load_test_file("full-board.json")))
 
-    it 'raises error when done column cannot be found' do
-      allow(trello_board).to receive(:lists).and_raise('me broken')
-      expect{subject.done_column}.to raise_error ScrumBoard::DoneColumnNotFoundError
+      @settings = dummy_settings
+      @scrum_board = ScrumBoard.new(double("Trello Board"), @settings)
     end
 
-  end
+    it 'raises error when done column cannot be found' do
+      @settings.done_column_name_regex = /thiscolumndoesntexist/
 
+      expect{@scrum_board.done_column}.to raise_error ScrumBoard::DoneColumnNotFoundError
+    end
+  end
 end

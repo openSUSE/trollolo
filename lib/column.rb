@@ -15,9 +15,13 @@
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 class Column
+  def initialize(board_data, list_id)
+    @board_data = board_data
+    @list_data = @board_data["lists"].select{|l| l["id"] == list_id}.first
+  end
 
-  def initialize(trello_column)
-    @trello_column = trello_column
+  def name
+    @list_data["name"]
   end
 
   def estimated_cards
@@ -49,11 +53,9 @@ class Column
   end
 
   def cards
-    @cards ||= super.map{|c| Card.new(c)}
-  end
+    return @cards if @cards
 
-  def method_missing(*args)
-    @trello_column.send(*args)
+    cards = @board_data["cards"].select{|c| c["idList"] == @list_data["id"]}
+    @cards = cards.map{|c| Card.new(@board_data, c["id"])}
   end
-
 end

@@ -16,13 +16,17 @@
 #  you may find current contact information at www.suse.com
 
 class Card
-
   # Assuming we have card titles as follows '(8) This is the card name'
   ESTIMATED_REGEX     = /\A\(([\d.]+)\)/
   SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
-  def initialize(trello_card)
-    @trello_card = trello_card
+  def initialize(board_data, card_id)
+    init_data(board_data, card_id)
+  end
+
+  def init_data(board_data, card_id)
+    @board_data = board_data
+    @card_data = @board_data["cards"].select{|c| c["id"] == card_id}.first
   end
 
   def estimated?
@@ -35,11 +39,19 @@ class Card
   end
 
   def done_tasks
-    @trello_card.badges['checkItemsChecked'].to_f
+    @card_data["badges"]["checkItemsChecked"].to_f
   end
 
   def tasks
-    @trello_card.badges['checkItems'].to_f
+    @card_data["badges"]["checkItems"].to_f
+  end
+
+  def card_labels
+    @card_data["labels"]
+  end
+
+  def desc
+    @card_data["desc"]
   end
 
   def extra?
@@ -74,12 +86,7 @@ class Card
     end
   end
 
-  def self.parse(json)
-    Card.new(Trello::Card.new(json))
+  def name
+    @card_data["name"]
   end
-
-  def method_missing(*args)
-    @trello_card.send(*args)
-  end
-
 end

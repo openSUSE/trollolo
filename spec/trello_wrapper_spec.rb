@@ -8,6 +8,7 @@ describe TrelloWrapper do
   before do
     stub_request(:get, "https://api.trello.com/1/boards/myboard?key=mykey&token=mytoken").
         to_return(:status => 200, :body => load_test_file("board.json"), :headers => {})
+    full_board_mock
   end
 
   describe '.new' do
@@ -24,6 +25,7 @@ describe TrelloWrapper do
   describe '#board' do
     it 'finds board via Trello' do
       expect(Trello::Board).to receive(:find).with('myboard')
+      expect_any_instance_of(ScrumBoard).to receive(:retrieve_data)
       subject.board("myboard")
     end
 
