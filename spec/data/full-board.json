@@ -115,7 +115,10 @@
       ],
       "shortUrl": "https://trello.com/c/GRsvY3vZ",
       "subscribed": false,
-      "url": "https://trello.com/c/GRsvY3vZ/3-sprint-3"
+      "url": "https://trello.com/c/GRsvY3vZ/3-sprint-3",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c16d9d04708d450d65f1",
@@ -165,7 +168,49 @@
       ],
       "shortUrl": "https://trello.com/c/pOLDMtPW",
       "subscribed": false,
-      "url": "https://trello.com/c/pOLDMtPW/16-3-p1-fill-backlog-column"
+      "url": "https://trello.com/c/pOLDMtPW/16-3-p1-fill-backlog-column",
+      "checklists": [
+        {
+          "id": "5319c22c584448bf2c314936",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c16d9d04708d450d65f1",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c234b0d2cfb56fa08dcc",
+              "name": "Add card to fill Backlog column",
+              "nameData": {
+                "emoji": {
+                }
+              },
+              "pos": 17129,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c2696a28a4b415d010d9",
+              "name": "Add card to read data from Trollolo",
+              "nameData": null,
+              "pos": 33879,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c28620f6f38b2c2c63ae",
+              "name": "Add card to save read data as reference data",
+              "nameData": null,
+              "pos": 50809,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c2e18554929611011756",
+              "name": "Add card under the waterline",
+              "nameData": null,
+              "pos": 68121,
+              "state": "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c57ff6be845f428aa7a3",
@@ -215,7 +260,32 @@
       ],
       "shortUrl": "https://trello.com/c/d7ZeVHVH",
       "subscribed": false,
-      "url": "https://trello.com/c/d7ZeVHVH/18-5-p4-read-data-from-trollolo"
+      "url": "https://trello.com/c/d7ZeVHVH/18-5-p4-read-data-from-trollolo",
+      "checklists": [
+        {
+          "id": "5319c5b3d9e20a072df0400a",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c57ff6be845f428aa7a3",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c5c1a72f131d5b2dc22e",
+              "name": "Add option to Trollolo to provide the board id",
+              "nameData": null,
+              "pos": 16452,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c5c518aeec6815e18469",
+              "name": "Call command",
+              "nameData": null,
+              "pos": 33525,
+              "state": "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c5961e530fd26f83999d",
@@ -265,7 +335,32 @@
       ],
       "shortUrl": "https://trello.com/c/sSDUmT6R",
       "subscribed": false,
-      "url": "https://trello.com/c/sSDUmT6R/19-3-p5-save-read-data-as-reference-data"
+      "url": "https://trello.com/c/sSDUmT6R/19-3-p5-save-read-data-as-reference-data",
+      "checklists": [
+        {
+          "id": "5319c5ce8cf780f37d4c0b35",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c5961e530fd26f83999d",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c5db5b4bd5c845e3cecc",
+              "name": "Save test data",
+              "nameData": null,
+              "pos": 16589,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c5e272e066b46ff624c2",
+              "name": "Make tests work",
+              "nameData": null,
+              "pos": 33446,
+              "state": "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c197e4a1ba6215bc03c8",
@@ -321,7 +416,10 @@
       ],
       "shortUrl": "https://trello.com/c/663yRhde",
       "subscribed": false,
-      "url": "https://trello.com/c/663yRhde/17-waterline"
+      "url": "https://trello.com/c/663yRhde/17-waterline",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c5a8743488047e13fcbc",
@@ -377,7 +475,25 @@
       ],
       "shortUrl": "https://trello.com/c/n2g4S35q",
       "subscribed": false,
-      "url": "https://trello.com/c/n2g4S35q/20-8-p6-celebrate-testing-board"
+      "url": "https://trello.com/c/n2g4S35q/20-8-p6-celebrate-testing-board",
+      "checklists": [
+        {
+          "id": "5319c5ea7b7a51a62bc907a1",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c5a8743488047e13fcbc",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c5ecb0d2cfb56fa092df",
+              "name": "Party",
+              "nameData": null,
+              "pos": 16886,
+              "state": "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c15d4a5040bb15f74655",
@@ -415,8 +531,8 @@
         "viewingMemberVoted": false,
         "subscribed": false,
         "fogbugz": "",
-        "checkItems": 2,
-        "checkItemsChecked": 1,
+        "checkItems": 4,
+        "checkItemsChecked": 2,
         "comments": 0,
         "attachments": 0,
         "description": false,
@@ -435,7 +551,58 @@
       ],
       "shortUrl": "https://trello.com/c/QI256QAJ",
       "subscribed": false,
-      "url": "https://trello.com/c/QI256QAJ/15-2-p2-fill-doing-column"
+      "url": "https://trello.com/c/QI256QAJ/15-2-p2-fill-doing-column",
+      "checklists": [
+        {
+          "id": "5319c1cd55ed32bd2bb998eb",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c15d4a5040bb15f74655",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c1e6da570ee46fb8491a",
+              "name": "Add task to add task to Fill Doing column card",
+              "nameData": {
+                "emoji": {
+                }
+              },
+              "pos": 17373,
+              "state": "incomplete"
+            },
+            {
+              "id": "5319c20b30a984c645c687ac",
+              "name": "Create card to Fill Doing column",
+              "nameData": null,
+              "pos": 8686.5,
+              "state": "complete"
+            }
+          ]
+        },
+        {
+          "id": "54d8d6905a4c941656e68ac5",
+          "name": "Feedback",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c15d4a5040bb15f74655",
+          "pos": 32768,
+          "checkItems": [
+            {
+              "id": "54d8d6905a4c941656e68ac6",
+              "name": "Ask user who requested the feature",
+              "nameData": null,
+              "pos": 16465,
+              "state": "complete"
+            },
+            {
+              "id": "54d8d6905a4c941656e68ac7",
+              "name": "Ask product manager",
+              "nameData": null,
+              "pos": 33130,
+              "state": "incomplete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c12ca78944d77d7912ea",
@@ -491,7 +658,10 @@
       ],
       "shortUrl": "https://trello.com/c/m2WRyutm",
       "subscribed": false,
-      "url": "https://trello.com/c/m2WRyutm/14-burndown-chart"
+      "url": "https://trello.com/c/m2WRyutm/14-burndown-chart",
+      "checklists": [
+
+      ]
     },
     {
       "id": "54ae8485221b1cc5b173e713",
@@ -547,7 +717,10 @@
       ],
       "shortUrl": "https://trello.com/c/enSlF2v1",
       "subscribed": false,
-      "url": "https://trello.com/c/enSlF2v1/21-sprint-10"
+      "url": "https://trello.com/c/enSlF2v1/21-sprint-10",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c07f277eb1661503be8a",
@@ -608,7 +781,39 @@
       ],
       "shortUrl": "https://trello.com/c/mbmz1nct",
       "subscribed": false,
-      "url": "https://trello.com/c/mbmz1nct/9-3-p3-fill-done-columns"
+      "url": "https://trello.com/c/mbmz1nct/9-3-p3-fill-done-columns",
+      "checklists": [
+        {
+          "id": "5319c09cab4511c37d2a6254",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c07f277eb1661503be8a",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c0b4deedfe4142d2f2bc",
+              "name": "Fill Done Sprint 1",
+              "nameData": null,
+              "pos": 16534,
+              "state": "complete"
+            },
+            {
+              "id": "5319c0b8a8f372aa2b17ab8d",
+              "name": "Fill Done Sprint 2",
+              "nameData": null,
+              "pos": 33881,
+              "state": "complete"
+            },
+            {
+              "id": "5319c0bd66b5b18a15d6c0ac",
+              "name": "Fill Done Sprint 3",
+              "nameData": null,
+              "pos": 50814,
+              "state": "complete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c10ed542ef5b1591d0e4",
@@ -664,7 +869,10 @@
       ],
       "shortUrl": "https://trello.com/c/WGpuHyli",
       "subscribed": false,
-      "url": "https://trello.com/c/WGpuHyli/13-burndown-chart"
+      "url": "https://trello.com/c/WGpuHyli/13-burndown-chart",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c0ccfb3dad67457985d0",
@@ -723,7 +931,10 @@
       ],
       "shortUrl": "https://trello.com/c/tHgAV3is",
       "subscribed": false,
-      "url": "https://trello.com/c/tHgAV3is/10-sprint-9"
+      "url": "https://trello.com/c/tHgAV3is/10-sprint-9",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319bf851193a85e110d8460",
@@ -773,7 +984,10 @@
       ],
       "shortUrl": "https://trello.com/c/xIBbjlRQ",
       "subscribed": false,
-      "url": "https://trello.com/c/xIBbjlRQ/7-2-p1-explain-purpose"
+      "url": "https://trello.com/c/xIBbjlRQ/7-2-p1-explain-purpose",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c0409a567dc62b68aa6b",
@@ -834,7 +1048,42 @@
       ],
       "shortUrl": "https://trello.com/c/afmNzjbW",
       "subscribed": false,
-      "url": "https://trello.com/c/afmNzjbW/8-2-p2-create-scrum-columns"
+      "url": "https://trello.com/c/afmNzjbW/8-2-p2-create-scrum-columns",
+      "checklists": [
+        {
+          "id": "5319c04d592a9182153db831",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319c0409a567dc62b68aa6b",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319c052d86da6cb6fa2a9e0",
+              "name": "Backlog",
+              "nameData": null,
+              "pos": 17223,
+              "state": "complete"
+            },
+            {
+              "id": "5319c0548163d08c11d36a07",
+              "name": "Doing",
+              "nameData": null,
+              "pos": 33889,
+              "state": "complete"
+            },
+            {
+              "id": "5319c0562fef3bc511c79279",
+              "name": "Multiple Done Columns",
+              "nameData": {
+                "emoji": {
+                }
+              },
+              "pos": 50322,
+              "state": "complete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319c1062d3cd2de456c3127",
@@ -890,7 +1139,10 @@
       ],
       "shortUrl": "https://trello.com/c/dBvqdCxL",
       "subscribed": false,
-      "url": "https://trello.com/c/dBvqdCxL/12-burndown-chart"
+      "url": "https://trello.com/c/dBvqdCxL/12-burndown-chart",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319c0cf0c9c84b0450b41ce",
@@ -946,7 +1198,10 @@
       ],
       "shortUrl": "https://trello.com/c/kyPwZhls",
       "subscribed": false,
-      "url": "https://trello.com/c/kyPwZhls/11-sprint-8"
+      "url": "https://trello.com/c/kyPwZhls/11-sprint-8",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319bf6980da466e451848bb",
@@ -1003,7 +1258,32 @@
       ],
       "shortUrl": "https://trello.com/c/jK3lHglS",
       "subscribed": false,
-      "url": "https://trello.com/c/jK3lHglS/4-1-p1-create-trello-testing-board"
+      "url": "https://trello.com/c/jK3lHglS/4-1-p1-create-trello-testing-board",
+      "checklists": [
+        {
+          "id": "5319bfca9876ce6d4591c4b2",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319bf6980da466e451848bb",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319bfd806b13b906faa1705",
+              "name": "Create board",
+              "nameData": null,
+              "pos": 17406,
+              "state": "complete"
+            },
+            {
+              "id": "5319bfdb43b3177d1112b8b4",
+              "name": "Name board",
+              "nameData": null,
+              "pos": 33959,
+              "state": "complete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319bf7099ee686d15b3e966",
@@ -1068,7 +1348,46 @@
       ],
       "shortUrl": "https://trello.com/c/Ph2XGEwl",
       "subscribed": false,
-      "url": "https://trello.com/c/Ph2XGEwl/5-5-p2-add-fancy-background"
+      "url": "https://trello.com/c/Ph2XGEwl/5-5-p2-add-fancy-background",
+      "checklists": [
+        {
+          "id": "5319bfaa8ff351c22b123ad0",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319bf7099ee686d15b3e966",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319bfae5a24d7037e79a726",
+              "name": "Find image",
+              "nameData": null,
+              "pos": 16461,
+              "state": "complete"
+            },
+            {
+              "id": "5319bfb5b0d2cfb56fa08a3b",
+              "name": "Download image",
+              "nameData": null,
+              "pos": 32870,
+              "state": "complete"
+            },
+            {
+              "id": "5319bfb7eeecdca82bffe3d4",
+              "name": "Set image",
+              "nameData": null,
+              "pos": 49499,
+              "state": "complete"
+            },
+            {
+              "id": "5319bfbe5b4bd5c845e3c598",
+              "name": "Add attribution",
+              "nameData": null,
+              "pos": 66653,
+              "state": "complete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319bf7bf2c8ecce45c2f5bb",
@@ -1121,7 +1440,25 @@
       ],
       "shortUrl": "https://trello.com/c/02broblM",
       "subscribed": false,
-      "url": "https://trello.com/c/02broblM/6-1-p4-add-legend"
+      "url": "https://trello.com/c/02broblM/6-1-p4-add-legend",
+      "checklists": [
+        {
+          "id": "5319bfeb2d638eb411117815",
+          "name": "Tasks",
+          "idBoard": "53186e8391ef8671265eba9d",
+          "idCard": "5319bf7bf2c8ecce45c2f5bb",
+          "pos": 16384,
+          "checkItems": [
+            {
+              "id": "5319bff6c1d6da8742926989",
+              "name": "Create Legend column",
+              "nameData": null,
+              "pos": 16455,
+              "state": "complete"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "5319bd1a8b60144a4255b294",
@@ -1174,7 +1511,10 @@
       ],
       "shortUrl": "https://trello.com/c/APlDWOc8",
       "subscribed": false,
-      "url": "https://trello.com/c/APlDWOc8/2-purpose"
+      "url": "https://trello.com/c/APlDWOc8/2-purpose",
+      "checklists": [
+
+      ]
     },
     {
       "id": "5319bc12f1ac326d11e3f46c",
@@ -1227,7 +1567,10 @@
       ],
       "shortUrl": "https://trello.com/c/C46wQCD2",
       "subscribed": false,
-      "url": "https://trello.com/c/C46wQCD2/1-background-image"
+      "url": "https://trello.com/c/C46wQCD2/1-background-image",
+      "checklists": [
+
+      ]
     }
   ],
   "lists": [

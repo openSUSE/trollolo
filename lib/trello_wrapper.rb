@@ -39,11 +39,11 @@ class TrelloWrapper
   end
 
   def retrieve_board_data(board_id)
-    JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open"))
+    JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all"))
   end
 
   def backup(board_id)
-    client.get("/boards/#{board_id}?lists=open&cards=open")
+    client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
   end
 
   def organization(org_id)

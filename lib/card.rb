@@ -39,11 +39,27 @@ class Card
   end
 
   def done_tasks
-    @card_data["badges"]["checkItemsChecked"].to_f
+    count = 0
+    @card_data["checklists"].each do |checklist|
+      if checklist["name"] != "Feedback"
+        checklist["checkItems"].each do |checklist_item|
+          if checklist_item["state"] == "complete"
+            count += 1
+          end
+        end
+      end
+    end
+    count
   end
 
   def tasks
-    @card_data["badges"]["checkItems"].to_f
+    count = 0
+    @card_data["checklists"].each do |checklist|
+      if checklist["name"] != "Feedback"
+        count += checklist["checkItems"].count
+      end
+    end
+    count
   end
 
   def card_labels

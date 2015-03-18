@@ -47,6 +47,13 @@ class Backup
       out.puts "  #{list['name']}"
       lists[list["id"]].each do |card|
         out.puts "    " + card["name"]
+        card["checklists"].each do |checklist|
+          out.puts "      " + checklist["name"]
+          checklist["checkItems"].each do |checklist_item|
+            out.puts "        " + checklist_item["name"] + " (" +
+              checklist_item["state"] + ")"
+          end
+        end
       end
     end
   end
