@@ -1,6 +1,3 @@
-require 'benchmark'
-require 'ostruct'
-
 class ScrumBoard
 
   class DoneColumnNotFoundError < StandardError; end
