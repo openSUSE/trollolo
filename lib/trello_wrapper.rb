@@ -25,6 +25,13 @@ class TrelloWrapper
     init_trello
   end
 
+  def client
+    Trello::Client.new(
+      developer_public_key: @settings.developer_public_key,
+      member_token: @settings.member_token
+    )
+  end
+
   def board(board_id)
     return @board if @board
 
@@ -32,12 +39,11 @@ class TrelloWrapper
   end
 
   def retrieve_board_data(board_id)
-    client = Trello::Board.find(board_id).client
     JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open"))
   end
 
   def backup(board_id)
-    Trello::Board.find(board_id).client.get("/boards/#{board_id}?lists=open&cards=open")
+    client.get("/boards/#{board_id}?lists=open&cards=open")
   end
 
   def organization(org_id)
