@@ -6,7 +6,7 @@ describe TrelloWrapper do
   subject { described_class.new(settings) }
 
   before do
-    stub_request(:get, "https://api.trello.com/1/boards/myboard?key=mykey&token=mytoken").
+    stub_request(:get, "https://api.trello.com/1/boards/myboard?cards=open&key=mykey&lists=open&token=mytoken").
         to_return(:status => 200, :body => load_test_file("board.json"), :headers => {})
     full_board_mock
   end
@@ -23,14 +23,15 @@ describe TrelloWrapper do
   end
 
   describe '#board' do
+    before(:each) do
+      expect(subject).to receive(:retrieve_board_data).with('myboard').and_return(:board)
+    end
+
     it 'finds board via Trello' do
-      expect(Trello::Board).to receive(:find).with('myboard')
-      expect_any_instance_of(ScrumBoard).to receive(:retrieve_data)
       subject.board("myboard")
     end
 
     it 'instantiate ScrumBoard with trello board and settings' do
-      allow(Trello::Board).to receive(:find).with('myboard').and_return(:board)
       expect(ScrumBoard).to receive(:new).with(:board, subject.instance_variable_get(:@settings))
       subject.board("myboard")
     end

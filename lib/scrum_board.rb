@@ -2,16 +2,9 @@ class ScrumBoard
 
   class DoneColumnNotFoundError < StandardError; end
 
-  def initialize(trello_board, settings)
-    @trello_board = trello_board
-    @settings     = settings
-
-    @board_data = retrieve_data
-  end
-
-  def retrieve_data
-    JSON.parse(@trello_board.client.get("/boards/#{@trello_board.id}?" +
-      "lists=open&cards=open"))
+  def initialize(board_data, settings)
+    @settings = settings
+    @board_data = board_data
   end
 
   def columns

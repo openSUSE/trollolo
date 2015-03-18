@@ -26,7 +26,14 @@ class TrelloWrapper
   end
 
   def board(board_id)
-    @board ||= ScrumBoard.new(Trello::Board.find(board_id), @settings)
+    return @board if @board
+
+    @board = ScrumBoard.new(retrieve_board_data(board_id), @settings)
+  end
+
+  def retrieve_board_data(board_id)
+    client = Trello::Board.find(board_id).client
+    JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open"))
   end
 
   def backup(board_id)
