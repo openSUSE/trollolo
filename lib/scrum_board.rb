@@ -101,10 +101,6 @@ class ScrumBoard
     open_columns.map(&:fast_lane_cards).flatten(1) + done_column.cards
   end
 
-  def backup
-    @trello_board.client.get("/boards/#{@trello_board.id}?lists=open&cards=open")
-  end
-
   def meta_cards
     scrum_cards.select{|c| c.meta_card? }
   end

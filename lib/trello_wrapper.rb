@@ -29,6 +29,10 @@ class TrelloWrapper
     @board ||= ScrumBoard.new(Trello::Board.find(board_id), @settings)
   end
 
+  def backup(board_id)
+    Trello::Board.find(board_id).client.get("/boards/#{board_id}?lists=open&cards=open")
+  end
+
   def organization(org_id)
     Trello::Organization.find(org_id)
   end

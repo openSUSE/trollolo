@@ -13,7 +13,7 @@ class Backup
 
     trello = TrelloWrapper.new(@settings)
 
-    data = trello.board(board_id).backup
+    data = trello.backup(board_id)
 
     File.open(File.join(backup_path, "board.json"), "w") do |f|
       f.write(data)
