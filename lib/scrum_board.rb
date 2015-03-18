@@ -14,7 +14,7 @@ class ScrumBoard
 
   def retrieve_data
     JSON.parse(@trello_board.client.get("/boards/#{@trello_board.id}?" +
-      "lists=all&cards=all"))
+      "lists=open&cards=open"))
   end
 
   def columns
@@ -105,7 +105,7 @@ class ScrumBoard
   end
 
   def backup
-    @trello_board.client.get("/boards/#{@trello_board.id}?lists=all&cards=all")
+    @trello_board.client.get("/boards/#{@trello_board.id}?lists=open&cards=open")
   end
 
   def meta_cards
