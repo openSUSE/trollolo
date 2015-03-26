@@ -93,6 +93,7 @@ describe BurndownData do
 
       expected_hash = {
         'date' => '2015-01-15',
+        'updated_at' => '2015-01-15T00:00:00+00:00',
         'story_points' => {
           'total' => 3,
           'open' => 1

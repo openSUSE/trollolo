@@ -1,5 +1,6 @@
 ---
 meta:
+  board_id: myboardid
   sprint: 2
   total_days: 9
   weekend_lines:
@@ -7,6 +8,7 @@ meta:
   - 7.5
 days:
 - date: '2014-04-23'
+  updated_at: '2014-04-23T10:00:00+01:00'
   story_points:
     total: 30
     open: 23
@@ -14,6 +16,7 @@ days:
     total: 25
     open: 21
 - date: '2014-04-24'
+  updated_at: '2014-04-24T19:00:00+01:00'
   story_points:
     total: 30
     open: 21

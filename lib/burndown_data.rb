@@ -49,6 +49,7 @@ class BurndownData
   def to_hash
     base = {
       "date" => date_time.to_date.to_s,
+      "updated_at" => date_time.to_s,
       "story_points" => {
         "total" => story_points.total,
         "open" => story_points.open

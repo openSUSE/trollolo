@@ -146,7 +146,6 @@ class BurndownChart
     burndown_data_path = load_last_sprint(burndown_dir)
     @burndown_data.board_id = board_id
     @burndown_data.fetch
-    @burndown_data.date_time = DateTime.now
     add_data(@burndown_data)
     write_data burndown_data_path
     if with_plot

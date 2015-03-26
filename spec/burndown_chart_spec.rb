@@ -26,6 +26,7 @@ describe BurndownChart do
       @raw_data = [
         {
           "date" => '2014-04-23',
+          "updated_at" => '2014-04-23T10:00:00+01:00',
           "story_points" =>
           {
             "total" => 30,
@@ -39,6 +40,7 @@ describe BurndownChart do
         },
         {
           "date" => '2014-04-24',
+          "updated_at" => '2014-04-24T19:00:00+01:00',
           "story_points" =>
           {
             "total" => 30,
@@ -152,47 +154,60 @@ describe BurndownChart do
       expect(@chart.data["days"]).to eq @raw_data
     end
 
-    it "writes data" do
-      read_path = given_file('burndown-data.yaml')
-      @chart.read_data(read_path)
+    describe "#write_data" do
+      it "writes object to disk" do
+        @chart.sprint = 2
+        @chart.data["meta"]["total_days"] = 9
+        @chart.data["meta"]["weekend_lines"] = [3.5, 7.5]
+        @chart.data["meta"]["board_id"] = "myboardid"
+        @chart.data["days"] = @raw_data
 
-      write_path = given_dummy_file
-      @chart.write_data(write_path)
+        write_path = given_dummy_file
+        @chart.write_data(write_path)
+        expect(File.read(write_path)). to eq load_test_file('burndown-data.yaml')
+      end
 
-      expect(File.read(write_path)).to eq File.read(read_path)
-    end
+      it "writes all data which was read" do
+        read_path = given_file('burndown-data.yaml')
+        @chart.read_data(read_path)
 
-    it "doesn't write extra entries with 0 values" do
-      raw_data = [
-        {
-          "date" => '2014-04-24',
-          "story_points" =>
+        write_path = given_dummy_file
+        @chart.write_data(write_path)
+
+        expect(File.read(write_path)).to eq File.read(read_path)
+      end
+
+      it "doesn't write extra entries with 0 values" do
+        raw_data = [
           {
-            "total" => 30,
-            "open" => 21
-          },
-          "tasks" =>
-          {
-            "total" => 26,
-            "open" => 19
-          },
-          "story_points_extra" =>
-          {
-            "done" => 0
-          },
-          "tasks_extra" =>
-          {
-            "done" => 0
+            "date" => '2014-04-24',
+            "story_points" =>
+            {
+              "total" => 30,
+              "open" => 21
+            },
+            "tasks" =>
+            {
+              "total" => 26,
+              "open" => 19
+            },
+            "story_points_extra" =>
+            {
+              "done" => 0
+            },
+            "tasks_extra" =>
+            {
+              "done" => 0
+            }
           }
-        }
-      ]
-      @chart.data["days"] = raw_data
-      @chart.data["meta"]["board_id"] = "1234"
+        ]
+        @chart.data["days"] = raw_data
+        @chart.data["meta"]["board_id"] = "1234"
 
-      write_path = given_dummy_file
-      @chart.write_data(write_path)
+        write_path = given_dummy_file
+        @chart.write_data(write_path)
 
-      expected_file_content = <<EOT
+        expected_file_content = <<EOT
 ---
 meta:
   board_id: '1234'
@@ -210,7 +225,8 @@ days:
     total: 26
     open: 19
 EOT
-      expect(File.read(write_path)).to eq expected_file_content
+        expect(File.read(write_path)).to eq expected_file_content
+      end
     end
 
   end
@@ -258,6 +274,10 @@ EOT
 
     describe "update" do
       it "updates chart with latest data" do
+        updated_at = "2015-01-12T13:57:16+01:00"
+        expected_date_time = DateTime.parse(updated_at)
+        allow(DateTime).to receive(:now).and_return(expected_date_time)
+
         path = given_directory_from_data("burndown_dir")
 
         before = BurndownChart.new(@settings)
@@ -269,6 +289,9 @@ EOT
         after.read_data(File.join(path,'burndown-data-02.yaml'))
 
         expect(after.days.size).to eq before.days.size + 1
+
+        expect(after.days.last["date"]).to eq "2015-01-12"
+        expect(after.days.last["updated_at"]).to eq updated_at
       end
 
       it "overwrites data on same date" do
