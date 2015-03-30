@@ -1,0 +1,24 @@
+---
+meta:
+  board_id: QI6wqucd
+  sprint: 36
+  total_days: 10
+  weekend_lines:
+  - 3.5
+  - 8.5
+days:
+- date: '2015-03-25'
+  story_points:
+    total: 22.0
+    open: 22.0
+  tasks:
+    total: 35
+    open: 33
+- date: '2015-03-26'
+  updated_at: '2015-03-26T14:13:25+01:00'
+  story_points:
+    total: 22.0
+    open: 21.0
+  tasks:
+    total: 35
+    open: 29
