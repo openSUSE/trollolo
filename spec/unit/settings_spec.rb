@@ -6,7 +6,7 @@ describe Settings do
   
   context "given config file" do
     before(:each) do
-      @settings = Settings.new( File.expand_path('../data/trollolorc',__FILE__) )
+      @settings = Settings.new( File.expand_path('../../data/trollolorc',__FILE__) )
     end
     
     it "is not verbose by default" do

@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require_relative 'integration_spec_helper'
 
 include GivenFilesystemSpecHelpers
 
