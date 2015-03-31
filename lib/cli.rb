@@ -217,20 +217,25 @@ EOT
   desc "burndowns", "run multiple burndowns"
   option "board-list", :desc => "path to board-list.yaml", :required => true
   option :plot, :type => :boolean, :desc => "also plot the new data"
+  option :output, :aliases => :o, :desc => "Output directory"
   def burndowns
     process_global_options options
     board_list = YAML.load_file(options["board-list"])
     board_list.keys.each do |name|
+      if name =~ /[^[:alnum:]. _]/ # sanitize
+        raise "invalid character in team name"
+      end
       board = board_list[name]
-      destdir = name
+      if options['output']
+        destdir = File.join(options['output'], name)
+      else
+        destdir = name
+      end
       chart = BurndownChart.new @@settings
       if ! File.directory?(destdir)
-        if destdir =~ /[^[:alnum:]. _]/ # sanitize
-          raise "invalid character in team name"
-        end
         chart.setup(destdir, board["boardid"])
       end
-      chart.update(destdir, options[:plot])
+      chart.update({'output' => destdir, plot: options[:plot]})
     end
   end
 
