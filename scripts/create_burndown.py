@@ -34,9 +34,6 @@ if args.output:
 if args.verbose:
   print args
 
-if args.verbose:
-  print args
-
 with open('burndown-data-' + args.sprint + '.yaml', 'r') as f:
   burndown = yaml.load(f)
 
