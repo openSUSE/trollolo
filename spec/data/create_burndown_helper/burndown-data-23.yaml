@@ -1,0 +1,85 @@
+---
+meta:
+  board_id: QI6wqucd
+  sprint: 23
+  total_days: 8
+  weekend_lines:
+  - 3.5
+  - 8.5
+days:
+- date: '2014-09-10'
+  story_points:
+    total: 24
+    open: 24
+  tasks:
+    total: 39
+    open: 39
+- date: '2014-09-11'
+  story_points:
+    total: 24
+    open: 24
+  tasks:
+    total: 39
+    open: 39
+- date: '2014-09-12'
+  story_points:
+    total: 24
+    open: 24
+  tasks:
+    total: 39
+    open: 22
+- date: '2014-09-15'
+  story_points:
+    total: 24
+    open: 24
+  tasks:
+    total: 39
+    open: 21
+  story_points_extra:
+    done: 2
+  tasks_extra:
+    done: 2
+- date: '2014-09-16'
+  story_points:
+    total: 24
+    open: 18
+  tasks:
+    total: 40
+    open: 15
+  story_points_extra:
+    done: 4
+  tasks_extra:
+    done: 4
+- date: '2014-09-17'
+  story_points:
+    total: 24
+    open: 18
+  tasks:
+    total: 40
+    open: 11
+  story_points_extra:
+    done: 4
+  tasks_extra:
+    done: 4
+- date: '2014-09-18'
+  story_points:
+    total: 24
+    open: 18
+  tasks:
+    total: 45
+    open: 15
+  story_points_extra:
+    done: 4
+  tasks_extra:
+    done: 4
+- date: '2014-09-19'
+  story_points:
+    total: 24
+    open: 21
+  tasks:
+    total: 49
+    open: 10
+  story_points_extra:
+    done: 7
+  tasks_extra:
+    done: 8

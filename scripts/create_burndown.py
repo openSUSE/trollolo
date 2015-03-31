@@ -129,9 +129,6 @@ for weekend_line in meta["weekend_lines"]:
 plt.ylabel('Story Points', color='black')
 plt.plot(x_days, y_open_story_points, 'ko-', linewidth=2)
 
-if x_days_extra and extra_day == 0:
-  del y_story_points_done_extra[0]
-
 if len(x_days_extra) > 0:
   plt.plot(x_days_extra, y_story_points_done_extra, 'ko-', linewidth=2)
 
@@ -146,8 +143,6 @@ if not args.no_tasks:
   plt.tick_params(axis='y', colors='green')
   plt.axis([0, total_days + 1, ymin*scalefactor, ymax * scalefactor])
   plt.plot(x_days, y_open_tasks, 'go-', linewidth=2)
-  if x_days_extra and extra_day == 0:
-    del y_tasks_done_extra[0]
   if len(x_days_extra) > 0:
     plt.plot(x_days_extra, y_tasks_done_extra, 'go-', linewidth=2)
 
@@ -196,7 +191,7 @@ if len(total_fast_lane) > 1 and args.with_fast_lane:
 # Draw arrow showing already done tasks at begin of sprint
 tasks_done = burndown["days"][0]["tasks"]["total"] - burndown["days"][0]["tasks"]["open"]
 
-if tasks_done > 5 and not args.no_tasks:
+if tasks_done > 0 and not args.no_tasks:
   plt.annotate("",
 	       xy=(x_days[0], scalefactor * y_open_story_points[0] - 0.5 ), xycoords='data',
 	       xytext=(x_days[0], y_open_tasks[0] + 0.5), textcoords='data',
