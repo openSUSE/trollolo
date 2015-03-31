@@ -26,6 +26,7 @@ parser.add_argument('--output', help='Location of data to process')
 parser.add_argument('--no-tasks', action='store_true', help='Disable Tasks line in the chart', default=False)
 parser.add_argument('--with-fast-lane', action='store_true', help='Draw line for Fast Lane cards', default=False)
 parser.add_argument('--verbose', action='store_true', help='Verbose Output', default=False)
+parser.add_argument('--no-head', action='store_true', help='Run in headless mode', default=False)
 args = parser.parse_args()
 
 if args.output:
@@ -219,4 +220,5 @@ if burndown["days"][0].has_key("tasks_extra") and not args.no_tasks:
 
 # Save the burndown chart
 plt.savefig('burndown-' + args.sprint + '.png',bbox_inches='tight')
-plt.show()
+if not args.no_head:
+  plt.show()

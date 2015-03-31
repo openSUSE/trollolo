@@ -12,7 +12,7 @@ describe "create_burndown.py" do
       given_file("burndown-data-23.yaml", from: "create_burndown_helper/burndown-data-23.yaml")
     end
 
-    cmd = "#{HELPER_SCRIPT} 23 --output=#{@working_dir}"
+    cmd = "#{HELPER_SCRIPT} 23 --output=#{@working_dir} --no-head"
     run(cmd)
     assert_exit_status(0)
     expect(File.join(@working_dir, "burndown-23.png")).
@@ -24,7 +24,7 @@ describe "create_burndown.py" do
       given_file("burndown-data-31.yaml", from: "create_burndown_helper/burndown-data-31.yaml")
     end
 
-    cmd = "#{HELPER_SCRIPT} 31 --output=#{@working_dir}"
+    cmd = "#{HELPER_SCRIPT} 31 --output=#{@working_dir} --no-head"
     run(cmd)
     assert_exit_status(0)
     expect(File.join(@working_dir, "burndown-31.png")).
@@ -36,7 +36,7 @@ describe "create_burndown.py" do
       given_file("burndown-data-35.yaml", from: "create_burndown_helper/burndown-data-35.yaml")
     end
 
-    cmd = "#{HELPER_SCRIPT} 35 --output=#{@working_dir}"
+    cmd = "#{HELPER_SCRIPT} 35 --output=#{@working_dir} --no-head"
     run(cmd)
     assert_exit_status(0)
     expect(File.join(@working_dir, "burndown-35.png")).
@@ -48,7 +48,7 @@ describe "create_burndown.py" do
       given_file("burndown-data-08.yaml", from: "create_burndown_helper/burndown-data-08.yaml")
     end
 
-    cmd = "#{HELPER_SCRIPT} 08 --output=#{@working_dir} --no-tasks --with-fast-lane"
+    cmd = "#{HELPER_SCRIPT} 08 --output=#{@working_dir} --no-tasks --with-fast-lane --no-head"
     run(cmd)
     assert_exit_status(0)
     expect(File.join(@working_dir, "burndown-08.png")).
