@@ -1,0 +1,111 @@
+---
+meta:
+  board_id: myboardid
+  sprint: 8
+  total_days: 10
+  weekend_lines:
+  - 5
+  - 10
+days:
+- date: '2015-03-16'
+  story_points:
+    total: 25.0
+    open: 25.0
+  tasks:
+    total: 62.0
+    open: 26.0
+  fast_lane:
+    total: 2
+    open: 2
+- date: '2015-03-17'
+  story_points:
+    total: 25.0
+    open: 25.0
+  tasks:
+    total: 62.0
+    open: 26.0
+  fast_lane:
+    total: 2
+    open: 2
+- date: '2015-03-18'
+  story_points:
+    total: 25.0
+    open: 25.0
+  tasks:
+    total: 62.0
+    open: 13.0
+  fast_lane:
+    total: 2
+    open: 2
+- date: '2015-03-19'
+  story_points:
+    total: 25.0
+    open: 25.0
+  tasks:
+    total: 65.0
+    open: 13.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 4
+    open: 4
+- date: '2015-03-20'
+  story_points:
+    total: 25.0
+    open: 25.0
+  tasks:
+    total: 65.0
+    open: 13.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 4
+    open: 2
+- date: '2015-03-23'
+  story_points:
+    total: 25.0
+    open: 20.0
+  tasks:
+    total: 66.0
+    open: 8.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 6
+    open: 3
+- date: '2015-03-24'
+  story_points:
+    total: 25.0
+    open: 20.0
+  tasks:
+    total: 70.0
+    open: 9.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 7
+    open: 3
+- date: '2015-03-25'
+  story_points:
+    total: 25.0
+    open: 10.0
+  tasks:
+    total: 75.0
+    open: 10.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 7
+    open: 3
+- date: '2015-03-27'
+  story_points:
+    total: 25.0
+    open: 8.0
+  tasks:
+    total: 75.0
+    open: 8.0
+  story_points_extra:
+    done: 2.0
+  fast_lane:
+    total: 7
+    open: 1

@@ -1,0 +1,109 @@
+---
+meta:
+  board_id: myboardid
+  sprint: 31
+  total_days: 10
+  weekend_lines:
+  - 3.5
+  - 8.5
+days:
+- date: '2015-01-28'
+  story_points:
+    total: 28.0
+    open: 28.0
+  tasks:
+    total: 42.0
+    open: 29.0
+  tasks_extra:
+    done: 6.0
+- date: '2015-01-29'
+  story_points:
+    total: 28.0
+    open: 25.0
+  tasks:
+    total: 42.0
+    open: 28.0
+  tasks_extra:
+    done: 6.0
+- date: '2015-01-30'
+  story_points:
+    total: 28.0
+    open: 25.0
+  tasks:
+    total: 42.0
+    open: 22.0
+  tasks_extra:
+    done: 8.0
+- date: '2015-02-02'
+  story_points:
+    total: 28.0
+    open: 20.0
+  tasks:
+    total: 43.0
+    open: 15.0
+  tasks_extra:
+    done: 9.0
+- date: '2015-02-03'
+  story_points:
+    total: 28.0
+    open: 15.0
+  tasks:
+    total: 44.0
+    open: 11.0
+  tasks_extra:
+    done: 9.0
+- date: '2015-02-04'
+  story_points:
+    total: 28.0
+    open: 15.0
+  tasks:
+    total: 44.0
+    open: 10.0
+  story_points_extra:
+    done: 2.0
+  tasks_extra:
+    done: 10.0
+- date: '2015-02-05'
+  story_points:
+    total: 28.0
+    open: 11.0
+  tasks:
+    total: 44.0
+    open: 7.0
+  story_points_extra:
+    done: 3.0
+  tasks_extra:
+    done: 12.0
+- date: '2015-02-06'
+  story_points:
+    total: 28.0
+    open: 6.0
+  tasks:
+    total: 47.0
+    open: 6.0
+  story_points_extra:
+    done: 5.0
+  tasks_extra:
+    done: 13.0
+- date: '2015-02-09'
+  story_points:
+    total: 28.0
+    open: 3.0
+  tasks:
+    total: 47.0
+    open: 2.0
+  story_points_extra:
+    done: 5.0
+  tasks_extra:
+    done: 13.0
+- date: '2015-02-10'
+  story_points:
+    total: 28.0
+    open: 3.0
+  tasks:
+    total: 48.0
+    open: 2.0
+  story_points_extra:
+    done: 5.0
+  tasks_extra:
+    done: 14.0

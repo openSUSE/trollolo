@@ -7,17 +7,39 @@ HELPER_SCRIPT = File.expand_path("../../../scripts/create_burndown.py", __FILE__
 describe "create_burndown.py" do
   use_given_filesystem(keep_files: true)
 
-  before(:each) do
+  it "creates burndown chart for sprint 31" do
+    @working_dir = given_directory do
+      given_file("burndown-data-31.yaml", from: "create_burndown_helper/burndown-data-31.yaml")
+    end
+
+    cmd = "#{HELPER_SCRIPT} 31 #{@working_dir}"
+    run(cmd)
+    assert_exit_status(0)
+    expect(File.join(@working_dir, "burndown-31.png")).
+      to be_same_image_as("create_burndown_helper/burndown-31.png")
+  end
+
+  it "creates burndown chart for sprint 35" do
     @working_dir = given_directory do
       given_file("burndown-data-35.yaml", from: "create_burndown_helper/burndown-data-35.yaml")
     end
-  end
 
-  it "creates burndown chart" do
     cmd = "#{HELPER_SCRIPT} 35 #{@working_dir}"
     run(cmd)
     assert_exit_status(0)
     expect(File.join(@working_dir, "burndown-35.png")).
       to be_same_image_as("create_burndown_helper/burndown-35.png")
+  end
+
+  it "creates burndown chart for sprint 8" do
+    @working_dir = given_directory do
+      given_file("burndown-data-08.yaml", from: "create_burndown_helper/burndown-data-08.yaml")
+    end
+
+    cmd = "#{HELPER_SCRIPT} 08 #{@working_dir}"
+    run(cmd)
+    assert_exit_status(0)
+    expect(File.join(@working_dir, "burndown-08.png")).
+      to be_same_image_as("create_burndown_helper/burndown-08.png")
   end
 end
