@@ -47,6 +47,12 @@ class Backup
       out.puts "  #{list['name']}"
       lists[list["id"]].each do |card|
         out.puts "    " + card["name"]
+        if options["show-descriptions"]
+          if !card["desc"].empty?
+            out.puts "      Description"
+            out.puts "        " + card["desc"]
+          end
+        end
         card["checklists"].each do |checklist|
           out.puts "      " + checklist["name"]
           checklist["checkItems"].each do |checklist_item|

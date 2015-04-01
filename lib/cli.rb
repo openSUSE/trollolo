@@ -303,9 +303,10 @@ EOT
 
   desc "show_backup", "Show backup of board"
   option "board-id", :desc => "Id of Trello board", :required => true
+  option "show-descriptions", :desc => "Show descriptions of cards", :required => false, :type => :boolean
   def show_backup
     b = Backup.new @@settings
-    b.show(options["board-id"])
+    b.show(options["board-id"], options)
   end
 
   desc "organization", "Show organization info"
