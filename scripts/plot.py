@@ -98,10 +98,10 @@ class Plot:
       tasks['x_arrow_start_end'] = self.data.days[0]
       tasks['y_arrow_start'] = self.data.total_story_points[0] * self.data.scalefactor - 0.5
       tasks['y_arrow_end'] = self.data.open_tasks[0] + 0.5
-      tasks['y_arrow_start_bonus'] = self.data.bonus_tasks_day_one * self.data.scalefactor - 0.5
+      tasks['y_arrow_start_bonus'] = 0
       tasks['y_arrow_end_bonus'] = 0.5 - self.data.bonus_tasks_day_one
       tasks['y_text'] = self.data.total_story_points[0] * self.data.scalefactor
-      tasks['y_text_bonus'] = - self.data.bonus_tasks_done[0] / 2
+      tasks['y_text_bonus'] = self.data.bonus_tasks_done[0] / 2
       tasks['bonus_tasks_day_one'] = self.data.bonus_tasks_day_one
     tasks['total'] = self.data.total_tasks
     tasks['ymin'] = self.data.ymin * self.data.scalefactor

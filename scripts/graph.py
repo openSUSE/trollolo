@@ -101,7 +101,7 @@ class Graph:
         arrowprops=dict(arrowstyle="<|-|>", connectionstyle="arc3", color=color)
       )
 
-      self.subplot.text(0.4, self.y_text_bonus, str(int(self.y_extra[0])) + " extra",
+      self.subplot.text(0.4, self.y_text_bonus, str(int(-self.y_extra[0])) + " extra",
         rotation='vertical', verticalalignment='center', color=color
       )
       self.subplot.text(0.7, self.y_text_bonus, "tasks done",
