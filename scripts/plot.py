@@ -15,7 +15,7 @@ class Plot:
     self.setXKCD()
     self.createFigure(figure_width, figure_height)
     self.setXAxisLimits(0, self.data.total_days+1)
-    self.setXAxisTicks(self.data.days)
+    self.setXAxisTicks(self.data.total_days)
 
   def setXKCD(self):
     plt.xkcd()
@@ -50,9 +50,10 @@ class Plot:
     plt.xlim([x_min, x_max])
     return
 
-  def setXAxisTicks(self, days):
-    x_labels = [0] + days
-    plt.xticks(days, x_labels)
+  def setXAxisTicks(self, total_days):
+    x_labels = range(0, total_days)
+    x_range = range(1, total_days + 1)
+    plt.xticks(x_range, x_labels)
     return
 
   def saveImage(self, args):
