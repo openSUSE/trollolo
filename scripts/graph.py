@@ -65,7 +65,7 @@ class Graph:
       width = 0.2
       spacing = 0.1
       offset = (width + spacing) * self.plot_count + 0.1
-      new = [0]
+      new = []
       for i in range(1, len(self.total)):
         new.append(self.total[i] - self.total[i - 1])
       additional_days = []
