@@ -73,6 +73,7 @@ class Plot:
   def storyPoints(self):
     story_points = {}
     story_points['draw_tasks_diff'] = 0
+    story_points['draw_bonus_tasks_diff'] = 0
     story_points['x'] = self.data.days
     story_points['y'] = self.data.open_story_points
     if self.data.extra_day:
@@ -88,20 +89,21 @@ class Plot:
 
   def tasks(self):
     tasks = {}
-    tasks['draw_tasks_diff'] = 0
+    tasks['draw_tasks_diff'] = 1
+    tasks['draw_bonus_tasks_diff'] = 0
     tasks['x'] = self.data.days
     tasks['y'] = self.data.open_tasks
+    tasks['x_arrow_start_end'] = self.data.days[0]
+    tasks['y_arrow_start'] = self.data.total_story_points[0] * self.data.scalefactor - 0.5
+    tasks['y_arrow_end'] = self.data.open_tasks[0] + 0.5
+    tasks['y_text'] = self.data.total_story_points[0] * self.data.scalefactor
     if self.data.extra_day:
       tasks['x_extra'] = self.data.tasks_extra_days
       tasks['y_extra'] = self.data.bonus_tasks_done
     if self.data.bonus_tasks_day_one:
-      tasks['draw_tasks_diff'] = 1
-      tasks['x_arrow_start_end'] = self.data.days[0]
-      tasks['y_arrow_start'] = self.data.total_story_points[0] * self.data.scalefactor - 0.5
-      tasks['y_arrow_end'] = self.data.open_tasks[0] + 0.5
+      tasks['draw_bonus_tasks_diff'] = 1
       tasks['y_arrow_start_bonus'] = 0
       tasks['y_arrow_end_bonus'] = 0.5 - self.data.bonus_tasks_day_one
-      tasks['y_text'] = self.data.total_story_points[0] * self.data.scalefactor
       tasks['y_text_bonus'] = self.data.bonus_tasks_done[0] / 2
       tasks['bonus_tasks_day_one'] = self.data.bonus_tasks_day_one
     tasks['total'] = self.data.total_tasks
@@ -115,6 +117,7 @@ class Plot:
   def fastLane(self):
     fast_lane = {}
     fast_lane['draw_tasks_diff'] = 0
+    fast_lane['draw_bonus_tasks_diff'] = 0
     fast_lane['x'] = self.data.x_fast_lane
     fast_lane['y'] = self.data.y_fast_lane
     fast_lane['ymin'] = self.data.ymin

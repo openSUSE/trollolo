@@ -15,6 +15,7 @@ class Graph:
     self.total = graph_data['total']
     self.plot_count = graph_data['plot_count']
     self.draw_tasks_diff = graph_data['draw_tasks_diff']
+    self.draw_bonus_tasks_diff = graph_data['draw_bonus_tasks_diff']
 
     if 'x_extra' in graph_data:
       self.x_extra = graph_data['x_extra']
@@ -25,9 +26,11 @@ class Graph:
       self.x_arrow_start_end = graph_data['x_arrow_start_end']
       self.y_arrow_start = graph_data['y_arrow_start']
       self.y_arrow_end = graph_data['y_arrow_end']
+      self.y_text = graph_data['y_text']
+
+    if self.draw_bonus_tasks_diff:
       self.y_arrow_start_bonus = graph_data['y_arrow_start_bonus']
       self.y_arrow_end_bonus = graph_data['y_arrow_end_bonus']
-      self.y_text = graph_data['y_text']
       self.y_text_bonus = graph_data['y_text_bonus']
       self.bonus_tasks_day_one = graph_data['bonus_tasks_day_one']
 
@@ -52,6 +55,7 @@ class Graph:
     self.drawBars(color)
     if self.draw_tasks_diff:
       self.drawTasksDiff(color)
+    if self.draw_bonus_tasks_diff:
       self.drawBonusTasksDiff(color)
     return
 
@@ -64,15 +68,15 @@ class Graph:
     if len(self.total) > 1:
       width = 0.2
       spacing = 0.1
-      offset = (width + spacing) * self.plot_count + 0.1
-      new = []
+      offset = spacing + (width + spacing) * (self.plot_count - 1)
+      new = [0]
       for i in range(1, len(self.total)):
         new.append(self.total[i] - self.total[i - 1])
       additional_days = []
       additional = []
       for i in range(len(new)):
         if new[i] != 0:
-          additional_days.append(i + 1 + offset)
+          additional_days.append(i + offset)
           additional.append(new[i])
       if len(additional) > 0:
         self.subplot.bar(additional_days, additional, width, color=color)
