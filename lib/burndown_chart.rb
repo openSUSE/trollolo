@@ -83,6 +83,10 @@ class BurndownChart
 
   def read_data filename
     @data = YAML.load_file filename
+    not_done_columns = @data["meta"]["not_done_columns"]
+    if not_done_columns
+      @settings.not_done_columns = not_done_columns
+    end
   end
 
   def write_data filename
