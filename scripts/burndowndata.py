@@ -95,7 +95,8 @@ class BurndownData:
       ymin_bonus_tasks = min(bonus_tasks_done) -3
     else:
       ymin_bonus_tasks = 0
-      ymin_bonus_story_points = 0
+
+    ymin_bonus_story_points = 0
 
     if len(bonus_story_points_done) > 0:
       ymin_bonus_story_points = min(bonus_story_points_done) -3
