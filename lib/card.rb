@@ -17,7 +17,7 @@
 
 class Card
   # Assuming we have card titles as follows '(8) This is the card name'
-  ESTIMATED_REGEX     = /\A\(([\d.]+)\)/
+  ESTIMATED_REGEX     = /\(([\d.]+)\)/
   SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
   def initialize(board_data, card_id)

@@ -22,6 +22,11 @@ describe Card do
       allow(@card).to receive(:name).and_return "(0.5) P1: Refactor cards"
       expect(@card.story_points).to eq(0.5)
     end
+
+    it "extracts story points when value is not at beginning of card name" do
+      allow(@card).to receive(:name).and_return "P01: (3) Refactor cards"
+      expect(@card.story_points).to eq(3)
+    end
   end
 
   describe "#parse_yaml_from_description" do
