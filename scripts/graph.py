@@ -67,7 +67,9 @@ class Graph:
   def drawBars(self, color):
     if len(self.total) > 1:
       width = 0.2
-      offset = width * (self.plot_count - 1)
+      offset = 0
+      if self.plot_count == 1:
+        offset = -width
       new = [0, 0]
       for i in range(1, len(self.total)):
         new.append(self.total[i] - self.total[i - 1])
