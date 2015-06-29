@@ -16,7 +16,7 @@ days:
     open: 39
 - date: '2014-09-11'
   story_points:
-    total: 24
+    total: 26
     open: 24
   tasks:
     total: 39
@@ -41,7 +41,7 @@ days:
     done: 2
 - date: '2014-09-16'
   story_points:
-    total: 24
+    total: 28
     open: 18
   tasks:
     total: 40
@@ -52,7 +52,7 @@ days:
     done: 4
 - date: '2014-09-17'
   story_points:
-    total: 24
+    total: 28
     open: 18
   tasks:
     total: 40
@@ -63,7 +63,7 @@ days:
     done: 4
 - date: '2014-09-18'
   story_points:
-    total: 24
+    total: 28
     open: 18
   tasks:
     total: 45
@@ -74,7 +74,7 @@ days:
     done: 4
 - date: '2014-09-19'
   story_points:
-    total: 24
+    total: 27
     open: 21
   tasks:
     total: 49
