@@ -133,9 +133,11 @@ The burndown functionality expects the board to follow a certain naming scheme,
 so that Trollolo can process it as a Scrum board.
 
 It expects a list `Sprint Backlog` with open items, a list `Doing` with items in
-progress, and a list `Done Sprint X` with done items, where `X` is the number
-of the sprint. For burndown data calculation the list with the highest number
-is taken.
+progress, and a list with a name starting with `Done`. If there are multiple
+lists starting with `Done` the first one is taken.
+
+Other names of columns with work in progress can be set in the YAML file in the
+`meta` section as an array of column names under the key `not_done_columns`.
 
 On work item cards the tool takes a bracketed number as suffix as size of the
 item in story points. E.g. a card with the title `(3) Build magic tool` would
@@ -149,4 +151,4 @@ Board](https://trello.com/b/CRdddpdy/trollolo-testing-board).
 
 ## COPYRIGHT
 
-Trollolo is Copyright (C) 2013-2014 SUSE LLC
+Trollolo is Copyright (C) 2013-2015 SUSE LLC
