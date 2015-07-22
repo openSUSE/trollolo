@@ -1,5 +1,11 @@
 # Trollolo Changelog
 
+## Version 0.0.5
+
+* Allow done columns which have a name stating with `Done` and do not insist on
+  having a sprint number there. If multiple such columns are found, the first
+  one is taken for burndown calculations.
+
 ## Version 0.0.4
 
 * Allow to story points anywhere in the card name
