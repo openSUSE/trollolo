@@ -234,7 +234,6 @@ EOT
         expect(File.read(write_path)).to eq expected_file_content
       end
     end
-
   end
 
   describe "commands" do
