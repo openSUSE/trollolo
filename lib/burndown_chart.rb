@@ -20,7 +20,6 @@ class BurndownChart
 
   def initialize(settings)
     @settings = settings
-    @burndown_data = BurndownData.new settings
 
     @data = {
       "meta" => {
@@ -168,10 +167,15 @@ class BurndownChart
 
   def update(options)
     burndown_data_path = load_last_sprint(options['output'] || Dir.pwd)
-    @burndown_data.board_id = board_id
-    @burndown_data.fetch
-    add_data(@burndown_data)
-    write_data burndown_data_path
+
+    burndown_data = BurndownData.new(@settings)
+    burndown_data.board_id = board_id
+    burndown_data.fetch
+
+    add_data(burndown_data)
+
+    write_data(burndown_data_path)
+
     if options[:plot]
       BurndownChart.plot(self.sprint, options)
     end
