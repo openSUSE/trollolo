@@ -3,7 +3,6 @@ require_relative 'spec_helper'
 include GivenFilesystemSpecHelpers
 
 describe BurndownData do
-  
   before(:each) do
     @burndown = BurndownData.new(dummy_settings)
     @burndown.board_id = "53186e8391ef8671265eba9d"
@@ -33,7 +32,6 @@ describe BurndownData do
   end
 
   describe "#fetch" do
-
     before do
       @burndown.fetch
     end
@@ -79,7 +77,6 @@ describe BurndownData do
   end
 
   describe '#to_hash' do
-
     it 'converts to hash' do
       @burndown.story_points.open = 1
       @burndown.story_points.done = 2
@@ -112,7 +109,5 @@ describe BurndownData do
 
       expect(@burndown.to_hash).to eq(expected_hash)
     end
-    
   end
-
 end
