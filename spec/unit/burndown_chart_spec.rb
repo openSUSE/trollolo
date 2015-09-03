@@ -62,89 +62,91 @@ describe BurndownChart do
       ]
     end
 
-    it "creates first data entry" do
-      @burndown_data.story_points.open = 16
-      @burndown_data.story_points.done = 7
-      @burndown_data.tasks.open = 10
-      @burndown_data.tasks.done = 11
-      @burndown_data.date_time = DateTime.parse("2014-05-30")
-
-      @chart.add_data(@burndown_data)
-
-      expect( @chart.data["days"].first["story_points"] ).to eq(
-        {
-          "total" => 23,
-          "open" => 16
-        } )
-      expect( @chart.data["days"].first["tasks"] ).to eq(
-        {
-          "total" => 21,
-          "open" => 10
-        } )
-    end
-
     it "returns sprint number" do
       expect(@chart.sprint).to eq 1
     end
 
-    it "adds data" do
-      @chart.data["days"] = @raw_data
+    describe "#add_data" do
+      it "creates first data entry" do
+        @burndown_data.story_points.open = 16
+        @burndown_data.story_points.done = 7
+        @burndown_data.tasks.open = 10
+        @burndown_data.tasks.done = 11
+        @burndown_data.date_time = DateTime.parse("2014-05-30")
 
-      @burndown_data.story_points.open = 16
-      @burndown_data.story_points.done = 7
-      @burndown_data.tasks.open = 10
-      @burndown_data.tasks.done = 11
-      @burndown_data.extra_story_points.open = 2
-      @burndown_data.extra_story_points.done = 3
-      @burndown_data.extra_tasks.open = 5
-      @burndown_data.extra_tasks.done = 2
-      @burndown_data.date_time = DateTime.parse("2014-05-30")
+        @chart.add_data(@burndown_data)
 
-      @chart.add_data(@burndown_data)
+        expect( @chart.data["days"].first["story_points"] ).to eq(
+          {
+            "total" => 23,
+            "open" => 16
+          } )
+        expect( @chart.data["days"].first["tasks"] ).to eq(
+          {
+            "total" => 21,
+            "open" => 10
+          } )
+      end
 
-      expect( @chart.data["days"].count ).to eq 3
-      expect( @chart.data["days"].last["date"] ).to eq ( "2014-05-30" )
-      expect( @chart.data["days"].last["story_points"] ).to eq ( {
-        "total" => 23,
-        "open" => 16
-      } )
-      expect( @chart.data["days"].last["tasks"] ).to eq ( {
-        "total" => 21,
-        "open" => 10
-      } )
-      expect( @chart.data["days"].last["story_points_extra"] ).to eq ( {
-        "done" => 3
-      } )
-      expect( @chart.data["days"].last["tasks_extra"] ).to eq ( {
-        "done" => 2
-      } )
-    end
+      it "adds data" do
+        @chart.data["days"] = @raw_data
 
-    it "replaces data of same day" do
-      @chart.data["days"] = @raw_data
+        @burndown_data.story_points.open = 16
+        @burndown_data.story_points.done = 7
+        @burndown_data.tasks.open = 10
+        @burndown_data.tasks.done = 11
+        @burndown_data.extra_story_points.open = 2
+        @burndown_data.extra_story_points.done = 3
+        @burndown_data.extra_tasks.open = 5
+        @burndown_data.extra_tasks.done = 2
+        @burndown_data.date_time = DateTime.parse("2014-05-30")
 
-      @burndown_data.story_points.open = 16
-      @burndown_data.story_points.done = 7
-      @burndown_data.tasks.open = 10
-      @burndown_data.tasks.done = 11
-      @burndown_data.date_time = DateTime.parse("2014-05-30")
+        @chart.add_data(@burndown_data)
 
-      @chart.add_data(@burndown_data)
+        expect( @chart.data["days"].count ).to eq 3
+        expect( @chart.data["days"].last["date"] ).to eq ( "2014-05-30" )
+        expect( @chart.data["days"].last["story_points"] ).to eq ( {
+          "total" => 23,
+          "open" => 16
+        } )
+        expect( @chart.data["days"].last["tasks"] ).to eq ( {
+          "total" => 21,
+          "open" => 10
+        } )
+        expect( @chart.data["days"].last["story_points_extra"] ).to eq ( {
+          "done" => 3
+        } )
+        expect( @chart.data["days"].last["tasks_extra"] ).to eq ( {
+          "done" => 2
+        } )
+      end
 
-      expect( @chart.data["days"].count ).to eq 3
-      expect( @chart.data["days"].last["story_points"] ).to eq ( {
-        "total" => 23,
-        "open" => 16
-      } )
+      it "replaces data of same day" do
+        @chart.data["days"] = @raw_data
 
-      @burndown_data.story_points.done = 8
-      @chart.add_data(@burndown_data)
+        @burndown_data.story_points.open = 16
+        @burndown_data.story_points.done = 7
+        @burndown_data.tasks.open = 10
+        @burndown_data.tasks.done = 11
+        @burndown_data.date_time = DateTime.parse("2014-05-30")
 
-      expect( @chart.data["days"].count ).to eq 3
-      expect( @chart.data["days"].last["story_points"] ).to eq ( {
-        "total" => 24,
-        "open" => 16
-      } )
+        @chart.add_data(@burndown_data)
+
+        expect( @chart.data["days"].count ).to eq 3
+        expect( @chart.data["days"].last["story_points"] ).to eq ( {
+          "total" => 23,
+          "open" => 16
+        } )
+
+        @burndown_data.story_points.done = 8
+        @chart.add_data(@burndown_data)
+
+        expect( @chart.data["days"].count ).to eq 3
+        expect( @chart.data["days"].last["story_points"] ).to eq ( {
+          "total" => 24,
+          "open" => 16
+        } )
+      end
     end
 
     describe "#read_data" do
