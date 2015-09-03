@@ -73,7 +73,7 @@ class BurndownChart
 
   def add_data(burndown_data)
     new_entry = burndown_data.to_hash
-    if entry_exists?(burndown_data.date_time.to_date)
+    if entry_exists?(burndown_data.date_time.to_date) && days.length > 1
       replace_entry(burndown_data.date_time.to_date, new_entry)
     else
       days.push(new_entry)
