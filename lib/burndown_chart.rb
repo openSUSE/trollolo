@@ -72,6 +72,10 @@ class BurndownChart
   end
 
   def add_data(burndown_data)
+    m = burndown_data.meta
+    if m
+      @data["meta"] = @data["meta"].merge(m)
+    end
     new_entry = burndown_data.to_hash
     if entry_exists?(burndown_data.date_time.to_date) && days.length > 1
       replace_entry(burndown_data.date_time.to_date, new_entry)

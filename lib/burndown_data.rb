@@ -104,7 +104,7 @@ class BurndownData
     meta_cards = board.meta_cards
     return unless meta_cards.any?
     current_sprint_meta_card = meta_cards.max_by(&:sprint_number)
-    @meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc)
+    @meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc) || {}
     @meta['sprint'] = current_sprint_meta_card.sprint_number
   end
 
