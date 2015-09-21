@@ -73,14 +73,15 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
-    lists = trello.lists
+    trello = TrelloWrapper.new(@@settings)
+    board = trello.board(options["board-id"])
+    lists = board.columns
 
     if @@settings.raw
       puts JSON.pretty_generate lists
     else
       lists.each do |list|
-        puts "#{list[ "name" ]}"
+        puts list.name
       end
     end
   end
@@ -91,78 +92,16 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
-    
-    cards = trello.cards
+    trello = TrelloWrapper.new(@@settings)
+    board = trello.board(options["board-id"])
+    cards = board.cards
 
     if @@settings.raw
       puts JSON.pretty_generate cards
     else
-      burndown = BurndownData.new @@settings
-      burndown.board_id = options["board-id"]
-
-      todo_list_id = burndown.fetch_todo_list_id
-      doing_list_id = burndown.fetch_doing_list_id
-      done_list_id = burndown.fetch_done_list_id
-      
-      cards_todo = Array.new
-      cards_doing = Array.new
-      cards_done = Array.new
-
-      above_waterline = true
-      
       cards.each do |card|
-        name = card["name"]
-        list = card["idList"]
-        puts "CARD #{name} (#{list})"
-        
-        if name == "Waterline"
-          above_waterline = false
-          next
-        end
-        
-        if Card.name_to_points(name).nil?
-          next
-        end
-        
-        if list == todo_list_id && above_waterline
-          cards_todo.push card
-        elsif list == doing_list_id
-          cards_doing.push card
-        elsif list == done_list_id
-          cards_done.push card
-        end
+        puts card.name
       end
-
-      story_points_todo = 0
-      story_points_doing = 0
-      story_points_done = 0
-      
-      puts
-      
-      puts "Todo"
-      cards_todo.each do |card|
-        puts "  #{card["name"]}"
-        story_points_todo += Card.name_to_points(card["name"])
-      end
-
-      puts "Doing"
-      cards_doing.each do |card|
-        puts "  #{card["name"]}"
-        story_points_doing += Card.name_to_points(card["name"])
-      end
-
-      puts "Done"
-      cards_done.each do |card|
-        puts "  #{card["name"]}"
-        story_points_done += Card.name_to_points(card["name"])
-      end
-      
-      puts
-      
-      story_points_total = story_points_todo + story_points_doing + story_points_done
-      
-      puts "Done: #{story_points_done}/#{story_points_total} (#{story_points_doing} in progress)"
     end
   end
 
@@ -172,48 +111,15 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    trello = Trello.new(board_id: options["board-id"], developer_public_key: @@settings.developer_public_key, member_token: @@settings.member_token)
-    
-    data = trello.checklists
-
-    puts JSON.pretty_generate data
+    trello = TrelloWrapper.new(@@settings)
+    board = trello.board(options["board-id"])
+    board.cards.each do |card|
+      card.checklists.each do |checklist|
+        puts checklist.name
+      end
+    end
   end
 
-  desc "fetch-burndown-data", "Fetch data for burndown chart"
-  option "board-id", :desc => "Id of Trello board", :required => true
-  def fetch_burndown_data
-    process_global_options options
-    require_trello_credentials
-
-    burndown = BurndownData.new @@settings
-    burndown.board_id = options["board-id"]
-    burndown.fetch
-        
-    puts "Story points:"
-    puts "   Open: #{burndown.story_points.open}"
-    puts "   Done: #{burndown.story_points.done}"
-    puts "   Total: #{burndown.story_points.total}"
-    puts
-    puts "Tasks:"
-    puts "   Open: #{burndown.tasks.open}"
-    puts "   Done: #{burndown.tasks.done}"
-    puts "   Total: #{burndown.tasks.total}"
-    puts
-    puts "Extra story points:"
-    puts "   Open: #{burndown.extra_story_points.open}"
-    puts "   Done: #{burndown.extra_story_points.done}"
-    puts "   Total: #{burndown.extra_story_points.total}"
-    puts "Extra tasks:"
-    puts "   Open: #{burndown.extra_tasks.open}"
-    puts "   Done: #{burndown.extra_tasks.done}"
-    puts "   Total: #{burndown.extra_tasks.total}"
-    puts
-    puts "FastLane Cards:"
-    puts "   Open: #{burndown.fast_lane_cards.open}"
-    puts "   Done: #{burndown.fast_lane_cards.done}"
-    puts "   Total: #{burndown.fast_lane_cards.total}"
-  end
-  
   desc "burndowns", "run multiple burndowns"
   option "board-list", :desc => "path to board-list.yaml", :required => true
   option :plot, :type => :boolean, :desc => "also plot the new data"
