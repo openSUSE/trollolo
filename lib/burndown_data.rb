@@ -44,6 +44,7 @@ class BurndownData
     @extra_story_points = Result.new
     @extra_tasks        = Result.new
     @fast_lane_cards    = Result.new
+    @date_time          = Date.today
   end
 
   def to_hash
@@ -73,6 +74,26 @@ class BurndownData
     else
       base
     end
+  end
+
+  def to_api
+    { date: date_time.to_s,
+
+      total_sp: story_points.total.round,
+      open_sp:  story_points.open.round,
+
+      total_fl: fast_lane_cards.total,
+      open_fl:  fast_lane_cards.total,
+
+      total_ep: extra_story_points.total.round,
+      open_ep:  extra_story_points.open.round,
+
+      total_tasks: tasks.total,
+      open_tasks:  tasks.open,
+
+      total_etasks: extra_tasks.total,
+      open_etasks:  extra_tasks.open
+    }
   end
 
   def trello

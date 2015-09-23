@@ -3,10 +3,24 @@ require_relative 'spec_helper'
 include GivenFilesystemSpecHelpers
 
 describe BurndownChart do
+
+  subject { BurndownChart.new(dummy_settings) }
+
+  let(:burndown_data) do
+    burndown_data = BurndownData.new(dummy_settings)
+    burndown_data.story_points.open = 16
+    burndown_data.story_points.done = 7
+    burndown_data.tasks.open = 10
+    burndown_data.tasks.done = 11
+    burndown_data.date_time = DateTime.parse('2014-05-30')
+    burndown_data
+  end
+
   before(:each) do
     @settings = dummy_settings
     @burndown_data = BurndownData.new(@settings)
     @chart = BurndownChart.new(@settings)
+    allow(BurndownData).to receive(:new).and_return(burndown_data)
     full_board_mock
   end
 
@@ -300,6 +314,33 @@ days:
     open: 19
 EOT
         expect(File.read(write_path)).to eq expected_file_content
+      end
+    end
+
+    describe '#write_data_to_api' do
+      it 'check if it raises an expection on malformed url' do
+        malformed = 'http//malformed.uuuuuurrrriiiiii/@@@@@@'
+        expect { subject.write_data_to_api(malformed, burndown_data) }.to raise_error(TrolloloError)
+      end
+
+      it 'push data to api endpoint' do
+        hostname     = 'api.somesite.org'
+        url          = "http://#{hostname}/push/1/days"
+        header       = { 'Content-Type' => 'application/json' }
+
+        uri = double
+        expect(uri).to receive(:path).and_return url
+        expect(uri).to receive(:hostname).and_return hostname
+        expect(uri).to receive(:port).and_return 80
+
+        post = double
+        expect(post).to receive(:body=).with(burndown_data.to_api.to_json)
+
+        expect(URI).to receive(:parse).with(url).and_return(uri)
+        expect(Net::HTTP::Post).to receive(:new).with(url, header).and_return(post)
+        expect(Net::HTTP).to receive(:start).with(hostname, 80)
+
+        subject.write_data_to_api(url, burndown_data)
       end
     end
   end

@@ -90,6 +90,34 @@ This will create a new data file for the next sprint number and populate it
 with initial data taken from the Trello board. You are ready to go for the
 sprint now and can continue with calling `trollolo burndown` after each daily.
 
+To push the current state of the scrum process (current day) to an api endpoint call:
+
+    trollolo burndown --push-to-api URL
+
+Trollolo will send a json encoded POST request to `URL` in following structure:
+
+```
+{ "date": "2015-09-23T09:41:57+02:00",  // date when data was collected
+  "total_sp": 16,                       // total story points
+  "open_sp": 13,                        // open story points
+  "total_fl": 2,                        // total fast lane cards
+  "open_fl": 2,                         // open fast lane cards
+  "total_ep": 8,                        // total extra points
+  "open_ep": 8,                         // open extrapoints
+  "total_tasks": 13,                    // total tasks
+  "open_tasks":  9,                     // open tasks
+  "total_etasks": 1,                    // total extra tasks
+  "open_etasks": 1                      // open extra tasks
+}
+```
+
+The specified `URL` can contain placeholders which will be replaced:
+
+     %sprint => Current running sprint
+     %board  => Board ID
+
+
+
 To generate the actual burndown chart, go to the working directory and call:
 
     trollolo plot SPRINT_NUMBER
