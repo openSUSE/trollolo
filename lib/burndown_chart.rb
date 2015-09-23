@@ -128,6 +128,29 @@ class BurndownChart
       system "python #{plot_helper} #{sprint_number} #{cli_switches.join(' ')}"
     end
 
+    def new_sprint_started?(settings, dir)
+      # get local current sprint number
+      cur = 0
+      sprint_file = Dir.glob("#{dir}/burndown-data-*.yaml").max_by do |file|
+        n = file.match(/burndown-data-(.*).yaml/).captures.first.to_i
+        cur = n if n > cur
+        n
+      end
+      # load file
+      begin
+        sprint = YAML.load_file(sprint_file)
+      rescue SyntaxError, SystemCallError => e
+        raise Trollolo.new("Loading #{sprint_file} failed: #{e.message}")
+      end
+      # current sprint on trello board
+      trello = TrelloWrapper.new(settings).board(sprint['meta']['board_id'])
+      if cur < trello.current_sprint
+        puts "A new sprint was started #{cur} -> #{trello.current_sprint}"
+        return true
+      end
+      return false
+    end
+
     private
 
     def process_options(hash)

@@ -263,6 +263,9 @@ EOT
 
     chart = BurndownChart.new @@settings
     begin
+      if BurndownChart.new_sprint_started?(@@settings, (options[:output] || Dir.pwd))
+        chart.create_next_sprint(options[:output] || Dir.pwd)
+      end
       if options[:new_sprint]
         chart.create_next_sprint(options[:output] || Dir.pwd)
       end

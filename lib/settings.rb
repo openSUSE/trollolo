@@ -31,7 +31,7 @@ class Settings
         @member_token           = @config["member_token"]
         @not_done_columns       = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
         @todo_column            = @config["todo_column"].freeze
-        @done_column_name_regex = @config["done_column_name_regex"].freeze || /\ADone/
+        @done_column_name_regex = @config["done_column_name_regex"].freeze || /\ADone Sprint (\d+)/
         @todo_column_name_regex = @config["todo_column_name_regex"].freeze || /\ATo Do\Z/
       else
         raise "Couldn't read config data from '#{config_file_path}'"

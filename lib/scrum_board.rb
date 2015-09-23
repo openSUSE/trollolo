@@ -22,6 +22,10 @@ class ScrumBoard
     end
   end
 
+  def current_sprint
+    done_column.name.match(@settings.done_column_name_regex).captures.first.to_i
+  end
+
   def done_cards
     done_column.committed_cards
   end

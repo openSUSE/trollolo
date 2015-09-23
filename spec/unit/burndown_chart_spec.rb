@@ -440,6 +440,52 @@ EOT
     end
   end
 
+  describe '.new_sprint_started?' do
+    let(:test_dir) { '/test/burndown' }
+    let(:test_sprint_files) do
+      [ "#{test_dir}/burndown-data-08.yaml",
+        "#{test_dir}/burndown-data-09.yaml",
+        "#{test_dir}/burndown-data-10.yaml",
+        "#{test_dir}/burndown-data-11.yaml" ]
+    end
+
+    let(:test_settings) {}
+
+    it 'check if a new newer online sprint results in true' do
+      test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11 } }
+
+      expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
+      expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
+
+      scrum_board = double
+      expect(scrum_board).to receive(:current_sprint).twice.and_return(12)
+
+      trello = double
+      expect(trello).to receive(:board).and_return(scrum_board)
+
+      expect(TrelloWrapper).to receive(:new).with(test_settings).and_return(trello)
+
+      expect(described_class.new_sprint_started?(test_settings, test_dir)).to eq(true)
+    end
+
+    it 'check if a older, equal sprint results in false' do
+      test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11 } }
+
+      expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
+      expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
+
+      scrum_board = double
+      expect(scrum_board).to receive(:current_sprint).and_return(11)
+
+      trello = double
+      expect(trello).to receive(:board).and_return(scrum_board)
+
+      expect(TrelloWrapper).to receive(:new).with(test_settings).and_return(trello)
+
+      expect(described_class.new_sprint_started?(test_settings, test_dir)).to eq(false)
+    end
+  end
+
   describe '.plot' do
     it 'sends joined parsed options to python script' do
       allow(described_class).to receive(:process_options).and_return(%w{ --test 1 --no-blah })
