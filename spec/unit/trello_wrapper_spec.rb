@@ -44,4 +44,8 @@ describe TrelloWrapper do
       expect(subject.board("myboard")).to be subject.board("myboard")
     end
   end
+
+  describe '#add_attachment' do
+  end
+
 end

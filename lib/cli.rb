@@ -245,6 +245,16 @@ EOT
     end
   end
 
+  desc "set_cover <filename>", "Set cover picture"
+  option "card-id", :desc => "Id of card", :required => true
+  def set_cover(filename)
+    process_global_options(options)
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+    trello.add_attachment(options["card-id"], File.read(filename))
+  end
+
   private
   
   def process_global_options options
