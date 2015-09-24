@@ -81,8 +81,8 @@ This will get the current data from the Trello board and update the data file
 with the data from the current day. If there already was some data in the file
 for the same day it will be overridden.
 
-When the sprint is over and you want to start with the next sprint, go to the
-working directory and call:
+When the sprint is over a new sprint file is created automatically but if you want to
+start a new sprint manually go to the working directory and call:
 
     trollolo burndown --new-sprint
 
