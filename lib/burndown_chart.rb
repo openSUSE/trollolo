@@ -14,11 +14,6 @@
 #
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
-
-
-require 'net/http'
-require 'uri'
-
 class BurndownChart
 
   attr_accessor :data
@@ -115,13 +110,13 @@ class BurndownChart
   # Writes a POST request to url
   def write_data_to_api(url, burndown_data)
 
-    url = url.gsub('%sprint', sprint.to_s)
-      .gsub('%board', board_id.to_s)
+    url = url.gsub(':sprint', sprint.to_s)
+      .gsub(':board', board_id.to_s)
 
     begin
       uri       = URI.parse(url)
       push      = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/json' })
-      push.body = burndown_data.to_api.to_json
+      push.body = burndown_data.to_json
 
       Net::HTTP.start(uri.hostname, uri.port) do |http|
         http.request(push)

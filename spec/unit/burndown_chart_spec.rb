@@ -334,7 +334,7 @@ EOT
         expect(uri).to receive(:port).and_return 80
 
         post = double
-        expect(post).to receive(:body=).with(burndown_data.to_api.to_json)
+        expect(post).to receive(:body=).with(burndown_data.to_json)
 
         expect(URI).to receive(:parse).with(url).and_return(uri)
         expect(Net::HTTP::Post).to receive(:new).with(url, header).and_return(post)

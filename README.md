@@ -113,8 +113,8 @@ Trollolo will send a json encoded POST request to `URL` in following structure:
 
 The specified `URL` can contain placeholders which will be replaced:
 
-     %sprint => Current running sprint
-     %board  => Board ID
+     :sprint => Current running sprint
+     :board  => Board ID
 
 
 
