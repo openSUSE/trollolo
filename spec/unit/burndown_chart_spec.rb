@@ -10,6 +10,19 @@ describe BurndownChart do
     full_board_mock
   end
 
+  let(:stub_trello) do
+    # stub all trello calls
+    column = double
+    expect(column).to receive(:id).and_return('donecolumnid')
+
+    scrum_board = double
+    expect(scrum_board).to receive(:done_column).and_return(column)
+
+    trello = double
+    expect(trello).to receive(:board).and_return(scrum_board)
+    trello
+  end
+
   describe "initializer" do
     it "sets initial meta data" do
       expect(@chart.data["meta"]["sprint"]).to eq 1
@@ -236,6 +249,9 @@ describe BurndownChart do
         @chart.data["meta"]["board_id"] = "myboardid"
         @chart.data["days"] = @raw_data
 
+        expect(@chart).to receive(:board_id).and_return('myboardid')
+        expect(TrelloWrapper).to receive(:new).with(@settings).and_return(stub_trello)
+
         write_path = given_dummy_file
         @chart.write_data(write_path)
         expect(File.read(write_path)). to eq load_test_file('burndown-data.yaml')
@@ -245,6 +261,8 @@ describe BurndownChart do
         read_path = given_file('burndown-data.yaml')
         @chart.read_data(read_path)
 
+        expect(@chart).to receive(:board_id).and_return('myboardid')
+        expect(TrelloWrapper).to receive(:new).with(@settings).and_return(stub_trello)
         write_path = given_dummy_file
         @chart.write_data(write_path)
 
@@ -278,6 +296,8 @@ describe BurndownChart do
         @chart.data["days"] = raw_data
         @chart.data["meta"]["board_id"] = "1234"
 
+        expect(@chart).to receive(:board_id).and_return('myboardid')
+        expect(TrelloWrapper).to receive(:new).with(@settings).and_return(stub_trello)
         write_path = given_dummy_file
         @chart.write_data(write_path)
 
@@ -285,6 +305,7 @@ describe BurndownChart do
 ---
 meta:
   board_id: '1234'
+  done_column_id: donecolumnid
   sprint: 1
   total_days: 10
   weekend_lines:
@@ -398,8 +419,10 @@ EOT
 
     describe "create_next_sprint" do
       it "create new sprint file" do
-        path = given_directory_from_data("burndown_dir")
         chart = BurndownChart.new(@settings)
+        path = given_directory_from_data("burndown_dir")
+        expect(chart).to receive(:board_id).and_return('myboardid')
+        expect(TrelloWrapper).to receive(:new).with(@settings).and_return(stub_trello)
         chart.create_next_sprint(path)
 
         next_sprint_file = File.join(path, "burndown-data-03.yaml")
@@ -414,6 +437,7 @@ meta:
   weekend_lines:
   - 3.5
   - 7.5
+  done_column_id: donecolumnid
 days: []
 EOT
         expect(File.read(next_sprint_file)).to eq expected_file_content
@@ -452,35 +476,21 @@ EOT
     let(:test_settings) {}
 
     it 'check if a new newer online sprint results in true' do
-      test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11 } }
+      test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11, 'done_column_id' => 'donecolumnid-old' } }
 
       expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
       expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
 
-      scrum_board = double
-      expect(scrum_board).to receive(:current_sprint).twice.and_return(12)
-
-      trello = double
-      expect(trello).to receive(:board).and_return(scrum_board)
-
-      expect(TrelloWrapper).to receive(:new).with(test_settings).and_return(trello)
+      expect(TrelloWrapper).to receive(:new).with(test_settings).and_return(stub_trello)
 
       expect(described_class.new_sprint_started?(test_settings, test_dir)).to eq(true)
     end
 
-    it 'check if a older, equal sprint results in false' do
+    it 'check if no column_done_id was set false is returned' do
       test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11 } }
 
       expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
       expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
-
-      scrum_board = double
-      expect(scrum_board).to receive(:current_sprint).and_return(11)
-
-      trello = double
-      expect(trello).to receive(:board).and_return(scrum_board)
-
-      expect(TrelloWrapper).to receive(:new).with(test_settings).and_return(trello)
 
       expect(described_class.new_sprint_started?(test_settings, test_dir)).to eq(false)
     end

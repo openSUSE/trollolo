@@ -20,6 +20,10 @@ class Column
     @list_data = @board_data["lists"].select{|l| l["id"] == list_id}.first
   end
 
+  def id
+    @list_data['id']
+  end
+
   def name
     @list_data["name"]
   end

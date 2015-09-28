@@ -1,6 +1,7 @@
 ---
 meta:
   board_id: myboardid
+  done_column_id: donecolumnid
   sprint: 2
   total_days: 9
   weekend_lines:

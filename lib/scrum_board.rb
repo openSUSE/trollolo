@@ -17,13 +17,9 @@ class ScrumBoard
       if done_columns.empty?
         raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
       else
-        done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
+        done_columns.first
       end
     end
-  end
-
-  def current_sprint
-    done_column.name.match(@settings.done_column_name_regex).captures.first.to_i
   end
 
   def done_cards
