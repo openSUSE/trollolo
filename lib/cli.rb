@@ -260,14 +260,12 @@ EOT
   def burndown
     process_global_options options
     require_trello_credentials
-
+    path  = options[:output] || Dir.pwd
     chart = BurndownChart.new @@settings
     begin
-      if BurndownChart.new_sprint_started?(@@settings, (options[:output] || Dir.pwd))
-        chart.create_next_sprint(options[:output] || Dir.pwd)
-      end
-      if options[:new_sprint]
-        chart.create_next_sprint(options[:output] || Dir.pwd)
+      if (options[:new_sprint] || BurndownChart.new_sprint_started?(@@settings, path))
+        chart.create_next_sprint(path)
+        puts "Created new sprint"
       end
       chart.update(options)
       puts "Updated data for sprint #{chart.sprint}"

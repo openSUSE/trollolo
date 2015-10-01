@@ -73,7 +73,7 @@ This will create a directory WORKING_DIR and put an initial data file there,
 which contains the meta data. The file is called `burndown-data-1.yaml`. You
 might want to keep this file in a git repository for safe storage and history.
 
-After each daily go to the working directory and call:
+Each day, go to the working directory and call:
 
     trollolo burndown
 
@@ -88,7 +88,7 @@ start a new sprint manually go to the working directory and call:
 
 This will create a new data file for the next sprint number and populate it
 with initial data taken from the Trello board. You are ready to go for the
-sprint now and can continue with calling `trollolo burndown` after each daily.
+sprint now and can continue with calling `trollolo burndown` after each day.
 
 To generate the actual burndown chart, go to the working directory and call:
 

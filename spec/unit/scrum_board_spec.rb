@@ -35,7 +35,7 @@ describe ScrumBoard do
       expect(scrum_board.done_column.name).to eq("Done Sprint 43")
     end
 
-    it 'finds done column with name "Done Sprint %s" if there are multiple done columns' do
+    it 'finds most recent done column' do
       scrum_board = ScrumBoard.new(nil, dummy_settings)
 
       columns = []

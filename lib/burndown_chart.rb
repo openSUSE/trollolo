@@ -133,12 +133,10 @@ class BurndownChart
     end
 
     def new_sprint_started?(settings, dir)
-      # get local current sprint number
       sprint_file = Dir.glob("#{dir}/burndown-data-*.yaml").max_by do |file|
-        file.match(/burndown-data-(.*).yaml/).captures.first.to_i
+        file.match(/burndown-data-(\d+).yaml/).captures.first.to_i
       end
 
-      # load file
       begin
         sprint = YAML.load_file(sprint_file)
       rescue SyntaxError, SystemCallError => e
@@ -152,7 +150,6 @@ class BurndownChart
       trello = TrelloWrapper.new(settings).board(sprint['meta']['board_id'])
 
       if sprint['meta']['done_column_id'] != trello.done_column.id
-        puts "A new sprint was started"
         return true
       end
       return false

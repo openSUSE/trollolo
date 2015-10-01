@@ -17,6 +17,8 @@ class ScrumBoard
       if done_columns.empty?
         raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
       else
+        # Use the most left aligned done column as the current sprint column
+        # Depends on sort order by trello API
         done_columns.first
       end
     end
