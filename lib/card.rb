@@ -29,6 +29,10 @@ class Card
     @card_data = @board_data["cards"].select{|c| c["id"] == card_id}.first
   end
 
+  def as_json
+    JSON.pretty_generate(@card_data)
+  end
+
   def estimated?
     name =~ ESTIMATED_REGEX
   end

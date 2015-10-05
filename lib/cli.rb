@@ -97,7 +97,13 @@ EOT
     cards = board.cards
 
     if @@settings.raw
-      puts JSON.pretty_generate cards
+      cards_as_json = []
+      cards.each do |card|
+        cards_as_json.push(card.as_json)
+      end
+      puts "["
+      puts cards_as_json.join(",")
+      puts "]"
     else
       cards.each do |card|
         puts card.name
