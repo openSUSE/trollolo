@@ -162,7 +162,7 @@ EOT
     puts "Preparing directory..."
     chart.setup(options[:output],options["board-id"])
   end
-  
+
   desc "burndown", "Update burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => false
   option :new_sprint, :aliases => :n, :desc => "Create new sprint"
@@ -251,18 +251,18 @@ EOT
     end
   end
 
-  desc "set_cover <filename>", "Set cover picture"
+  desc "set-cover <filename>", "Set cover picture"
   option "card-id", :desc => "Id of card", :required => true
   def set_cover(filename)
     process_global_options(options)
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    trello.add_attachment(options["card-id"], File.read(filename))
+    trello.add_attachment(options["card-id"], filename)
   end
 
   private
-  
+
   def process_global_options options
     @@settings.verbose = options[:verbose]
     @@settings.raw = options[:raw]
@@ -276,7 +276,7 @@ EOT
       @@settings.developer_public_key = STDIN.gets.chomp
       write_back = true
     end
-    
+
     if !@@settings.member_token
       puts "Put in Trello member token:"
       @@settings.member_token = STDIN.gets.chomp
@@ -286,7 +286,7 @@ EOT
     if write_back
       @@settings.save_config
     end
-    
+
     if !@@settings.developer_public_key || !@@settings.member_token
       STDERR.puts "Require trello credentials in config file"
       exit 1

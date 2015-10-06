@@ -1,5 +1,7 @@
 require_relative 'spec_helper'
 
+include GivenFilesystemSpecHelpers
+
 describe TrelloWrapper do
 
   let!(:settings){ double('settings', developer_public_key: "mykey", member_token: "mytoken") }
@@ -46,6 +48,30 @@ describe TrelloWrapper do
   end
 
   describe '#add_attachment' do
-  end
+    use_given_filesystem
 
+    it "uploads attachment" do
+      srand(1) # Make sure multipart boundary is always the same
+
+      card_body = <<EOT
+{
+  "name": "mycard",
+  "id": "123"
+}
+EOT
+
+      stub_request(:get, "https://api.trello.com/1/cards/123?key=mykey&token=mytoken").
+        with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+          to_return(:status => 200, :body => card_body, :headers => {})
+
+      stub_request(:post, "https://api.trello.com/1/cards/123/attachments?key=mykey&token=mytoken").
+          with(:body => "--470924\r\nContent-Disposition: form-data; name=\"file\"; filename=\"attachment-data\"\r\nContent-Type: text/plain\r\n\r\nabc\n\r\n--470924\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n\r\n--470924--\r\n",
+               :headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'188', 'Content-Type'=>'multipart/form-data; boundary=470924', 'User-Agent'=>'Ruby'}).
+            to_return(:status => 200, :body => "", :headers => {})
+
+      path = given_file("attachment-data")
+
+      subject.add_attachment("123", path)
+    end
+  end
 end
