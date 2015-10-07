@@ -101,4 +101,13 @@ class ScrumBoard
   def id
     @board_data["id"]
   end
+
+  def cards
+    return @cards if @cards
+    @cards = []
+    columns.each do |column|
+      @cards += column.cards
+    end
+    @cards
+  end
 end
