@@ -108,7 +108,7 @@ class BurndownChart
 
 
   # Writes a POST request to url
-  def write_data_to_api(url, burndown_data)
+  def push_to_api(url, burndown_data)
 
     url = url.gsub(':sprint', sprint.to_s)
       .gsub(':board', board_id.to_s)
@@ -205,7 +205,7 @@ class BurndownChart
     end
 
     if options.has_key?('push-to-api')
-      write_data_to_api(options['push-to-api'], burndown_data)
+      push_to_api(options['push-to-api'], burndown_data)
     end
   end
 

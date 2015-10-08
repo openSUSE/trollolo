@@ -317,30 +317,18 @@ EOT
       end
     end
 
-    describe '#write_data_to_api' do
+    describe '#push_to_api' do
+      let(:sample_url) { 'http://api.somesite.org/push/1/days' }
+      let(:malformed_url) { 'http//api.malformed..urrii/@@@@' }
+
       it 'check if it raises an expection on malformed url' do
-        malformed = 'http//malformed.uuuuuurrrriiiiii/@@@@@@'
-        expect { subject.write_data_to_api(malformed, burndown_data) }.to raise_error(TrolloloError)
+        expect { subject.push_to_api(malformed_url, burndown_data) }
+          .to raise_error(TrolloloError)
       end
 
       it 'push data to api endpoint' do
-        hostname     = 'api.somesite.org'
-        url          = "http://#{hostname}/push/1/days"
-        header       = { 'Content-Type' => 'application/json' }
-
-        uri = double
-        expect(uri).to receive(:path).and_return url
-        expect(uri).to receive(:hostname).and_return hostname
-        expect(uri).to receive(:port).and_return 80
-
-        post = double
-        expect(post).to receive(:body=).with(burndown_data.to_json)
-
-        expect(URI).to receive(:parse).with(url).and_return(uri)
-        expect(Net::HTTP::Post).to receive(:new).with(url, header).and_return(post)
-        expect(Net::HTTP).to receive(:start).with(hostname, 80)
-
-        subject.write_data_to_api(url, burndown_data)
+        stub_request(:post, sample_url).with(body: burndown_data.to_json).to_return(status: 200)
+        subject.push_to_api(sample_url, burndown_data)
       end
     end
   end
