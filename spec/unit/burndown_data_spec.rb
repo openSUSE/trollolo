@@ -14,7 +14,7 @@ describe BurndownData do
       r = described_class.new
       r.open = 7
       r.done = 4
-      
+
       expect(r.total).to eq 11
     end
   end
@@ -24,7 +24,7 @@ describe BurndownData do
       @burndown.story_points.open = 13
       expect(@burndown.story_points.open).to eq 13
     end
-    
+
     it "sets open tasks" do
       @burndown.tasks.open = 42
       expect(@burndown.tasks.open).to eq 42
@@ -32,47 +32,60 @@ describe BurndownData do
   end
 
   describe "#fetch" do
-    before do
-      @burndown.fetch
+    context "with meta data on sprint card" do
+      before do
+        @burndown.fetch
+      end
+
+      it "returns story points" do
+        expect( @burndown.story_points.total ).to eq 16
+        expect( @burndown.story_points.open ).to eq 13
+        expect( @burndown.story_points.done ).to eq 3
+      end
+
+      it "returns extra story points" do
+        expect( @burndown.extra_story_points.total ).to eq 8
+        expect( @burndown.extra_story_points.open ).to eq 8
+        expect( @burndown.extra_story_points.done ).to eq 0
+      end
+
+      it "returns tasks" do
+        expect( @burndown.tasks.total ).to eq 13
+        expect( @burndown.tasks.open ).to eq 9
+        expect( @burndown.tasks.done ).to eq 4
+      end
+
+      it "returns extra tasks" do
+        expect( @burndown.extra_tasks.total ).to eq 1
+        expect( @burndown.extra_tasks.open ).to eq 1
+        expect( @burndown.extra_tasks.done ).to eq 0
+      end
+
+      it "returns meta data" do
+        expect( @burndown.meta ).to eq({
+          "sprint" => 10,
+          "total_days" => 18,
+          "weekend_lines" => [1.5, 6.5, 11.5, 16.5]
+        })
+      end
+
+      it "saves date and time" do
+        expected_date_time = DateTime.parse("2015-01-12T13:57:16+01:00")
+        allow(DateTime).to receive(:now).and_return(expected_date_time)
+        @burndown.fetch
+        expect(@burndown.date_time).to eq(expected_date_time)
+      end
     end
 
-    it "returns story points" do
-      expect( @burndown.story_points.total ).to eq 16
-      expect( @burndown.story_points.open ).to eq 13
-      expect( @burndown.story_points.done ).to eq 3
-    end
+    context "without meta data on sprint card" do
+      before do
+        allow(Card).to receive(:parse_yaml_from_description).and_return(nil)
+        @burndown.fetch
+      end
 
-    it "returns extra story points" do
-      expect( @burndown.extra_story_points.total ).to eq 8
-      expect( @burndown.extra_story_points.open ).to eq 8
-      expect( @burndown.extra_story_points.done ).to eq 0
-    end
-
-    it "returns tasks" do
-      expect( @burndown.tasks.total ).to eq 13
-      expect( @burndown.tasks.open ).to eq 9
-      expect( @burndown.tasks.done ).to eq 4
-    end
-    
-    it "returns extra tasks" do
-      expect( @burndown.extra_tasks.total ).to eq 1
-      expect( @burndown.extra_tasks.open ).to eq 1
-      expect( @burndown.extra_tasks.done ).to eq 0
-    end
-
-    it "returns meta data" do
-      expect( @burndown.meta ).to eq({
-        "sprint" => 10,
-        "total_days" => 18,
-        "weekend_lines" => [1.5, 6.5, 11.5, 16.5]
-      })
-    end
-
-    it "saves date and time" do
-      expected_date_time = DateTime.parse("2015-01-12T13:57:16+01:00")
-      allow(DateTime).to receive(:now).and_return(expected_date_time)
-      @burndown.fetch
-      expect(@burndown.date_time).to eq(expected_date_time)
+      it "does not fail" do
+        expect(@burndown.meta).to be(nil)
+      end
     end
   end
 

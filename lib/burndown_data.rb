@@ -84,7 +84,7 @@ class BurndownData
   end
 
   def fetch
-    get_meta
+    @meta = get_meta
     @story_points.done       = board.done_story_points
     @story_points.open       = board.open_story_points
     @tasks.open              = board.tasks - board.closed_tasks
@@ -102,10 +102,12 @@ class BurndownData
 
   def get_meta
     meta_cards = board.meta_cards
-    return unless meta_cards.any?
+    return nil unless meta_cards.any?
     current_sprint_meta_card = meta_cards.max_by(&:sprint_number)
-    @meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc)
-    @meta['sprint'] = current_sprint_meta_card.sprint_number
+    meta = Card.parse_yaml_from_description(current_sprint_meta_card.desc)
+    return nil unless meta
+    meta['sprint'] = current_sprint_meta_card.sprint_number
+    meta
   end
 
 end
