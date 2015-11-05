@@ -97,19 +97,28 @@ To push the current state of the scrum process (current day) to an api endpoint 
 Trollolo will send a json encoded POST request to `URL` in following structure:
 
 ```
-{ "date": "2015-09-23T09:41:57+02:00",  // date when data was collected
-  "total_sp": 16,                       // total story points
-  "open_sp": 13,                        // open story points
-  "total_fl": 2,                        // total fast lane cards
-  "open_fl": 2,                         // open fast lane cards
-  "total_ep": 8,                        // total extra points
-  "open_ep": 8,                         // open extrapoints
-  "total_tasks": 13,                    // total tasks
-  "open_tasks":  9,                     // open tasks
-  "total_etasks": 1,                    // total extra tasks
-  "open_etasks": 1                      // open extra tasks
+{ "date":"2015-11-05",
+  "updated_at":"2015-11-05T11:27:55+01:00",
+  "story_points": {
+    "total":16.0,
+    "open" :13.0 },
+
+  "tasks": {
+    "total":13,
+    "open" :9 },
+
+  "story_points_extra": {
+    "done":0 },
+
+  "tasks_extra": {
+    "done":0 },
+
+  "fast_lane": {
+    "total":2,
+    "open" :1 }
 }
 ```
+__Note:__ If no fast lane cards are in this sprint the fast_lane structure won't appear
 
 The specified `URL` can contain placeholders which will be replaced:
 

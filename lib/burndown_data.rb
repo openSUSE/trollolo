@@ -76,26 +76,6 @@ class BurndownData
     end
   end
 
-  def to_json
-    { date: date_time.to_s,
-
-      total_sp: story_points.total.round,
-      open_sp:  story_points.open.round,
-
-      total_fl: fast_lane_cards.total,
-      open_fl:  fast_lane_cards.total,
-
-      total_ep: extra_story_points.total.round,
-      open_ep:  extra_story_points.open.round,
-
-      total_tasks: tasks.total,
-      open_tasks:  tasks.open,
-
-      total_etasks: extra_tasks.total,
-      open_etasks:  extra_tasks.open
-    }.to_json
-  end
-
   def trello
     @trello ||= TrelloWrapper.new(@settings)
   end
