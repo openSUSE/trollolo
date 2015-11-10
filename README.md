@@ -94,31 +94,9 @@ To push the current state of the scrum process (current day) to an api endpoint 
 
     trollolo burndown --push-to-api URL
 
-Trollolo will send a json encoded POST request to `URL` in following structure:
+Trollolo will send a json encoded POST request to `URL` with the same structure as the generated burndown yaml file.
 
-```
-{ "date":"2015-11-05",
-  "updated_at":"2015-11-05T11:27:55+01:00",
-  "story_points": {
-    "total":16.0,
-    "open" :13.0 },
-
-  "tasks": {
-    "total":13,
-    "open" :9 },
-
-  "story_points_extra": {
-    "done":0 },
-
-  "tasks_extra": {
-    "done":0 },
-
-  "fast_lane": {
-    "total":2,
-    "open" :1 }
-}
-```
-__Note:__ If no fast lane cards are in this sprint the fast_lane structure won't appear
+__Note:__ If no fast lane cards are in this sprint the fast_lane structure won't appear in the json structure
 
 The specified `URL` can contain placeholders which will be replaced:
 
