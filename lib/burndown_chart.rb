@@ -205,7 +205,7 @@ class BurndownChart
     end
 
     if options.has_key?('push-to-api')
-      push_to_api(options['push-to-api'], burndown_data)
+      push_to_api(options['push-to-api'], data)
     end
   end
 

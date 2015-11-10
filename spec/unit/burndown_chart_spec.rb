@@ -327,8 +327,8 @@ EOT
       end
 
       it 'push data to api endpoint' do
-        stub_request(:post, sample_url).with(body: burndown_data.to_hash.to_json).to_return(status: 200)
-        subject.push_to_api(sample_url, burndown_data)
+        stub_request(:post, sample_url).with(body: @chart.data.to_hash.to_json).to_return(status: 200)
+        subject.push_to_api(sample_url, @chart.data)
       end
     end
   end
