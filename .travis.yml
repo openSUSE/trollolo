@@ -4,8 +4,8 @@ before_install:
   - gem update --system
   - gem --version
 rvm:
-  - "2.0.0"
-  - "2.1.1"
+  - "2.1.7"
+  - "2.2.3"
 script: bundle exec rspec spec/unit
 sudo: false
 
