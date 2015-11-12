@@ -95,7 +95,6 @@ EOT
   "dateLastActivity": "2014-03-07T12:52:07.236Z",
   "desc": "",
   "descData": null,
-  "email": null,
   "idBoard": "53186e8391ef8671265eba9d",
   "idList": "53186e8391ef8671265eba9e",
   "idMembersVoted": [
@@ -123,6 +122,7 @@ EOT
     "due": null
   },
   "due": null,
+  "email": "trello@example.com",
   "idChecklists": [
 
   ],
