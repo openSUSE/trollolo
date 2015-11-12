@@ -1,17 +1,35 @@
 #!/usr/bin/env ruby
 
+require "json"
+
 require_relative "webmocks"
 
-trollolo_bin = File.expand_path("../../../bin/trollolo", __FILE__)
-spec_data_dir = File.expand_path("../../data", __FILE__)
+trollolo_bin = File.expand_path("../../../../bin/trollolo", __FILE__)
+spec_data_dir = File.expand_path("../../../data", __FILE__)
 
 STDERR.puts "Updating web mock data"
 
+def scrub_file(file)
+  json = JSON.parse(File.read(file))
+  if json.is_a?(Hash) and json.has_key?("cards")
+    json["cards"].each do |card|
+      card["email"] = "trello@example.com"
+    end
+  end
+  File.open(file, "w") do |f|
+    f.write(JSON.pretty_generate(json))
+  end
+end
+
 webmock_mapping.each do |mapping|
   url = mapping[:path] + parameters_as_string(mapping)
-  file = mapping[:file]
+  filename = mapping[:file]
 
-  cmd = "#{trollolo_bin} get-raw '#{url}' >#{spec_data_dir}/#{file}"
+  file = File.join(spec_data_dir, filename)
+
+  cmd = "#{trollolo_bin} get-raw '#{url}' >#{file}"
   puts cmd
   system cmd
+
+  scrub_file(file)
 end

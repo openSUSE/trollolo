@@ -16,6 +16,7 @@
     "selfJoin": false,
     "cardCovers": true,
     "cardAging": "regular",
+    "calendarFeedEnabled": false,
     "background": "5319bb612fb0bcdf451401a8",
     "backgroundColor": null,
     "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/4e727168cb2ac700002cf6b6/990df8f044b98679ccbef943beff54d6/4268316033_6d847a0219_b.jpg",
@@ -70,7 +71,6 @@
       "dateLastActivity": "2014-03-07T12:52:07.236Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -98,6 +98,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -129,7 +130,6 @@
       "dateLastActivity": "2014-03-07T13:00:17.162Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -157,6 +157,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c22c584448bf2c314936"
       ],
@@ -221,7 +222,6 @@
       "dateLastActivity": "2015-02-09T15:47:34.597Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -249,6 +249,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c5b3d9e20a072df0400a"
       ],
@@ -296,7 +297,6 @@
       "dateLastActivity": "2014-03-14T12:09:20.214Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -324,6 +324,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c5ce8cf780f37d4c0b35"
       ],
@@ -371,7 +372,6 @@
       "dateLastActivity": "2014-03-07T12:54:51.637Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -399,6 +399,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -430,7 +431,6 @@
       "dateLastActivity": "2014-03-14T12:10:26.446Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9e",
       "idMembersVoted": [
@@ -458,6 +458,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c5ea7b7a51a62bc907a1"
       ],
@@ -511,7 +512,6 @@
       "dateLastActivity": "2015-02-09T15:47:39.045Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265eba9f",
       "idMembersVoted": [
@@ -539,6 +539,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c1cd55ed32bd2bb998eb",
         "54d8d6905a4c941656e68ac5"
@@ -613,7 +614,6 @@
       "dateLastActivity": "2014-03-07T12:53:06.043Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf088cdf9cd82be336b0",
       "idMembersVoted": [
@@ -641,6 +641,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -672,7 +673,6 @@
       "dateLastActivity": "2015-01-08T13:22:38.264Z",
       "desc": "```yaml\ntotal_days: 18\nweekend_lines:\n  - 1.5\n  - 6.5\n  - 11.5\n  - 16.5\n```",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf088cdf9cd82be336b0",
       "idMembersVoted": [
@@ -700,6 +700,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -742,7 +743,6 @@
       "dateLastActivity": "2014-03-07T12:54:22.043Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf088cdf9cd82be336b0",
       "idMembersVoted": [
@@ -770,6 +770,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c09cab4511c37d2a6254"
       ],
@@ -824,7 +825,6 @@
       "dateLastActivity": "2014-03-07T12:52:52.679Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf045c6ef0092c55331e",
       "idMembersVoted": [
@@ -852,6 +852,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -886,7 +887,6 @@
         "emoji": {
         }
       },
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf045c6ef0092c55331e",
       "idMembersVoted": [
@@ -914,6 +914,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -945,7 +946,6 @@
       "dateLastActivity": "2014-03-07T12:48:06.330Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf045c6ef0092c55331e",
       "idMembersVoted": [
@@ -973,6 +973,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1009,7 +1010,6 @@
       "dateLastActivity": "2014-03-07T12:49:44.474Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bf045c6ef0092c55331e",
       "idMembersVoted": [
@@ -1037,6 +1037,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319c04d592a9182153db831"
       ],
@@ -1094,7 +1095,6 @@
       "dateLastActivity": "2014-03-07T12:52:49.208Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265ebaa0",
       "idMembersVoted": [
@@ -1122,6 +1122,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1153,7 +1154,6 @@
       "dateLastActivity": "2015-01-08T13:22:54.227Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265ebaa0",
       "idMembersVoted": [
@@ -1181,6 +1181,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1219,7 +1220,6 @@
       "dateLastActivity": "2014-03-07T12:48:42.185Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265ebaa0",
       "idMembersVoted": [
@@ -1247,6 +1247,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319bfca9876ce6d4591c4b2"
       ],
@@ -1309,7 +1310,6 @@
       "dateLastActivity": "2014-03-07T12:46:58.957Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265ebaa0",
       "idMembersVoted": [
@@ -1337,6 +1337,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319bfaa8ff351c22b123ad0"
       ],
@@ -1401,7 +1402,6 @@
       "dateLastActivity": "2014-03-07T12:48:38.152Z",
       "desc": "",
       "descData": null,
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "53186e8391ef8671265ebaa0",
       "idMembersVoted": [
@@ -1429,6 +1429,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
         "5319bfeb2d638eb411117815"
       ],
@@ -1472,7 +1473,6 @@
         "emoji": {
         }
       },
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bc0aa338308d42f108d6",
       "idMembersVoted": [
@@ -1500,6 +1500,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1528,7 +1529,6 @@
         "emoji": {
         }
       },
-      "email": null,
       "idBoard": "53186e8391ef8671265eba9d",
       "idList": "5319bc0aa338308d42f108d6",
       "idMembersVoted": [
@@ -1556,6 +1556,7 @@
         "due": null
       },
       "due": null,
+      "email": "trello@example.com",
       "idChecklists": [
 
       ],
