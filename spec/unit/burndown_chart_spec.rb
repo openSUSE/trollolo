@@ -57,6 +57,16 @@ describe BurndownChart do
           "tasks_extra" =>
           {
             "done" => 2
+          },
+          "story_points_unplanned" =>
+          {
+            "total" => 3,
+            "open" => 1
+          },
+          "tasks_unplanned" =>
+          {
+            "total" => 2,
+            "open" => 1
           }
         }
       ]

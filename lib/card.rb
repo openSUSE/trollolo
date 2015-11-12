@@ -89,6 +89,12 @@ class Card
     end
   end
 
+  def unplanned?
+    self.card_labels.any? do |label|
+      label['name'].include?('Unplanned')
+    end
+  end
+
   def meta_card?
     name =~ SPRINT_NUMBER_REGEX
   end

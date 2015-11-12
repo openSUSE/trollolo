@@ -54,6 +54,7 @@ class ScrumBoard
     committed_cards.map(&:tasks).sum
   end
 
+
   def extra_cards
     (done_column.extra_cards + open_columns.map(&:extra_cards)).flatten(1)
   end
@@ -81,6 +82,36 @@ class ScrumBoard
   def extra_closed_tasks
     extra_cards.map(&:done_tasks).sum
   end
+
+
+  def unplanned_cards
+    (done_column.unplanned_cards + open_columns.map(&:unplanned_cards)).flatten(1)
+  end
+
+  def unplanned_done_cards
+    done_column.unplanned_cards
+  end
+
+  def unplanned_done_story_points
+    unplanned_done_cards.map(&:story_points).sum
+  end
+
+  def unplanned_open_cards
+    open_columns.map{|col| col.cards.select{|c| c.unplanned?}}.flatten
+  end
+
+  def unplanned_open_story_points
+    unplanned_open_cards.map(&:story_points).sum
+  end
+
+  def unplanned_tasks
+    unplanned_cards.map(&:tasks).sum
+  end
+
+  def unplanned_closed_tasks
+    unplanned_cards.map(&:done_tasks).sum
+  end
+
 
   def open_fast_lane_cards_count
     open_columns.map(&:fast_lane_cards).flatten(1).count

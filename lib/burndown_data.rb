@@ -34,16 +34,19 @@ class BurndownData
   end
 
   attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks,
+                :unplanned_story_points, :unplanned_tasks,
                 :board_id, :fast_lane_cards, :date_time
   attr_reader :meta
 
   def initialize(settings)
-    @settings           = settings
-    @story_points       = Result.new
-    @tasks              = Result.new
-    @extra_story_points = Result.new
-    @extra_tasks        = Result.new
-    @fast_lane_cards    = Result.new
+    @settings               = settings
+    @story_points           = Result.new
+    @tasks                  = Result.new
+    @extra_story_points     = Result.new
+    @extra_tasks            = Result.new
+    @unplanned_story_points = Result.new
+    @unplanned_tasks        = Result.new
+    @fast_lane_cards        = Result.new
   end
 
   def to_hash
@@ -66,13 +69,22 @@ class BurndownData
       }
     }
     if fast_lane_cards.total > 0
-      base.merge("fast_lane" => {
-                     "total" => fast_lane_cards.total,
-                     "open" => fast_lane_cards.open
-                 })
-    else
-      base
+      base["fast_lane"] = {
+        "total" => fast_lane_cards.total,
+        "open" => fast_lane_cards.open
+      }
     end
+    if unplanned_story_points.total > 0
+      base["unplanned_story_points"] = {
+        "total" => unplanned_story_points.total,
+        "open" => unplanned_story_points.open
+      }
+      base["unplanned_tasks"] = {
+        "total" => unplanned_tasks.total,
+        "open" => unplanned_tasks.open
+      }
+    end
+    base
   end
 
   def trello
@@ -93,6 +105,10 @@ class BurndownData
     @extra_story_points.open = board.extra_open_story_points
     @extra_tasks.done        = board.extra_closed_tasks
     @extra_tasks.open        = board.extra_tasks - board.extra_closed_tasks
+    @unplanned_story_points.done = board.unplanned_done_story_points
+    @unplanned_story_points.open = board.unplanned_open_story_points
+    @unplanned_tasks.done = board.unplanned_closed_tasks
+    @unplanned_tasks.open = board.unplanned_tasks - board.unplanned_closed_tasks
     @fast_lane_cards.done    = board.done_fast_lane_cards_count
     @fast_lane_cards.open    = board.open_fast_lane_cards_count
     @date_time               = DateTime.now

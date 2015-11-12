@@ -9,7 +9,7 @@ describe Cli do
     Cli.settings = dummy_settings
     @cli = Cli.new
   end
-  
+
   it "fetches burndown data from board-list" do
     full_board_mock
     dir = given_directory
@@ -53,9 +53,11 @@ Sprint 3
 Waterline
 (8) P6: Celebrate testing board
 (2) P2: Fill Doing column
+(1) Fix emergency
 Burndown chart
 Sprint 10
 (3) P3: Fill Done columns
+(2) Some unplanned work
 Burndown chart
 Sprint 9
 (2) P1: Explain purpose
@@ -83,6 +85,7 @@ Tasks
 Tasks
 Tasks
 Feedback
+Tasks
 Tasks
 Tasks
 Tasks

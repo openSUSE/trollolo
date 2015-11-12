@@ -49,6 +49,12 @@ describe BurndownData do
         expect( @burndown.extra_story_points.done ).to eq 0
       end
 
+      it "returns unplanned story points" do
+        expect( @burndown.unplanned_story_points.total ).to eq 3
+        expect( @burndown.unplanned_story_points.open ).to eq 1
+        expect( @burndown.unplanned_story_points.done ).to eq 2
+      end
+
       it "returns tasks" do
         expect( @burndown.tasks.total ).to eq 13
         expect( @burndown.tasks.open ).to eq 9
@@ -59,6 +65,12 @@ describe BurndownData do
         expect( @burndown.extra_tasks.total ).to eq 1
         expect( @burndown.extra_tasks.open ).to eq 1
         expect( @burndown.extra_tasks.done ).to eq 0
+      end
+
+      it "returns unplanned tasks" do
+        expect( @burndown.unplanned_tasks.total ).to eq 2
+        expect( @burndown.unplanned_tasks.open ).to eq 1
+        expect( @burndown.unplanned_tasks.done ).to eq 1
       end
 
       it "returns meta data" do
@@ -99,6 +111,10 @@ describe BurndownData do
       @burndown.extra_story_points.done = 6
       @burndown.extra_tasks.open = 7
       @burndown.extra_tasks.done = 8
+      @burndown.unplanned_story_points.open = 1
+      @burndown.unplanned_story_points.done = 2
+      @burndown.unplanned_tasks.open = 1
+      @burndown.unplanned_tasks.done = 1
       @burndown.date_time = DateTime.parse('20150115')
 
       expected_hash = {
@@ -117,6 +133,14 @@ describe BurndownData do
         },
         'tasks_extra' => {
           'done' => 8
+        },
+        'unplanned_story_points' => {
+          'total' => 3,
+          'open' => 1
+        },
+        'unplanned_tasks' => {
+          'total' => 2,
+          'open' => 1
         }
       }
 
