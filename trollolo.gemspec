@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Trello command line client'
   s.description = 'Trollolo is a command line tool to access Trello and support tasks like generation of burndown charts.'
 
+  s.required_ruby_version = '>= 2.1'
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project         = 'trollolo'
 
