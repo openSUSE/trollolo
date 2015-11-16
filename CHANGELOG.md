@@ -1,5 +1,15 @@
 # Trollolo Changelog
 
+## Version 0.0.6
+
+* Track cards with unplanned work separately
+* Fix error when parsing of meta data on card fails
+* Implement `set-cover` command. This command uploads a picture to a given card,
+  which is then set as cover.
+* Fix raw output of cards list
+* Fix commands to get basic data
+* Don't overwrite data on first day of sprint
+
 ## Version 0.0.5
 
 * Allow done columns which have a name stating with `Done` and do not insist on

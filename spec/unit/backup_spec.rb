@@ -64,6 +64,10 @@ Trollolo Testing Board
       Feedback
         Ask user who requested the feature (complete)
         Ask product manager (incomplete)
+    (1) Fix emergency
+      Tasks
+        Start (complete)
+        Stop (incomplete)
   Done Sprint 10
     Burndown chart
     Sprint 10
@@ -72,6 +76,7 @@ Trollolo Testing Board
         Fill Done Sprint 1 (complete)
         Fill Done Sprint 2 (complete)
         Fill Done Sprint 3 (complete)
+    (2) Some unplanned work
   Done Sprint 9
     Burndown chart
     Sprint 9

@@ -46,9 +46,10 @@ For creating a developer key go to the
 [Developer API Keys](https://trello.com/1/appKey/generate) page on Trello. It's
 the key in the first box.
 
-For creating a member token go follow the
-[instructions](https://trello.com/docs/gettingstarted/index.html#getting-a-token-from-a-user)
-in the Trello API documentation.
+For creating a member token use the following URL, replacing `applicationkey` by
+the key you obtained in the first step.
+
+    https://trello.com/1/authorize?key=applicationkey&name=trollolo&expiration=never&response_type=token
 
 The board id is the cryptic string in the URL of your board.
 

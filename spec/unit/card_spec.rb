@@ -76,4 +76,79 @@ EOT
       expect(meta["weekend_lines"]).to eq([1.5, 6.5])
     end
   end
+
+  describe "gets raw JSON" do
+    it "for cards" do
+      @settings = dummy_settings
+      full_board_mock
+
+      trello = TrelloWrapper.new(@settings)
+      board = trello.board("53186e8391ef8671265eba9d")
+
+      expected_json = <<EOT
+{
+  "id": "5319bf244cc53afd5afd991f",
+  "checkItemStates": [
+
+  ],
+  "closed": false,
+  "dateLastActivity": "2014-03-07T12:52:07.236Z",
+  "desc": "",
+  "descData": null,
+  "idBoard": "53186e8391ef8671265eba9d",
+  "idList": "53186e8391ef8671265eba9e",
+  "idMembersVoted": [
+
+  ],
+  "idShort": 3,
+  "idAttachmentCover": null,
+  "manualCoverAttachment": false,
+  "idLabels": [
+    "5463b41e74d650d56700f16a"
+  ],
+  "name": "Sprint 3",
+  "pos": 65535,
+  "shortLink": "GRsvY3vZ",
+  "badges": {
+    "votes": 0,
+    "viewingMemberVoted": false,
+    "subscribed": false,
+    "fogbugz": "",
+    "checkItems": 0,
+    "checkItemsChecked": 0,
+    "comments": 0,
+    "attachments": 0,
+    "description": false,
+    "due": null
+  },
+  "due": null,
+  "email": "trello@example.com",
+  "idChecklists": [
+
+  ],
+  "idMembers": [
+
+  ],
+  "labels": [
+    {
+      "id": "5463b41e74d650d56700f16a",
+      "idBoard": "53186e8391ef8671265eba9d",
+      "name": "Sticky",
+      "color": "blue",
+      "uses": 8
+    }
+  ],
+  "shortUrl": "https://trello.com/c/GRsvY3vZ",
+  "subscribed": false,
+  "url": "https://trello.com/c/GRsvY3vZ/3-sprint-3",
+  "checklists": [
+
+  ]
+}
+EOT
+
+      json = board.cards.first.as_json
+      expect(json).to eq(expected_json.chomp)
+    end
+  end
 end

@@ -50,6 +50,11 @@ class TrelloWrapper
     Trello::Organization.find(org_id)
   end
 
+  def add_attachment(card_id, filename)
+    card = Trello::Card.find(card_id)
+    card.add_attachment(File.open(filename, "rb"))
+  end
+
   private
 
   def init_trello

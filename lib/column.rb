@@ -44,8 +44,12 @@ class Column
     cards.select{|c| c.extra?}
   end
 
+  def unplanned_cards
+    cards.select{|c| c.unplanned?}
+  end
+
   def committed_cards
-    cards.select{|c| !c.extra?}
+    cards.select{|c| !c.extra? && !c.unplanned?}
   end
 
   def fast_lane_cards
