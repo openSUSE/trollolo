@@ -47,6 +47,7 @@ class BurndownData
     @unplanned_story_points = Result.new
     @unplanned_tasks        = Result.new
     @fast_lane_cards        = Result.new
+    @date_time              = Time.now
   end
 
   def to_hash

@@ -106,6 +106,30 @@ class BurndownChart
     end
   end
 
+
+  # Writes a POST request to url
+  def push_to_api(url, burndown_data)
+
+    url = url.gsub(':sprint', sprint.to_s)
+      .gsub(':board', board_id.to_s)
+
+    begin
+      uri       = URI.parse(url)
+      push      = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/json' })
+      push.body = burndown_data.to_hash.to_json
+
+      Net::HTTP.start(uri.hostname, uri.port) do |http|
+        http.request(push)
+      end
+    rescue StandardError => e
+      # Instead of catching 20 different exceptions which can be
+      # thrown by URI and Http::, StandardError is catched.
+      # Fix this if there is a better solution
+      raise TrolloloError.new("pushing to endpoint failed: #{e.message}")
+    end
+  end
+
+
   def burndown_data_filename
     "burndown-data-#{sprint.to_s.rjust(2,"0")}.yaml"
   end
@@ -178,6 +202,10 @@ class BurndownChart
 
     if options[:plot]
       BurndownChart.plot(self.sprint, options)
+    end
+
+    if options.has_key?('push-to-api')
+      push_to_api(options['push-to-api'], data)
     end
   end
 

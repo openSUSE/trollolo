@@ -3,10 +3,24 @@ require_relative 'spec_helper'
 include GivenFilesystemSpecHelpers
 
 describe BurndownChart do
+
+  subject { BurndownChart.new(dummy_settings) }
+
+  let(:burndown_data) do
+    burndown_data = BurndownData.new(dummy_settings)
+    burndown_data.story_points.open = 16
+    burndown_data.story_points.done = 7
+    burndown_data.tasks.open = 10
+    burndown_data.tasks.done = 11
+    burndown_data.date_time = DateTime.parse('2014-05-30')
+    burndown_data
+  end
+
   before(:each) do
     @settings = dummy_settings
     @burndown_data = BurndownData.new(@settings)
     @chart = BurndownChart.new(@settings)
+    allow(BurndownData).to receive(:new).and_return(burndown_data)
     full_board_mock
   end
 
@@ -310,6 +324,21 @@ days:
     open: 19
 EOT
         expect(File.read(write_path)).to eq expected_file_content
+      end
+    end
+
+    describe '#push_to_api' do
+      let(:sample_url) { 'http://api.somesite.org/push/1/days' }
+      let(:malformed_url) { 'http//api.malformed..urrii/@@@@' }
+
+      it 'check if it raises an expection on malformed url' do
+        expect { subject.push_to_api(malformed_url, burndown_data) }
+          .to raise_error(TrolloloError)
+      end
+
+      it 'push data to api endpoint' do
+        stub_request(:post, sample_url).with(body: @chart.data.to_hash.to_json).to_return(status: 200)
+        subject.push_to_api(sample_url, @chart.data)
       end
     end
   end
