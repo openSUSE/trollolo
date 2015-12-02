@@ -56,6 +56,16 @@ class Plot:
     plt.xticks(x_range, x_labels)
     return
 
+  def drawLegend(self, legend_list):
+    handles = []
+    labels = []
+    for leg in legend_list:
+      h, l = leg.get_legend_handles_labels()
+      handles.extend(h)
+      labels.extend(l)
+    plt.legend(handles, labels, loc="upper right", fontsize="small")
+    return
+
   def saveImage(self, args):
     plt.savefig('burndown-' + args.sprint + '.png',bbox_inches='tight')
     if not args.no_head:
@@ -79,11 +89,16 @@ class Plot:
     if self.data.extra_day:
       story_points['x_extra'] = self.data.story_points_extra_days
       story_points['y_extra'] = self.data.bonus_story_points_done
+    if self.data.unplanned_day:
+      story_points['x_unplanned'] = self.data.unplanned_story_points_days
+      story_points['y_unplanned'] = self.data.unplanned_story_points_done
     story_points['total'] = self.data.total_story_points
+    story_points['total_unplanned'] = self.data.total_unplanned_story_points
     story_points['ymin'] = self.data.ymin
     story_points['ymax'] = self.data.ymax
     story_points['subplot'] = self.createSubplot()
     story_points['plot_count'] = self.plot_count
+    story_points['label_unplanned'] = "Unplanned Story Points"
     self.plot_count += 1
     return story_points
 
@@ -100,6 +115,9 @@ class Plot:
     if self.data.extra_day:
       tasks['x_extra'] = self.data.tasks_extra_days
       tasks['y_extra'] = self.data.bonus_tasks_done
+    if self.data.unplanned_day:
+      tasks['x_unplanned'] = self.data.unplanned_tasks_days
+      tasks['y_unplanned'] = self.data.unplanned_tasks_done
     if self.data.bonus_tasks_day_one:
       tasks['draw_bonus_tasks_diff'] = 1
       tasks['y_arrow_start_bonus'] = 0
@@ -107,10 +125,12 @@ class Plot:
       tasks['y_text_bonus'] = self.data.bonus_tasks_done[0] / 2
       tasks['bonus_tasks_day_one'] = self.data.bonus_tasks_day_one
     tasks['total'] = self.data.total_tasks
+    tasks['total_unplanned'] = self.data.total_unplanned_tasks
     tasks['ymin'] = self.data.ymin * self.data.scalefactor
     tasks['ymax'] = self.data.ymax * self.data.scalefactor
     tasks['subplot'] = self.createSubplot()
     tasks['plot_count'] = self.plot_count
+    tasks['label_unplanned'] = "Unplanned Tasks"
     self.plot_count += 1
     return tasks
 

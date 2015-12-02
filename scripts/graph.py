@@ -10,9 +10,11 @@ class Graph:
     self.x = graph_data['x']
     self.y = graph_data['y']
     self.xy_extra = 0
+    self.xy_unplanned = 0
     self.ymin = graph_data['ymin']
     self.ymax = graph_data['ymax']
     self.total = graph_data['total']
+    self.total_unplanned = graph_data['total_unplanned']
     self.plot_count = graph_data['plot_count']
     self.draw_tasks_diff = graph_data['draw_tasks_diff']
     self.draw_bonus_tasks_diff = graph_data['draw_bonus_tasks_diff']
@@ -21,6 +23,11 @@ class Graph:
       self.x_extra = graph_data['x_extra']
       self.y_extra = graph_data['y_extra']
       self.xy_extra = 1
+
+    if 'x_unplanned' in graph_data:
+      self.x_unplanned = graph_data['x_unplanned']
+      self.y_unplanned = graph_data['y_unplanned']
+      self.xy_unplanned = 1
 
     if self.draw_tasks_diff:
       self.x_arrow_start_end = graph_data['x_arrow_start_end']
@@ -37,7 +44,7 @@ class Graph:
     self.subplot = graph_data['subplot']
     return
 
-  def draw(self, y_label, color, marker, linestyle, linewidth, plot):
+  def draw(self, y_label, color, color_unplanned, marker, linestyle, linewidth, label, plot):
     self.plot = plot
     self.subplot.set_ylabel(y_label, color=color)
     self.subplot.set_ylim([self.ymin, self.ymax])
@@ -52,7 +59,8 @@ class Graph:
 
     self.subplot.plot(self.x, self.y, color=color, marker=marker, linestyle=linestyle, linewidth=linewidth)
     self.drawBonus(color, marker, linestyle, linewidth)
-    self.drawBars(color)
+    self.drawUnplanned(color_unplanned, marker, linestyle, linewidth, label)
+    self.drawBars(color, color_unplanned)
     if self.draw_tasks_diff:
       self.drawTasksDiff(color)
     if self.draw_bonus_tasks_diff:
@@ -64,23 +72,38 @@ class Graph:
       self.subplot.plot(self.x_extra, self.y_extra, color=color, marker=marker, linestyle=linestyle, linewidth=linewidth)
     return
 
-  def drawBars(self, color):
+  def drawUnplanned(self, color_unplanned, marker, linestyle, linewidth, label):
+    if self.xy_unplanned and len(self.x_unplanned) > 0:
+      #self.subplot.plot(self.x_unplanned, self.y_unplanned, color=color_unplanned, marker=marker, markeredgecolor="red", markerfacecolor="red", linestyle=linestyle, linewidth=linewidth, label=label)
+      self.subplot.plot(self.x_unplanned, self.y_unplanned, color=color_unplanned, marker=marker, linestyle=linestyle, linewidth=linewidth, label=label)
+    return
+
+  def drawBars(self, color, color_unplanned):
     if len(self.total) > 1:
       width = 0.2
       offset = 0
+      days = self.x
+      days = [i+1 for i in days]
+
       if self.plot_count == 1:
-        offset = -width
-      new = [0, 0]
-      for i in range(1, len(self.total)):
-        new.append(self.total[i] - self.total[i - 1])
-      additional_days = []
+        offset += width
+
+      for i in range(len(days)):
+        days[i] = days[i] - offset
+
       additional = []
-      for i in range(len(new)):
-        if new[i] != 0:
-          additional_days.append(i + offset)
-          additional.append(new[i])
-      if len(additional) > 0:
-        self.subplot.bar(additional_days, additional, width, color=color)
+      additional_unplanned = []
+
+      for i in range(1, len(self.total)):
+        additional.append(self.total[i] - self.total[i - 1])
+        additional_unplanned.append(self.total_unplanned[i] - self.total_unplanned[i - 1])
+
+      for i in range(len(additional)):
+        if additional[i] != 0:
+          self.subplot.bar(days[i], additional[i], width, color=color)
+        if additional_unplanned[i] != 0:
+          bottom = (0 if additional[i] < 0 else additional[i])
+          self.subplot.bar(days[i], additional_unplanned[i], width, color=color_unplanned, bottom=bottom)
     return
 
   def drawTasksDiff(self, color):

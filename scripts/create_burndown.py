@@ -87,27 +87,40 @@ graph_story_points = graph.Graph(plot.storyPoints())
 
 y_label = "Story Points"
 color = "black"
+color_unplanned = "magenta"
 marker = "o"
 linestyle = "solid"
 linewidth = 2
+label_unplanned = "Unplanned Story Points"
+legend_list = []
 
-graph_story_points.draw(y_label, color, marker, linestyle, linewidth, plot)
+graph_story_points.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label_unplanned, plot)
+
+legend_list.append(graph_story_points.subplot)
 
 if not args.no_tasks:
   graph_tasks = graph.Graph(plot.tasks())
 
   y_label = "Tasks"
   color = "green"
+  color_unplanned = "chartreuse"
+  label_unplanned = "Unplanned Tasks"
 
-  graph_tasks.draw(y_label, color, marker, linestyle, linewidth, plot)
+  graph_tasks.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label_unplanned, plot)
+  legend_list.append(graph_tasks.subplot)
 
 if args.with_fast_lane:
   graph_fast_lane = graph.Graph(plot.fastLane())
 
   y_label = "Fast Lane"
   color = "red"
+  label = "Fast Lane"
 
-  graph_fast_lane.draw(y_label, color, marker, linestyle, linewidth, plot)
+  graph_fast_lane.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label, plot)
+  legend_list.append(graph_fast_lane.subplot)
+    
+# Draw legend
+plot.drawLegend(legend_list)
 
 # Save the burndown chart
 plot.saveImage(args)
