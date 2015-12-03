@@ -48,6 +48,7 @@ class BurndownData:
     self.x_fast_lane = []
     self.y_fast_lane = []
     self.total_fast_lane = []
+    self.total_unplanned_fast_lane = []
     self.max_story_points = 0
     self.max_tasks = 0
 
@@ -88,6 +89,7 @@ class BurndownData:
         self.x_fast_lane.append(self.current_day)
         self.y_fast_lane.append(day["fast_lane"]["open"])
         self.total_fast_lane.append(day["fast_lane"]["total"])
+        self.total_unplanned_fast_lane.append(0)
 
       self.current_day += 1
     return

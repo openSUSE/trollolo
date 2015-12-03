@@ -74,7 +74,6 @@ class Graph:
 
   def drawUnplanned(self, color_unplanned, marker, linestyle, linewidth, label):
     if self.xy_unplanned and len(self.x_unplanned) > 0:
-      #self.subplot.plot(self.x_unplanned, self.y_unplanned, color=color_unplanned, marker=marker, markeredgecolor="red", markerfacecolor="red", linestyle=linestyle, linewidth=linewidth, label=label)
       self.subplot.plot(self.x_unplanned, self.y_unplanned, color=color_unplanned, marker=marker, linestyle=linestyle, linewidth=linewidth, label=label)
     return
 

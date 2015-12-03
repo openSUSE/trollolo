@@ -63,7 +63,8 @@ class Plot:
       h, l = leg.get_legend_handles_labels()
       handles.extend(h)
       labels.extend(l)
-    plt.legend(handles, labels, loc="upper right", fontsize="small")
+    if handles:
+      plt.legend(handles, labels, loc="upper right", fontsize="small")
     return
 
   def saveImage(self, args):
@@ -143,6 +144,7 @@ class Plot:
     fast_lane['ymin'] = self.data.ymin
     fast_lane['ymax'] = self.data.ymax
     fast_lane['total'] = self.data.total_fast_lane
+    fast_lane['total_unplanned'] = self.data.total_unplanned_fast_lane
     fast_lane['subplot'] = self.createSubplot()
     fast_lane['plot_count'] = self.plot_count
     self.plot_count += 1
