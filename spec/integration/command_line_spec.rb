@@ -1,6 +1,7 @@
 require_relative 'integration_spec_helper'
 
 include GivenFilesystemSpecHelpers
+include CliTester
 
 def trollolo_cmd
   File.expand_path('../wrapper/trollolo_wrapper',__FILE__)
@@ -17,37 +18,35 @@ end
 describe "command line" do
 
   it "processes help option" do
-    run "trollolo -h"
-    assert_exit_status_and_partial_output 0, "Commands:"
-    assert_partial_output "trollolo help", all_output
-    assert_partial_output "Options:", all_output
+    result = run_command(args: ["-h"])
+    expect(result).to exit_with_success(/Commands:/)
+    expect(result.stdout).to match("trollolo help")
+    expect(result.stdout).to match("Options:")
   end
 
   it "throws error on invalid command" do
-    run "#{trollolo_cmd} invalid_command"
-    assert_exit_status 1
+    result = run_command(cmd: trollolo_cmd, args: ["invalid_command"])
+    expect(result).to exit_with_error(1, "Could not find command \"invalid_command\".\n")
   end
-  
+
   it "asks for authorization data" do
-    run "#{credentials_input_wrapper} get-cards --board-id=myboardid"
-    assert_exit_status 0
+    expect(run_command(cmd: credentials_input_wrapper, args: ["get-cards", "--board-id=myboardid"])).to exit_with_success("")
   end
 
   describe "burndown chart" do
     use_given_filesystem
-    
+
     it "inits burndown directory" do
       path = given_directory
-      run "#{trollolo_cmd} burndown-init -o #{path} --board-id=myboardid"
-      assert_exit_status 0
+      result = run_command(cmd: trollolo_cmd, args: ["burndown-init", "-o", "#{path}", "--board-id=myboardid"])
+      expect(result).to exit_with_success(/Preparing/)
     end
-    
+
     it "fails, if burndown data is not found" do
       path = given_directory
-      run "#{trollolo_cmd} burndown -o #{path}"
-      assert_exit_status 1
-      assert_partial_output "burndown-data-01.yaml' not found", all_stderr
+      result = run_command(cmd: trollolo_cmd, args: ["burndown", "-o", "#{path}"])
+      expect(result).to exit_with_error(1, /burndown-data-01.yaml' not found/)
     end
   end
-  
+
 end

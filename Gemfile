@@ -5,7 +5,7 @@ gemspec
 group :test do
   gem 'codeclimate-test-reporter'
   gem 'rspec', '~> 3'
-  gem 'aruba'
+  gem 'cli_tester'
   gem 'webmock'
   gem 'given_filesystem'
   gem 'byebug'
