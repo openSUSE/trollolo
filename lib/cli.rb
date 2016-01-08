@@ -247,6 +247,16 @@ EOT
     puts trello.get_description(options["card-id"])
   end
 
+  desc "set-description", "Writes description read from standard input"
+  option "card-id", :desc => "Id of card", :required => true
+  def set_description
+    process_global_options options
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+    trello.set_description(options["card-id"], STDIN.read)
+  end
+
   desc "organization_members", "Show organization members"
   option "org-name", :desc => "Name of organization", :required => true
   def organization_members

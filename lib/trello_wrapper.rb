@@ -76,6 +76,9 @@ class TrelloWrapper
     card.desc
   end
 
+  def set_description(card_id, description)
+    client.put("/cards/#{card_id}/desc?value=#{description}")
+  end
 
   private
 
