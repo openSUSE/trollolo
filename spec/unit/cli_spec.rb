@@ -96,4 +96,27 @@ EOT
       @cli.get_checklists
     }.to output(expected_output).to_stdout
   end
+
+  it "gets description" do
+    body = <<-EOT
+{
+  "id": "54ae8485221b1cc5b173e713",
+  "desc": "haml"
+}
+EOT
+    stub_request(
+      :get, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713?key=mykey&token=mytoken"
+    ).with(
+      :headers => {
+        'Accept'=>'*/*; q=0.5, application/xml',
+        'Accept-Encoding'=>'gzip, deflate',
+        'User-Agent'=>'Ruby'
+      }
+    ).to_return(:status => 200, :body => body, :headers => {})
+    @cli.options = {"card-id" => "54ae8485221b1cc5b173e713"}
+    expected_output = "haml\n"
+    expect {
+      @cli.get_description
+    }.to output(expected_output).to_stdout
+  end
 end

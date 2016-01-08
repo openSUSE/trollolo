@@ -71,6 +71,12 @@ class TrelloWrapper
     end
   end
 
+  def get_description(card_id)
+    card = Trello::Card.find(card_id)
+    card.desc
+  end
+
+
   private
 
   def init_trello
