@@ -1,5 +1,12 @@
 # Trollolo Changelog
 
+## Version 0.0.7
+
+* Add set-description command
+* Add get-description command
+* Add make-cover command to set an existing image as cover
+* Add option to push burndown data to an API endpoint
+
 ## Version 0.0.6
 
 * Track cards with unplanned work separately
