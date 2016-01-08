@@ -57,11 +57,9 @@ class TrelloWrapper
 
   def make_cover(card_id, image_name)
     attachment_id = attachment_id_by_name(card_id, image_name)
-    raise("Error: The attachment with the name '#{image_name}' was not found!") if !attachment_id
+    raise("Error: The attachment with the name '#{image_name}' was not found") if !attachment_id
     client.put("/cards/#{card_id}/idAttachmentCover?value=#{attachment_id}")
   end
-
-  private
 
   def attachment_id_by_name(card_id, image_name)
     json = JSON.parse(client.get("/cards/#{card_id}/attachments?fields=name"))
@@ -72,6 +70,8 @@ class TrelloWrapper
       nil
     end
   end
+
+  private
 
   def init_trello
     Trello.configure do |config|

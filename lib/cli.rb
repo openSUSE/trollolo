@@ -261,7 +261,7 @@ EOT
     trello.add_attachment(options["card-id"], filename)
   end
 
-  desc "make-cover <filename>", "Make existing picture as cover"
+  desc "make-cover <filename>", "Make existing picture the cover"
   option "card-id", :desc => "Id of card", :required => true
   def make_cover(filename)
     process_global_options(options)
