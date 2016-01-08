@@ -71,6 +71,15 @@ class TrelloWrapper
     end
   end
 
+  def get_description(card_id)
+    card = Trello::Card.find(card_id)
+    card.desc
+  end
+
+  def set_description(card_id, description)
+    client.put("/cards/#{card_id}/desc?value=#{description}")
+  end
+
   private
 
   def init_trello
