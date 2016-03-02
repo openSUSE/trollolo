@@ -3,4 +3,3 @@ Gemfile.lock
 tmp
 coverage
 *.png
-*.yaml
