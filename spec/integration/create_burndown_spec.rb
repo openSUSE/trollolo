@@ -15,6 +15,17 @@ def run_helper(working_dir, sprint_number, extra_args = [])
   run_command(cmd: "docker", args: args)
 end
 
+def compare_images_for_sprint(sprint_number, extra_args = [])
+  @working_dir = given_directory do
+    given_file("burndown-data-#{sprint_number}.yaml", from: "create_burndown_helper/burndown-data-#{sprint_number}.yaml")
+  end
+
+  result = run_helper(@working_dir, sprint_number, extra_args)
+  expect(result).to exit_with_success("")
+  expect(File.join(@working_dir, "burndown-#{sprint_number}.png")).
+    to be_same_image_as("create_burndown_helper/burndown-#{sprint_number}.png")
+end
+
 describe "create_burndown.py" do
   use_given_filesystem(keep_files: true)
 
@@ -24,69 +35,27 @@ describe "create_burndown.py" do
     end
   end
 
-  it "creates burndown chart for sprint 23" do
-    @working_dir = given_directory do
-      given_file("burndown-data-23.yaml", from: "create_burndown_helper/burndown-data-23.yaml")
-    end
-
-    result = run_helper(@working_dir, "23")
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-23.png")).
-      to be_same_image_as("create_burndown_helper/burndown-23.png")
+  it "creates burndown chart with varying number of total story points and tasks" do
+    compare_images_for_sprint("23")
   end
 
-  it "creates burndown chart for sprint 31" do
-    @working_dir = given_directory do
-      given_file("burndown-data-31.yaml", from: "create_burndown_helper/burndown-data-31.yaml")
-    end
-
-    result = run_helper(@working_dir, "31")
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-31.png")).
-      to be_same_image_as("create_burndown_helper/burndown-31.png")
+  it "creates burndown chart with done tasks at the beginning" do
+    compare_images_for_sprint("31")
   end
 
-  it "creates burndown chart for sprint 35" do
-    @working_dir = given_directory do
-      given_file("burndown-data-35.yaml", from: "create_burndown_helper/burndown-data-35.yaml")
-    end
-
-    result = run_helper(@working_dir, "35")
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-35.png")).
-      to be_same_image_as("create_burndown_helper/burndown-35.png")
+  it "creates burndown chart of unfinished sprint" do
+    compare_images_for_sprint("35")
   end
 
-  it "creates burndown chart for sprint 8" do
-    @working_dir = given_directory do
-      given_file("burndown-data-08.yaml", from: "create_burndown_helper/burndown-data-08.yaml")
-    end
-
-    result = run_helper(@working_dir, "08", ["--no-tasks", "--with-fast-lane"])
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-08.png")).
-      to be_same_image_as("create_burndown_helper/burndown-08.png")
+  it "creates burndown chart with fast lane and no tasks" do
+    compare_images_for_sprint("08", ["--no-tasks", "--with-fast-lane"])
   end
 
   it "creates perfect burndown chart" do
-    @working_dir = given_directory do
-      given_file("burndown-data-42.yaml", from: "create_burndown_helper/burndown-data-42.yaml")
-    end
-
-    result = run_helper(@working_dir, "42")
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-42.png")).
-      to be_same_image_as("create_burndown_helper/burndown-42.png")
+    compare_images_for_sprint("42")
   end
 
   it "creates burndown chart with unplanned cards" do
-    @working_dir = given_directory do
-      given_file("burndown-data-56.yaml", from: "create_burndown_helper/burndown-data-56.yaml")
-    end
-
-    result = run_helper(@working_dir, "56")
-    expect(result).to exit_with_success("")
-    expect(File.join(@working_dir, "burndown-56.png")).
-      to be_same_image_as("create_burndown_helper/burndown-56.png")
+    compare_images_for_sprint("56")
   end
 end
