@@ -1,0 +1,140 @@
+---
+meta:
+  board_id: QI6wqucd
+  not_done_columns:
+  - Sprint Backlog
+  - Doing
+  - QA
+  sprint: 56
+  total_days: 10
+  weekend_lines:
+  - 3.5
+  - 8.5
+  done_column_id: 5630c8074db53ef7499f7a02
+days:
+- date: '2016-01-27'
+  updated_at: '2016-01-28T10:14:11+01:00'
+  story_points:
+    total: 31.0
+    open: 31.0
+  tasks:
+    total: 53
+    open: 53
+- date: '2016-01-28'
+  updated_at: '2016-01-28T11:54:44+01:00'
+  story_points:
+    total: 31.0
+    open: 26.0
+  tasks:
+    total: 53
+    open: 49
+- date: '2016-01-29'
+  updated_at: '2016-01-29T12:48:01+01:00'
+  story_points:
+    total: 31.0
+    open: 26.0
+  tasks:
+    total: 53
+    open: 43
+- date: '2016-02-01'
+  updated_at: '2016-02-01T12:47:59+01:00'
+  story_points:
+    total: 31.0
+    open: 24.0
+  tasks:
+    total: 54
+    open: 37
+  unplanned_story_points:
+    total: 1.0
+    open: 1.0
+  unplanned_tasks:
+    total: 9
+    open: 4
+- date: '2016-02-02'
+  updated_at: '2016-02-02T14:52:11+01:00'
+  story_points:
+    total: 31.0
+    open: 24
+  tasks:
+    total: 56
+    open: 29
+  unplanned_story_points:
+    total: 1.0
+    open: 0.0
+  unplanned_tasks:
+    total: 8
+    open: 1
+- date: '2016-02-03'
+  updated_at: '2016-02-03T17:10:50+01:00'
+  story_points:
+    total: 31.0
+    open: 15.5
+  tasks:
+    total: 56
+    open: 20
+  unplanned_story_points:
+    total: 4.0
+    open: 2.0
+  unplanned_tasks:
+    total: 9
+    open: 1
+- date: '2016-02-04'
+  updated_at: '2016-02-04T11:43:31+01:00'
+  story_points:
+    total: 31.0
+    open: 15.5
+  tasks:
+    total: 56
+    open: 16
+  unplanned_story_points:
+    total: 4.0
+    open: 2.0
+  unplanned_tasks:
+    total: 9
+    open: 1
+- date: '2016-02-05'
+  updated_at: '2016-02-05T13:19:02+01:00'
+  story_points:
+    total: 31.0
+    open: 8.5
+  tasks:
+    total: 56
+    open: 4
+  unplanned_story_points:
+    total: 4.0
+    open: 2.0
+  unplanned_tasks:
+    total: 9
+    open: 1
+- date: '2016-02-08'
+  updated_at: '2016-02-08T13:28:28+01:00'
+  story_points:
+    total: 31.0
+    open: 8.5
+  tasks:
+    total: 56
+    open: 5
+  tasks_extra:
+    done: 1
+  unplanned_story_points:
+    total: 4.0
+    open: 2.0
+  unplanned_tasks:
+    total: 11
+    open: 3
+- date: '2016-02-09'
+  updated_at: '2016-02-09T11:40:33+01:00'
+  story_points:
+    total: 31.0
+    open: 8.5
+  tasks:
+    total: 60
+    open: 3
+  tasks_extra:
+    done: 1
+  unplanned_story_points:
+    total: 4.0
+    open: 2.0
+  unplanned_tasks:
+    total: 11
+    open: 1

@@ -67,4 +67,26 @@ describe "create_burndown.py" do
     expect(File.join(@working_dir, "burndown-08.png")).
       to be_same_image_as("create_burndown_helper/burndown-08.png")
   end
+
+  it "creates perfect burndown chart" do
+    @working_dir = given_directory do
+      given_file("burndown-data-42.yaml", from: "create_burndown_helper/burndown-data-42.yaml")
+    end
+
+    result = run_helper(@working_dir, "42")
+    expect(result).to exit_with_success("")
+    expect(File.join(@working_dir, "burndown-42.png")).
+      to be_same_image_as("create_burndown_helper/burndown-42.png")
+  end
+
+  it "creates burndown chart with unplanned cards" do
+    @working_dir = given_directory do
+      given_file("burndown-data-56.yaml", from: "create_burndown_helper/burndown-data-56.yaml")
+    end
+
+    result = run_helper(@working_dir, "56")
+    expect(result).to exit_with_success("")
+    expect(File.join(@working_dir, "burndown-56.png")).
+      to be_same_image_as("create_burndown_helper/burndown-56.png")
+  end
 end
