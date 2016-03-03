@@ -1,5 +1,16 @@
 # Trollolo Changelog
 
+## Version 0.0.8
+
+* Burndown chart reflects unplanned work
+
+  If unplanned work is added to the board during the sprint, separate graphs
+  for the corresponding story points and tasks are drawn. For easier
+  distinction, the additional graphs got different colors and are mentioned in
+  the also newly added legend of the plot.
+
+* Run integration tests of the image generation in Docker
+
 ## Version 0.0.7
 
 * Add set-description command
