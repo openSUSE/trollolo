@@ -25,13 +25,6 @@ class TrelloWrapper
     init_trello
   end
 
-  def client
-    Trello::Client.new(
-      developer_public_key: @settings.developer_public_key,
-      member_token: @settings.member_token
-    )
-  end
-
   def board(board_id)
     return @board if @board
 
@@ -39,11 +32,11 @@ class TrelloWrapper
   end
 
   def retrieve_board_data(board_id)
-    JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all"))
+    JSON.parse(get_board(board_id))
   end
 
   def backup(board_id)
-    client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
+    get_board(board_id)
   end
 
   def organization(org_id)
@@ -82,11 +75,24 @@ class TrelloWrapper
 
   private
 
+  def client
+    Trello::Client.new(
+        developer_public_key: @settings.developer_public_key,
+        member_token: @settings.member_token
+    )
+  end
+
   def init_trello
     Trello.configure do |config|
       config.developer_public_key = @settings.developer_public_key
       config.member_token         = @settings.member_token
     end
+  end
+
+  def get_board(board_id)
+    raise TrolloloError.new("Board id cannot be blank") if board_id.blank?
+
+    client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
   end
 
 end
