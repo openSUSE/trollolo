@@ -1,35 +1,34 @@
 class Backup
+  BACKUP_DIR = File.expand_path("~/.trollolo/backup")
 
+  attr_reader :board_id
   attr_accessor :directory
 
-  def initialize settings
+  def initialize(board_id, settings)
+    @board_id = board_id
     @settings = settings
-    @directory = File.expand_path("~/.trollolo/backup")
   end
 
-  def backup(board_id)
-    backup_path = File.join(@directory, board_id)
+  def self.list
+    Dir.entries(BACKUP_DIR).reject { |d| d =~ /^\./ }
+  end
+
+  def backup
     FileUtils.mkdir_p(backup_path)
 
     trello = TrelloWrapper.new(@settings)
 
     data = trello.backup(board_id)
 
-    File.open(File.join(backup_path, "board.json"), "w") do |f|
+    File.open(backup_file, "w") do |f|
       f.write(data)
     end
   end
 
-  def list
-    Dir.entries(@directory).reject { |d| d =~ /^\./ }
-  end
-
-  def show(board_id, options = {})
+  def show(options = {})
     out = options[:output] || STDOUT
 
-    backup_path = File.join(@directory, board_id)
-
-    board = JSON.parse(File.read(File.join(backup_path, "board.json")))
+    board = JSON.parse(File.read(backup_file))
 
     out.puts board["name"]
 
@@ -64,4 +63,13 @@ class Backup
     end
   end
 
+  private
+
+  def backup_path
+    File.join(BACKUP_DIR, board_id)
+  end
+
+  def backup_file
+    File.join(backup_path, "board.json")
+  end
 end

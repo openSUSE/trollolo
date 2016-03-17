@@ -202,14 +202,13 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    b = Backup.new @@settings
-    b.backup(options["board-id"])
+    b = Backup.new(options["board-id"], @@settings)
+    b.backup
   end
 
   desc "list_backups", "List all backups"
   def list_backups
-    b = Backup.new @@settings
-    b.list.each do |backup|
+    Backup.list.each do |backup|
       puts backup
     end
   end
@@ -218,8 +217,8 @@ EOT
   option "board-id", :desc => "Id of Trello board", :required => true
   option "show-descriptions", :desc => "Show descriptions of cards", :required => false, :type => :boolean
   def show_backup
-    b = Backup.new @@settings
-    b.show(options["board-id"], options)
+    b = Backup.new(options["board-id"], @@settings)
+    b.show(options)
   end
 
   desc "organization", "Show organization info"
