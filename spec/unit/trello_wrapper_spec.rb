@@ -58,16 +58,6 @@ describe TrelloWrapper do
   end
 
   describe '#retrieve_board_data' do
-    before do
-      stub_request(:get, "https://api.trello.com/1/boards/myboard?card_checklists=all&cards=open&key=mykey&lists=open&token=mytoken").
-        with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
-        to_return(:status => 200, :body => load_test_file("board.json"), :headers => {})
-    end
-
-    it 'returns board data in Ruby hash format' do
-      expect(subject.retrieve_board_data("myboard")).to be_instance_of(Hash)
-    end
-
     it 'raises error when board id is empty' do
       expect { subject.retrieve_board_data('') }.to raise_error(TrolloloError)
     end
