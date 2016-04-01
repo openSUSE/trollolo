@@ -9,14 +9,12 @@ class BurndownData:
     self.args = args
     burndown = self.readYAML(self.args.sprint)
     self.getSprintData(burndown)
-    self.calculateMaxStoryPoints()
-    self.calculateMaxTasks()
     self.setBonusTasksDayOne(burndown)
     self.setUnplannedTasksDayOne(burndown)
     self.setExtraDays()
     self.setUnplannedDays()
-    self.calculateYRange(self.max_story_points, self.bonus_tasks_done, self.bonus_story_points_done, self.unplanned_tasks_done, self.unplanned_story_points_done)
-    self.setScaleFactor(self.max_tasks, self.max_story_points)
+    self.calculateYRange(self.total_story_points[0], self.bonus_tasks_done, self.bonus_story_points_done, self.unplanned_tasks_done, self.unplanned_story_points_done)
+    self.setScaleFactor(self.total_tasks[0], self.total_story_points[0])
 
   def readYAML(self, sprint_number):
     with open('burndown-data-' + sprint_number + '.yaml', 'r') as f:
@@ -49,8 +47,6 @@ class BurndownData:
     self.y_fast_lane = []
     self.total_fast_lane = []
     self.total_unplanned_fast_lane = []
-    self.max_story_points = 0
-    self.max_tasks = 0
 
     for day in burndown["days"]:
       self.days.append(self.current_day)
@@ -94,16 +90,6 @@ class BurndownData:
       self.current_day += 1
     return
 
-  def calculateMaxStoryPoints(self):
-    for sp in self.total_story_points:
-      self.max_story_points = max(self.max_story_points, sp)
-    return
-
-  def calculateMaxTasks(self):
-    for t in self.total_tasks:
-      self.max_tasks = max(self.max_tasks, t)
-    return
-
   def setBonusTasksDayOne(self, burndown):
     if burndown["days"][0].has_key("tasks_extra"):
       self.bonus_tasks_day_one = burndown["days"][0]["tasks_extra"]["done"]
@@ -140,8 +126,8 @@ class BurndownData:
       self.unplanned_day = 1
     return
 
-  def calculateYRange(self, max_story_points, bonus_tasks_done, bonus_story_points_done, unplanned_tasks_done, unplanned_story_points_done):
-    self.ymax = max_story_points + 3
+  def calculateYRange(self, total_story_points, bonus_tasks_done, bonus_story_points_done, unplanned_tasks_done, unplanned_story_points_done):
+    self.ymax = total_story_points + 3
 
     if len(bonus_tasks_done) > 0:
       ymin_bonus_tasks = min(bonus_tasks_done) -3
@@ -168,7 +154,7 @@ class BurndownData:
       self.ymin = -3
     return
 
-  def setScaleFactor(self, max_tasks, max_story_points):
-    self.scalefactor = float(max_tasks) / float(max_story_points)
+  def setScaleFactor(self, total_tasks, total_story_points):
+    self.scalefactor = float(total_tasks) / float(total_story_points)
     return
 
