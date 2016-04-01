@@ -1,0 +1,23 @@
+---
+meta:
+  board_id: CRdddpdy
+  sprint: 1
+  total_days: 10
+  weekend_lines:
+  - 3.5
+  - 8.5
+days:
+- date: '2016-03-17'
+  updated_at: '2016-03-17T18:31:46+01:00'
+  story_points:
+    total: 16.0
+    open: 13.0
+  tasks:
+    total: 13
+    open: 9
+  unplanned_story_points:
+    total: 3.0
+    open: 1.0
+  unplanned_tasks:
+    total: 2
+    open: 1

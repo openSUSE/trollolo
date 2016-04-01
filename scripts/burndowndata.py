@@ -99,7 +99,7 @@ class BurndownData:
 
   def setUnplannedTasksDayOne(self, burndown):
     if burndown["days"][0].has_key("unplanned_tasks"):
-      self.unplanned_tasks_day_one = burndown["days"][0]["unplanned_tasks"]["done"]
+      self.unplanned_tasks_day_one = burndown["days"][0]["unplanned_tasks"]["total"] - burndown["days"][0]["unplanned_tasks"]["open"]
     else:
       self.unplanned_tasks_day_one = 0
     return

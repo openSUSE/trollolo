@@ -58,4 +58,8 @@ describe "create_burndown.py" do
   it "creates burndown chart with unplanned cards" do
     compare_images_for_sprint("56")
   end
+
+  it "creates burndown chart with unplanned tasks on day one" do
+    compare_images_for_sprint("01")
+  end
 end
