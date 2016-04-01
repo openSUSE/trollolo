@@ -1,11 +1,8 @@
 language: ruby
 cache: bundler
 before_install:
-  - gem update --system
   - gem --version
-  - gem update bundler
   - gem list bundler
-  - cat Gemfile.lock
 rvm:
   - "2.1.7"
   - "2.2.3"
