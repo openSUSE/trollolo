@@ -80,6 +80,10 @@ class TrelloWrapper
     client.put("/cards/#{card_id}/desc?value=#{description}")
   end
 
+  def set_name(card_id, name)
+    client.put("/cards/#{card_id}/name?value=#{name}")
+  end
+
   private
 
   def init_trello

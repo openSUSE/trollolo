@@ -32,6 +32,7 @@ require_relative 'burndown_chart'
 require_relative 'burndown_data'
 require_relative 'backup'
 require_relative 'checklist'
+require_relative 'prioritizer'
 
 class TrolloloError < StandardError
 end

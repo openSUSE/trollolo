@@ -293,6 +293,21 @@ EOT
     trello.make_cover(options["card-id"], filename)
   end
 
+  desc "set-priorities", "Set priority text into card titles"
+  long_desc <<EOT
+  Add 'P<n>: ' to the beginning of every cards title, replace where
+  already present. n is the current position of the list on the card.
+EOT
+  option "board-id", :desc => "Id of the board", :required => true
+  option "list-name", :desc => "Name of the list", :required => true
+  def set_priorities
+    process_global_options options
+    require_trello_credentials
+
+    p = Prioritizer.new(@@settings)
+    p.prioritize(options["board-id"], options["list-name"])
+  end
+
   private
 
   def process_global_options options

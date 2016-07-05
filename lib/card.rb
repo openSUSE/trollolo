@@ -141,4 +141,8 @@ class Card
   def name=(str)
     @card_data["name"] = str
   end
+
+  def id
+    @card_data["id"]
+  end
 end
