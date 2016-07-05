@@ -48,6 +48,14 @@ class Card
     m.captures.first.to_i
   end
 
+  def priority=(n)
+    if priority
+      @card_data["name"].sub!(/P\d+: /, "P#{n}: ")
+    else
+      @card_data["name"] = "P#{n}: #{name}"
+    end
+  end
+
   def done_tasks
     count = 0
     @card_data["checklists"].each do |checklist|
@@ -128,5 +136,9 @@ class Card
 
   def name
     @card_data["name"]
+  end
+
+  def name=(str)
+    @card_data["name"] = str
   end
 end

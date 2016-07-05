@@ -39,6 +39,36 @@ describe Card do
     end
   end
 
+  describe "updates priority" do
+    before(:each) do
+      @card = Card.new({"cards" => [{ "id" => "mycard" }]}, "mycard")
+    end
+
+    it "updates existing priority in title" do
+      @card.name = "P01: (3) Refactor cards"
+      @card.priority = 3
+      expect(@card.name).to eq("P3: (3) Refactor cards")
+    end
+
+    it "adds new priority text to title" do
+      @card.name = "(3) Refactor cards"
+      @card.priority = 4
+      expect(@card.name).to eq("P4: (3) Refactor cards")
+    end
+
+    it "updates priority after story points" do
+      @card.name = "(0.5) P1: Refactor cards"
+      @card.priority = 4
+      expect(@card.name).to eq("(0.5) P4: Refactor cards")
+    end
+
+    it "adds priority after story points" do
+      @card.name = "(0.5) P1: Refactor cards"
+      @card.priority = 5
+      expect(@card.name).to eq("(0.5) P5: Refactor cards")
+    end
+  end
+
   describe "#parse_yaml_from_description" do
     it "parses description only having YAML" do
       description = <<EOT
