@@ -206,7 +206,7 @@ EOT
     b.backup(options["board-id"])
   end
 
-  desc "list_backups", "List all backups"
+  desc "list-backups", "List all backups"
   def list_backups
     b = Backup.new @@settings
     b.list.each do |backup|
@@ -214,7 +214,7 @@ EOT
     end
   end
 
-  desc "show_backup", "Show backup of board"
+  desc "show-backup", "Show backup of board"
   option "board-id", :desc => "Id of Trello board", :required => true
   option "show-descriptions", :desc => "Show descriptions of cards", :required => false, :type => :boolean
   def show_backup
@@ -257,7 +257,7 @@ EOT
     trello.set_description(options["card-id"], STDIN.read)
   end
 
-  desc "organization_members", "Show organization members"
+  desc "organization-members", "Show organization members"
   option "org-name", :desc => "Name of organization", :required => true
   def organization_members
     process_global_options options
