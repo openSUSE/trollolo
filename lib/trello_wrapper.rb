@@ -76,6 +76,10 @@ class TrelloWrapper
     card.desc
   end
 
+  def get_member_boards(member_id)
+    JSON.parse(client.get("/members/#{member_id}/boards"))
+  end
+
   def set_description(card_id, description)
     client.put("/cards/#{card_id}/desc?value=#{description}")
   end

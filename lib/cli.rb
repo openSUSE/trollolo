@@ -308,6 +308,20 @@ EOT
     p.prioritize(options["board-id"], options["list-name"])
   end
 
+  desc "list-member-boards", "List name and id of all boards"
+  option "member-id", :desc => "Id of the member", :required => true
+  def list_member_boards
+    process_global_options options
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+    trello.get_member_boards(options["member-id"]).sort_by { |board|
+      board["name"]
+    }.each { |board|
+      puts "#{board["name"]} - #{board["id"]}"
+    }
+  end
+
   private
 
   def process_global_options options
