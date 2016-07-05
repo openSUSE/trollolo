@@ -40,7 +40,7 @@ member_token: 87345897238957a29835789b2374580927f3589072398579820345
 ```
 
 These values have to be set with the personal access data for the Trello API
-and the id of the board, which is processed.
+and the personal access token of the application, which has to be generated.
 
 For creating a developer key go to the
 [Developer API Keys](https://trello.com/1/appKey/generate) page on Trello. It's
