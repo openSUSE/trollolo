@@ -4,8 +4,8 @@ before_install:
   - gem --version
   - gem list bundler
 rvm:
-  - "2.1.7"
   - "2.2.3"
+  - "2.3.1"
 script: bundle exec rspec spec/unit
 sudo: false
 
