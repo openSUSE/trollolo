@@ -40,7 +40,6 @@ describe Prioritizer do
       expect {
         subject.prioritize("53186e8391ef8671265eba9d", "Sprint Backlog")
       }.not_to raise_error
-      expect(TrelloWrapper.any_instance).should_receive(:post)
     end
   end
 end
