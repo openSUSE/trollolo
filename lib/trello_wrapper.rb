@@ -88,6 +88,22 @@ class TrelloWrapper
     client.put("/cards/#{card_id}/name?value=#{name}")
   end
 
+  def get_cards_from_list(list_id)
+    JSON.parse(client.get("/lists/#{list_id}/cards"))
+  end
+
+  def get_lists_from_board(board)
+    JSON.parse(client.get("/boards/#{board_id}/lists"))
+  end
+
+  def get_lists_from_board(board)
+    JSON.parse(client.get("/boards/#{board_id}/labels"))
+  end
+
+  def move_card(card_id, target_list_id)
+    client.put("/cards/#{card_id}/idList?value=#{target_list_id}")
+  end
+
   private
 
   def init_trello
