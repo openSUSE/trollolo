@@ -33,6 +33,7 @@ require_relative 'burndown_data'
 require_relative 'backup'
 require_relative 'checklist'
 require_relative 'prioritizer'
+require_relative 'sprint_cleanup'
 
 class TrolloloError < StandardError
 end

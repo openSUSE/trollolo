@@ -322,6 +322,19 @@ EOT
     }
   end
 
+  desc "after-planning", "Move remaining cards to backlog"
+  long_desc <<EOT
+EOT
+  option "board-id", :desc => "Id of the board", :required => true
+  option "target-board-id", :desc => "Id of the target board", :required => true
+  def after_planning
+    process_global_options options
+    require_trello_credentials
+
+    s = SprintCleanup.new(@@settings)
+    s.cleanup(options["board-id"], options["target-board-id"])
+  end
+
   private
 
   def process_global_options options
