@@ -5,7 +5,7 @@ class Prioritizer
   end
 
   def prioritize(board_id, list_name)
-    list = find_list(board_id, list_name)
+    list = trello.find_list(board_id, list_name)
     fail "list not found on board" unless list
     update_priorities(list)
   end
@@ -25,10 +25,5 @@ class Prioritizer
       puts %(set priority to #{n} for "#{card.name}")
       n += 1
     end
-  end
-
-  def find_list(board_id, list_name)
-    board = trello.board(board_id)
-    board.columns.find { |list| list.name == list_name }
   end
 end
