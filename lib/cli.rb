@@ -74,7 +74,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.boards(options["board-id"])
     lists = board.columns
 
     if @@settings.raw
@@ -93,7 +93,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.boards(options["board-id"])
     cards = board.cards
 
     if @@settings.raw
@@ -118,7 +118,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.boards(options["board-id"])
     board.cards.each do |card|
       card.checklists.each do |checklist|
         puts checklist.name

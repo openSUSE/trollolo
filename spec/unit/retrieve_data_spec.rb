@@ -4,7 +4,7 @@ describe "retrieve data through Trello API" do
   before(:each) do
     full_board_mock
     trello_wrapper = TrelloWrapper.new(dummy_settings)
-    @board = trello_wrapper.board("53186e8391ef8671265eba9d")
+    @board = trello_wrapper.boards("53186e8391ef8671265eba9d")
   end
 
   describe "board" do

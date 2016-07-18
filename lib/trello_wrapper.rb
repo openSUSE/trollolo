@@ -17,11 +17,9 @@
 require 'trello'
 
 class TrelloWrapper
-
-  attr_accessor :board
-
   def initialize(settings)
     @settings = settings
+    @boards = {}
     init_trello
   end
 
@@ -32,10 +30,9 @@ class TrelloWrapper
     )
   end
 
-  def board(board_id)
-    return @board if @board
-
-    @board = ScrumBoard.new(retrieve_board_data(board_id), @settings)
+  def boards(board_id)
+    return @boards[board_id] if @boards.key?(board_id)
+    @boards[board_id] = ScrumBoard.new(retrieve_board_data(board_id), @settings)
   end
 
   def retrieve_board_data(board_id)
