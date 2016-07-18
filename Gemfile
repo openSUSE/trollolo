@@ -7,6 +7,7 @@ group :test do
   gem 'rspec', '~> 3'
   gem 'cli_tester'
   gem 'webmock'
+  gem 'vcr'
   gem 'given_filesystem'
   gem 'byebug'
   gem 'awesome_print'

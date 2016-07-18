@@ -30,20 +30,20 @@ describe TrelloWrapper do
     end
 
     it 'finds board via Trello' do
-      subject.board("myboard")
+      subject.boards("myboard")
     end
 
     it 'instantiate ScrumBoard with trello board and settings' do
       expect(ScrumBoard).to receive(:new).with(:board, subject.instance_variable_get(:@settings))
-      subject.board("myboard")
+      subject.boards("myboard")
     end
 
     it 'returns instance of a ScrumBoard' do
-      expect(subject.board("myboard")).to be_instance_of(ScrumBoard)
+      expect(subject.boards("myboard")).to be_instance_of(ScrumBoard)
     end
 
     it 'memoize board object' do
-      expect(subject.board("myboard")).to be subject.board("myboard")
+      expect(subject.boards("myboard")).to be subject.boards("myboard")
     end
   end
 

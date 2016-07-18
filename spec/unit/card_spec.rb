@@ -123,7 +123,7 @@ EOT
       full_board_mock
 
       trello = TrelloWrapper.new(@settings)
-      board = trello.board("53186e8391ef8671265eba9d")
+      board = trello.boards("53186e8391ef8671265eba9d")
 
       expected_json = <<EOT
 {

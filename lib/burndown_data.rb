@@ -93,7 +93,7 @@ class BurndownData
   end
 
   def board
-    trello.board(@board_id)
+    trello.boards(@board_id)
   end
 
   def fetch
