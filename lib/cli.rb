@@ -326,22 +326,13 @@ EOT
   long_desc <<EOT
 EOT
   option "board-id", :desc => "Id of the board", :required => true
+  option "target-board-id", :desc => "Id of the target board", :required => true
   def after_planning
     process_global_options options
     require_trello_credentials
 
-    trello = TrelloWrapper.new(@@settings)
-    lists = trello.get_lists_from_board(options["board-id"])
-    target_list = lists.find { |l| l["name"] == 'Backlog' }
-    sticky_label = trello.get_labels(options["board-id"]).find { |l| l["name"] == 'Sticky' }
-    ['Dontrember', 'Doing'].each do |list_name|
-      list = lists.find { |l| l["name"] == list_name }
-      trello.get_cards_from_list(list.id).each do |card|
-        next if card.card_labels.any? { |l| l["id"] == sticky_label.id }
-        #trello.move_card(card.id, target_list.id)
-        puts "WOUDL MOVE #{card.id} to #{target_list.id}"
-      end
-    end
+    s = SprintCleanup.new(@@settings)
+    s.cleanup(options["board-id"], options["target-board-id"])
   end
 
   private

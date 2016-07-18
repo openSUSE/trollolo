@@ -89,20 +89,8 @@ class TrelloWrapper
     JSON.parse(client.get("/lists/#{list_id}/cards"))
   end
 
-  def get_lists_from_board(board)
-    JSON.parse(client.get("/boards/#{board_id}/lists"))
-  end
-
-  def get_lists_from_board(board)
-    JSON.parse(client.get("/boards/#{board_id}/labels"))
-  end
-
   def find_list(board_id, list_name)
     boards(board_id).columns.find { |list| list.name == list_name }
-  end
-
-  def move_card(card_id, target_list_id)
-    client.put("/cards/#{card_id}/idList?value=#{target_list_id}")
   end
 
   private

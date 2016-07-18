@@ -24,6 +24,10 @@ class Column
     @list_data["name"]
   end
 
+  def id
+    @list_data["id"]
+  end
+
   def estimated_cards
     cards.select{|x| x.estimated? }
   end
