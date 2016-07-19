@@ -1,5 +1,20 @@
 # Trollolo Changelog
 
+## Version 0.0.9
+
+* Add `sprint-cleanup` command to move cards back from the sprint board to the
+  planning board. It takes all cards from the "Sprint backlog" and "Doing"
+  columns on the sprint board, moves them to the "Ready" column on the planning
+  board and removes all members and the "under the waterline" label.
+* Add `set-priorities` command to add priorities to the title of all cards of a
+  given column. The priorities are added as a prefix of the form "Pnn", where
+  "nn" is the number of the card in the column. This is useful, if you use the
+  order of cards as priorities and want to move them around to different columns
+  without losing this information.
+* Consistently use hyphens in command names, get rid of underscores.
+* Fix calculation of unplanned tasks on day one
+* Fix scaling tasks
+
 ## Version 0.0.8
 
 * Burndown chart reflects unplanned work
