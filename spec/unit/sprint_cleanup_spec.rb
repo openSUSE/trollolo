@@ -11,6 +11,7 @@ describe SprintCleanup do
     subject { described_class.new(dummy_settings) }
 
     it "moves remaining cards to target board", vcr: "sprint_cleanup", vcr_rerecord: false do
+      expect(STDOUT).to receive(:puts).exactly(5).times
       expect(subject.cleanup("GVMQz9dx", "neUHHzDo")).to be
     end
   end
