@@ -322,12 +322,14 @@ EOT
     }
   end
 
-  desc "after-planning", "Move remaining cards to backlog"
+  desc "sprint-cleanup", "Move remaining cards to backlog"
   long_desc <<EOT
+  After the sprint, move remaining cards from 'Sprint Backlog' and 'Doing'
+  back to the planning board into the 'Ready' list.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
   option "target-board-id", :desc => "Id of the target board", :required => true
-  def after_planning
+  def sprint_cleanup
     process_global_options options
     require_trello_credentials
 
