@@ -4,7 +4,7 @@ gemspec
 
 group :test do
   gem 'codeclimate-test-reporter'
-  gem 'rspec', '~> 3'
+  gem 'rspec', '~> 3.5'
   gem 'cli_tester'
   gem 'webmock'
   gem 'vcr'
