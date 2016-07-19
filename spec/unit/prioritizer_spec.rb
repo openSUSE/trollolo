@@ -37,6 +37,8 @@ describe Prioritizer do
       ].each { |value|
         stub_request(:put, "https://api.trello.com/1/cards/#{value}")
       }
+
+      expect(STDOUT).to receive(:puts).exactly(5).times
       expect {
         subject.prioritize("53186e8391ef8671265eba9d", "Sprint Backlog")
       }.not_to raise_error
