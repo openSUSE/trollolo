@@ -2,14 +2,13 @@ require_relative "spec_helper"
 require 'pry'
 
 describe Prioritizer do
+  subject { described_class.new(dummy_settings) }
+
   it "creates new prioritizer" do
-    prioritizer = Prioritizer.new(dummy_settings)
-    expect(prioritizer).to be
+    expect(subject).to be
   end
 
   context "default" do
-    subject { described_class.new(dummy_settings) }
-
     before(:each) do
       full_board_mock
     end

@@ -4,26 +4,26 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-# example needs to use real_settings if vcr_rerecord: true is used
+# example needs to use real_settings if vcr_record: true is used
 def real_settings
   config_path = ENV["TROLLOLO_CONFIG_PATH"] || File.expand_path("~/.trollolorc")
   Settings.new(config_path)
 end
 
 def real_settings_needed?(example, subject)
-  example.metadata[:vcr_rerecord] && subject.instance_variable_get(:@settings).developer_public_key == 'mykey'
+  example.metadata[:vcr_record] && subject.instance_variable_get(:@settings).developer_public_key == 'mykey'
 end
 
 def cassette_path(cassette)
   File.join(VCR.configuration.cassette_library_dir, cassette + '.yml')
 end
 
-def vcr_rerecord?(example)
-  example.metadata[:vcr_rerecord] && File.readable?(cassette_path(example.metadata[:vcr]))
+def vcr_record?(example)
+  example.metadata[:vcr_record]
 end
 
 def vcr_record_mode(example)
-  return :all if vcr_rerecord?(example)
+  return :all if vcr_record?(example)
   :none
 end
 
@@ -44,7 +44,7 @@ RSpec.configure do |c|
       VCR.use_cassette(cassette, record: vcr_record_mode(example)) do
         example.run
       end
-      vcr_replace_tokens(cassette_path(cassette)) if vcr_rerecord?(example)
+      vcr_replace_tokens(cassette_path(cassette)) if vcr_record?(example)
     else
       example.run
     end
