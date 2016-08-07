@@ -1,11 +1,6 @@
-class SprintCleanup
+class SprintCleanup < TrelloService
   SOURCE_LISTS = ["Sprint Backlog", "Doing"]
   TARGET_LIST = "Ready"
-
-  def initialize(settings)
-    @settings = settings
-    init_trello
-  end
 
   def cleanup(board_id, target_board_id)
     @board = Trello::Board.find(board_id)
@@ -18,19 +13,8 @@ class SprintCleanup
 
   private
 
-  def init_trello
-    Trello.configure do |config|
-      config.developer_public_key = @settings.developer_public_key
-      config.member_token         = @settings.member_token
-    end
-  end
-
   def target_list
     @target_list ||= @target_board.lists.find { |l| l.name == TARGET_LIST }
-  end
-
-  def sticky?(card)
-    card.labels.any? { |l| l.name == "Sticky" }
   end
 
   def waterline_label(card)
