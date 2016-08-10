@@ -16,14 +16,9 @@
 #  you may find current contact information at www.suse.com
 require 'trello'
 
-class TrelloWrapper
+class TrelloWrapper < TrelloService
 
   attr_accessor :board
-
-  def initialize(settings)
-    @settings = settings
-    init_trello
-  end
 
   def client
     Trello::Client.new(
@@ -87,14 +82,4 @@ class TrelloWrapper
   def set_name(card_id, name)
     client.put("/cards/#{card_id}/name?value=#{name}")
   end
-
-  private
-
-  def init_trello
-    Trello.configure do |config|
-      config.developer_public_key = @settings.developer_public_key
-      config.member_token         = @settings.member_token
-    end
-  end
-
 end
