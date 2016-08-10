@@ -4,6 +4,11 @@ class TrelloService
     init_trello
   end
 
+  def self.find_list(board_id, name)
+    board = Trello::Board.find(board_id)
+    return board, board.lists.find { |l| l.name == name }
+  end
+
   def sticky?(card)
     card.labels.any? { |l| l.name == "Sticky" }
   end
