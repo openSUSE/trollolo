@@ -1,7 +1,6 @@
-require_relative "spec_helper"
-require 'pry'
+require_relative "../spec_helper"
 
-describe Prioritizer do
+describe Scrum::Prioritizer do
   subject { described_class.new(dummy_settings) }
 
   it "creates new prioritizer" do

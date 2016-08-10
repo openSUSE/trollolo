@@ -304,7 +304,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    p = Prioritizer.new(@@settings)
+    p = Scrum::Prioritizer.new(@@settings)
     p.prioritize(options["board-id"], options["list-name"])
   end
 
@@ -333,7 +333,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    s = SprintCleanup.new(@@settings)
+    s = Scrum::SprintCleanup.new(@@settings)
     s.cleanup(options["board-id"], options["target-board-id"])
   end
 
@@ -348,7 +348,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    m = MoveBacklog.new(@@settings)
+    m = Scrum::MoveBacklog.new(@@settings)
     m.move(options["planning-board-id"], options["sprint-board-id"])
   end
 

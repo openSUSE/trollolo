@@ -1,7 +1,6 @@
-require_relative "spec_helper"
-require 'pry'
+require_relative "../spec_helper"
 
-describe MoveBacklog do
+describe Scrum::MoveBacklog do
   subject { described_class.new(dummy_settings) }
 
   it "creates new move backlog" do
