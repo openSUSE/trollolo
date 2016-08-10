@@ -9,10 +9,10 @@ module Scrum
     private
 
     def setup(planning_board_id, sprint_board_id)
-      @sprint_board = SprintBoard.new(sprint_board_id)
+      @sprint_board = SprintBoard.new.setup(sprint_board_id)
       fail "sprint board is missing #{@sprint_board.backlog_list_name} list" unless @sprint_board.backlog_list
 
-      @planning_board = SprintPlanningBoard.new(planning_board_id)
+      @planning_board = SprintPlanningBoard.new.setup(planning_board_id)
       fail "backlog list not found on planning board" unless @planning_board.backlog_list
 
       @waterline_card = @planning_board.waterline_card
@@ -29,6 +29,7 @@ module Scrum
 
         elsif card == @waterline_card
           @sprint_board.place_waterline(@waterline_card)
+          puts "under the waterline"
 
         else
           move_sprint_card(card)

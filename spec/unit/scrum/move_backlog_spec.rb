@@ -20,6 +20,7 @@ describe Scrum::MoveBacklog do
   end
 
   it "moves cards to sprint board", vcr: "move_backlog", vcr_record: false do
+    expect(STDOUT).to receive(:puts).exactly(11).times
     subject.move("neUHHzDo", "NzGCbEeN")
   end
 end

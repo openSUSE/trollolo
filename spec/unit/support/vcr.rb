@@ -10,8 +10,8 @@ def real_settings
   Settings.new(config_path)
 end
 
-def real_settings_needed?(example, subject)
-  example.metadata[:vcr_record] && subject.instance_variable_get(:@settings).developer_public_key == 'mykey'
+def real_settings_needed?(example)
+  example.metadata[:vcr_record] && Trello.configuration.developer_public_key == 'mykey'
 end
 
 def cassette_path(cassette)
@@ -40,7 +40,7 @@ end
 RSpec.configure do |c|
   c.around do |example|
     if cassette = example.metadata[:vcr]
-      fail "you need to use real_settings to re-record vcr data" if real_settings_needed?(example, subject)
+      fail "you need to use real_settings to re-record vcr data" if real_settings_needed?(example)
       VCR.use_cassette(cassette, record: vcr_record_mode(example)) do
         example.run
       end

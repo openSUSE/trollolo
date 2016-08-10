@@ -2,11 +2,15 @@ module Scrum
   class SprintBoard
     include CardTypeDetection
 
-    def initialize(id)
-      @board, @backlog_list = TrelloService.find_list(id, backlog_list_name)
+    def initialize
       @under_waterline = false
     end
     attr_reader :backlog_list
+
+    def setup(id)
+      @board, @backlog_list = TrelloService.find_list(id, backlog_list_name)
+      self
+    end
 
     def backlog_list_name
       "Sprint Backlog"
@@ -28,14 +32,6 @@ module Scrum
 
     private
 
-    def waterline_card
-      @board.cards.find { |card| is_waterline?(card) }
-    end
-
-    def seabed_card
-      @board.cards.find { |card| is_seabed?(card) }
-    end
-
     def under_waterline_label
       @label ||= @board.labels.find { |label| label.name =~ /under waterline/i }
       @label ||= Trello::Label.create(name: 'Under waterline')
@@ -48,7 +44,8 @@ module Scrum
 
     def place_card_at_bottom(existing_card, planning_card)
       if existing_card
-        existing_card.update_fields(pos: 'bottom')
+        existing_card.pos = 'bottom'
+        existing_card.save
         planning_card.delete
       else
         planning_card.move_to_board(@board, @backlog_list)
