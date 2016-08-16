@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'thor', '~> 0.19'
   s.add_dependency 'ruby-trello', '~> 1.1'
+  s.add_dependency 'activesupport', '~> 4'
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
