@@ -12,10 +12,28 @@ describe Settings do
     it "is not verbose by default" do
       expect(@settings.verbose).to be false
     end
-    
+
     it "reads config file" do
       expect(@settings.developer_public_key).to eq "mykey"
       expect(@settings.member_token).to eq "mytoken"
+    end
+
+    context "#board_aliases" do
+      context "when aliases do not exist" do
+        it "returns an empty Hash" do
+          expect(@settings.board_aliases).to eq({})
+        end
+      end
+
+      context "when mapping exists" do
+        before do
+          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases',__FILE__) )
+        end
+
+        it "returns the mapping" do
+          expect(@settings.board_aliases).to eq({"MyTrelloBoard" => "53186e8391ef8671265eba9d"})
+        end
+      end
     end
   end
   
