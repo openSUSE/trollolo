@@ -6,7 +6,8 @@ describe Cli do
   use_given_filesystem
 
   before(:each) do
-    Cli.settings = dummy_settings
+    Cli.settings = Settings.new(
+      File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__))
     @cli = Cli.new
   end
 
@@ -26,6 +27,12 @@ describe Cli do
     @cli.backup
   end
 
+  it "backups board using an alias" do
+    expect_any_instance_of(Backup).to receive(:backup)
+    @cli.options = {"board-id" => "MyTrelloBoard"}
+    @cli.backup
+  end
+
   it "gets lists" do
     full_board_mock
     @cli.options = {"board-id" => "53186e8391ef8671265eba9d"}
@@ -37,6 +44,13 @@ Done Sprint 9
 Done Sprint 8
 Legend
 EOT
+    expect {
+      @cli.get_lists
+    }.to output(expected_output).to_stdout
+
+
+    # Using an alias
+    @cli.options = {"board-id" => "MyTrelloBoard"}
     expect {
       @cli.get_lists
     }.to output(expected_output).to_stdout
@@ -73,6 +87,12 @@ EOT
     expect {
       @cli.get_cards
     }.to output(expected_output).to_stdout
+
+    # Using an alias
+    @cli.options = {"board-id" => "MyTrelloBoard"}
+    expect {
+      @cli.get_cards
+    }.to output(expected_output).to_stdout
   end
 
   it "gets checklists" do
@@ -92,6 +112,12 @@ Tasks
 Tasks
 Tasks
 EOT
+    expect {
+      @cli.get_checklists
+    }.to output(expected_output).to_stdout
+
+    # Using an alias
+    @cli.options = {"board-id" => "MyTrelloBoard"}
     expect {
       @cli.get_checklists
     }.to output(expected_output).to_stdout
@@ -136,5 +162,21 @@ EOT
     @cli.options = {"card-id" => "54ae8485221b1cc5b173e713"}
     @cli.set_description
     expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description")
+  end
+
+  context "#board_id" do
+    before do
+      Cli.settings = Settings.new(
+        File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__))
+      @cli = Cli.new
+    end
+
+    it "returns the id when no alias exists" do
+      expect(@cli.send(:board_id, "1234")).to eq("1234")
+    end
+
+    it "return the id when an alias exists" do
+      expect(@cli.send(:board_id, "MyTrelloBoard")).to eq("53186e8391ef8671265eba9d")
+    end
   end
 end
