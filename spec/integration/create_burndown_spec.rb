@@ -9,7 +9,7 @@ def run_helper(working_dir, sprint_number, extra_args = [])
   args += ["-v", "#{helper_dir}:/trollolo/helper"]
   args += ["-v", "#{working_dir}:/trollolo/data"]
   args += ["-w", "/trollolo/data"]
-  args += ["matplotlib"]
+  args += ["trollolo-matplotlib"]
   args += ["/trollolo/helper/create_burndown.py", sprint_number]
   args += extra_args
   run_command(cmd: "docker", args: args)
