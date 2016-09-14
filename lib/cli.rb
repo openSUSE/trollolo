@@ -304,7 +304,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    p = Prioritizer.new(@@settings)
+    p = Scrum::Prioritizer.new(@@settings)
     p.prioritize(options["board-id"], options["list-name"])
   end
 
@@ -333,8 +333,23 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    s = SprintCleanup.new(@@settings)
+    s = Scrum::SprintCleanup.new(@@settings)
     s.cleanup(options["board-id"], options["target-board-id"])
+  end
+
+  desc "move-backlog", "Move the product backlog to the planning board"
+  long_desc <<-EOT
+  Two separate boards are used, a planning board and a sprint board for the current sprint.
+  After each planning meeting the cards are moved from the planning boards 'Backlog' list to the sprint boards 'Sprint Backlog' list.
+  EOT
+  option "planning-board-id", desc: "Id of the planning board", required: true
+  option "sprint-board-id", desc: "Id of the sprint board", required: true
+  def move_backlog
+    process_global_options options
+    require_trello_credentials
+
+    m = Scrum::MoveBacklog.new(@@settings)
+    m.move(options["planning-board-id"], options["sprint-board-id"])
   end
 
   private

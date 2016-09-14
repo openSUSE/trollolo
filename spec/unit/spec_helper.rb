@@ -4,6 +4,7 @@ require_relative '../../lib/trollolo'
 require 'given_filesystem/spec_helpers'
 require 'webmock/rspec'
 require 'byebug'
+require 'pry'
 WebMock.disable_net_connect!(:allow => "codeclimate.com")
 
 bin_path = File.expand_path( "../../../bin/", __FILE__ )

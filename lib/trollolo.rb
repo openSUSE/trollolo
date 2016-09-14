@@ -27,13 +27,13 @@ require_relative 'settings'
 require_relative 'column'
 require_relative 'card'
 require_relative 'scrum_board'
+require_relative 'trello_service'
 require_relative 'trello_wrapper'
 require_relative 'burndown_chart'
 require_relative 'burndown_data'
 require_relative 'backup'
 require_relative 'checklist'
-require_relative 'prioritizer'
-require_relative 'sprint_cleanup'
+require_relative 'scrum'
 
 class TrolloloError < StandardError
 end
