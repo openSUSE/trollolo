@@ -1,6 +1,7 @@
 class ScrumBoard
 
   class DoneColumnNotFoundError < StandardError; end
+  class AcceptedColumnNotFoundError < StandardError; end
 
   def initialize(board_data, settings)
     @settings = settings
@@ -22,8 +23,19 @@ class ScrumBoard
     end
   end
 
+  def accepted_column
+    begin
+      accepted_columns = columns.select{|c| c.name =~ @settings.accepted_column_name_regex }
+      if accepted_columns.empty?
+        raise AcceptedColumnNotFoundError, "can't find accepted column by name regex #{@settings.accepted_column_name_regex}"
+      else
+        accepted_columns.max_by{|c| c.name.match(@settings.accepted_column_name_regex).captures.first.to_i }
+      end
+    end
+  end
+
   def done_cards
-    done_column.committed_cards
+    done_column.committed_cards + accepted_column.committed_cards
   end
 
   def open_columns
@@ -56,11 +68,11 @@ class ScrumBoard
 
 
   def extra_cards
-    (done_column.extra_cards + open_columns.map(&:extra_cards)).flatten(1)
+    (done_column.extra_cards + accepted_column.extra_cards + open_columns.map(&:extra_cards)).flatten(1)
   end
 
   def extra_done_cards
-    done_column.extra_cards
+    done_column.extra_cards + accepted_column.extra_cards
   end
 
   def extra_done_story_points
@@ -85,11 +97,11 @@ class ScrumBoard
 
 
   def unplanned_cards
-    (done_column.unplanned_cards + open_columns.map(&:unplanned_cards)).flatten(1)
+    (done_column.unplanned_cards + accepted_column.unplanned_cards + open_columns.map(&:unplanned_cards)).flatten(1)
   end
 
   def unplanned_done_cards
-    done_column.unplanned_cards
+    done_column.unplanned_cards + accepted_column.unplanned_cards
   end
 
   def unplanned_done_story_points
@@ -118,11 +130,11 @@ class ScrumBoard
   end
 
   def done_fast_lane_cards_count
-    done_column.fast_lane_cards.count
+    done_column.fast_lane_cards.count + accepted_column.fast_lane_cards.count
   end
 
   def scrum_cards
-    open_columns.map(&:fast_lane_cards).flatten(1) + done_column.cards
+    open_columns.map(&:fast_lane_cards).flatten(1) + done_column.cards + accepted_column.cards
   end
 
   def meta_cards
