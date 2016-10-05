@@ -74,7 +74,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.board(board_id(options["board-id"]))
     lists = board.columns
 
     if @@settings.raw
@@ -93,7 +93,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.board(board_id(options["board-id"]))
     cards = board.cards
 
     if @@settings.raw
@@ -118,7 +118,7 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    board = trello.board(options["board-id"])
+    board = trello.board(board_id(options["board-id"]))
     board.cards.each do |card|
       card.checklists.each do |checklist|
         puts checklist.name
@@ -160,7 +160,7 @@ EOT
 
     chart = BurndownChart.new @@settings
     puts "Preparing directory..."
-    chart.setup(options[:output],options["board-id"])
+    chart.setup(options[:output],board_id(options["board-id"]))
   end
 
   desc "burndown", "Update burndown chart"
@@ -203,7 +203,7 @@ EOT
     require_trello_credentials
 
     b = Backup.new @@settings
-    b.backup(options["board-id"])
+    b.backup(board_id(options["board-id"]))
   end
 
   desc "list-backups", "List all backups"
@@ -219,7 +219,7 @@ EOT
   option "show-descriptions", :desc => "Show descriptions of cards", :required => false, :type => :boolean
   def show_backup
     b = Backup.new @@settings
-    b.show(options["board-id"], options)
+    b.show(board_id(options["board-id"]), options)
   end
 
   desc "organization", "Show organization info"
@@ -305,7 +305,7 @@ EOT
     require_trello_credentials
 
     p = Scrum::Prioritizer.new(@@settings)
-    p.prioritize(options["board-id"], options["list-name"])
+    p.prioritize(board_id(options["board-id"]), options["list-name"])
   end
 
   desc "list-member-boards", "List name and id of all boards"
@@ -334,7 +334,8 @@ EOT
     require_trello_credentials
 
     s = Scrum::SprintCleanup.new(@@settings)
-    s.cleanup(options["board-id"], options["target-board-id"])
+    s.cleanup(board_id(options["board-id"]),
+              board_id(options["target-board-id"]))
   end
 
   desc "move-backlog", "Move the product backlog to the planning board"
@@ -382,5 +383,12 @@ EOT
       STDERR.puts "Require trello credentials in config file"
       exit 1
     end
+  end
+
+  # Returns the board_id using id_or_alias. If id_or_alias matches a mapping
+  # from trollolorc then the mapped id is returned or else the id_or_alias
+  # is returned.
+  def board_id(id_or_alias)
+    @@settings.board_aliases[id_or_alias] || id_or_alias
   end
 end

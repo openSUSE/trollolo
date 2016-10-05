@@ -23,7 +23,10 @@ and cards and has functionality for extracting data for burndown charts.
 
   * `--board-id`:
     Most commands take a `board-id` parameter. This is the id of the Trello
-    board. It is the cryptic part of the URL of the Trello board.
+    board. It is the cryptic part of the URL of the Trello board. Since the
+    actual id is hard to remember, you can set an alias in the `.trollolorc`
+    file and use that instead of the actual id.
+    See [CONFIGURATION](#CONFIGURATION) section below.
 
   * `--raw`:
     Some of the commands take a `raw` option. If this is provided the commands
@@ -125,6 +128,24 @@ For creating a member token go follow the
 in the Trello API documentation.
 
 The board id is the cryptic string in the URL of your board.
+
+The `.trollolorc` file can also be used to set aliases for board ids. When set,
+you will be able to use the alias instead of the board-id in the various
+commands. E.g.
+
+With the following configuration
+
+```
+board_aliases:
+  MyTrelloBoard: 53186e8391ef8671265ebf9e
+
+```
+
+You can issue the command:
+
+```
+  trollolo get-cards --board-id=MyTrelloBoard
+```
 
 
 ## CONVENTIONS FOR SCRUM BOARDS
