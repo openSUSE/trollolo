@@ -83,4 +83,49 @@ describe ScrumBoard do
       expect(scrum_board.done_column.name).to eq("Done (July 20th - August 3rd)")
     end
   end
+
+  describe "card counts" do
+    context "full board" do
+      let(:board) { ScrumBoard.new(JSON.parse(load_test_file("full-board.json")), dummy_settings) }
+
+      it "#done_cards" do
+        expect(board.done_cards.count).to eq(3)
+        expect(board.done_cards[0].name).to eq("Burndown chart")
+        expect(board.done_cards[1].name).to eq("Sprint 10")
+        expect(board.done_cards[2].name).to eq("(3) P3: Fill Done columns")
+      end
+
+      it "#extra_cards" do
+        expect(board.extra_cards.count).to eq(1)
+        expect(board.extra_cards[0].name).to eq("(8) P6: Celebrate testing board")
+      end
+
+      it "#extra_done_cards" do
+        expect(board.extra_done_cards.count).to eq(0)
+      end
+
+      it "#unplanned_cards" do
+        expect(board.unplanned_cards.count).to eq(2)
+        expect(board.unplanned_cards[0].name).to eq("(2) Some unplanned work")
+        expect(board.unplanned_cards[1].name).to eq("(1) Fix emergency")
+      end
+
+      it "#unplanned_done_cards" do
+        expect(board.unplanned_done_cards.count).to eq(1)
+        expect(board.unplanned_done_cards[0].name).to eq("(2) Some unplanned work")
+      end
+
+      it "#done_fast_lane_cards_count" do
+        expect(board.done_fast_lane_cards_count).to eq(0)
+      end
+
+      it "#scrum_cards" do
+        expect(board.scrum_cards.count).to eq(4)
+        expect(board.scrum_cards[0].name).to eq("Burndown chart")
+        expect(board.scrum_cards[1].name).to eq("Sprint 10")
+        expect(board.scrum_cards[2].name).to eq("(3) P3: Fill Done columns")
+        expect(board.scrum_cards[3].name).to eq("(2) Some unplanned work")
+      end
+    end
+  end
 end
