@@ -162,7 +162,6 @@ EOT
     "due": null
   },
   "due": null,
-  "email": "trello@example.com",
   "idChecklists": [
 
   ],

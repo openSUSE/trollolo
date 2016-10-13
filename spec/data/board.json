@@ -18,7 +18,6 @@
     "cardAging": "regular",
     "calendarFeedEnabled": false,
     "background": "5319bb612fb0bcdf451401a8",
-    "backgroundColor": null,
     "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/4e727168cb2ac700002cf6b6/990df8f044b98679ccbef943beff54d6/4268316033_6d847a0219_b.jpg",
     "backgroundImageScaled": [
       {
@@ -44,9 +43,9 @@
     ],
     "backgroundTile": false,
     "backgroundBrightness": "light",
-    "canBePublic": false,
-    "canBeOrg": false,
-    "canBePrivate": false,
+    "canBePublic": true,
+    "canBeOrg": true,
+    "canBePrivate": true,
     "canInvite": true
   },
   "labelNames": {

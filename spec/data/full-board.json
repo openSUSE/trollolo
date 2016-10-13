@@ -18,7 +18,6 @@
     "cardAging": "regular",
     "calendarFeedEnabled": false,
     "background": "5319bb612fb0bcdf451401a8",
-    "backgroundColor": null,
     "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/4e727168cb2ac700002cf6b6/990df8f044b98679ccbef943beff54d6/4268316033_6d847a0219_b.jpg",
     "backgroundImageScaled": [
       {
@@ -44,9 +43,9 @@
     ],
     "backgroundTile": false,
     "backgroundBrightness": "light",
-    "canBePublic": false,
-    "canBeOrg": false,
-    "canBePrivate": false,
+    "canBePublic": true,
+    "canBeOrg": true,
+    "canBePrivate": true,
     "canInvite": true
   },
   "labelNames": {
@@ -98,7 +97,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -157,7 +155,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c22c584448bf2c314936"
       ],
@@ -249,7 +246,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c5b3d9e20a072df0400a"
       ],
@@ -324,7 +320,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c5ce8cf780f37d4c0b35"
       ],
@@ -399,7 +394,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -458,7 +452,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c5ea7b7a51a62bc907a1"
       ],
@@ -539,7 +532,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c1cd55ed32bd2bb998eb",
         "54d8d6905a4c941656e68ac5"
@@ -644,7 +636,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5644a75c36ae567f29215587"
       ],
@@ -725,7 +716,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -784,7 +774,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -854,7 +843,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c09cab4511c37d2a6254"
       ],
@@ -936,7 +924,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -995,7 +982,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1057,7 +1043,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1116,7 +1101,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1180,7 +1164,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319c04d592a9182153db831"
       ],
@@ -1265,7 +1248,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1324,7 +1306,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1390,7 +1371,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319bfca9876ce6d4591c4b2"
       ],
@@ -1480,7 +1460,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319bfaa8ff351c22b123ad0"
       ],
@@ -1572,7 +1551,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
         "5319bfeb2d638eb411117815"
       ],
@@ -1643,7 +1621,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
@@ -1699,7 +1676,6 @@
         "due": null
       },
       "due": null,
-      "email": "trello@example.com",
       "idChecklists": [
 
       ],
