@@ -17,8 +17,13 @@
 
 class Settings
 
+<<<<<<< HEAD
   attr_accessor :developer_public_key, :member_token, :verbose, :raw,
                 :not_done_columns, :todo_column, :accepted_column_name_regex,
+=======
+  attr_accessor :developer_public_key, :member_token, :board_aliases, :verbose,
+                :raw, :not_done_columns, :todo_column,
+>>>>>>> master
                 :done_column_name_regex, :todo_column_name_regex
 
   def initialize config_file_path
@@ -27,6 +32,7 @@ class Settings
       @config = YAML.load_file(config_file_path)
 
       if @config
+<<<<<<< HEAD
         @developer_public_key       = @config["developer_public_key"]
         @member_token               = @config["member_token"]
         @not_done_columns           = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
@@ -34,6 +40,15 @@ class Settings
         @done_column_name_regex     = @config["done_column_name_regex"].freeze || /\ADone/
         @accepted_column_name_regex = @config["accepted_column_name_regex"].freeze || /\AAccepted/
         @todo_column_name_regex     = @config["todo_column_name_regex"].freeze || /\ATo Do\Z/
+=======
+        @developer_public_key   = @config["developer_public_key"]
+        @member_token           = @config["member_token"]
+        @board_aliases          = @config["board_aliases"] || {}
+        @not_done_columns       = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
+        @todo_column            = @config["todo_column"].freeze
+        @done_column_name_regex = @config["done_column_name_regex"].freeze || /\ADone/
+        @todo_column_name_regex = @config["todo_column_name_regex"].freeze || /\ATo Do\Z/
+>>>>>>> master
       else
         raise "Couldn't read config data from '#{config_file_path}'"
       end

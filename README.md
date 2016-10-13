@@ -57,6 +57,24 @@ To create a member token for the `set-priority` command use this URL instead:
 
 The board id is the cryptic string in the URL of your board.
 
+The `.trollolorc` file can also be used to set aliases for board ids. When set,
+you will be able to use the alias instead of the board-id in the various
+commands. E.g.
+
+With the following configuration
+
+```
+board_aliases:
+  MyTrelloBoard: 53186e8391ef8671265ebf9e
+
+```
+
+You can issue the command:
+
+```
+  trollolo get-cards --board-id=MyTrelloBoard
+```
+
 ## Creating burndown charts
 
 Trollolo implements a simple work flow for creating burndown charts from the
