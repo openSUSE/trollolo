@@ -34,6 +34,7 @@ require_relative 'burndown_data'
 require_relative 'backup'
 require_relative 'checklist'
 require_relative 'scrum'
+require_relative 'empty_column'
 
 class TrolloloError < StandardError
 end

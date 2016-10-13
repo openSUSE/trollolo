@@ -24,13 +24,11 @@ class ScrumBoard
   end
 
   def accepted_column
-    begin
-      accepted_columns = columns.select{|c| c.name =~ @settings.accepted_column_name_regex }
-      if accepted_columns.empty?
-        raise AcceptedColumnNotFoundError, "can't find accepted column by name regex #{@settings.accepted_column_name_regex}"
-      else
-        accepted_columns.max_by{|c| c.name.match(@settings.accepted_column_name_regex).captures.first.to_i }
-      end
+    accepted_columns = columns.select{|c| c.name =~ @settings.accepted_column_name_regex }
+    if accepted_columns.empty?
+      EmptyColumn.new
+    else
+      accepted_columns.max_by{|c| c.name.match(@settings.accepted_column_name_regex).captures.first.to_i }
     end
   end
 
