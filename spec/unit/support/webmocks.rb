@@ -19,6 +19,15 @@ def webmock_mapping
         "card_checklists" => "all"
       },
       file: 'full-board.json'
+    },
+    {
+      path: 'boards/P4kJA4bE',
+      parameters: {
+        "cards" => "open",
+        "lists" => "open",
+        "card_checklists" => "all"
+      },
+      file: 'full-board-with-accepted.json'
     }
   ]
 end
