@@ -17,8 +17,12 @@ class ScrumBoard
       done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
       if done_columns.empty?
         raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
+      end
+      current_numbered_done_column = done_columns.find { |c| c.name.include? $sprint_nr.to_s }
+      if current_numbered_done_column
+        current_numbered_done_column
       else
-        done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
+        done_columns.first
       end
     end
   end
