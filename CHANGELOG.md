@@ -4,6 +4,8 @@
 
 * `burndown-init` only requires the `--board-id` option. The `--output` option
   is optional and defaults to the current working directory. Fix #103.
+* Allow to define checklists that should not be parsed as task lists. Such lists
+  can be added in the trollolorc as `no_task_checklists`.
 
 ## Version 0.1.1
 

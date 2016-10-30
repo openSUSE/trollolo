@@ -5,6 +5,9 @@ not_done_columns:
   - Doing
   - In review
   - Sprint Backlog
+no_task_checklists:
+  - Definition of done
+  - Feedback
 scrum:
   board_names:
     planning: Planning Board

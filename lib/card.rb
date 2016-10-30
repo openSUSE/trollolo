@@ -46,7 +46,7 @@ class Card
   def done_tasks
     count = 0
     @card_data["checklists"].each do |checklist|
-      if checklist["name"] != "Feedback"
+      unless (@settings && @settings.no_task_checklists.include?(checklist["name"]))
         checklist["checkItems"].each do |checklist_item|
           if checklist_item["state"] == "complete"
             count += 1
@@ -60,7 +60,7 @@ class Card
   def tasks
     count = 0
     @card_data["checklists"].each do |checklist|
-      if checklist["name"] != "Feedback"
+      unless (@settings && @settings.no_task_checklists.include?(checklist["name"]))
         count += checklist["checkItems"].count
       end
     end

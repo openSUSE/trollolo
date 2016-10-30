@@ -49,6 +49,25 @@
   "idChecklists": [
     "5319c04d592a9182153db831"
   ],
+  "checklists": [
+    { "id": "5319c052d86da6cb6fa2a9e0",
+      "name": "Tasks",
+      "checkItems": [
+        { "name": "Task 1", "state": "complete"},
+        { "name": "Task 2", "state": "incomplete"},
+        { "name": "Task 3", "state": "incomplete"}
+      ]
+    },
+    {
+      "id": "5319c0562fef3bc511c79279",
+      "name": "Definition of done",
+      "checkItems": [
+        { "name": "DoD 1", "state": "complete"},
+        { "name": "DoD 2", "state": "complete"},
+        { "name": "DoD 3", "state": "inmplete"}
+      ]
+    }
+  ],
   "idMembers": [
 
   ],
