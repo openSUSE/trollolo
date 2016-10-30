@@ -85,11 +85,9 @@ class Card
   end
 
   def checklists
-    checklists = []
-    @card_data["checklists"].each do |checklist|
-      checklists.push(Checklist.new(checklist))
+    @card_data["checklists"].map do |checklist|
+      Checklist.new(checklist)
     end
-    checklists
   end
 
   def desc
