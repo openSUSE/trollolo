@@ -15,6 +15,7 @@
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 require 'trello'
+require 'erb'
 
 class TrelloWrapper < TrelloService
 
@@ -76,10 +77,10 @@ class TrelloWrapper < TrelloService
   end
 
   def set_description(card_id, description)
-    client.put("/cards/#{card_id}/desc?value=#{description}")
+    client.put("/cards/#{card_id}/desc?value=#{ERB::Util.url_encode(description)}")
   end
 
   def set_name(card_id, name)
-    client.put("/cards/#{card_id}/name?value=#{name}")
+    client.put("/cards/#{card_id}/name?value=#{ERB::Util.url_encode(name)}")
   end
 end
