@@ -5,7 +5,7 @@ describe Card do
   describe "parses name" do
     before(:each) do
       allow_any_instance_of(Card).to receive(:init_data)
-      @card = Card.new(double, double)
+      @card = Card.new(double, double, dummy_settings)
     end
 
     it "extracts single digit story point value from card name" do

@@ -20,12 +20,13 @@ class Card
   ESTIMATED_REGEX     = /\(([\d.]+)\)/
   SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
-  def initialize(board_data, card_id)
-    init_data(board_data, card_id)
+  def initialize(board_data, card_id, settings = nil)
+    init_data(board_data, card_id, settings)
   end
 
-  def init_data(board_data, card_id)
+  def init_data(board_data, card_id, settings = nil)
     @board_data = board_data
+    @settings = settings
     @card_data = @board_data["cards"].find{|c| c["id"] == card_id}
   end
 
