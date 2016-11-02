@@ -144,11 +144,6 @@ class ScrumBoard
   end
 
   def cards
-    return @cards if @cards
-    @cards = []
-    columns.each do |column|
-      @cards += column.cards
-    end
-    @cards
+    @cards ||= columns.map(&:cards).flatten
   end
 end
