@@ -17,7 +17,7 @@
 class Column
   def initialize(board_data, list_id)
     @board_data = board_data
-    @list_data = @board_data["lists"].select{|l| l["id"] == list_id}.first
+    @list_data = @board_data["lists"].find{|l| l["id"] == list_id}
   end
 
   def name

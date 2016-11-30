@@ -26,7 +26,7 @@ class Card
 
   def init_data(board_data, card_id)
     @board_data = board_data
-    @card_data = @board_data["cards"].select{|c| c["id"] == card_id}.first
+    @card_data = @board_data["cards"].find{|c| c["id"] == card_id}
   end
 
   def as_json
