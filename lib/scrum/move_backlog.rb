@@ -16,10 +16,10 @@ module Scrum
       fail "backlog list not found on planning board" unless @planning_board.backlog_list
 
       @waterline_card = @planning_board.waterline_card
-      fail "backlog list on planning board is missing waterline or seabed card"  unless @waterline_card
+      fail "backlog list on planning board is missing waterline or seabed card" unless @waterline_card
 
       @seabed_card = @planning_board.seabed_card
-      fail "backlog list on planning board is missing waterline or seabed card"  unless @seabed_card
+      fail "backlog list on planning board is missing waterline or seabed card" unless @seabed_card
     end
 
     def inspect_backlog

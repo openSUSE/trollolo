@@ -20,7 +20,7 @@ module Scrum
     def update_priorities(list)
       n = 1
       list.cards.each do |card|
-        next if card.name =~ /waterline/i
+        next if card.card_labels.any? { |label| label["name"] == "Sticky" }
         card.priority = n
         trello.set_name(card.id, card.name)
         puts %(set priority to #{n} for "#{card.name}")
