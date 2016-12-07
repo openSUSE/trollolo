@@ -1,5 +1,9 @@
 module Scrum
   module CardTypeDetection
+    def sticky?(card)
+      card.labels.any? { |l| l.name == "Sticky" }
+    end
+
     def waterline?(card)
       card.name =~ /w.?a.?t.?e.?r.?l.?i.?n.?e/i
     end

@@ -9,10 +9,6 @@ class TrelloService
     return board, board.lists.find { |l| l.name == name }
   end
 
-  def sticky?(card)
-    card.labels.any? { |l| l.name == "Sticky" }
-  end
-
   protected
 
   def init_trello

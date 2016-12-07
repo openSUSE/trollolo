@@ -324,8 +324,8 @@ EOT
 
   desc "sprint-cleanup", "Move remaining cards to backlog"
   long_desc <<EOT
-  After the sprint, move remaining cards from 'Sprint Backlog' and 'Doing'
-  back to the planning board into the 'Ready' list.
+  After the sprint, move remaining cards from 'Sprint Backlog', 'Doing'
+  and 'QA' lists back to the planning board into the 'Ready' list.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
   option "target-board-id", :desc => "Id of the target board", :required => true
