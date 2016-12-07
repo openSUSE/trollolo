@@ -333,7 +333,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    s = Scrum::SprintCleanup.new(@@settings)
+    s = Scrum::SprintCleaner.new(@@settings)
     s.cleanup(board_id(options["board-id"]),
               board_id(options["target-board-id"]))
   end
