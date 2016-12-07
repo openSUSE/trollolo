@@ -18,7 +18,6 @@
 class Card
   # Assuming we have card titles as follows '(8) This is the card name'
   ESTIMATED_REGEX     = /\(([\d.]+)\)/
-  PRIORITY_REGEX      = /^(?:\([\d.]+\) )?P(\d+): /
   SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
   def initialize(board_data, card_id)
@@ -41,19 +40,6 @@ class Card
   def story_points
     return 0.0 unless estimated?
     name.match(ESTIMATED_REGEX).captures.first.to_f
-  end
-
-  def priority
-    return unless m = name.match(PRIORITY_REGEX)
-    m.captures.first.to_i
-  end
-
-  def priority=(n)
-    if priority
-      @card_data["name"].sub!(/P\d+: /, "P#{n}: ")
-    else
-      @card_data["name"] = "P#{n}: #{name}"
-    end
   end
 
   def done_tasks
