@@ -1,5 +1,5 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require "simplecov"
+SimpleCov.start
 require_relative '../../lib/trollolo'
 require 'given_filesystem/spec_helpers'
 require 'webmock/rspec'
