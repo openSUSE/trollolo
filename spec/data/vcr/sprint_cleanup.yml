@@ -579,7 +579,7 @@ http_interactions:
         Expires=Sun, 11 Dec 2016 13:18:36 GMT; Secure
     body:
       encoding: UTF-8
-      string: '[{"id":"57a78bc5980cdceb09195dc9","name":"Backlog Backup","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":36863,"subscribed":false},{"id":"57ab15db6568cc9735820ee3","name":"Backlog","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":84863,"subscribed":false},{"id":"577b6e75ce0f88ec9af823c0","name":"Done","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":131071,"subscribed":false},{"id":"577b6e78ef9a4b2cb2f08ed0","name":"Doing","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":196607,"subscribed":false},{"id":"578e03cf104153b060cc27bd","name":"Ready","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":344063,"subscribed":false}]'
+      string: '[{"id":"57a78bc5980cdceb09195dc9","name":"Backlog Backup","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":36863,"subscribed":false},{"id":"57ab15db6568cc9735820ee3","name":"Backlog","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":84863,"subscribed":false},{"id":"577b6e75ce0f88ec9af823c0","name":"Done","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":131071,"subscribed":false},{"id":"577b6e78ef9a4b2cb2f08ed0","name":"Doing","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":196607,"subscribed":false},{"id":"578e03cf104153b060cc27bd","name":"Ready for Estimation","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":344063,"subscribed":false}]'
     http_version:
   recorded_at: Thu, 08 Dec 2016 13:18:36 GMT
 - request:
@@ -2344,7 +2344,7 @@ http_interactions:
         Expires=Sun, 11 Dec 2016 13:19:39 GMT; Secure
     body:
       encoding: UTF-8
-      string: '[{"id":"57a78bc5980cdceb09195dc9","name":"Backlog Backup","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":36863,"subscribed":false},{"id":"57ab15db6568cc9735820ee3","name":"Backlog","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":84863,"subscribed":false},{"id":"577b6e75ce0f88ec9af823c0","name":"Done","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":131071,"subscribed":false},{"id":"577b6e78ef9a4b2cb2f08ed0","name":"Doing","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":196607,"subscribed":false},{"id":"578e03cf104153b060cc27bd","name":"Ready","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":344063,"subscribed":false}]'
+      string: '[{"id":"57a78bc5980cdceb09195dc9","name":"Backlog Backup","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":36863,"subscribed":false},{"id":"57ab15db6568cc9735820ee3","name":"Backlog","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":84863,"subscribed":false},{"id":"577b6e75ce0f88ec9af823c0","name":"Done","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":131071,"subscribed":false},{"id":"577b6e78ef9a4b2cb2f08ed0","name":"Doing","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":196607,"subscribed":false},{"id":"578e03cf104153b060cc27bd","name":"Ready for Estimation","closed":false,"idBoard":"577b6e6e00d1313a68d3a60a","pos":344063,"subscribed":false}]'
     http_version:
   recorded_at: Thu, 08 Dec 2016 13:19:39 GMT
 - request:
