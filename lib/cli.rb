@@ -333,7 +333,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    s = Scrum::SprintCleanup.new(@@settings)
+    s = Scrum::SprintCleaner.new(@@settings)
     s.cleanup(board_id(options["board-id"]),
               board_id(options["target-board-id"]))
   end
@@ -349,7 +349,7 @@ EOT
     process_global_options options
     require_trello_credentials
 
-    m = Scrum::MoveBacklog.new(@@settings)
+    m = Scrum::BacklogMover.new(@@settings)
     m.move(options["planning-board-id"], options["sprint-board-id"])
   end
 

@@ -1,6 +1,6 @@
 require_relative "../spec_helper"
 
-describe Scrum::MoveBacklog do
+describe Scrum::BacklogMover do
   subject { described_class.new(dummy_settings) }
 
   it "creates new move backlog" do

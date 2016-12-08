@@ -1,5 +1,5 @@
 module Scrum
-  class SprintCleanup < TrelloService
+  class SprintCleaner < TrelloService
     SOURCE_LISTS = ["Sprint Backlog", "Doing"]
     TARGET_LIST = "Ready"
 

@@ -1,6 +1,6 @@
 require_relative "../spec_helper"
 
-describe Scrum::SprintCleanup do
+describe Scrum::SprintCleaner do
   subject { described_class.new(dummy_settings) }
 
   it "creates new sprint cleanup" do

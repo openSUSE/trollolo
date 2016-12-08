@@ -1,5 +1,5 @@
 module Scrum
-  class MoveBacklog < TrelloService
+  class BacklogMover < TrelloService
     def move(planning_board_id, sprint_board_id)
       setup(planning_board_id, sprint_board_id)
       inspect_backlog
