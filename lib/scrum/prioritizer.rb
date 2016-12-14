@@ -1,7 +1,9 @@
 module Scrum
   class Prioritizer < TrelloService
+    include ScrumBoards
+
     def prioritize(board_id)
-      @board = SprintPlanningBoard.new.setup(board_id)
+      @board = planning_board(board_id)
       fail "list named 'Backlog' not found on board" unless @board.backlog_list
       update_priorities
     end

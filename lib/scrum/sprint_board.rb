@@ -2,8 +2,9 @@ module Scrum
   class SprintBoard
     include CardTypeDetection
 
-    def initialize
+    def initialize(settings)
       @under_waterline = false
+      @settings = settings
     end
     attr_reader :backlog_list
 
@@ -13,15 +14,7 @@ module Scrum
     end
 
     def backlog_list_name
-      "Sprint Backlog"
-    end
-
-    def qa_list_name
-      "QA"
-    end
-
-    def doing_list_name
-      "Doing"
+      @settings.list_names["sprint_backlog"]
     end
 
     def doing_list
@@ -46,11 +39,18 @@ module Scrum
       place_card_at_bottom(seabed_card, planning_seabed_card)
     end
 
+    def find_waterline_label(labels)
+      labels.find do |label|
+        label.name == waterline_label_name ||
+          label.name =~ /waterline/i
+      end
+    end
+
     private
 
     def under_waterline_label
-      @label ||= @board.labels.find { |label| label.name =~ /under waterline/i }
-      @label ||= Trello::Label.create(name: 'Under waterline')
+      @label ||= find_waterline_label(@board.labels)
+      @label ||= Trello::Label.create(name: waterline_label_name)
     end
 
     def add_waterline_label(original_card)
@@ -66,6 +66,18 @@ module Scrum
       else
         planning_card.move_to_board(@board, @backlog_list)
       end
+    end
+
+    def waterline_label_name
+      @settings.label_names["waterline"]
+    end
+
+    def qa_list_name
+      @settings.list_names["sprint_qa"]
+    end
+
+    def doing_list_name
+      @settings.list_names["sprint_doing"]
     end
   end
 end
