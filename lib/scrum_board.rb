@@ -41,7 +41,7 @@ class ScrumBoard
   end
 
   def open_cards
-    open_columns.map{|col| col.committed_cards}.flatten
+    open_columns.map(&:committed_cards).flatten
   end
 
   def committed_cards
@@ -78,7 +78,7 @@ class ScrumBoard
   end
 
   def extra_open_cards
-    open_columns.map{|col| col.cards.select{|c| c.extra?}}.flatten
+    open_columns.map{|col| col.cards.select(&:extra?) }.flatten
   end
 
   def extra_open_story_points
@@ -107,7 +107,7 @@ class ScrumBoard
   end
 
   def unplanned_open_cards
-    open_columns.map{|col| col.cards.select{|c| c.unplanned?}}.flatten
+    open_columns.map{|col| col.cards.select(&:unplanned?) }.flatten
   end
 
   def unplanned_open_story_points
@@ -136,7 +136,7 @@ class ScrumBoard
   end
 
   def meta_cards
-    scrum_cards.select{|c| c.meta_card? }
+    scrum_cards.select(&:meta_card?)
   end
 
   def id
