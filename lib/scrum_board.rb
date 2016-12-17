@@ -13,13 +13,11 @@ class ScrumBoard
   end
 
   def done_column
-    begin
-      done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
-      if done_columns.empty?
-        raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
-      else
-        done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
-      end
+    done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
+    if done_columns.empty?
+      raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
+    else
+      done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
     end
   end
 
