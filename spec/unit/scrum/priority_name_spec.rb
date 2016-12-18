@@ -1,7 +1,7 @@
 require_relative "../spec_helper"
 
 describe Scrum::PriorityName do
-  let(:priority_name) { Scrum::PriorityName.new }
+  let(:priority_name) { Scrum::PriorityName }
 
   describe "parses name" do
     it "extracts priority number from card name" do
@@ -30,12 +30,6 @@ describe Scrum::PriorityName do
       expect(
         priority_name.build("(0.5) P1: Refactor cards", 4)
       ).to eq("(0.5) P4: Refactor cards")
-    end
-
-    it "adds priority after story points" do
-      expect(
-        priority_name.build("(0.5) P1: Refactor cards", 5)
-      ).to eq("(0.5) P5: Refactor cards")
     end
   end
 end
