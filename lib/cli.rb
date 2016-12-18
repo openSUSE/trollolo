@@ -295,17 +295,17 @@ EOT
 
   desc "set-priorities", "Set priority text into card titles"
   long_desc <<EOT
-  Add 'P<n>: ' to the beginning of every cards title, replace where
-  already present. n is the current position of the list on the card.
+  Add 'P<n>: ' to the beginning of every cards title in the 'Backlog' list,
+  replace where already present. n is the current position of the list on
+  the card.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
-  option "list-name", :desc => "Name of the list", :required => true
   def set_priorities
     process_global_options options
     require_trello_credentials
 
     p = Scrum::Prioritizer.new(@@settings)
-    p.prioritize(board_id(options["board-id"]), options["list-name"])
+    p.prioritize(board_id(options["board-id"]))
   end
 
   desc "list-member-boards", "List name and id of all boards"
@@ -324,8 +324,8 @@ EOT
 
   desc "sprint-cleanup", "Move remaining cards to backlog"
   long_desc <<EOT
-  After the sprint, move remaining cards from 'Sprint Backlog' and 'Doing'
-  back to the planning board into the 'Ready' list.
+  After the sprint, move remaining cards from 'Sprint Backlog', 'Doing'
+  and 'QA' lists back to the planning board into the 'Ready' list.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
   option "target-board-id", :desc => "Id of the target board", :required => true

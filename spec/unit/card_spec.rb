@@ -23,49 +23,9 @@ describe Card do
       expect(@card.story_points).to eq(0.5)
     end
 
-    it "extracts priority number from card name" do
-      allow(@card).to receive(:name).and_return "(0.5) P1: Refactor cards"
-      expect(@card.priority).to eq(1)
-    end
-
     it "extracts story points when value is not at beginning of card name" do
       allow(@card).to receive(:name).and_return "P01: (3) Refactor cards"
       expect(@card.story_points).to eq(3)
-    end
-
-    it "extracts priority number from card name if it is at the beginning " do
-      allow(@card).to receive(:name).and_return "P01: (3) Refactor cards"
-      expect(@card.priority).to eq(1)
-    end
-  end
-
-  describe "updates priority" do
-    before(:each) do
-      @card = Card.new({"cards" => [{ "id" => "mycard" }]}, "mycard")
-    end
-
-    it "updates existing priority in title" do
-      @card.name = "P01: (3) Refactor cards"
-      @card.priority = 3
-      expect(@card.name).to eq("P3: (3) Refactor cards")
-    end
-
-    it "adds new priority text to title" do
-      @card.name = "(3) Refactor cards"
-      @card.priority = 4
-      expect(@card.name).to eq("P4: (3) Refactor cards")
-    end
-
-    it "updates priority after story points" do
-      @card.name = "(0.5) P1: Refactor cards"
-      @card.priority = 4
-      expect(@card.name).to eq("(0.5) P4: Refactor cards")
-    end
-
-    it "adds priority after story points" do
-      @card.name = "(0.5) P1: Refactor cards"
-      @card.priority = 5
-      expect(@card.name).to eq("(0.5) P5: Refactor cards")
     end
   end
 

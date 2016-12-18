@@ -8,7 +8,7 @@ describe Scrum::SprintCleaner do
   end
 
   it "moves remaining cards to target board", vcr: "sprint_cleanup", vcr_record: false do
-    expect(STDOUT).to receive(:puts).exactly(5).times
-    expect(subject.cleanup("GVMQz9dx", "neUHHzDo")).to be
+    expect(STDOUT).to receive(:puts).exactly(12).times
+    expect(subject.cleanup("NzGCbEeN", "neUHHzDo")).to be
   end
 end

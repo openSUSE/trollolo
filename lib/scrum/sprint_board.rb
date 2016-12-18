@@ -16,6 +16,22 @@ module Scrum
       "Sprint Backlog"
     end
 
+    def qa_list_name
+      "QA"
+    end
+
+    def doing_list_name
+      "Doing"
+    end
+
+    def doing_list
+      @doing_list ||= @board.lists.find { |l| l.name == doing_list_name }
+    end
+
+    def qa_list
+      @qa_list ||= @board.lists.find { |l| l.name == qa_list_name }
+    end
+
     def receive(card)
       card.move_to_board(@board, @backlog_list)
       add_waterline_label(card) if @under_waterline

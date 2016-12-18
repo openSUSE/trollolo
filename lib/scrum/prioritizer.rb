@@ -1,36 +1,22 @@
 module Scrum
-  class Prioritizer
-
-    def initialize(settings)
-      @settings = settings
-    end
-
-    def prioritize(board_id, list_name)
-      list = find_list(board_id, list_name)
-      fail "list not found on board" unless list
-      update_priorities(list)
+  class Prioritizer < TrelloService
+    def prioritize(board_id)
+      @board = SprintPlanningBoard.new.setup(board_id)
+      fail "list named 'Backlog' not found on board" unless @board.backlog_list
+      update_priorities
     end
 
     private
 
-    def trello
-      @trello ||= TrelloWrapper.new(@settings)
-    end
-
-    def update_priorities(list)
+    def update_priorities
       n = 1
-      list.cards.each do |card|
-        next if card.name =~ /waterline/i
-        card.priority = n
-        trello.set_name(card.id, card.name)
+      @board.backlog_cards.each do |card|
+        next if @board.sticky?(card) || @board.waterline?(card)
         puts %(set priority to #{n} for "#{card.name}")
+        card.name = PriorityName.build(card.name, n)
+        card.save
         n += 1
       end
-    end
-
-    def find_list(board_id, list_name)
-      board = trello.board(board_id)
-      board.columns.find { |list| list.name == list_name }
     end
   end
 end

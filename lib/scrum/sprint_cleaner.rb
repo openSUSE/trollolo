@@ -1,15 +1,16 @@
 module Scrum
   class SprintCleaner < TrelloService
-    SOURCE_LISTS = ["Sprint Backlog", "Doing"]
-    TARGET_LIST = "Ready"
+    TARGET_LIST = "Ready for Estimation"
 
     def cleanup(board_id, target_board_id)
-      @board = Trello::Board.find(board_id)
+      @board = SprintBoard.new.setup(board_id)
+      fail "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
       @target_board = Trello::Board.find(target_board_id)
+      fail "ready list '#{TARGET_LIST}' not found on planning board" unless target_list
 
-      SOURCE_LISTS.each do |list_name|
-        move_cards(@board.lists.find { |l| l.name == list_name })
-      end
+      move_cards(@board.backlog_list)
+      move_cards(@board.doing_list) if @board.doing_list
+      move_cards(@board.qa_list) if @board.qa_list
     end
 
     private
@@ -29,7 +30,7 @@ module Scrum
 
     def move_cards(source_list)
       source_list.cards.each do |card|
-        next if sticky?(card)
+        next if @board.sticky?(card)
         puts %(moving card "#{card.name}" to list "#{target_list.name}")
         card.members.each { |member| card.remove_member(member) }
         remove_waterline_label(card)
