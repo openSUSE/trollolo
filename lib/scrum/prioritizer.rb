@@ -9,12 +9,11 @@ module Scrum
     private
 
     def update_priorities
-      priority_name = PriorityName.new
       n = 1
       @board.backlog_cards.each do |card|
         next if @board.sticky?(card) || @board.waterline?(card)
         puts %(set priority to #{n} for "#{card.name}")
-        card.name = priority_name.build(card.name, n)
+        card.name = PriorityName.build(card.name, n)
         card.save
         n += 1
       end
