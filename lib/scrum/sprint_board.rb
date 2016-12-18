@@ -25,11 +25,11 @@ module Scrum
     end
 
     def doing_list
-      @board.lists.find { |l| l.name == doing_list_name }
+      @doing_list ||= @board.lists.find { |l| l.name == doing_list_name }
     end
 
     def qa_list
-      @board.lists.find { |l| l.name == qa_list_name }
+      @qa_list ||= @board.lists.find { |l| l.name == qa_list_name }
     end
 
     def receive(card)
