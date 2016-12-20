@@ -335,14 +335,14 @@ EOT
     p.prioritize(board_id(options["board-id"]))
   end
 
-  desc "sprint-cleanup", "Move remaining cards to backlog"
+  desc "cleanup-sprint", "Move remaining cards to the planning board"
   long_desc <<EOT
   After the sprint, move remaining cards from 'Sprint Backlog', 'Doing'
   and 'QA' lists back to the planning board into the 'Ready' list.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
   option "target-board-id", :desc => "Id of the target board", :required => true
-  def sprint_cleanup
+  def cleanup_sprint
     process_global_options options
     require_trello_credentials
 

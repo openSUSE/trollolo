@@ -2,8 +2,9 @@
 
 ## Version 0.0.10.pre
 
+* Rename `sprint-cleanup` to `cleanup-sprint`.
 * Configure board, list and label names to trollolorc. The commands
-  `sprint-cleanup`, `move-backlog`, `set-priorities` and `setup-scrum` will use
+  `cleanup-sprint`, `move-backlog`, `set-priorities` and `setup-scrum` will use
   these names. You will still need to provide board IDs, or their aliases, as
   several boards can share the same name.
 * Add `setup-scrum` command to create all necessary elements of our scrumb board

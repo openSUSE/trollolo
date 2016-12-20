@@ -206,7 +206,7 @@ Lookup the ID of the created boards and use them as arguments:
     # https://trello.com/b/123abC/sprint-board
     # https://trello.com/b/GHi456/planning-board
 
-    trollolo sprint-cleanup --board-id=123abC --target-board-id=GHi456
+    trollolo cleanup-sprint --board-id=123abC --target-board-id=GHi456
     trollolo set-priorities --board-id=GHi456
     trollolo move-backlog --planning-board-id=GHi456 --sprint-board-id=123abC
 
