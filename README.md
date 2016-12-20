@@ -148,6 +148,70 @@ Some more info can be found in the command line help with `trollolo help` and
 
 ![Burndown example](https://raw.githubusercontent.com/openSUSE/trollolo/master/examples/burndown-26.png)
 
+## Other SCRUM commands
+
+Trollolo supports SCRUM on Trello by using one board for the sprint and another one for planning.
+On these boards several lists are used to organize stories.
+
+The `setup-scrum` command creates the necessary elements. The names are taken from the configuration.
+If you change the names in Trello, you need to update theconfiguration in `trollolorc`.
+
+At the end of a sprint, after the review meeting, remaining cards can be moved back to the planning
+board with `cleanup-sprint`.
+Once the sprint backlog is ready, priorities can be added to the card titles with `prioritize`.
+Move the planning backlog to the sprint board with `move-backlog`.
+
+### Labels
+
+* `sticky`: used to mark cards which are not moved, like the goal card
+* `waterline`: for cards which are under the waterline
+
+### Lists
+
+* `sprint_backlog`: this list contains the stories of the current sprint
+* `sprint_qa`: any cards in the current sprint which need QA
+* `sprint_doing`: cards currently being worked on
+* `planning_backlog`: used to plan the next sprint, these cards will be prioritized
+* `planning_ready`: contains cards which are not yet estimated and therefore not in the backlog
+
+### Default Configuration
+
+These are the default names, add this to `trollolorc` and change as necessary.
+
+    scrum:
+      board_names:
+        planning: Planning Board
+        sprint: Sprint Board
+      label_names:
+        sticky: Sticky
+        waterline: Waterline
+      list_names:
+        sprint_backlog: Sprint Backlog
+        sprint_qa: QA
+        sprint_doing: Doing
+        planning_backlog: Backlog
+        planning_ready: Ready for Estimation
+
+The board names are not used to find the boards on trello.
+Since several boards can share the same name, they are only used when creating the SCRUM setup.
+
+### Examples
+
+Create the boards and lists:
+
+    trollolo setup-scrum
+
+Lookup the ID of the created boards and use them as arguments:
+
+    # https://trello.com/b/123abC/sprint-board
+    # https://trello.com/b/GHi456/planning-board
+
+    trollolo sprint-cleanup --board-id=123abC --target-board-id=GHi456
+    trollolo set-priorities --board-id=GHi456
+    trollolo move-backlog --planning-board-id=GHi456 --sprint-board-id=123abC
+
+You can use aliases, as described in the configuration section, instead of IDs.
+
 ## Updating VCR specs
 
 Some specs use VCR to reply with stored Trello API replies. The specs are annotated with `vcr:` and `vcr_record:`. To
