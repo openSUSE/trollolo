@@ -62,7 +62,6 @@ module Scrum
       if existing_card
         existing_card.pos = 'bottom'
         existing_card.save
-        planning_card.delete
       else
         planning_card.move_to_board(@board, @backlog_list)
       end
