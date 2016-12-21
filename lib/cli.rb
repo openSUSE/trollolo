@@ -351,7 +351,7 @@ EOT
               board_id(options["target-board-id"]))
   end
 
-  desc "move-backlog", "Move the product backlog to the planning board"
+  desc "move-backlog", "Move the planning backlog to the sprint board"
   long_desc <<-EOT
   Two separate boards are used, a planning board and a sprint board for the
   current sprint.
