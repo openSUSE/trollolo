@@ -365,7 +365,7 @@ EOT
     require_trello_credentials
 
     m = Scrum::BacklogMover.new(@@settings)
-    m.move(options["planning-board-id"], options["sprint-board-id"])
+    m.move(board_id(options["planning-board-id"]), board_id(options["sprint-board-id"]))
   end
 
   private
