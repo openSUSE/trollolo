@@ -293,6 +293,33 @@ EOT
     trello.make_cover(options["card-id"], filename)
   end
 
+  desc "list-member-boards", "List name and id of all boards"
+  option "member-id", :desc => "Id of the member", :required => true
+  def list_member_boards
+    process_global_options options
+    require_trello_credentials
+
+    trello = TrelloWrapper.new(@@settings)
+    trello.get_member_boards(options["member-id"]).sort_by { |board|
+      board["name"]
+    }.each { |board|
+      puts "#{board["name"]} - #{board["id"]}"
+    }
+  end
+
+  desc "setup-scrum", "Create necessary elements of our SCRUM setup"
+  long_desc <<-EOT
+  Will create board, lists and labels with names as configured in trollolorc,
+  or use the defaults.
+  EOT
+  def setup_scrum
+    process_global_options options
+    require_trello_credentials
+
+    c = Scrum::Creator.new(@@settings)
+    c.create
+  end
+
   desc "set-priorities", "Set priority text into card titles"
   long_desc <<EOT
   Add 'P<n>: ' to the beginning of every cards title in the 'Backlog' list,
@@ -308,28 +335,14 @@ EOT
     p.prioritize(board_id(options["board-id"]))
   end
 
-  desc "list-member-boards", "List name and id of all boards"
-  option "member-id", :desc => "Id of the member", :required => true
-  def list_member_boards
-    process_global_options options
-    require_trello_credentials
-
-    trello = TrelloWrapper.new(@@settings)
-    trello.get_member_boards(options["member-id"]).sort_by { |board|
-      board["name"]
-    }.each { |board|
-      puts "#{board["name"]} - #{board["id"]}"
-    }
-  end
-
-  desc "sprint-cleanup", "Move remaining cards to backlog"
+  desc "cleanup-sprint", "Move remaining cards to the planning board"
   long_desc <<EOT
   After the sprint, move remaining cards from 'Sprint Backlog', 'Doing'
   and 'QA' lists back to the planning board into the 'Ready' list.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
   option "target-board-id", :desc => "Id of the target board", :required => true
-  def sprint_cleanup
+  def cleanup_sprint
     process_global_options options
     require_trello_credentials
 
@@ -338,10 +351,12 @@ EOT
               board_id(options["target-board-id"]))
   end
 
-  desc "move-backlog", "Move the product backlog to the planning board"
+  desc "move-backlog", "Move the planning backlog to the sprint board"
   long_desc <<-EOT
-  Two separate boards are used, a planning board and a sprint board for the current sprint.
-  After each planning meeting the cards are moved from the planning boards 'Backlog' list to the sprint boards 'Sprint Backlog' list.
+  Two separate boards are used, a planning board and a sprint board for the
+  current sprint.
+  After each planning meeting the cards are moved from the planning boards
+  'Backlog' list to the sprint boards 'Sprint Backlog' list.
   EOT
   option "planning-board-id", desc: "Id of the planning board", required: true
   option "sprint-board-id", desc: "Id of the sprint board", required: true
@@ -350,7 +365,7 @@ EOT
     require_trello_credentials
 
     m = Scrum::BacklogMover.new(@@settings)
-    m.move(options["planning-board-id"], options["sprint-board-id"])
+    m.move(board_id(options["planning-board-id"]), board_id(options["sprint-board-id"]))
   end
 
   private

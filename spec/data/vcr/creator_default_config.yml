@@ -1,0 +1,824 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.trello.com/1/boards?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Sprint%20Board
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '19'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805652919'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '760'
+      Etag:
+      - W/"2f8-2c04b7e5"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:52 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f54314dfadfe96ab6db","name":"Sprint Board","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/kvmkTeKt/sprint-board","shortUrl":"https://trello.com/b/kvmkTeKt","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""}}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:57 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Sprint%20Backlog&closed=false&idBoard=58528f54314dfadfe96ab6db&pos=&idListSource=
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '86'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805653163'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '120'
+      Etag:
+      - W/"78-943f1122"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f55a3a704dcda4697f8","name":"Sprint Backlog","closed":false,"idBoard":"58528f54314dfadfe96ab6db","pos":8192}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:57 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=QA&closed=false&idBoard=58528f54314dfadfe96ab6db&pos=&idListSource=
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '72'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805653414'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Etag:
+      - W/"6c-a45999a0"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f55824b7cd2e1b86c20","name":"QA","closed":false,"idBoard":"58528f54314dfadfe96ab6db","pos":4096}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:57 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Doing&closed=false&idBoard=58528f54314dfadfe96ab6db&pos=&idListSource=
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '75'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805654194'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '111'
+      Etag:
+      - W/"6f-958ba540"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:54 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f559ddc0b5538c78a82","name":"Doing","closed":false,"idBoard":"58528f54314dfadfe96ab6db","pos":2048}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:58 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Sticky&color=&idBoard=58528f54314dfadfe96ab6db
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '51'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805654439'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Etag:
+      - W/"6c-607e883f"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:54 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f5671f929225f27b6c1","idBoard":"58528f54314dfadfe96ab6db","name":"Sticky","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:58 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Seabed&color=&idBoard=58528f54314dfadfe96ab6db
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '51'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805654665'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Etag:
+      - W/"6c-1aa5c07d"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:54 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f56b8c2099aab4b2644","idBoard":"58528f54314dfadfe96ab6db","name":"Seabed","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:58 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Under%20waterline&color=&idBoard=58528f54314dfadfe96ab6db
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '62'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805655068'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '117'
+      Etag:
+      - W/"75-e900568a"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:55 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f561e93e3e9e9bd00d3","idBoard":"58528f54314dfadfe96ab6db","name":"Under
+        waterline","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:59 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/boards?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Planning%20Board
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '21'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805655326'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '764'
+      Etag:
+      - W/"2fc-c52c7bb4"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:55 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f57bd62cab95263d9fb","name":"Planning Board","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/M9zXeYlD/planning-board","shortUrl":"https://trello.com/b/M9zXeYlD","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""}}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:59 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Backlog&closed=false&idBoard=58528f57bd62cab95263d9fb&pos=&idListSource=
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '77'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805655635'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '113'
+      Etag:
+      - W/"71-b088b572"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:55 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f574b6aa9d8ab64fcdb","name":"Backlog","closed":false,"idBoard":"58528f57bd62cab95263d9fb","pos":8192}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:40:59 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Ready%20for%20Estimation&closed=false&idBoard=58528f57bd62cab95263d9fb&pos=&idListSource=
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '94'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805655894'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '126'
+      Etag:
+      - W/"7e-b82eaf8d"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:55 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f57d95462eff9c256f8","name":"Ready for Estimation","closed":false,"idBoard":"58528f57bd62cab95263d9fb","pos":4096}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:41:00 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Sticky&color=&idBoard=58528f57bd62cab95263d9fb
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '51'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805656152'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Etag:
+      - W/"6c-feaa33b6"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f58fffa6765389a653a","idBoard":"58528f57bd62cab95263d9fb","name":"Sticky","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:41:00 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Seabed&color=&idBoard=58528f57bd62cab95263d9fb
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '51'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805656397'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '108'
+      Etag:
+      - W/"6c-c630d274"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f583ec84cd38d40bd7d","idBoard":"58528f57bd62cab95263d9fb","name":"Seabed","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:41:00 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Under%20waterline&color=&idBoard=58528f57bd62cab95263d9fb
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '62'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=15768000
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - DENY
+      X-Trello-Version:
+      - 1.830.0
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Server-Time:
+      - '1481805656640'
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '117'
+      Etag:
+      - W/"75-17430a65"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Thu, 15 Dec 2016 12:40:56 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"58528f58b3b2cd9ea0934ae5","idBoard":"58528f57bd62cab95263d9fb","name":"Under
+        waterline","color":null,"uses":0}'
+    http_version: 
+  recorded_at: Thu, 15 Dec 2016 12:41:00 GMT
+recorded_with: VCR 3.0.3

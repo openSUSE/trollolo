@@ -5,3 +5,16 @@ not_done_columns:
   - Doing
   - In review
   - Sprint Backlog
+scrum:
+  board_names:
+    planning: Planning Board
+    sprint: Sprint Board
+  label_names:
+    sticky: Sticky
+    waterline: Waterline
+  list_names:
+    sprint_backlog: Sprint Backlog
+    sprint_qa: QA
+    sprint_doing: Doing
+    planning_backlog: Backlog
+    planning_ready: Ready for Estimation

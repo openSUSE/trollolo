@@ -1,8 +1,8 @@
 require_relative "../spec_helper"
 
 describe Scrum::SprintBoard do
-  subject!(:sprint_board) { described_class.new }
-  let!(:planning_board) { Scrum::SprintPlanningBoard.new }
+  subject!(:sprint_board) { described_class.new(dummy_settings.scrum) }
+  let!(:planning_board) { Scrum::SprintPlanningBoard.new(dummy_settings.scrum) }
 
   before(:each) do
     TrelloService.new(dummy_settings)

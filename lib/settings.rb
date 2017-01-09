@@ -19,7 +19,7 @@ class Settings
 
   attr_accessor :developer_public_key, :member_token, :board_aliases, :verbose,
                 :raw, :not_done_columns, :todo_column, :accepted_column_name_regex,
-                :done_column_name_regex, :todo_column_name_regex
+                :done_column_name_regex, :todo_column_name_regex, :scrum
 
   def initialize config_file_path
     @config_file_path = config_file_path
@@ -30,6 +30,7 @@ class Settings
         @developer_public_key       = @config["developer_public_key"]
         @member_token               = @config["member_token"]
         @board_aliases              = @config["board_aliases"] || {}
+        @scrum                      = OpenStruct.new(@config["scrum"] || scrum_defaults)
         @not_done_columns           = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
         @todo_column                = @config["todo_column"].freeze
         @done_column_name_regex     = @config["done_column_name_regex"].freeze || /\ADone/
@@ -58,4 +59,25 @@ class Settings
     Trollolo::VERSION
   end
 
+  private
+
+  def scrum_defaults
+    {
+      "board_names" => {
+        "planning" => "Planning Board",
+        "sprint" => "Sprint Board"
+      },
+      "label_names" => {
+        "sticky" => "Sticky",
+        "waterline" => "Under waterline"
+      },
+      "list_names" => {
+        "sprint_backlog" => "Sprint Backlog",
+        "sprint_qa" => "QA",
+        "sprint_doing" => "Doing",
+        "planning_backlog" => "Backlog",
+        "planning_ready" => "Ready for Estimation"
+      },
+    }.freeze
+  end
 end
