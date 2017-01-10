@@ -47,6 +47,26 @@ describe TrelloWrapper do
     end
   end
 
+  describe '#backup' do
+    it 'raises an error for empty board id' do
+      expect { subject.backup("") }.to raise_error(TrolloloError)
+    end
+
+    it 'raises an error for nil board id' do
+      expect { subject.backup(nil) }.to raise_error(TrolloloError)
+    end
+  end
+
+  describe '#retrieve_board_data' do
+    it 'raises error when board id is empty' do
+      expect { subject.retrieve_board_data('') }.to raise_error(TrolloloError)
+    end
+
+    it 'raises error when board id is nil' do
+      expect { subject.retrieve_board_data(nil) }.to raise_error(TrolloloError)
+    end
+  end
+
   describe '#add_attachment' do
     use_given_filesystem
 

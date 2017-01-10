@@ -19,13 +19,7 @@ require 'trello'
 class TrelloWrapper < TrelloService
 
   attr_accessor :board
-
-  def client
-    Trello::Client.new(
-      developer_public_key: @settings.developer_public_key,
-      member_token: @settings.member_token
-    )
-  end
+  attr_accessor :client
 
   def board(board_id)
     return @board if @board
@@ -34,11 +28,11 @@ class TrelloWrapper < TrelloService
   end
 
   def retrieve_board_data(board_id)
-    JSON.parse(client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all"))
+    JSON.parse(get_board(board_id))
   end
 
   def backup(board_id)
-    client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
+    get_board(board_id)
   end
 
   def organization(org_id)
@@ -81,5 +75,18 @@ class TrelloWrapper < TrelloService
 
   def set_name(card_id, name)
     client.put("/cards/#{card_id}/name?value=#{name}")
+  end
+
+  def client
+    @client ||= Trello::Client.new(
+      developer_public_key: @settings.developer_public_key,
+      member_token: @settings.member_token
+    )
+  end
+
+  def get_board(board_id)
+    raise TrolloloError.new("Board id cannot be blank") if board_id.blank?
+
+    client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
   end
 end
