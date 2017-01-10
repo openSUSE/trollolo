@@ -19,6 +19,7 @@ require 'trello'
 class TrelloWrapper < TrelloService
 
   attr_accessor :board
+  attr_accessor :client
 
   def board(board_id)
     return @board if @board
@@ -77,9 +78,9 @@ class TrelloWrapper < TrelloService
   end
 
   def client
-    Trello::Client.new(
-        developer_public_key: @settings.developer_public_key,
-        member_token: @settings.member_token
+    @client ||= Trello::Client.new(
+      developer_public_key: @settings.developer_public_key,
+      member_token: @settings.member_token
     )
   end
 
