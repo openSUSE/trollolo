@@ -77,9 +77,9 @@ class TrelloWrapper < TrelloService
   end
 
   def client
-    Trello::Client.new(
-        developer_public_key: @settings.developer_public_key,
-        member_token: @settings.member_token
+    @client ||= Trello::Client.new(
+      developer_public_key: @settings.developer_public_key,
+      member_token: @settings.member_token
     )
   end
 
