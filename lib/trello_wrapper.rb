@@ -17,13 +17,15 @@
 require 'trello'
 
 class TrelloWrapper < TrelloService
-
-  attr_accessor :board
-
   def board(board_id)
-    return @board if @board
+    @board ||= ScrumBoard.new(retrieve_board_data(board_id), @settings)
+  end
 
-    @board = ScrumBoard.new(retrieve_board_data(board_id), @settings)
+  def client
+    @client ||= Trello::Client.new(
+      developer_public_key: @settings.developer_public_key,
+      member_token: @settings.member_token
+    )
   end
 
   def retrieve_board_data(board_id)
@@ -74,13 +76,6 @@ class TrelloWrapper < TrelloService
 
   def set_name(card_id, name)
     client.put("/cards/#{card_id}/name?value=#{name}")
-  end
-
-  def client
-    @client ||= Trello::Client.new(
-      developer_public_key: @settings.developer_public_key,
-      member_token: @settings.member_token
-    )
   end
 
   def get_board(board_id)
