@@ -26,6 +26,7 @@ module Scrum
 
     def inspect_backlog
       @planning_board.backlog_cards.each do |card|
+        next if @planning_board.sticky?(card)
         if card == @seabed_card
           break
 
