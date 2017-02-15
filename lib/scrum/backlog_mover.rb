@@ -26,7 +26,6 @@ module Scrum
 
     def inspect_backlog
       @planning_board.backlog_cards.each do |card|
-        next if @planning_board.sticky?(card)
         if card == @seabed_card
           break
 
@@ -35,7 +34,7 @@ module Scrum
           puts "under the waterline"
 
         else
-          move_sprint_card(card)
+          move_sprint_card(card) unless @planning_board.sticky?(card)
         end
       end
     end
