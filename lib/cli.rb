@@ -327,12 +327,13 @@ EOT
   the card.
 EOT
   option "board-id", :desc => "Id of the board", :required => true
+  option "backlog-list-name", :desc => "Name of backlog list", :required => false
   def set_priorities
     process_global_options options
     require_trello_credentials
 
     p = Scrum::Prioritizer.new(@@settings)
-    p.prioritize(board_id(options["board-id"]))
+    p.prioritize(board_id(options["board-id"]), options["backlog-list-name"])
   end
 
   desc "cleanup-sprint", "Move remaining cards to the planning board"

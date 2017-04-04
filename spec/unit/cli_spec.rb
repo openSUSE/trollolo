@@ -164,6 +164,37 @@ EOT
     expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description")
   end
 
+  it "sets priorities for default planning list", vcr: "prioritize_backlog_list", vcr_record: false do
+    @cli.options = {"board-id" => "neUHHzDo"}
+
+    expected_output = <<-EOT
+set priority to 1 for "P1: (2) Document how to run cf-openstack-validator on SUSE"
+set priority to 2 for "P2: Etymologie von Foo"
+set priority to 3 for "P3: (3) Set up Concourse pipeline for stemcell building"
+set priority to 4 for "P4: (6) Build #stemcell in containers &sort=123"
+set priority to 5 for "P5: (2) Document how to run cf-openstack-validator on SUSE"
+set priority to 6 for "P6: (3) Set up Concourse pipeline for os image building"
+set priority to 7 for "P7: (3) Set up Concourse pipeline for stemcell building"
+set priority to 8 for "P8: (6) Build stemcell in containers"
+set priority to 9 for "P9: (3) Set up Concourse pipeline for BATs"
+set priority to 10 for "P10: seabed"
+set priority to 11 for "P11: (3) Set up Concourse pipeline for BATs"
+set priority to 12 for "P12: Bike Shedding Feature"
+set priority to 13 for "P13: (3) Set up Concourse pipeline for os image building"
+EOT
+    expect {
+      @cli.set_priorities
+    }.to output(expected_output).to_stdout
+  end
+
+  it "sets priorities for specified planning list", vcr: "prioritize_backlog_list", vcr_record: false do
+    @cli.options = {"board-id" => "neUHHzDo", "backlog-list-name" => "Nonexisting List"}
+
+    expect {
+      @cli.set_priorities
+    }.to raise_error /'Nonexisting List' not found/
+  end
+
   context "#board_id" do
     before do
       Cli.settings = Settings.new(

@@ -4,8 +4,8 @@ module Scrum
       Scrum::SprintBoard.new(@settings.scrum).setup(board_id)
     end
 
-    def planning_board(board_id)
-      Scrum::SprintPlanningBoard.new(@settings.scrum).setup(board_id)
+    def planning_board(board_id, list_name = nil)
+      Scrum::SprintPlanningBoard.new(@settings.scrum).setup(board_id, list_name)
     end
   end
 end
