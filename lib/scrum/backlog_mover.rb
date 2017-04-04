@@ -34,7 +34,7 @@ module Scrum
           puts "under the waterline"
 
         else
-          move_sprint_card(card)
+          move_sprint_card(card) unless @planning_board.sticky?(card)
         end
       end
     end
