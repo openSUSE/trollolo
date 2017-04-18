@@ -6,7 +6,7 @@ module Scrum
       @board = sprint_board(board_id)
       fail "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
       @target_board = Trello::Board.find(target_board_id)
-      fail "ready list '#{@settings.scrum.list_names["planning_backlog"]}' not found on planning board" unless target_list
+      fail "ready list '#{@settings.scrum.list_names["planning_ready"]}' not found on planning board" unless target_list
 
       move_cards(@board.backlog_list)
       move_cards(@board.doing_list) if @board.doing_list
