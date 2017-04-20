@@ -191,6 +191,7 @@ class BurndownChart
 
   def update(options)
     burndown_data_path = load_last_sprint(options['output'] || Dir.pwd)
+    $sprint_nr = self.sprint
 
     burndown_data = BurndownData.new(@settings)
     burndown_data.board_id = board_id
