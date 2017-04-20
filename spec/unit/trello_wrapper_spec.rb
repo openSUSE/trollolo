@@ -122,12 +122,26 @@ EOF
     end
 
     it "make the attachment with the file name passed.jpg the cover" do
-     subject.make_cover(card_id, image_name)
-     expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/#{card_id}/idAttachmentCover?key=mykey&token=mytoken&value=#{image_id}")
+      subject.make_cover(card_id, image_name)
+      expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/#{card_id}/idAttachmentCover?key=mykey&token=mytoken&value=#{image_id}")
     end
 
     it "shows an error if the file was not found in the attachment list" do
       expect { subject.make_cover(card_id, "non_existing_file.jpg") }.to raise_error(/non_existing_file.jpg/)
     end
+  end
+
+  describe "#set_description" do
+    let(:card_id) { "c133a484cff21c7a33ff031f" }
+
+    before(:each) do
+      stub_request(:put, "https://api.trello.com/1/cards/#{card_id}/desc?key=mykey&token=mytoken&value=Bug%20%235").
+                 with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'Content-Length'=>'0', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'Ruby'})
+    end
+
+    it "handles encoding" do
+      subject.set_description(card_id, "Bug #5")
+      expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/#{card_id}/desc?key=mykey&token=mytoken&value=Bug%20%235")
+     end
   end
 end
