@@ -1,6 +1,6 @@
 # Trollolo Changelog
 
-## Version 0.0.10.pre
+## Version 0.0.10
 
 * Rename `sprint-cleanup` to `cleanup-sprint`.
 * Configure board, list and label names to trollolorc. The commands
@@ -9,7 +9,10 @@
   several boards can share the same name.
 * Add `setup-scrum` command to create all necessary elements of our scrumb board
   as configured in trollolorc or using the defaults. A sample configuration can
-  be found in `spec/data/trollolorc`.
+  be found in `spec/data/trollolorc`. Fixes #57
+* Add option for backlog list name in `set-priorities`.
+* Add `move-backlog` command for moving a backlog from a planning to a sprint board
+* Handle boards which have an "Accepted" column in addition to a "Done" column
 
 ## Version 0.0.9
 
