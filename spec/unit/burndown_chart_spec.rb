@@ -257,7 +257,7 @@ describe BurndownChart do
         @chart.sprint = 2
         @chart.data["meta"]["total_days"] = 9
         @chart.data["meta"]["weekend_lines"] = [3.5, 7.5]
-        @chart.data["meta"]["board_id"] = "myboardid"
+        @chart.data["meta"]["board_id"] = '53186e8391ef8671265eba9d'
         @chart.data["days"] = @raw_data
 
         write_path = given_dummy_file
@@ -300,7 +300,7 @@ describe BurndownChart do
           }
         ]
         @chart.data["days"] = raw_data
-        @chart.data["meta"]["board_id"] = "1234"
+        @chart.data["meta"]["board_id"] = '53186e8391ef8671265eba9d'
 
         write_path = given_dummy_file
         @chart.write_data(write_path)
@@ -308,7 +308,8 @@ describe BurndownChart do
         expected_file_content = <<EOT
 ---
 meta:
-  board_id: '1234'
+  board_id: 53186e8391ef8671265eba9d
+  done_column_id: 5319bf088cdf9cd82be336b0
   sprint: 1
   total_days: 10
   weekend_lines:
@@ -437,8 +438,9 @@ EOT
 
     describe "create_next_sprint" do
       it "create new sprint file" do
-        path = given_directory_from_data("burndown_dir")
         chart = BurndownChart.new(@settings)
+        path = given_directory_from_data("burndown_dir")
+        expect(chart).to receive(:board_id).and_return('53186e8391ef8671265eba9d')
         chart.create_next_sprint(path)
 
         next_sprint_file = File.join(path, "burndown-data-03.yaml")
@@ -453,6 +455,7 @@ meta:
   weekend_lines:
   - 3.5
   - 7.5
+  done_column_id: 5319bf088cdf9cd82be336b0
 days: []
 EOT
         expect(File.read(next_sprint_file)).to eq expected_file_content
@@ -476,6 +479,36 @@ EOT
       chart.merge_meta_data_from_board(burndown)
 
       expect(chart.data["meta"]["weekend_lines"]).to eq([1.5, 6.5, 11.5, 16.5])
+    end
+  end
+
+  describe '.new_sprint_started?' do
+    let(:test_dir) { '/test/burndown' }
+    let(:test_sprint_files) do
+      [ "#{test_dir}/burndown-data-08.yaml",
+        "#{test_dir}/burndown-data-09.yaml",
+        "#{test_dir}/burndown-data-10.yaml",
+        "#{test_dir}/burndown-data-11.yaml" ]
+    end
+
+    let(:test_settings) {}
+
+    it 'check if a new newer online sprint results in true' do
+      test_sprint_file = { 'meta' => { 'board_id' => '53186e8391ef8671265eba9d', 'sprint' => 11, 'done_column_id' => 'donecolumnid-old' } }
+
+      expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
+      expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
+
+      expect(described_class.new_sprint_started?(@settings, test_dir)).to eq(true)
+    end
+
+    it 'check if no column_done_id was set false is returned' do
+      test_sprint_file = { 'meta' => { 'board_id' => 'foo', 'sprint' => 11 } }
+
+      expect(Dir).to receive(:glob).with("#{test_dir}/burndown-data-*.yaml").and_return(test_sprint_files)
+      expect(YAML).to receive(:load_file).with(test_sprint_files.last).and_return(test_sprint_file)
+
+      expect(described_class.new_sprint_started?(test_settings, test_dir)).to eq(false)
     end
   end
 

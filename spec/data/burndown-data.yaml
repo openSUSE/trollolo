@@ -1,6 +1,7 @@
 ---
 meta:
-  board_id: myboardid
+  board_id: 53186e8391ef8671265eba9d
+  done_column_id: 5319bf088cdf9cd82be336b0
   sprint: 2
   total_days: 9
   weekend_lines:

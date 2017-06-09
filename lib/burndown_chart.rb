@@ -24,6 +24,7 @@ class BurndownChart
     @data = {
       "meta" => {
         "board_id" => nil,
+        "done_column_id" => nil,
         "sprint" => 1,
         "total_days" => 10,
         "weekend_lines" => [ 3.5, 8.5 ]
@@ -97,6 +98,9 @@ class BurndownChart
       end
     end
 
+    # update the column id to the most left done column
+    @data['meta']['done_column_id'] = TrelloWrapper.new(@settings).board(board_id).done_column.id
+
     begin
       File.open( filename, "w" ) do |file|
         file.write @data.to_yaml
@@ -135,7 +139,7 @@ class BurndownChart
   end
 
   def setup(burndown_dir, board_id)
-    self.board_id = board_id
+    self.board_id       = board_id
     FileUtils.mkdir_p burndown_dir
     write_data File.join(burndown_dir, burndown_data_filename)
   end
@@ -150,6 +154,29 @@ class BurndownChart
       sprint_number = sprint_number.to_s.rjust(2, '0')
       cli_switches = process_options(options)
       system "python #{plot_helper} #{sprint_number} #{cli_switches.join(' ')}"
+    end
+
+    def new_sprint_started?(settings, dir)
+      sprint_file = Dir.glob("#{dir}/burndown-data-*.yaml").max_by do |file|
+        file.match(/burndown-data-(\d+).yaml/).captures.first.to_i
+      end
+
+      begin
+        sprint = YAML.load_file(sprint_file)
+      rescue SyntaxError, SystemCallError => e
+        raise Trollolo.new("Loading #{sprint_file} failed: #{e.message}")
+      end
+
+      # Current file does not support auto creating new sprints
+      return false if sprint['meta']['done_column_id'].nil?
+
+      # current sprint on trello board
+      trello = TrelloWrapper.new(settings).board(sprint['meta']['board_id'])
+
+      if sprint['meta']['done_column_id'] != trello.done_column.id
+        return true
+      end
+      return false
     end
 
     private

@@ -155,7 +155,7 @@ so that Trollolo can process it as a Scrum board.
 
 It expects a list `Sprint Backlog` with open items, a list `Doing` with items in
 progress, and a list with a name starting with `Done`. If there are multiple
-lists starting with `Done` the first one is taken.
+lists starting with `Done` the first one (most left) is taken.
 
 Other names of columns with work in progress can be set in the YAML file in the
 `meta` section as an array of column names under the key `not_done_columns`.

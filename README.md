@@ -96,7 +96,7 @@ This will create a directory WORKING_DIR and put an initial data file there,
 which contains the meta data. The file is called `burndown-data-1.yaml`. You
 might want to keep this file in a git repository for safe storage and history.
 
-After each daily go to the working directory and call:
+Each day, go to the working directory and call:
 
     trollolo burndown
 
@@ -104,14 +104,14 @@ This will get the current data from the Trello board and update the data file
 with the data from the current day. If there already was some data in the file
 for the same day it will be overridden.
 
-When the sprint is over and you want to start with the next sprint, go to the
-working directory and call:
+When the sprint is over a new sprint file is created automatically but if you want to
+start a new sprint manually go to the working directory and call:
 
     trollolo burndown --new-sprint
 
 This will create a new data file for the next sprint number and populate it
 with initial data taken from the Trello board. You are ready to go for the
-sprint now and can continue with calling `trollolo burndown` after each daily.
+sprint now and can continue with calling `trollolo burndown` after each day.
 
 To push the current state of the scrum process (current day) to an api endpoint call:
 
