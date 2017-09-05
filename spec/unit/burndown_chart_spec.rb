@@ -436,14 +436,11 @@ EOT
     end
 
     describe "create_next_sprint" do
+      let(:path) { given_directory_from_data("burndown_dir") }
+      let(:chart) { BurndownChart.new(@settings) }
+      let(:next_sprint_file) { File.join(path, "burndown-data-03.yaml") }
+
       it "create new sprint file" do
-        path = given_directory_from_data("burndown_dir")
-        chart = BurndownChart.new(@settings)
-        chart.create_next_sprint(path)
-
-        next_sprint_file = File.join(path, "burndown-data-03.yaml")
-        expect(File.exist?(next_sprint_file)).to be true
-
         expected_file_content = <<EOT
 ---
 meta:
@@ -455,6 +452,29 @@ meta:
   - 7.5
 days: []
 EOT
+        chart.create_next_sprint(path)
+
+        expect(File.exist?(next_sprint_file)).to be true
+        expect(File.read(next_sprint_file)).to eq expected_file_content
+      end
+      
+      it "create new sprint file with params" do
+        expected_file_content = <<EOT
+---
+meta:
+  board_id: 53186e8391ef8671265eba9d
+  sprint: 3
+  total_days: 17
+  weekend_lines:
+  - 1.5
+  - 6.5
+  - 11.5
+  - 16.5
+days: []
+EOT
+        chart.create_next_sprint(path, { total_days: 17, weekend_lines: [1.5, 6.5, 11.5, 16.5] })
+
+        expect(File.exist?(next_sprint_file)).to be true
         expect(File.read(next_sprint_file)).to eq expected_file_content
       end
     end
