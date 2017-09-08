@@ -75,7 +75,7 @@ class Settings
         "sprint_backlog" => "Sprint Backlog",
         "sprint_qa" => "QA",
         "sprint_doing" => "Doing",
-        "planning_backlog" => "Backlog",
+        "planning_backlog" => "Platform Backlog",
         "planning_ready" => "Ready for Estimation"
       },
     }.freeze
