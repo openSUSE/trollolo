@@ -160,7 +160,7 @@ EOT
 
     chart = BurndownChart.new @@settings
     puts "Preparing directory..."
-    chart.setup(options[:output],board_id(options["board-id"]))
+    chart.setup(options[:output], board_id(options["board-id"]))
   end
 
   desc "burndown", "Update burndown chart"
@@ -266,7 +266,7 @@ EOT
     trello = TrelloWrapper.new(@@settings)
 
     members = trello.organization(options["org-name"]).members
-    members.sort! { |a,b| a.username <=> b.username }
+    members.sort! { |a, b| a.username <=> b.username }
 
     members.each do |member|
       puts "#{member.username} (#{member.full_name})"

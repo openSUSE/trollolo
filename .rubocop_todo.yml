@@ -162,21 +162,6 @@ Layout/MultilineOperationIndentation:
     - 'lib/backup.rb'
     - 'lib/card.rb'
 
-# Offense count: 28
-# Cop supports --auto-correct.
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/cli.rb'
-    - 'lib/settings.rb'
-    - 'spec/integration/command_line_spec.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
-    - 'spec/integration/wrapper/empty_config_trollolo_wrapper'
-    - 'spec/integration/wrapper/trollolo_wrapper'
-    - 'spec/unit/burndown_chart_spec.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/settings_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/SpaceAfterNot:

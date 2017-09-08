@@ -17,8 +17,8 @@ describe Cli do
     @cli.options = {"board-list" => "spec/data/board-list.yaml",
                     "output" => dir}
     @cli.burndowns
-    expect(File.exist?(File.join(dir,"orange/burndown-data-01.yaml")))
-    expect(File.exist?(File.join(dir,"blue/burndown-data-01.yaml")))
+    expect(File.exist?(File.join(dir, "orange/burndown-data-01.yaml")))
+    expect(File.exist?(File.join(dir, "blue/burndown-data-01.yaml")))
   end
 
   it "backups board" do
