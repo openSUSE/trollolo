@@ -6,7 +6,7 @@ describe Settings do
 
   context "given config file" do
     before(:each) do
-      @settings = Settings.new( File.expand_path('../../data/trollolorc',__FILE__) )
+      @settings = Settings.new( File.expand_path('../../data/trollolorc', __FILE__) )
     end
 
     it "is not verbose by default" do
@@ -21,7 +21,7 @@ describe Settings do
     context "#scrum" do
       context "when setting is missing" do
         before do
-          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases',__FILE__) )
+          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__) )
         end
         it "returns default settings" do
           expect(@settings.scrum["board_names"]).to eq({"planning"=>"Planning Board", "sprint"=>"Sprint Board"})
@@ -45,7 +45,7 @@ describe Settings do
 
       context "when mapping exists" do
         before do
-          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases',__FILE__) )
+          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__) )
         end
 
         it "returns the mapping" do

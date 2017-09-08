@@ -50,7 +50,7 @@ class Settings
     @config["developer_public_key"] = @developer_public_key
     @config["member_token"] = @member_token
 
-    File.open(@config_file_path,"w") do |f|
+    File.open(@config_file_path, "w") do |f|
       f.write(@config.to_yaml)
     end
   end

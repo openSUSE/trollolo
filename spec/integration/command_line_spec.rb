@@ -4,15 +4,15 @@ include GivenFilesystemSpecHelpers
 include CliTester
 
 def trollolo_cmd
-  File.expand_path('../wrapper/trollolo_wrapper',__FILE__)
+  File.expand_path('../wrapper/trollolo_wrapper', __FILE__)
 end
 
 def trollolo_cmd_empty_config
-  File.expand_path('../wrapper/empty_config_trollolo_wrapper',__FILE__)
+  File.expand_path('../wrapper/empty_config_trollolo_wrapper', __FILE__)
 end
 
 def credentials_input_wrapper
-  File.expand_path('../wrapper/credentials_input_wrapper',__FILE__)
+  File.expand_path('../wrapper/credentials_input_wrapper', __FILE__)
 end
 
 describe "command line" do

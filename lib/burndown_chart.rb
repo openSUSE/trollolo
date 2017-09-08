@@ -131,7 +131,7 @@ class BurndownChart
 
 
   def burndown_data_filename
-    "burndown-data-#{sprint.to_s.rjust(2,"0")}.yaml"
+    "burndown-data-#{sprint.to_s.rjust(2, "0")}.yaml"
   end
 
   def setup(burndown_dir, board_id)

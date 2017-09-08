@@ -349,12 +349,12 @@ EOT
     describe "setup" do
       it "initializes new chart" do
         path = given_directory
-        @chart.setup(path,"53186e8391ef8671265eba9d")
+        @chart.setup(path, "53186e8391ef8671265eba9d")
 
-        expect(File.exist?(File.join(path,"burndown-data-01.yaml"))).to be true
+        expect(File.exist?(File.join(path, "burndown-data-01.yaml"))).to be true
 
         chart = BurndownChart.new(@settings)
-        chart.read_data(File.join(path,"burndown-data-01.yaml"))
+        chart.read_data(File.join(path, "burndown-data-01.yaml"))
 
         expect(chart.board_id).to eq "53186e8391ef8671265eba9d"
       end
@@ -402,7 +402,7 @@ EOT
       end
 
       it "returns the path of the last sprint" do
-        expect(@chart.load_last_sprint(path)).to eq(File.join(path,"burndown-data-02.yaml"))
+        expect(@chart.load_last_sprint(path)).to eq(File.join(path, "burndown-data-02.yaml"))
       end
     end
 
@@ -417,9 +417,9 @@ EOT
         expected_date_time = DateTime.parse(updated_at)
         allow(DateTime).to receive(:now).and_return(expected_date_time)
 
-        before.read_data(File.join(path,'burndown-data-02.yaml'))
+        before.read_data(File.join(path, 'burndown-data-02.yaml'))
         @chart.update(options)
-        after.read_data(File.join(path,'burndown-data-02.yaml'))
+        after.read_data(File.join(path, 'burndown-data-02.yaml'))
         expect(after.days.size).to eq before.days.size + 1
 
         expect(after.days.last["date"]).to eq "2015-01-12"
@@ -427,10 +427,10 @@ EOT
       end
 
       it "overwrites data on same date" do
-        before.read_data(File.join(path,'burndown-data-02.yaml'))
+        before.read_data(File.join(path, 'burndown-data-02.yaml'))
         @chart.update(options)
         @chart.update(options)
-        after.read_data(File.join(path,'burndown-data-02.yaml'))
+        after.read_data(File.join(path, 'burndown-data-02.yaml'))
         expect(after.days.size).to eq before.days.size + 1
       end
     end

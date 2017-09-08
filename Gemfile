@@ -14,4 +14,5 @@ group :test do
   gem 'pry'
   gem 'ronn', '>=0.7.3'
   gem 'rake'
+  gem 'rubocop'
 end

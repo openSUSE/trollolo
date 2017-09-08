@@ -106,7 +106,7 @@ Trollolo Testing Board
     Purpose
     Background image
 EOT
-      )
+                                          )
     end
   end
 end
