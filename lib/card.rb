@@ -107,7 +107,7 @@ class Card
     self.card_labels.map{|l| l['name']}.include?('FastLane')
   end
 
-  #TODO: rethink storage for meta data for sprint
+  # TODO: rethink storage for meta data for sprint
   def self.parse_yaml_from_description(description)
     description =~ /```(yaml)?\n(.*)```/m
     yaml = $2

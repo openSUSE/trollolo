@@ -123,12 +123,6 @@ Layout/IndentationWidth:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Layout/LeadingCommentSpace:
-  Exclude:
-    - 'lib/card.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Layout/MultilineBlockLayout:
   Exclude:
     - 'spec/unit/trello_wrapper_spec.rb'
