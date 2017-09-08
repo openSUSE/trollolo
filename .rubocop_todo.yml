@@ -14,12 +14,6 @@ Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/ClosingParenthesisIndentation:
-  Exclude:
-    - 'spec/unit/backup_spec.rb'
-
 # Offense count: 9
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
