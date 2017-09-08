@@ -13,13 +13,11 @@ class ScrumBoard
   end
 
   def done_column
-    begin
-      done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
-      if done_columns.empty?
-        raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
-      else
-        done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
-      end
+    done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
+    if done_columns.empty?
+      raise DoneColumnNotFoundError, "can't find done column by name regex #{@settings.done_column_name_regex}"
+    else
+      done_columns.max_by{|c| c.name.match(@settings.done_column_name_regex).captures.first.to_i }
     end
   end
 
@@ -41,7 +39,7 @@ class ScrumBoard
   end
 
   def open_cards
-    open_columns.map{|col| col.committed_cards}.flatten
+    open_columns.map(&:committed_cards).flatten
   end
 
   def committed_cards
@@ -78,7 +76,7 @@ class ScrumBoard
   end
 
   def extra_open_cards
-    open_columns.map{|col| col.cards.select{|c| c.extra?}}.flatten
+    open_columns.map{|col| col.cards.select(&:extra?) }.flatten
   end
 
   def extra_open_story_points
@@ -107,7 +105,7 @@ class ScrumBoard
   end
 
   def unplanned_open_cards
-    open_columns.map{|col| col.cards.select{|c| c.unplanned?}}.flatten
+    open_columns.map{|col| col.cards.select(&:unplanned?) }.flatten
   end
 
   def unplanned_open_story_points
@@ -136,7 +134,7 @@ class ScrumBoard
   end
 
   def meta_cards
-    scrum_cards.select{|c| c.meta_card? }
+    scrum_cards.select(&:meta_card?)
   end
 
   def id
@@ -144,11 +142,6 @@ class ScrumBoard
   end
 
   def cards
-    return @cards if @cards
-    @cards = []
-    columns.each do |column|
-      @cards += column.cards
-    end
-    @cards
+    @cards ||= columns.map(&:cards).flatten
   end
 end
