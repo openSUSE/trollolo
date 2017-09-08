@@ -14,9 +14,9 @@ module Scrum
       n = 1
       @board.backlog_cards.each do |card|
         next if @board.sticky?(card) || @board.waterline?(card)
-        puts %(set priority to #{n} for "#{card.name}")
         card.name = PriorityName.build(card.name, n)
         card.save
+        puts %(set priority to #{n} for "#{card.name}")
         n += 1
       end
     end
