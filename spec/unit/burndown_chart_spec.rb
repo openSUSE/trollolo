@@ -457,7 +457,7 @@ EOT
         expect(File.exist?(next_sprint_file)).to be true
         expect(File.read(next_sprint_file)).to eq expected_file_content
       end
-      
+
       it "create new sprint file with params" do
         expected_file_content = <<EOT
 ---
