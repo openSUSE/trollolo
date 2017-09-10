@@ -209,7 +209,7 @@ class BurndownChart
     end
   end
 
-  def create_next_sprint(burndown_dir, options={})
+  def create_next_sprint(burndown_dir, options = {})
     load_last_sprint(burndown_dir)
     self.sprint = self.sprint + 1
     @data["meta"]["total_days"] = options[:total_days] if options[:total_days]
