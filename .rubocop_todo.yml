@@ -303,10 +303,6 @@ Lint/UselessAssignment:
   Exclude:
     - 'spec/unit/support/webmocks.rb'
 
-# Offense count: 16
-Metrics/AbcSize:
-  Max: 50
-
 # Offense count: 41
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/BlockLength:
@@ -331,10 +327,6 @@ Metrics/LineLength:
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
   Max: 35
-
-# Offense count: 1
-Metrics/PerceivedComplexity:
-  Max: 10
 
 # Offense count: 1
 # Cop supports --auto-correct.
