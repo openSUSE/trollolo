@@ -1,5 +1,8 @@
 # Trollolo Changelog
 
+## Master (unreleased)
+
+
 ## Version 0.0.11
 
 * Add in `trollolo burndown --new-sprint` command the `total_days` and
