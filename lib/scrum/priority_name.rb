@@ -1,6 +1,6 @@
 module Scrum
   class PriorityName
-    PRIORITY_REGEX      = /^(?:\([\d.]+\) )?P(\d+): /
+    PRIORITY_REGEX = /^(?:\([\d.]+\) )?P(\d+): /
 
     def self.priority(name)
       return unless (m = name.match(PRIORITY_REGEX))

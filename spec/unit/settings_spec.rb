@@ -24,7 +24,7 @@ describe Settings do
           @settings = Settings.new( File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__) )
         end
         it "returns default settings" do
-          expect(@settings.scrum["board_names"]).to eq({"planning"=>"Planning Board", "sprint"=>"Sprint Board"})
+          expect(@settings.scrum["board_names"]).to eq({"planning" => "Planning Board", "sprint" => "Sprint Board"})
         end
       end
 
