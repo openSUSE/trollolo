@@ -12,6 +12,8 @@ To contribute code please open pull requests.
 
 Ensure that rspec and rubocop pass locally before sending your PR and always that you add new changes.
 
+If your changes include important new features or bug fixes please add them to the [Master (unreleased) section fo the CHANGELOG.md](https://github.com/openSUSE/trollolo/blob/master/CHANGELOG.md#master-unreleased)
+
 ## To run rspec test
 
 To run all the rspec test:
