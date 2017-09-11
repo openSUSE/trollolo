@@ -1,5 +1,12 @@
 # Trollolo Changelog
 
+## Version 0.0.11
+
+* Add in `trollolo burndown --new-sprint` command the `total_days` and
+  `weekend_lines` params. Closes #77.
+* Change stdout output when running set-priorities to render the new priority
+  instead of the old one. Fixes #72.
+
 ## Version 0.0.10
 
 * Rename `sprint-cleanup` to `cleanup-sprint`.
