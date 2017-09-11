@@ -3,7 +3,7 @@ module Scrum
     PRIORITY_REGEX      = /^(?:\([\d.]+\) )?P(\d+): /
 
     def self.priority(name)
-      return unless m = name.match(PRIORITY_REGEX)
+      return unless (m = name.match(PRIORITY_REGEX))
       m.captures.first.to_i
     end
 

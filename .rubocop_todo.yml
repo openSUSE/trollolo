@@ -266,13 +266,6 @@ Lint/AmbiguousRegexpLiteral:
     - 'spec/unit/cli_spec.rb'
     - 'spec/unit/scrum/sprint_cleaner_spec.rb'
 
-# Offense count: 2
-# Configuration parameters: AllowSafeAssignment.
-Lint/AssignmentInCondition:
-  Exclude:
-    - 'lib/scrum/priority_name.rb'
-    - 'spec/unit/support/vcr.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Lint/DeprecatedClassMethods:
