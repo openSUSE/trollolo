@@ -2,6 +2,8 @@
 
 ## Master (unreleased)
 
+* Find and remove 'Unplanned' labels on `cleanup-sprint`. Fixes #72.
+
 
 ## Version 0.0.11
 

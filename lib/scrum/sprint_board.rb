@@ -46,6 +46,12 @@ module Scrum
       end
     end
 
+    def find_unplanned_label(labels)
+      labels.find do |label|
+        label.name =~ /unplanned/i
+      end
+    end
+
     private
 
     def under_waterline_label

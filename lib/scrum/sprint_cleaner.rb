@@ -28,12 +28,22 @@ module Scrum
       card.remove_label(label) if label
     end
 
+    def unplanned_label(card)
+      @board.find_unplanned_label(card.labels)
+    end
+
+    def remove_unplanned_label(card)
+      label = unplanned_label(card)
+      card.remove_label(label) if label
+    end
+
     def move_cards(source_list)
       source_list.cards.each do |card|
         next if @board.sticky?(card)
         puts %(moving card "#{card.name}" to list "#{target_list.name}")
         card.members.each { |member| card.remove_member(member) }
         remove_waterline_label(card)
+        remove_unplanned_label(card)
         card.move_to_board(@target_board, target_list)
       end
     end
