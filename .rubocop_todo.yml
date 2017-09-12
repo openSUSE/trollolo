@@ -161,11 +161,6 @@ Layout/MultilineOperationIndentation:
     - 'lib/backup.rb'
     - 'lib/card.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/SpaceAfterNot:
-  Exclude:
-    - 'lib/cli.rb'
 
 # Offense count: 23
 # Cop supports --auto-correct.
