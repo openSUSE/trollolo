@@ -11,7 +11,7 @@ STDERR.puts "Updating web mock data"
 
 def scrub_file(file)
   json = JSON.parse(File.read(file))
-  if json.is_a?(Hash) and json.has_key?("cards")
+  if json.is_a?(Hash) && json.has_key?("cards")
     json["cards"].each do |card|
       if card.has_key?("email")
         card["email"] = "trello@example.com"
