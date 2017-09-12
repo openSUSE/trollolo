@@ -167,14 +167,6 @@ Layout/SpaceAfterNot:
   Exclude:
     - 'lib/cli.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: space, no_space
-Layout/SpaceAroundEqualsInParameterDefault:
-  Exclude:
-    - 'lib/cli.rb'
-
 # Offense count: 23
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
