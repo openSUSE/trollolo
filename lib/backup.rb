@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Backup
 
   attr_accessor :directory
