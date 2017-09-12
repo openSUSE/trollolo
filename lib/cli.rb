@@ -144,7 +144,7 @@ EOT
         destdir = name
       end
       chart = BurndownChart.new @@settings
-      if ! File.directory?(destdir)
+      if !File.directory?(destdir)
         chart.setup(destdir, board["boardid"])
       end
       chart.update({'output' => destdir, plot: options[:plot]})
@@ -154,7 +154,7 @@ EOT
   desc "burndown-init", "Initialize burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => true
   option "board-id", :desc => "Id of Trello board", :required => true
-  def burndown_init command=nil
+  def burndown_init command = nil
     process_global_options options
     require_trello_credentials
 

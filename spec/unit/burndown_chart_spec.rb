@@ -383,15 +383,15 @@ EOT
               { "date" => "2015-08-28",
                 "updated_at" => "2015-08-28T11:04:52+02:00",
                 "story_points" =>
-                  { "total"=>24.0,
-                    "open"=>24.0
+                  { "total" => 24.0,
+                    "open" => 24.0
                   },
                 "tasks" =>
                   { "total" => 43,
                     "open" => 28
                   },
                 "story_points_extra" =>
-                  { "done"=>2.0
+                  { "done" => 2.0
                   },
                 "tasks_extra" =>
                   { "done" => 5
