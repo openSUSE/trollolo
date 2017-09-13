@@ -2,10 +2,12 @@
 
 ## Master (unreleased)
 
+
+## Version 0.0.12
+
 * Find and remove 'Unplanned' labels on `cleanup-sprint`. Fixes #72.
 * Fix `trollolo burndown-init` and `trollolo backup`.
 * Remove Ruby 2.1 support. Closes #96.
-
 
 ## Version 0.0.11
 
