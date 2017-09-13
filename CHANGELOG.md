@@ -5,6 +5,8 @@
 * Add a new `plot-to-board` option to the burndown command to send the plotted
   burndown chart to the first card of the `Done` column.
 
+* Run `burndown` on `cleanup-sprint`. Fixes #68. 
+
 ## Version 0.0.12
 
 * Find and remove 'Unplanned' labels on `cleanup-sprint`. Fixes #72.

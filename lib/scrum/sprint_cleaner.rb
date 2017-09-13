@@ -8,6 +8,8 @@ module Scrum
       @target_board = Trello::Board.find(target_board_id)
       fail "ready list '#{@settings.scrum.list_names["planning_ready"]}' not found on planning board" unless target_list
 
+      gen_burndown
+
       move_cards(@board.backlog_list)
       move_cards(@board.doing_list) if @board.doing_list
       move_cards(@board.qa_list) if @board.qa_list
@@ -45,6 +47,18 @@ module Scrum
         remove_waterline_label(card)
         remove_unplanned_label(card)
         card.move_to_board(@target_board, target_list)
+      end
+    end
+
+    def gen_burndown
+      chart = BurndownChart.new(@settings)
+      begin
+        chart.update({})
+        puts 'New burndown data was generated automatically.'
+      rescue TrolloloError => e
+        if e.message =~ /(burndown-data-)\d*.yaml' (not found)/
+          puts e.message + '. Skipping automatic burndown generation.'
+        end
       end
     end
   end
