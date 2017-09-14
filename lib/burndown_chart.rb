@@ -202,12 +202,18 @@ class BurndownChart
 
     write_data(burndown_data_path)
 
-    if options[:plot]
+    if options[:plot] || options[:plot_to_board]
       BurndownChart.plot(self.sprint, options)
     end
 
     if options.has_key?('push-to-api')
       push_to_api(options['push-to-api'], data)
+    end
+
+    if options[:plot_to_board]
+      trello = TrelloWrapper.new(@settings)
+      board = trello.board(board_id)
+      trello.add_attachment(board.burndown_card_id, "burndown-#{sprint.to_s.rjust(2, '0')}.png")
     end
   end
 

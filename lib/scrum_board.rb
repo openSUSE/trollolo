@@ -144,4 +144,8 @@ class ScrumBoard
   def cards
     @cards ||= columns.map(&:cards).flatten
   end
+
+  def burndown_card_id
+    done_column.cards[0].id
+  end
 end
