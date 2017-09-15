@@ -8,8 +8,20 @@ describe Scrum::SprintCleaner do
   end
 
   it "moves remaining cards to target board", vcr: "sprint_cleanup", vcr_record: false do
-    expect(STDOUT).to receive(:puts).exactly(12).times
-    expect(subject.cleanup("NzGCbEeN", "neUHHzDo")).to be
+    expect(STDOUT).to receive(:puts).exactly(13).times
+    expect(subject.cleanup("7Zar7bNm", "72tOJsGS")).to be
+  end
+
+  context "given correct burndown-data-xx.yaml" do
+    before do
+      allow_any_instance_of(BurndownChart).to receive(:update)
+    end
+
+    it "generates new burndown data", vcr: "sprint_cleanup", vcr_record: false do
+      expect {
+        subject.cleanup("7Zar7bNm", "72tOJsGS")
+      }.to output(/^(New burndown data was generated automatically)/).to_stdout
+    end
   end
 
   context "with non-existing target list on target board" do
@@ -19,7 +31,7 @@ describe Scrum::SprintCleaner do
 
     it "throws error", vcr: "sprint_cleanup", vcr_record: false do
       expect {
-        subject.cleanup("NzGCbEeN", "neUHHzDo")
+        subject.cleanup("7Zar7bNm", "72tOJsGS")
       }.to raise_error /'Nonexisting List' not found/
     end
   end

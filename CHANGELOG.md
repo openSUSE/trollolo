@@ -6,6 +6,8 @@
   burndown chart to the first card of the `Done` column.
 * Add documentation for all CLI commands. Fixes #83.
 
+* Run `burndown` on `cleanup-sprint`. Fixes #68. 
+
 ## Version 0.0.12
 
 * Find and remove 'Unplanned' labels on `cleanup-sprint`. Fixes #72.
