@@ -220,8 +220,9 @@ re-record the stored replies, set `vcr_record:` to true and replace `dummy_setti
     describe Scrum::BacklogMover do
       subject { described_class.new(real_settings) }
 
-      it "fails without moving if backlog list is missing waterline or seabed", vcr: "move_backlog_missing_waterbed", vcr_record: true do
-        expect { subject.move("neUHHzDo", "NzGCbEeN") }.to raise_error
+      it "fails without moving if sprint backlog is missing from sprint board", vcr: "move_backlog_missing_backlog", vcr_record: false do
+        expect {
+        }.to raise_error("sprint board is missing Sprint Backlog list")
       end
     end
 

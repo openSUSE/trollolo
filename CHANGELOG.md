@@ -5,6 +5,8 @@
 * Add a new `plot-to-board` option to the burndown command to send the plotted
   burndown chart to the first card of the `Done` column.
 * Add documentation for all CLI commands. Fixes #83.
+* Allow to use `move-backlog` without waterline and seabed cards.
+  Closes #106 and #107.
 
 ## Version 0.0.12
 
