@@ -36,6 +36,13 @@ and cards and has functionality for extracting data for burndown charts.
 
 ## COMMANDS
 
+### help -- Display help
+
+`trollolo help [COMMAND]`
+
+Displays help about the available trollolo commands. Can take a command as 
+an argument to display detailed information about it.
+
 ### burndown-init -- Initialize burndown chart
 
 `trollolo burndown-init --board-id=<board id> --output=<directory>`
@@ -66,6 +73,13 @@ For correct generation of the burndown chart, the Trello board has to follow
 a few convention. They are described in the section `CONVENTIONS for SCRUM
 BOARDS`.
 
+### burndowns -- Process data for multiple burndown charts at once
+
+`trollolo burndowns --board-list=<board list>`
+
+Updates the burndown data for all boards specified in the YAML file in the 
+given directory. See the previous section for details on the update process. 
+
 ### plot -- Plot burndown chart
 
 `trollolo plot <sprint-number>`
@@ -83,15 +97,124 @@ conventions for Scrum boards, and reports burndown data.
 
 ### get-cards -- Get card data for a board
 
+`trollolo get-cards --board-id=<boad id>`
+
 Read all card data for a given board.
 
 ### get-checklists -- Get checklist data for a board
 
+`trollolo get-checklists --board-id=<boad id>`
+
 Read all checklist data for a given board
+
+### get-description -- Get description of a card
+
+`trollolo get-description --card-id=<card id>`
+
+Read description of a given card.
 
 ### get-lists -- Get list data for a board
 
+`trollolo get-lists --board-id=<boad id>`
+
 Read all list data for a given board.
+
+### get-raw -- Get raw JSON from Trello API
+
+`trollolo get-raw <url fragment>`
+
+Read raw JSON from Trello using the given URL fragment. Trollolo adds the server
+part and API version as well as the credentials from the Trollolo configuration.
+
+### backup -- Create local copy of a board
+
+`trollolo backup --board-id=<board id>`
+
+Save a local copy of a board as a JSON file. The backup will be stored in 
+'~/.trollolo/backup/<board-id>/'.
+
+### list-backups -- List all backups
+
+`trollolo list-backups`
+
+Get a list of all local backups.
+
+### show-backup -- Show local backup
+
+`trollolo show-backup --board-id=<board id>`
+
+Show the local backup of the given board.
+
+### list-member-boards -- List name and id of boards for a user
+
+`trollolo list-member-boards --member-id=<member id>`
+
+Get a list of all boards the given user is a member of.
+
+### set-cover -- Set picture as cover
+
+`trollolo set-cover <filename> --card-id=<card id>`
+
+Use the given file as the cover for the given card.
+
+### make-cover -- Make existing picture the cover
+
+`trollolo make-cover <filename> --card-id=<card id>`
+
+Make the given picture the cover for the given card. The given card must
+be an attachment of the given card. If you want to use a new picture use
+`set-cover`.
+
+### organization -- Get organization details
+
+`trollolo organization --org-name=<organization name>`
+
+Get details of an organization.
+
+### organization-members -- Get a list of organization member 
+
+`trollolo organization-members --org-name=<organization name>`
+
+Get a list of all organization members.
+
+### set-description -- Write description to a card
+
+`trollolo set-description --card-id=<card id>`
+
+Write description to the given card. The description is read from STDIN, use
+<^D> to end input.
+
+### setup-scrum -- Setup Scrum boards
+
+`trollolo setup-scrum`
+
+Create boards, lists and labels with names configured in '~/.trollolorc' or
+with the defaults.
+
+### move-backlog -- Move backlog from planning to sprint board
+
+`trollolo move-backlog --planning-board-id=<planning board id>
+--sprint-board-id=<sprint board id>`
+
+Move cards from the 'Backlog' list on the planning board to the 'Sprint
+Backlog' list on the sprint board. This is generally done after the planning
+meeting in preparation for a sprint.
+
+### cleanup-sprint -- Move cards back to planning board
+
+`trollolo cleanup-sprint --board-id=<board id> --target-board-id=<target board
+id>`
+
+Move unfinished cards from 'Sprint Backlog', 'Doing' and 'QA' lists on the sprint
+board to the 'Ready' list on the planning board. This is generally done after the
+sprint is finished.
+
+### set-priorities -- Add priorities to card titles
+
+`trollolo set-priorities --board-id=<board id>`
+
+Add 'P<n>: ' to the beginning of every cards title in the 'Backlog' list,
+replacing old values if present. 'n' is the current position of the card in the list. 
 
 
 ## EXAMPLES
@@ -103,6 +226,12 @@ Fetch burndown data of a Trello board configured in the configuration file:
 Fetch raw data of all cards of a Trello board:
 
 `trollolo get-cards --raw --board-id=CRdddpdy`
+
+Fetch raw JSON of a list:
+
+`trollolo get-raw lists/53186e8391ef8671265eba9f/cards?filter=open`
+
+
 
 
 ## CONFIGURATION
