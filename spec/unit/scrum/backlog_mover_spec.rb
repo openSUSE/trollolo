@@ -7,12 +7,6 @@ describe Scrum::BacklogMover do
     expect(subject).to be
   end
 
-  it "fails without moving if backlog list is missing waterline or seabed", vcr: "move_backlog_missing_waterbed", vcr_record: false do
-    expect {
-      subject.move("neUHHzDo", "NzGCbEeN")
-    }.to raise_error("backlog list on planning board is missing waterline or seabed card")
-  end
-
   it "fails without moving if sprint backlog is missing from sprint board", vcr: "move_backlog_missing_backlog", vcr_record: false do
     expect {
       subject.move("neUHHzDo", "NzGCbEeN")
