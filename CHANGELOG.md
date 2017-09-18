@@ -3,7 +3,7 @@
 ## Master (unreleased)
 
 
-## Version 0.0.13
+## Version 0.0.14
 
 * Add a new `plot-to-board` option to the burndown command to send the plotted
   burndown chart to the first card of the `Done` column.
