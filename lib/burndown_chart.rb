@@ -213,7 +213,9 @@ class BurndownChart
     if options[:plot_to_board]
       trello = TrelloWrapper.new(@settings)
       board = trello.board(board_id)
-      trello.add_attachment(board.burndown_card_id, "burndown-#{sprint.to_s.rjust(2, '0')}.png")
+      name = options['output'] ? options['output'] : '.'
+      name += "/burndown-#{sprint.to_s.rjust(2, '0')}.png"
+      trello.add_attachment(board.burndown_card_id, name)
     end
   end
 
