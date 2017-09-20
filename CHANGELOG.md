@@ -2,6 +2,8 @@
 
 ## Master (unreleased)
 
+* Fix `plot-to-board` option in the burndown command when it is used together
+  with `-o`.
 
 ## Version 0.0.14
 
