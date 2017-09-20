@@ -26,6 +26,9 @@ You can install Trollolo as gem with `gem install trollolo`.
 For the chart generation you will need a working matplotlib installation and
 the python module to read YAML. On openSUSE you can get that with
 
+    zypper install python2-matplotlib python2-matplotlib-tk python2-PyYAML
+or
+
     zypper install python-matplotlib python-matplotlib-tk python-PyYAML
 
 ## Configuration
