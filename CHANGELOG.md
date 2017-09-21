@@ -4,6 +4,8 @@
 
 * Fix `plot-to-board` option in the burndown command when it is used together
   with `-o`.
+* `burndown --plot-to-board` always sets the burndown chart as the cover.
+  Fix #114.
 
 ## Version 0.0.14
 
