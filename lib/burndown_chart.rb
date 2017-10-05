@@ -180,8 +180,9 @@ class BurndownChart
     last_sprint
   end
 
-  def load_last_sprint(burndown_dir)
-    self.sprint = last_sprint(burndown_dir)
+  # It loads the sprint for the given number or the last one if it is nil
+  def load_sprint(burndown_dir, number = nil)
+    self.sprint = number || last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
     begin
       read_data burndown_data_path
@@ -192,7 +193,7 @@ class BurndownChart
   end
 
   def update(options)
-    burndown_data_path = load_last_sprint(options['output'] || Dir.pwd)
+    burndown_data_path = load_sprint(options['output'] || Dir.pwd, options[:sprint_number])
 
     burndown_data = BurndownData.new(@settings)
     burndown_data.board_id = board_id
@@ -222,8 +223,8 @@ class BurndownChart
   end
 
   def create_next_sprint(burndown_dir, options = {})
-    load_last_sprint(burndown_dir)
-    self.sprint = self.sprint + 1
+    load_sprint(burndown_dir)
+    self.sprint = options[:sprint_number] || (self.sprint + 1)
     @data["meta"]["total_days"] = options[:total_days] if options[:total_days]
     @data["meta"]["weekend_lines"] = options[:weekend_lines] unless options[:weekend_lines].blank?
     @data["days"] = []

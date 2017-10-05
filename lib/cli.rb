@@ -167,6 +167,7 @@ EOT
   desc "burndown", "Update burndown chart"
   option :output, :aliases => :o, :desc => "Output directory", :required => false
   option :new_sprint, :aliases => :n, :desc => "Create new sprint"
+  option :sprint_number, type: :numeric, :desc => "Provide the number of the sprint"
   option :total_days, type: :numeric, desc: "Provide how many days the sprint longs. 10 days by default"
   option :weekend_lines, type: :array, desc: "Set the weekend_lines. [3.5, 8.5] by default"
   option :plot, :type => :boolean, :desc => "also plot the new data"
@@ -181,7 +182,7 @@ EOT
     chart = BurndownChart.new @@settings
     begin
       if options[:new_sprint]
-        chart.create_next_sprint(options[:output] || Dir.pwd, { total_days: options[:total_days], weekend_lines: options[:weekend_lines] })
+        chart.create_next_sprint(options[:output] || Dir.pwd, options)
       end
       chart.update(options)
       puts "Updated data for sprint #{chart.sprint}"
