@@ -153,7 +153,7 @@ EOT
   end
 
   desc "burndown-init", "Initialize burndown chart"
-  option :output, :aliases => :o, :desc => "Output directory", :required => true
+  option :output, :aliases => :o, :desc => "Output directory", :required => false
   option "board-id", :desc => "Id of Trello board", :required => true
   def burndown_init command = nil
     process_global_options options
@@ -161,7 +161,7 @@ EOT
 
     chart = BurndownChart.new @@settings
     puts "Preparing directory..."
-    chart.setup(options[:output], board_id(options["board-id"]))
+    chart.setup(options[:output] || Dir.pwd, board_id(options["board-id"]))
   end
 
   desc "burndown", "Update burndown chart"

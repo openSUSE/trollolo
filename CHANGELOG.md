@@ -2,6 +2,8 @@
 
 ## Master (unreleased)
 
+* `burndown-init` only requires the `--board-id` option. The `--output` option
+  is optional and defaults to the current working directory. Fix #103.
 
 ## Version 0.1.1
 
