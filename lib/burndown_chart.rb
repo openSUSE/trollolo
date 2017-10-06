@@ -215,7 +215,9 @@ class BurndownChart
       board = trello.board(board_id)
       name = options['output'] ? options['output'] : '.'
       name += "/burndown-#{sprint.to_s.rjust(2, '0')}.png"
-      trello.add_attachment(board.burndown_card_id, name)
+      card_id = board.burndown_card_id
+      trello.add_attachment(card_id, name)
+      trello.make_cover(card_id, name)
     end
   end
 
