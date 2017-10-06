@@ -367,11 +367,11 @@ EOT
       end
     end
 
-    describe "load_last_sprint" do
+    describe "load_sprint" do
       let(:path) { given_directory_from_data("burndown_dir") }
 
       it "loads the burndown from the 2nd sprint into data" do
-        @chart.load_last_sprint(path)
+        @chart.load_sprint(path)
         expect(@chart.data).to eq(
           { "meta" =>
             { "board_id" => "53186e8391ef8671265eba9d",
@@ -402,7 +402,7 @@ EOT
       end
 
       it "returns the path of the last sprint" do
-        expect(@chart.load_last_sprint(path)).to eq(File.join(path, "burndown-data-02.yaml"))
+        expect(@chart.load_sprint(path)).to eq(File.join(path, "burndown-data-02.yaml"))
       end
     end
 

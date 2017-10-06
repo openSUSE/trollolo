@@ -6,6 +6,7 @@
   with `-o`.
 * `burndown --plot-to-board` always sets the burndown chart as the cover.
   Fix #114.
+* Allow to create and update an Sprint with a custom number. Fix #78.
 
 ## Version 0.0.14
 
