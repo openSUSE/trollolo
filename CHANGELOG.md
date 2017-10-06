@@ -2,6 +2,9 @@
 
 ## Master (unreleased)
 
+* Fix the bug introduced whith always setting the burndown chart as the cover
+  for `burndown --plot-to-board`, as it only worked with files in the current
+  directory.
 
 ## Version 0.1.0
 
