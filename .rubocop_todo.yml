@@ -281,11 +281,6 @@ Metrics/ClassLength:
 Metrics/LineLength:
   Max: 220
 
-# Offense count: 18
-# Configuration parameters: CountComments.
-Metrics/MethodLength:
-  Max: 35
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Security/YAMLLoad:

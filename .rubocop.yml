@@ -12,5 +12,9 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
+# TODO: Down it to 30, 3 times more than Rubocop default
+Metrics/MethodLength:
+  Max: 35
+
 Metrics/PerceivedComplexity:
   Enabled: false
