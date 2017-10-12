@@ -84,9 +84,14 @@ EOT
         with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
           to_return(:status => 200, :body => card_body, :headers => {})
 
+      headers = {'Accept' => '*/*; q=0.5, application/xml',
+                 'Accept-Encoding' => 'gzip, deflate',
+                 'Content-Length' => '188',
+                 'Content-Type' => 'multipart/form-data; boundary=470924',
+                 'User-Agent' => 'Ruby'}
+
       stub_request(:post, "https://api.trello.com/1/cards/123/attachments?key=mykey&token=mytoken").
-          with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'Content-Length' => '188', 'Content-Type' => 'multipart/form-data; boundary=470924', 'User-Agent' => 'Ruby'}).
-            to_return(:status => 200, :body => "", :headers => {})
+          with(headers: headers).to_return(:status => 200, :body => "", :headers => {})
 
       path = given_file("attachment-data")
 
@@ -117,8 +122,14 @@ EOF
       stub_request(:get, "https://api.trello.com/1/cards/#{card_id}/attachments?fields=name&key=mykey&token=mytoken").
         with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
           to_return(:status => 200, :body => card_attachments_body, :headers => {})
+      headers = {'Accept' => '*/*; q=0.5, application/xml',
+                 'Accept-Encoding' => 'gzip, deflate',
+                 'Content-Length' => '0',
+                 'Content-Type' => 'application/x-www-form-urlencoded',
+                 'User-Agent' => 'Ruby'}
+
       stub_request(:put, "https://api.trello.com/1/cards/#{card_id}/idAttachmentCover?key=mykey&token=mytoken&value=#{image_id}").
-                 with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'Content-Length' => '0', 'Content-Type' => 'application/x-www-form-urlencoded', 'User-Agent' => 'Ruby'})
+                 with(headers: headers)
     end
 
     it "make the attachment with the file name passed.jpg the cover" do
