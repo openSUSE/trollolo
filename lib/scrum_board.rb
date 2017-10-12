@@ -3,13 +3,13 @@ class ScrumBoard
   class DoneColumnNotFoundError < StandardError; end
   class AcceptedColumnNotFoundError < StandardError; end
 
-  def initialize(board_data, settings)
+  def initialize(board_data, settings = nil)
     @settings = settings
     @board_data = board_data
   end
 
   def columns
-    @columns ||= @board_data["lists"].map{|x| Column.new(@board_data, x["id"])}
+    @columns ||= @board_data["lists"].map{|x| Column.new(@board_data, x["id"], @settings)}
   end
 
   def done_column

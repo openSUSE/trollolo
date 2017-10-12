@@ -5,7 +5,7 @@ describe Card do
   describe "parses name" do
     before(:each) do
       allow_any_instance_of(Card).to receive(:init_data)
-      @card = Card.new(double, double)
+      @card = Card.new(double, double, dummy_settings)
     end
 
     it "extracts single digit story point value from card name" do
@@ -26,6 +26,20 @@ describe Card do
     it "extracts story points when value is not at beginning of card name" do
       allow(@card).to receive(:name).and_return "P01: (3) Refactor cards"
       expect(@card.story_points).to eq(3)
+    end
+  end
+
+  describe "counts checklists" do
+    before(:each) do
+      @card = Card.new({ "cards" => [dummy_card_json] }, "5319c0409a567dc62b68aa6b", dummy_settings)
+    end
+
+    it "counts all checklist items that are marked as no_task_checklists" do
+      expect(@card.tasks).to eq(3)
+    end
+
+    it "counts all closed checklist items that are marked as no_task_checklists" do
+      expect(@card.done_tasks).to eq(1)
     end
   end
 

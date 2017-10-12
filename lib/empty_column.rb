@@ -1,5 +1,5 @@
 class EmptyColumn < Column
-  def initialize
-    super({"lists" => [], "cards" => []}, nil)
+  def initialize(settings = nil)
+    super({"lists" => [], "cards" => []}, nil, settings)
   end
 end

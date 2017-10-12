@@ -15,8 +15,9 @@
 #  To contact SUSE about this file by physical or electronic mail,
 #  you may find current contact information at www.suse.com
 class Column
-  def initialize(board_data, list_id)
+  def initialize(board_data, list_id, settings = nil)
     @board_data = board_data
+    @settings = settings
     @list_data = @board_data["lists"].find{|l| l["id"] == list_id}
   end
 
@@ -60,6 +61,6 @@ class Column
     return @cards if @cards
 
     cards = @board_data["cards"].select{|c| c["idList"] == @list_data["id"]}
-    @cards = cards.map{|c| Card.new(@board_data, c["id"])}
+    @cards = cards.map{|c| Card.new(@board_data, c["id"], @settings)}
   end
 end

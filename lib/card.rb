@@ -20,12 +20,13 @@ class Card
   ESTIMATED_REGEX     = /\(([\d.]+)\)/
   SPRINT_NUMBER_REGEX = /\ASprint (\d+)/
 
-  def initialize(board_data, card_id)
-    init_data(board_data, card_id)
+  def initialize(board_data, card_id, settings = nil)
+    init_data(board_data, card_id, settings)
   end
 
-  def init_data(board_data, card_id)
+  def init_data(board_data, card_id, settings = nil)
     @board_data = board_data
+    @settings = settings
     @card_data = @board_data["cards"].find{|c| c["id"] == card_id}
   end
 
@@ -43,27 +44,11 @@ class Card
   end
 
   def done_tasks
-    count = 0
-    @card_data["checklists"].each do |checklist|
-      if checklist["name"] != "Feedback"
-        checklist["checkItems"].each do |checklist_item|
-          if checklist_item["state"] == "complete"
-            count += 1
-          end
-        end
-      end
-    end
-    count
+    filtered_checklists.map(&:done_tasks).sum
   end
 
   def tasks
-    count = 0
-    @card_data["checklists"].each do |checklist|
-      if checklist["name"] != "Feedback"
-        count += checklist["checkItems"].count
-      end
-    end
-    count
+    filtered_checklists.map(&:tasks).sum
   end
 
   def card_labels
@@ -73,6 +58,12 @@ class Card
   def checklists
     @card_data["checklists"].map do |checklist|
       Checklist.new(checklist)
+    end
+  end
+
+  def filtered_checklists
+    checklists.reject do |checklist|
+      @settings && @settings.no_task_checklists.include?(checklist.name)
     end
   end
 
