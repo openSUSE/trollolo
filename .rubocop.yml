@@ -9,6 +9,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/ClassLength:
+  Enabled: false
+
 Metrics/CyclomaticComplexity:
   Enabled: false
 
