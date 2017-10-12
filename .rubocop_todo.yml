@@ -275,12 +275,6 @@ Lint/UselessAssignment:
 Metrics/ClassLength:
   Max: 328
 
-# Offense count: 135
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 220
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Security/YAMLLoad:
