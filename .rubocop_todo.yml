@@ -270,11 +270,6 @@ Lint/UselessAssignment:
   Exclude:
     - 'spec/unit/support/webmocks.rb'
 
-# Offense count: 41
-# Configuration parameters: CountComments, ExcludedMethods.
-Metrics/BlockLength:
-  Max: 456
-
 # Offense count: 3
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
