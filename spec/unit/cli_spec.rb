@@ -11,31 +11,31 @@ describe Cli do
     @cli = Cli.new
   end
 
-  it "fetches burndown data from board-list" do
+  it 'fetches burndown data from board-list' do
     full_board_mock
     dir = given_directory
-    @cli.options = {"board-list" => "spec/data/board-list.yaml",
-                    "output" => dir}
+    @cli.options = {'board-list' => 'spec/data/board-list.yaml',
+                    'output' => dir}
     @cli.burndowns
-    expect(File.exist?(File.join(dir, "orange/burndown-data-01.yaml")))
-    expect(File.exist?(File.join(dir, "blue/burndown-data-01.yaml")))
+    expect(File.exist?(File.join(dir, 'orange/burndown-data-01.yaml')))
+    expect(File.exist?(File.join(dir, 'blue/burndown-data-01.yaml')))
   end
 
-  it "backups board" do
+  it 'backups board' do
     expect_any_instance_of(Backup).to receive(:backup)
-    @cli.options = {"board-id" => "1234"}
+    @cli.options = {'board-id' => '1234'}
     @cli.backup
   end
 
-  it "backups board using an alias" do
+  it 'backups board using an alias' do
     expect_any_instance_of(Backup).to receive(:backup)
-    @cli.options = {"board-id" => "MyTrelloBoard"}
+    @cli.options = {'board-id' => 'MyTrelloBoard'}
     @cli.backup
   end
 
-  it "gets lists" do
+  it 'gets lists' do
     full_board_mock
-    @cli.options = {"board-id" => "53186e8391ef8671265eba9d"}
+    @cli.options = {'board-id' => '53186e8391ef8671265eba9d'}
     expected_output = <<EOT
 Sprint Backlog
 Doing
@@ -50,15 +50,15 @@ EOT
 
 
     # Using an alias
-    @cli.options = {"board-id" => "MyTrelloBoard"}
+    @cli.options = {'board-id' => 'MyTrelloBoard'}
     expect {
       @cli.get_lists
     }.to output(expected_output).to_stdout
   end
 
-  it "gets cards" do
+  it 'gets cards' do
     full_board_mock
-    @cli.options = {"board-id" => "53186e8391ef8671265eba9d"}
+    @cli.options = {'board-id' => '53186e8391ef8671265eba9d'}
     expected_output = <<EOT
 Sprint 3
 (3) P1: Fill Backlog column
@@ -89,15 +89,15 @@ EOT
     }.to output(expected_output).to_stdout
 
     # Using an alias
-    @cli.options = {"board-id" => "MyTrelloBoard"}
+    @cli.options = {'board-id' => 'MyTrelloBoard'}
     expect {
       @cli.get_cards
     }.to output(expected_output).to_stdout
   end
 
-  it "gets checklists" do
+  it 'gets checklists' do
     full_board_mock
-    @cli.options = {"board-id" => "53186e8391ef8671265eba9d"}
+    @cli.options = {'board-id' => '53186e8391ef8671265eba9d'}
     expected_output = <<EOT
 Tasks
 Tasks
@@ -117,13 +117,13 @@ EOT
     }.to output(expected_output).to_stdout
 
     # Using an alias
-    @cli.options = {"board-id" => "MyTrelloBoard"}
+    @cli.options = {'board-id' => 'MyTrelloBoard'}
     expect {
       @cli.get_checklists
     }.to output(expected_output).to_stdout
   end
 
-  it "gets description" do
+  it 'gets description' do
     body = <<-EOT
 {
   "id": "54ae8485221b1cc5b173e713",
@@ -131,7 +131,7 @@ EOT
 }
 EOT
     stub_request(
-      :get, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713?key=mykey&token=mytoken"
+      :get, 'https://api.trello.com/1/cards/54ae8485221b1cc5b173e713?key=mykey&token=mytoken'
     ).with(
       :headers => {
         'Accept' => '*/*; q=0.5, application/xml',
@@ -139,17 +139,17 @@ EOT
         'User-Agent' => 'Ruby'
       }
     ).to_return(:status => 200, :body => body, :headers => {})
-    @cli.options = {"card-id" => "54ae8485221b1cc5b173e713"}
+    @cli.options = {'card-id' => '54ae8485221b1cc5b173e713'}
     expected_output = "haml\n"
     expect {
       @cli.get_description
     }.to output(expected_output).to_stdout
   end
 
-  it "sets description" do
-    expect(STDIN).to receive(:read).and_return("My description")
+  it 'sets description' do
+    expect(STDIN).to receive(:read).and_return('My description')
     stub_request(
-      :put, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description"
+      :put, 'https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description'
     ).with(
       :headers => {
         'Accept' => '*/*; q=0.5, application/xml',
@@ -158,14 +158,14 @@ EOT
         'Content-Type' => 'application/x-www-form-urlencoded',
         'User-Agent' => 'Ruby'
       }
-    ).to_return(:status => 200, :body => "", :headers => {})
-    @cli.options = {"card-id" => "54ae8485221b1cc5b173e713"}
+    ).to_return(:status => 200, :body => '', :headers => {})
+    @cli.options = {'card-id' => '54ae8485221b1cc5b173e713'}
     @cli.set_description
-    expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description")
+    expect(WebMock).to have_requested(:put, 'https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description')
   end
 
-  it "sets priorities for default planning list", vcr: "prioritize_backlog_list", vcr_record: false do
-    @cli.options = {"board-id" => "neUHHzDo"}
+  it 'sets priorities for default planning list', vcr: 'prioritize_backlog_list', vcr_record: false do
+    @cli.options = {'board-id' => 'neUHHzDo'}
 
     expected_output = <<-EOT
 set priority to 1 for "P1: (2) Document how to run cf-openstack-validator on SUSE"
@@ -187,27 +187,27 @@ EOT
     }.to output(expected_output).to_stdout
   end
 
-  it "sets priorities for specified planning list", vcr: "prioritize_backlog_list", vcr_record: false do
-    @cli.options = {"board-id" => "neUHHzDo", "backlog-list-name" => "Nonexisting List"}
+  it 'sets priorities for specified planning list', vcr: 'prioritize_backlog_list', vcr_record: false do
+    @cli.options = {'board-id' => 'neUHHzDo', 'backlog-list-name' => 'Nonexisting List'}
 
     expect {
       @cli.set_priorities
     }.to raise_error /'Nonexisting List' not found/
   end
 
-  context "#board_id" do
+  context '#board_id' do
     before do
       Cli.settings = Settings.new(
         File.expand_path('../../data/trollolorc_with_board_aliases', __FILE__))
       @cli = Cli.new
     end
 
-    it "returns the id when no alias exists" do
-      expect(@cli.send(:board_id, "1234")).to eq("1234")
+    it 'returns the id when no alias exists' do
+      expect(@cli.send(:board_id, '1234')).to eq('1234')
     end
 
-    it "return the id when an alias exists" do
-      expect(@cli.send(:board_id, "MyTrelloBoard")).to eq("53186e8391ef8671265eba9d")
+    it 'return the id when an alias exists' do
+      expect(@cli.send(:board_id, 'MyTrelloBoard')).to eq('53186e8391ef8671265eba9d')
     end
   end
 end

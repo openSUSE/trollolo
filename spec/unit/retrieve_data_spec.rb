@@ -1,42 +1,42 @@
 require_relative 'spec_helper'
 
-describe "retrieve data through Trello API" do
+describe 'retrieve data through Trello API' do
   before(:each) do
     full_board_mock
     trello_wrapper = TrelloWrapper.new(dummy_settings)
-    @board = trello_wrapper.board("53186e8391ef8671265eba9d")
+    @board = trello_wrapper.board('53186e8391ef8671265eba9d')
   end
 
-  describe "board" do
-    it "gets id" do
-      expect(@board.id).to eq("53186e8391ef8671265eba9d")
+  describe 'board' do
+    it 'gets id' do
+      expect(@board.id).to eq('53186e8391ef8671265eba9d')
     end
 
-    it "gets columns" do
+    it 'gets columns' do
       columns = @board.columns
       expect(columns.count).to eq(6)
-      expect(columns[0].name).to eq("Sprint Backlog")
+      expect(columns[0].name).to eq('Sprint Backlog')
     end
 
-    it "gets cards" do
+    it 'gets cards' do
       cards = @board.columns[0].cards
       expect(cards.count).to eq(6)
-      expect(cards[0].name).to eq("Sprint 3")
+      expect(cards[0].name).to eq('Sprint 3')
     end
 
-    it "gets checklist item counts" do
+    it 'gets checklist item counts' do
       card = @board.columns[1].cards[0]
       expect(card.tasks).to eq(2)
       expect(card.done_tasks).to eq(1)
     end
 
-    it "gets card labels" do
+    it 'gets card labels' do
       card = @board.columns[0].cards[5]
       expect(card.card_labels.count).to eq(1)
-      expect(card.card_labels[0]["name"]).to eq("Under waterline")
+      expect(card.card_labels[0]['name']).to eq('Under waterline')
     end
 
-    it "gets card description" do
+    it 'gets card description' do
       card = @board.columns[2].cards[1]
       expected_desc = <<EOT
 ```yaml

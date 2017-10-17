@@ -4,12 +4,12 @@ include GivenFilesystemSpecHelpers
 
 describe TrelloWrapper do
 
-  let!(:settings){ double('settings', developer_public_key: "mykey", member_token: "mytoken") }
+  let!(:settings){ double('settings', developer_public_key: 'mykey', member_token: 'mytoken') }
   subject { described_class.new(settings) }
 
   before do
-    stub_request(:get, "https://api.trello.com/1/boards/myboard?cards=open&key=mykey&lists=open&token=mytoken").
-        to_return(:status => 200, :body => load_test_file("board.json"), :headers => {})
+    stub_request(:get, 'https://api.trello.com/1/boards/myboard?cards=open&key=mykey&lists=open&token=mytoken').
+        to_return(:status => 200, :body => load_test_file('board.json'), :headers => {})
     full_board_mock
   end
 
@@ -30,26 +30,26 @@ describe TrelloWrapper do
     end
 
     it 'finds board via Trello' do
-      subject.board("myboard")
+      subject.board('myboard')
     end
 
     it 'instantiate ScrumBoard with trello board and settings' do
       expect(ScrumBoard).to receive(:new).with(:board, subject.instance_variable_get(:@settings))
-      subject.board("myboard")
+      subject.board('myboard')
     end
 
     it 'returns instance of a ScrumBoard' do
-      expect(subject.board("myboard")).to be_instance_of(ScrumBoard)
+      expect(subject.board('myboard')).to be_instance_of(ScrumBoard)
     end
 
     it 'memoize board object' do
-      expect(subject.board("myboard")).to be subject.board("myboard")
+      expect(subject.board('myboard')).to be subject.board('myboard')
     end
   end
 
   describe '#backup' do
     it 'raises an error for empty board id' do
-      expect { subject.backup("") }.to raise_error(TrolloloError)
+      expect { subject.backup('') }.to raise_error(TrolloloError)
     end
 
     it 'raises an error for nil board id' do
@@ -70,7 +70,7 @@ describe TrelloWrapper do
   describe '#add_attachment' do
     use_given_filesystem
 
-    it "uploads attachment" do
+    it 'uploads attachment' do
       srand(1) # Make sure multipart boundary is always the same
 
       card_body = <<EOT
@@ -80,7 +80,7 @@ describe TrelloWrapper do
 }
 EOT
 
-      stub_request(:get, "https://api.trello.com/1/cards/123?key=mykey&token=mytoken").
+      stub_request(:get, 'https://api.trello.com/1/cards/123?key=mykey&token=mytoken').
         with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
           to_return(:status => 200, :body => card_body, :headers => {})
 
@@ -90,19 +90,19 @@ EOT
                  'Content-Type' => 'multipart/form-data; boundary=470924',
                  'User-Agent' => 'Ruby'}
 
-      stub_request(:post, "https://api.trello.com/1/cards/123/attachments?key=mykey&token=mytoken").
-          with(headers: headers).to_return(:status => 200, :body => "", :headers => {})
+      stub_request(:post, 'https://api.trello.com/1/cards/123/attachments?key=mykey&token=mytoken').
+          with(headers: headers).to_return(:status => 200, :body => '', :headers => {})
 
-      path = given_file("attachment-data")
+      path = given_file('attachment-data')
 
-      subject.add_attachment("123", path)
+      subject.add_attachment('123', path)
     end
   end
 
-  describe "#make_cover" do
-    let(:card_id) { "c133a484cff21c7a33ff031f" }
-    let(:image_id) { "484cff21c7a33ff031f997a" }
-    let(:image_name) { "passed.jpg" }
+  describe '#make_cover' do
+    let(:card_id) { 'c133a484cff21c7a33ff031f' }
+    let(:image_id) { '484cff21c7a33ff031f997a' }
+    let(:image_name) { 'passed.jpg' }
     let(:client) { double }
     let(:card_attachments_body) { <<-EOF
       [
@@ -132,13 +132,13 @@ EOF
                  with(headers: headers)
     end
 
-    it "make the attachment with the file name passed.jpg the cover" do
+    it 'make the attachment with the file name passed.jpg the cover' do
      subject.make_cover(card_id, image_name)
      expect(WebMock).to have_requested(:put, "https://api.trello.com/1/cards/#{card_id}/idAttachmentCover?key=mykey&token=mytoken&value=#{image_id}")
     end
 
-    it "shows an error if the file was not found in the attachment list" do
-      expect { subject.make_cover(card_id, "non_existing_file.jpg") }.to raise_error(/non_existing_file.jpg/)
+    it 'shows an error if the file was not found in the attachment list' do
+      expect { subject.make_cover(card_id, 'non_existing_file.jpg') }.to raise_error(/non_existing_file.jpg/)
     end
   end
 end

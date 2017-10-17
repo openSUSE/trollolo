@@ -502,26 +502,6 @@ Style/SignalException:
     - 'lib/scrum/sprint_cleaner.rb'
     - 'spec/unit/support/vcr.rb'
 
-# Offense count: 943
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiteralsInInterpolation:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/cli.rb'
-    - 'lib/scrum/sprint_cleaner.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
-    - 'spec/integration/wrapper/empty_config_trollolo_wrapper'
-    - 'spec/integration/wrapper/trollolo_wrapper'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: MinSize, SupportedStyles.

@@ -52,37 +52,37 @@ class BurndownData
 
   def to_hash
     base = {
-      "date" => date_time.to_date.to_s,
-      "updated_at" => date_time.to_s,
-      "story_points" => {
-        "total" => story_points.total,
-        "open" => story_points.open
+      'date' => date_time.to_date.to_s,
+      'updated_at' => date_time.to_s,
+      'story_points' => {
+        'total' => story_points.total,
+        'open' => story_points.open
       },
-      "tasks" => {
-        "total" => tasks.total,
-        "open" => tasks.open
+      'tasks' => {
+        'total' => tasks.total,
+        'open' => tasks.open
       },
-      "story_points_extra" => {
-        "done" => extra_story_points.done
+      'story_points_extra' => {
+        'done' => extra_story_points.done
       },
-      "tasks_extra" => {
-        "done" => extra_tasks.done
+      'tasks_extra' => {
+        'done' => extra_tasks.done
       }
     }
     if fast_lane_cards.total > 0
-      base["fast_lane"] = {
-        "total" => fast_lane_cards.total,
-        "open" => fast_lane_cards.open
+      base['fast_lane'] = {
+        'total' => fast_lane_cards.total,
+        'open' => fast_lane_cards.open
       }
     end
     if unplanned_story_points.total > 0
-      base["unplanned_story_points"] = {
-        "total" => unplanned_story_points.total,
-        "open" => unplanned_story_points.open
+      base['unplanned_story_points'] = {
+        'total' => unplanned_story_points.total,
+        'open' => unplanned_story_points.open
       }
-      base["unplanned_tasks"] = {
-        "total" => unplanned_tasks.total,
-        "open" => unplanned_tasks.open
+      base['unplanned_tasks'] = {
+        'total' => unplanned_tasks.total,
+        'open' => unplanned_tasks.open
       }
     end
     base

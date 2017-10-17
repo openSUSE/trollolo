@@ -24,53 +24,53 @@ class BurndownChart
     @settings = settings
 
     @data = {
-      "meta" => {
-        "board_id" => nil,
-        "sprint" => 1,
-        "total_days" => 10,
-        "weekend_lines" => [ 3.5, 8.5 ]
+      'meta' => {
+        'board_id' => nil,
+        'sprint' => 1,
+        'total_days' => 10,
+        'weekend_lines' => [ 3.5, 8.5 ]
       },
-      "days" => []
+      'days' => []
     }
   end
 
   def sprint
-    @data["meta"]["sprint"]
+    @data['meta']['sprint']
   end
 
   def sprint= s
-    @data["meta"]["sprint"] = s
+    @data['meta']['sprint'] = s
   end
 
   def board_id
-    @data["meta"]["board_id"]
+    @data['meta']['board_id']
   end
 
   def board_id= id
-    @data["meta"]["board_id"] = id
+    @data['meta']['board_id'] = id
   end
 
   def days
-    @data["days"]
+    @data['days']
   end
 
   def merge_meta_data_from_board(burndown_data)
     if burndown_data.meta
       m = burndown_data.meta
-      if m["sprint"] == @data["meta"]["sprint"].to_i
-        @data["meta"] = @data["meta"].merge(m)
+      if m['sprint'] == @data['meta']['sprint'].to_i
+        @data['meta'] = @data['meta'].merge(m)
       end
     end
   end
 
   def replace_entry(date, new_entry)
     days.each_with_index do |entry, idx|
-      days[idx] = new_entry if entry["date"] == date.to_s
+      days[idx] = new_entry if entry['date'] == date.to_s
     end
   end
 
   def entry_exists?(date)
-    days.any? { |entry| entry["date"] == date.to_s }
+    days.any? { |entry| entry['date'] == date.to_s }
   end
 
   def add_data(burndown_data)
@@ -84,23 +84,23 @@ class BurndownChart
 
   def read_data filename
     @data = YAML.load_file filename
-    not_done_columns = @data["meta"]["not_done_columns"]
+    not_done_columns = @data['meta']['not_done_columns']
     if not_done_columns
       @settings.not_done_columns = not_done_columns
     end
   end
 
   def write_data filename
-    @data["days"].each do |day|
-      [ "story_points_extra", "tasks_extra" ].each do |key|
-        if day[key] && day[key]["done"] == 0
+    @data['days'].each do |day|
+      [ 'story_points_extra', 'tasks_extra' ].each do |key|
+        if day[key] && day[key]['done'] == 0
           day.delete key
         end
       end
     end
 
     begin
-      File.open( filename, "w" ) do |file|
+      File.open( filename, 'w' ) do |file|
         file.write @data.to_yaml
       end
     rescue Errno::ENOENT
@@ -133,7 +133,7 @@ class BurndownChart
 
 
   def burndown_data_filename
-    "burndown-data-#{sprint.to_s.rjust(2, "0")}.yaml"
+    "burndown-data-#{sprint.to_s.rjust(2, '0')}.yaml"
   end
 
   def setup(burndown_dir, board_id)
@@ -225,9 +225,9 @@ class BurndownChart
   def create_next_sprint(burndown_dir, options = {})
     load_sprint(burndown_dir)
     self.sprint = options[:sprint_number] || (self.sprint + 1)
-    @data["meta"]["total_days"] = options[:total_days] if options[:total_days]
-    @data["meta"]["weekend_lines"] = options[:weekend_lines] unless options[:weekend_lines].blank?
-    @data["days"] = []
+    @data['meta']['total_days'] = options[:total_days] if options[:total_days]
+    @data['meta']['weekend_lines'] = options[:weekend_lines] unless options[:weekend_lines].blank?
+    @data['days'] = []
     write_data File.join(burndown_dir, burndown_data_filename)
   end
 

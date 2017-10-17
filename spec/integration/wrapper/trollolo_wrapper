@@ -3,8 +3,8 @@
 test_config_path = File.expand_path('../../../data/trollolorc', __FILE__)
 bin_path = File.expand_path('../../../../bin/trollolo', __FILE__)
 
-ENV["TROLLOLO_CONFIG_PATH"] = test_config_path
+ENV['TROLLOLO_CONFIG_PATH'] = test_config_path
 
-cmd = "#{bin_path} #{ARGV.join(" ")}"
+cmd = "#{bin_path} #{ARGV.join(' ')}"
 
 exec(cmd)

@@ -6,7 +6,7 @@ class Backup
 
   def initialize settings
     @settings = settings
-    @directory = File.expand_path("~/.trollolo/backup")
+    @directory = File.expand_path('~/.trollolo/backup')
   end
 
   def backup(board_id)
@@ -17,7 +17,7 @@ class Backup
 
     data = trello.backup(board_id)
 
-    File.open(File.join(backup_path, "board.json"), "w") do |f|
+    File.open(File.join(backup_path, 'board.json'), 'w') do |f|
       f.write(data)
     end
   end
@@ -31,35 +31,35 @@ class Backup
 
     backup_path = File.join(@directory, board_id)
 
-    board = JSON.parse(File.read(File.join(backup_path, "board.json")))
+    board = JSON.parse(File.read(File.join(backup_path, 'board.json')))
 
-    out.puts board["name"]
+    out.puts board['name']
 
     lists = {}
-    board["lists"].each do |list|
-      lists[list["id"]] = []
+    board['lists'].each do |list|
+      lists[list['id']] = []
     end
-    board["cards"].each do |card|
-      if lists[card["idList"]]
-        lists[card["idList"]].push(card)
+    board['cards'].each do |card|
+      if lists[card['idList']]
+        lists[card['idList']].push(card)
       end
     end
 
-    board["lists"].each do |list|
+    board['lists'].each do |list|
       out.puts "  #{list['name']}"
-      lists[list["id"]].each do |card|
-        out.puts "    " + card["name"]
-        if options["show-descriptions"]
-          if !card["desc"].empty?
-            out.puts "      Description"
-            out.puts "        " + card["desc"]
+      lists[list['id']].each do |card|
+        out.puts '    ' + card['name']
+        if options['show-descriptions']
+          if !card['desc'].empty?
+            out.puts '      Description'
+            out.puts '        ' + card['desc']
           end
         end
-        card["checklists"].each do |checklist|
-          out.puts "      " + checklist["name"]
-          checklist["checkItems"].each do |checklist_item|
-            out.puts "        " + checklist_item["name"] + " (" +
-              checklist_item["state"] + ")"
+        card['checklists'].each do |checklist|
+          out.puts '      ' + checklist['name']
+          checklist['checkItems'].each do |checklist_item|
+            out.puts '        ' + checklist_item['name'] + ' (' +
+              checklist_item['state'] + ')'
           end
         end
       end

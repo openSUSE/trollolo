@@ -27,7 +27,7 @@ class Card
   def init_data(board_data, card_id, settings = nil)
     @board_data = board_data
     @settings = settings
-    @card_data = @board_data["cards"].find{|c| c["id"] == card_id}
+    @card_data = @board_data['cards'].find{|c| c['id'] == card_id}
   end
 
   def as_json
@@ -52,11 +52,11 @@ class Card
   end
 
   def card_labels
-    @card_data["labels"]
+    @card_data['labels']
   end
 
   def checklists
-    @card_data["checklists"].map do |checklist|
+    @card_data['checklists'].map do |checklist|
       Checklist.new(checklist)
     end
   end
@@ -68,7 +68,7 @@ class Card
   end
 
   def desc
-    @card_data["desc"]
+    @card_data['desc']
   end
 
   def extra?
@@ -110,14 +110,14 @@ class Card
   end
 
   def name
-    @card_data["name"]
+    @card_data['name']
   end
 
   def name=(str)
-    @card_data["name"] = str
+    @card_data['name'] = str
   end
 
   def id
-    @card_data["id"]
+    @card_data['id']
   end
 end
