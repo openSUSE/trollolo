@@ -91,7 +91,14 @@ the generated data and results to make it even more automatic.
 
 The work flow goes as follows:
 
-Create an initial working directory for the burndown chart generation:
+Start the workflow by using the current directory as working directory and
+initialize it for the burndown chart generation:
+
+    trollolo burndown-init --board-id=MYBOARDID
+
+By default, trollolo uses the current directory as working directory, if you
+want to specify another directory as working directory, use the `--output`
+option as follows:
 
     trollolo burndown-init --board-id=MYBOARDID --output=WORKING_DIR
 
