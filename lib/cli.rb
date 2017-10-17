@@ -145,7 +145,7 @@ EOT
         destdir = name
       end
       chart = BurndownChart.new @@settings
-      if !File.directory?(destdir)
+      unless File.directory?(destdir)
         chart.setup(destdir, board['boardid'])
       end
       chart.update({'output' => destdir, plot: options[:plot]})
@@ -376,13 +376,13 @@ EOT
   def require_trello_credentials
     write_back = false
 
-    if !@@settings.developer_public_key
+    unless @@settings.developer_public_key
       puts 'Put in Trello developer public key:'
       @@settings.developer_public_key = STDIN.gets.chomp
       write_back = true
     end
 
-    if !@@settings.member_token
+    unless @@settings.member_token
       puts 'Put in Trello member token:'
       @@settings.member_token = STDIN.gets.chomp
       write_back = true

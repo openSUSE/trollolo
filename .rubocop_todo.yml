@@ -340,17 +340,6 @@ Style/MultilineBlockChain:
   Exclude:
     - 'lib/cli.rb'
 
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: both, prefix, postfix
-Style/NegatedIf:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/cli.rb'
-    - 'lib/trello_wrapper.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, MinBodyLength, SupportedStyles.

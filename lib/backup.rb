@@ -50,7 +50,7 @@ class Backup
       lists[list['id']].each do |card|
         out.puts '    ' + card['name']
         if options['show-descriptions']
-          if !card['desc'].empty?
+          unless card['desc'].empty?
             out.puts '      Description'
             out.puts '        ' + card['desc']
           end
