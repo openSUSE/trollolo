@@ -311,14 +311,6 @@ Style/ConditionalAssignment:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: empty, nil, both
-Style/EmptyElse:
-  Exclude:
-    - 'lib/trello_wrapper.rb'
-
 # Offense count: 8
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:

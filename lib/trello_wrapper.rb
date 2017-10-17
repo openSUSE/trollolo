@@ -54,11 +54,7 @@ class TrelloWrapper < TrelloService
   def attachment_id_by_name(card_id, image_name)
     json = JSON.parse(client.get("/cards/#{card_id}/attachments?fields=name"))
     attachment = json.find{ |e| e['name'] == image_name }
-    if attachment
-      attachment['id']
-    else
-      nil
-    end
+    attachment['id'] if attachment
   end
 
   def get_description(card_id)
