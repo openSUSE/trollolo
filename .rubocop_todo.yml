@@ -340,12 +340,6 @@ Style/MultilineBlockChain:
   Exclude:
     - 'lib/cli.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MutableConstant:
-  Exclude:
-    - 'lib/version.rb'
-
 # Offense count: 7
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
