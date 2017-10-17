@@ -441,11 +441,3 @@ Style/TrailingCommaInLiteral:
 Style/UnneededInterpolation:
   Exclude:
     - 'spec/integration/command_line_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles, WordRegex.
-# SupportedStyles: percent, brackets
-Style/WordArray:
-  EnforcedStyle: percent
-  MinSize: 3
