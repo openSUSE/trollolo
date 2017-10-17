@@ -1,24 +1,24 @@
 #!/usr/bin/env ruby
 
-require "json"
+require 'json'
 
-require_relative "webmocks"
+require_relative 'webmocks'
 
-trollolo_bin = File.expand_path("../../../../bin/trollolo", __FILE__)
-spec_data_dir = File.expand_path("../../../data", __FILE__)
+trollolo_bin = File.expand_path('../../../../bin/trollolo', __FILE__)
+spec_data_dir = File.expand_path('../../../data', __FILE__)
 
-STDERR.puts "Updating web mock data"
+STDERR.puts 'Updating web mock data'
 
 def scrub_file(file)
   json = JSON.parse(File.read(file))
-  if json.is_a?(Hash) && json.has_key?("cards")
-    json["cards"].each do |card|
-      if card.has_key?("email")
-        card["email"] = "trello@example.com"
+  if json.is_a?(Hash) && json.has_key?('cards')
+    json['cards'].each do |card|
+      if card.has_key?('email')
+        card['email'] = 'trello@example.com'
       end
     end
   end
-  File.open(file, "w") do |f|
+  File.open(file, 'w') do |f|
     f.write(JSON.pretty_generate(json))
   end
 end

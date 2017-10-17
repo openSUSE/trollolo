@@ -9,7 +9,7 @@ class ScrumBoard
   end
 
   def columns
-    @columns ||= @board_data["lists"].map{|x| Column.new(@board_data, x["id"], @settings)}
+    @columns ||= @board_data['lists'].map{|x| Column.new(@board_data, x['id'], @settings)}
   end
 
   def done_column
@@ -138,7 +138,7 @@ class ScrumBoard
   end
 
   def id
-    @board_data["id"]
+    @board_data['id']
   end
 
   def cards

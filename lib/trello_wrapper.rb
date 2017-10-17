@@ -42,7 +42,7 @@ class TrelloWrapper < TrelloService
 
   def add_attachment(card_id, filename)
     card = Trello::Card.find(card_id)
-    card.add_attachment(File.open(filename, "rb"))
+    card.add_attachment(File.open(filename, 'rb'))
   end
 
   def make_cover(card_id, image_name)
@@ -53,9 +53,9 @@ class TrelloWrapper < TrelloService
 
   def attachment_id_by_name(card_id, image_name)
     json = JSON.parse(client.get("/cards/#{card_id}/attachments?fields=name"))
-    attachment = json.find{ |e| e["name"] == image_name }
+    attachment = json.find{ |e| e['name'] == image_name }
     if attachment
-      attachment["id"]
+      attachment['id']
     else
       nil
     end
@@ -79,7 +79,7 @@ class TrelloWrapper < TrelloService
   end
 
   def get_board(board_id)
-    raise TrolloloError.new("Board id cannot be blank") if board_id.blank?
+    raise TrolloloError.new('Board id cannot be blank') if board_id.blank?
 
     client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
   end

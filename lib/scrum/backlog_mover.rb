@@ -15,7 +15,7 @@ module Scrum
       fail "sprint board is missing #{@sprint_board.backlog_list_name} list" unless @sprint_board.backlog_list
 
       @planning_board = planning_board(planning_board_id)
-      fail "backlog list not found on planning board" unless @planning_board.backlog_list
+      fail 'backlog list not found on planning board' unless @planning_board.backlog_list
 
       @waterline_card = @planning_board.waterline_card
       @seabed_card = @planning_board.seabed_card
@@ -27,7 +27,7 @@ module Scrum
           break
         elsif @waterline_card && card == @waterline_card
           @sprint_board.place_waterline(@waterline_card)
-          puts "under the waterline"
+          puts 'under the waterline'
         else
           move_sprint_card(card) unless @planning_board.sticky?(card)
         end

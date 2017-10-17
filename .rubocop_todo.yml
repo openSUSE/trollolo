@@ -502,13 +502,6 @@ Style/SignalException:
     - 'lib/scrum/sprint_cleaner.rb'
     - 'spec/unit/support/vcr.rb'
 
-# Offense count: 943
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 7
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

@@ -1,50 +1,50 @@
-require_relative "spec_helper"
+require_relative 'spec_helper'
 
 describe Card do
 
-  describe "parses name" do
+  describe 'parses name' do
     before(:each) do
       allow_any_instance_of(Card).to receive(:init_data)
       @card = Card.new(double, double, dummy_settings)
     end
 
-    it "extracts single digit story point value from card name" do
-      allow(@card).to receive(:name).and_return("(3) P1: Refactor cards")
+    it 'extracts single digit story point value from card name' do
+      allow(@card).to receive(:name).and_return('(3) P1: Refactor cards')
       expect(@card.story_points).to eq(3)
     end
 
-    it "extracts double digit story point value from card name" do
-      allow(@card).to receive(:name).and_return "(13) P1: Refactor cards"
+    it 'extracts double digit story point value from card name' do
+      allow(@card).to receive(:name).and_return '(13) P1: Refactor cards'
       expect(@card.story_points).to eq(13)
     end
 
-    it "extracts fractional story point value from card name" do
-      allow(@card).to receive(:name).and_return "(0.5) P1: Refactor cards"
+    it 'extracts fractional story point value from card name' do
+      allow(@card).to receive(:name).and_return '(0.5) P1: Refactor cards'
       expect(@card.story_points).to eq(0.5)
     end
 
-    it "extracts story points when value is not at beginning of card name" do
-      allow(@card).to receive(:name).and_return "P01: (3) Refactor cards"
+    it 'extracts story points when value is not at beginning of card name' do
+      allow(@card).to receive(:name).and_return 'P01: (3) Refactor cards'
       expect(@card.story_points).to eq(3)
     end
   end
 
-  describe "counts checklists" do
+  describe 'counts checklists' do
     before(:each) do
-      @card = Card.new({ "cards" => [dummy_card_json] }, "5319c0409a567dc62b68aa6b", dummy_settings)
+      @card = Card.new({ 'cards' => [dummy_card_json] }, '5319c0409a567dc62b68aa6b', dummy_settings)
     end
 
-    it "counts all checklist items that are marked as no_task_checklists" do
+    it 'counts all checklist items that are marked as no_task_checklists' do
       expect(@card.tasks).to eq(3)
     end
 
-    it "counts all closed checklist items that are marked as no_task_checklists" do
+    it 'counts all closed checklist items that are marked as no_task_checklists' do
       expect(@card.done_tasks).to eq(1)
     end
   end
 
-  describe "#parse_yaml_from_description" do
-    it "parses description only having YAML" do
+  describe '#parse_yaml_from_description' do
+    it 'parses description only having YAML' do
       description = <<EOT
 ```yaml
 total_days: 18
@@ -54,11 +54,11 @@ weekend_lines:
 ```
 EOT
       meta = Card.parse_yaml_from_description(description)
-      expect(meta["total_days"]).to eq(18)
-      expect(meta["weekend_lines"]).to eq([1.5, 6.5])
+      expect(meta['total_days']).to eq(18)
+      expect(meta['weekend_lines']).to eq([1.5, 6.5])
     end
 
-    it "parses description only having unmarked YAML" do
+    it 'parses description only having unmarked YAML' do
       description = <<EOT
 ```
 total_days: 18
@@ -68,11 +68,11 @@ weekend_lines:
 ```
 EOT
       meta = Card.parse_yaml_from_description(description)
-      expect(meta["total_days"]).to eq(18)
-      expect(meta["weekend_lines"]).to eq([1.5, 6.5])
+      expect(meta['total_days']).to eq(18)
+      expect(meta['weekend_lines']).to eq([1.5, 6.5])
     end
 
-    it "parses description having YAML and text" do
+    it 'parses description having YAML and text' do
       description = <<EOT
 This is some text
 
@@ -86,18 +86,18 @@ weekend_lines:
 And more text.
 EOT
       meta = Card.parse_yaml_from_description(description)
-      expect(meta["total_days"]).to eq(18)
-      expect(meta["weekend_lines"]).to eq([1.5, 6.5])
+      expect(meta['total_days']).to eq(18)
+      expect(meta['weekend_lines']).to eq([1.5, 6.5])
     end
   end
 
-  describe "gets raw JSON" do
-    it "for cards" do
+  describe 'gets raw JSON' do
+    it 'for cards' do
       @settings = dummy_settings
       full_board_mock
 
       trello = TrelloWrapper.new(@settings)
-      board = trello.board("53186e8391ef8671265eba9d")
+      board = trello.board('53186e8391ef8671265eba9d')
 
       expected_json = <<EOT
 {

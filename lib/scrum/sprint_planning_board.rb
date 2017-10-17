@@ -6,7 +6,7 @@ module Scrum
 
     def initialize(settings)
       @settings = settings
-      @backlog_list_name = settings.list_names["planning_backlog"]
+      @backlog_list_name = settings.list_names['planning_backlog']
     end
 
     attr_accessor :backlog_list

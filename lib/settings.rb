@@ -28,16 +28,16 @@ class Settings
       @config = YAML.load_file(config_file_path)
 
       if @config
-        @developer_public_key       = @config["developer_public_key"]
-        @member_token               = @config["member_token"]
-        @board_aliases              = @config["board_aliases"] || {}
-        @scrum                      = OpenStruct.new(@config["scrum"] || scrum_defaults)
-        @not_done_columns           = @config["not_done_columns"].freeze || ["Sprint Backlog", "Doing"]
-        @no_task_checklists         = @config["no_task_checklists"].freeze || ["Feedback"]
-        @todo_column                = @config["todo_column"].freeze
-        @done_column_name_regex     = @config["done_column_name_regex"].freeze || /\ADone/
-        @accepted_column_name_regex = @config["accepted_column_name_regex"].freeze || /\AAccepted/
-        @todo_column_name_regex     = @config["todo_column_name_regex"].freeze || /\ATo Do\Z/
+        @developer_public_key       = @config['developer_public_key']
+        @member_token               = @config['member_token']
+        @board_aliases              = @config['board_aliases'] || {}
+        @scrum                      = OpenStruct.new(@config['scrum'] || scrum_defaults)
+        @not_done_columns           = @config['not_done_columns'].freeze || ['Sprint Backlog', 'Doing']
+        @no_task_checklists         = @config['no_task_checklists'].freeze || ['Feedback']
+        @todo_column                = @config['todo_column'].freeze
+        @done_column_name_regex     = @config['done_column_name_regex'].freeze || /\ADone/
+        @accepted_column_name_regex = @config['accepted_column_name_regex'].freeze || /\AAccepted/
+        @todo_column_name_regex     = @config['todo_column_name_regex'].freeze || /\ATo Do\Z/
       else
         raise "Couldn't read config data from '#{config_file_path}'"
       end
@@ -49,10 +49,10 @@ class Settings
 
   def save_config
     @config = {}
-    @config["developer_public_key"] = @developer_public_key
-    @config["member_token"] = @member_token
+    @config['developer_public_key'] = @developer_public_key
+    @config['member_token'] = @member_token
 
-    File.open(@config_file_path, "w") do |f|
+    File.open(@config_file_path, 'w') do |f|
       f.write(@config.to_yaml)
     end
   end
@@ -65,20 +65,20 @@ class Settings
 
   def scrum_defaults
     {
-      "board_names" => {
-        "planning" => "Planning Board",
-        "sprint" => "Sprint Board"
+      'board_names' => {
+        'planning' => 'Planning Board',
+        'sprint' => 'Sprint Board'
       },
-      "label_names" => {
-        "sticky" => "Sticky",
-        "waterline" => "Under waterline"
+      'label_names' => {
+        'sticky' => 'Sticky',
+        'waterline' => 'Under waterline'
       },
-      "list_names" => {
-        "sprint_backlog" => "Sprint Backlog",
-        "sprint_qa" => "QA",
-        "sprint_doing" => "Doing",
-        "planning_backlog" => "Backlog",
-        "planning_ready" => "Ready for Estimation"
+      'list_names' => {
+        'sprint_backlog' => 'Sprint Backlog',
+        'sprint_qa' => 'QA',
+        'sprint_doing' => 'Doing',
+        'planning_backlog' => 'Backlog',
+        'planning_ready' => 'Ready for Estimation'
       },
     }.freeze
   end

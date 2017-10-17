@@ -18,7 +18,7 @@ module Scrum
     private
 
     def target_list
-      @target_list ||= @target_board.lists.find { |l| l.name == @settings.scrum.list_names["planning_ready"] }
+      @target_list ||= @target_board.lists.find { |l| l.name == @settings.scrum.list_names['planning_ready'] }
     end
 
     def waterline_label(card)

@@ -18,11 +18,11 @@ class Column
   def initialize(board_data, list_id, settings = nil)
     @board_data = board_data
     @settings = settings
-    @list_data = @board_data["lists"].find{|l| l["id"] == list_id}
+    @list_data = @board_data['lists'].find{|l| l['id'] == list_id}
   end
 
   def name
-    @list_data["name"]
+    @list_data['name']
   end
 
   def estimated_cards
@@ -60,7 +60,7 @@ class Column
   def cards
     return @cards if @cards
 
-    cards = @board_data["cards"].select{|c| c["idList"] == @list_data["id"]}
-    @cards = cards.map{|c| Card.new(@board_data, c["id"], @settings)}
+    cards = @board_data['cards'].select{|c| c['idList'] == @list_data['id']}
+    @cards = cards.map{|c| Card.new(@board_data, c['id'], @settings)}
   end
 end

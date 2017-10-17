@@ -18,12 +18,12 @@
 
 require_relative '../lib/trollolo'
 
-config_path = ENV["TROLLOLO_CONFIG_PATH"] || File.expand_path("~/.trollolorc")
+config_path = ENV['TROLLOLO_CONFIG_PATH'] || File.expand_path('~/.trollolorc')
 
 Cli.settings = Settings.new(config_path)
 
 # Set debug flag, so thor throws exceptions on error
-ENV["THOR_DEBUG"] = "1"
+ENV['THOR_DEBUG'] = '1'
 begin
   Cli.check_unknown_options!
   Cli.start

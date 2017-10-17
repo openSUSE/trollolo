@@ -14,7 +14,7 @@ module Scrum
     end
 
     def backlog_list_name
-      @settings.list_names["sprint_backlog"]
+      @settings.list_names['sprint_backlog']
     end
 
     def doing_list
@@ -74,15 +74,15 @@ module Scrum
     end
 
     def waterline_label_name
-      @settings.label_names["waterline"]
+      @settings.label_names['waterline']
     end
 
     def qa_list_name
-      @settings.list_names["sprint_qa"]
+      @settings.list_names['sprint_qa']
     end
 
     def doing_list_name
-      @settings.list_names["sprint_doing"]
+      @settings.list_names['sprint_doing']
     end
   end
 end
