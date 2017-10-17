@@ -21,6 +21,8 @@ Metrics/LineLength:
 # TODO: Down it to 30, 3 times more than Rubocop default
 Metrics/MethodLength:
   Max: 35
+  Exclude:
+    - 'spec/unit/support/webmocks.rb'
 
 Metrics/PerceivedComplexity:
   Enabled: false

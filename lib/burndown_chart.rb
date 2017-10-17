@@ -195,6 +195,7 @@ class BurndownChart
   def update(options)
     burndown_data_path = load_sprint(options['output'] || Dir.pwd, options[:sprint_number])
 
+    @data['meta']['board_id'] = options['board-id'] if options.has_key?('board-id')
     burndown_data = BurndownData.new(@settings)
     burndown_data.board_id = board_id
     burndown_data.fetch

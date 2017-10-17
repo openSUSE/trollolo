@@ -408,7 +408,7 @@ EOT
 
     describe 'update' do
       let(:path) { given_directory_from_data('burndown_dir') }
-      let(:options) { {'output' => path} }
+      let(:options) { {'output' => path, 'board-id' => '7Zar7bNm'} }
       let(:before) { BurndownChart.new(@settings) }
       let(:after) { BurndownChart.new(@settings) }
 
@@ -432,6 +432,11 @@ EOT
         @chart.update(options)
         after.read_data(File.join(path, 'burndown-data-02.yaml'))
         expect(after.days.size).to eq before.days.size + 1
+      end
+
+      it 'uses provided board-id' do
+        @chart.update(options)
+        expect(@chart.board_id).to eq '7Zar7bNm'
       end
     end
 

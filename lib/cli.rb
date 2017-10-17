@@ -175,6 +175,7 @@ EOT
   option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean
   option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
   option 'push-to-api', desc: 'Push collected data to api endpoint (in json)', required: false
+  option 'board-id', desc: 'Id of Trello Board'
   def burndown
     process_global_options options
     require_trello_credentials
