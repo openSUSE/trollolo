@@ -9,7 +9,7 @@ describe TrelloWrapper do
 
   before do
     stub_request(:get, 'https://api.trello.com/1/boards/myboard?cards=open&key=mykey&lists=open&token=mytoken').
-        to_return(:status => 200, :body => load_test_file('board.json'), :headers => {})
+        to_return(status: 200, body: load_test_file('board.json'), headers: {})
     full_board_mock
   end
 
@@ -81,8 +81,8 @@ describe TrelloWrapper do
 EOT
 
       stub_request(:get, 'https://api.trello.com/1/cards/123?key=mykey&token=mytoken').
-        with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
-          to_return(:status => 200, :body => card_body, :headers => {})
+        with(headers: {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
+          to_return(status: 200, body: card_body, headers: {})
 
       headers = {'Accept' => '*/*; q=0.5, application/xml',
                  'Accept-Encoding' => 'gzip, deflate',
@@ -91,7 +91,7 @@ EOT
                  'User-Agent' => 'Ruby'}
 
       stub_request(:post, 'https://api.trello.com/1/cards/123/attachments?key=mykey&token=mytoken').
-          with(headers: headers).to_return(:status => 200, :body => '', :headers => {})
+          with(headers: headers).to_return(status: 200, body: '', headers: {})
 
       path = given_file('attachment-data')
 
@@ -104,7 +104,7 @@ EOT
     let(:image_id) { '484cff21c7a33ff031f997a' }
     let(:image_name) { 'passed.jpg' }
     let(:client) { double }
-    let(:card_attachments_body) { <<-EOF
+    let(:card_attachments_body) do <<-EOF
       [
         {
           "id":"78d86ae7f25c748559b37ca",
@@ -116,12 +116,12 @@ EOT
         }
       ]
 EOF
-    }
+    end
 
     before(:each) do
       stub_request(:get, "https://api.trello.com/1/cards/#{card_id}/attachments?fields=name&key=mykey&token=mytoken").
-        with(:headers => {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
-          to_return(:status => 200, :body => card_attachments_body, :headers => {})
+        with(headers: {'Accept' => '*/*; q=0.5, application/xml', 'Accept-Encoding' => 'gzip, deflate', 'User-Agent' => 'Ruby'}).
+          to_return(status: 200, body: card_attachments_body, headers: {})
       headers = {'Accept' => '*/*; q=0.5, application/xml',
                  'Accept-Encoding' => 'gzip, deflate',
                  'Content-Length' => '0',

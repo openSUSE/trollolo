@@ -56,6 +56,6 @@ def full_board_mock
   webmock_mapping.each do |mapping|
     url = mapping_url(mapping, [ 'key=mykey', 'token=mytoken' ])
     stub_request(:get, url)
-      .to_return(:status => 200, :body => load_test_file(mapping[:file]))
+      .to_return(status: 200, body: load_test_file(mapping[:file]))
   end
 end

@@ -29,9 +29,9 @@ describe Scrum::Prioritizer do
 
     it 'finds backlog list', vcr: 'prioritize_backlog_list', vcr_record: false do
       expect(STDOUT).to receive(:puts).exactly(13).times
-      expect {
+      expect do
         subject.prioritize('neUHHzDo', 'Backlog')
-      }.not_to raise_error
+      end.not_to raise_error
     end
 
     it 'throws error when default list does not exist', vcr: 'prioritize_backlog_list', vcr_record: false  do

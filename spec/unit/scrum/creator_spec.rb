@@ -2,11 +2,11 @@ require_relative '../spec_helper'
 
 describe Scrum::Creator do
   subject { described_class.new(dummy_settings) }
-  let(:custom_subject) {
+  let(:custom_subject) do
     custom_settings = dummy_settings
     custom_settings.scrum.board_names['planning'] = 'Planungs Brett'
     described_class.new(custom_settings)
-  }
+  end
 
   it 'creates new creator' do
     expect(subject).to be

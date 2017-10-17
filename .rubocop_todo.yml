@@ -281,23 +281,6 @@ Style/AccessorMethodName:
     - 'lib/burndown_data.rb'
     - 'lib/cli.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'lib/cli.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/scrum/backlog_mover_spec.rb'
-    - 'spec/unit/scrum/creator_spec.rb'
-    - 'spec/unit/scrum/prioritizer_spec.rb'
-    - 'spec/unit/scrum/sprint_cleaner_spec.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
-
 # Offense count: 14
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -328,14 +311,6 @@ Style/ConditionalAssignment:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: empty, nil, both
-Style/EmptyElse:
-  Exclude:
-    - 'lib/trello_wrapper.rb'
-
 # Offense count: 8
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
@@ -346,19 +321,6 @@ Style/GuardClause:
     - 'lib/scrum/backlog_mover.rb'
     - 'lib/scrum_board.rb'
     - 'lib/settings.rb'
-
-# Offense count: 108
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
-# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-Style/HashSyntax:
-  Exclude:
-    - 'Rakefile'
-    - 'lib/cli.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/spec_helper.rb'
-    - 'spec/unit/support/webmocks.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
 
 # Offense count: 14
 # Cop supports --auto-correct.
@@ -373,38 +335,10 @@ Style/IfUnlessModifier:
     - 'spec/integration/wrapper/credentials_input_wrapper'
     - 'spec/unit/support/update_webmock_data'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_no_parentheses_except_multiline
-Style/MethodDefParentheses:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/burndown_chart.rb'
-    - 'lib/cli.rb'
-    - 'lib/settings.rb'
-
 # Offense count: 1
 Style/MultilineBlockChain:
   Exclude:
     - 'lib/cli.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MutableConstant:
-  Exclude:
-    - 'lib/version.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: both, prefix, postfix
-Style/NegatedIf:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/cli.rb'
-    - 'lib/trello_wrapper.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -438,14 +372,6 @@ Style/PercentLiteralDelimiters:
 
 # Offense count: 3
 # Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/card.rb'
-    - 'trollolo.gemspec'
-
-# Offense count: 3
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: short, verbose
 Style/PreferredHashMethods:
@@ -467,21 +393,6 @@ Style/RaiseArgs:
 Style/RedundantParentheses:
   Exclude:
     - 'spec/unit/burndown_chart_spec.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/trello_service.rb'
-
-# Offense count: 5
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/card.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -530,11 +441,3 @@ Style/TrailingCommaInLiteral:
 Style/UnneededInterpolation:
   Exclude:
     - 'spec/integration/command_line_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles, WordRegex.
-# SupportedStyles: percent, brackets
-Style/WordArray:
-  EnforcedStyle: percent
-  MinSize: 3

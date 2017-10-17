@@ -72,14 +72,14 @@ class Card
   end
 
   def extra?
-    self.card_labels.any? do |label|
+    card_labels.any? do |label|
       label['name'].include?('BelowWaterline') ||
           label['name'].include?('Under waterline')
     end
   end
 
   def unplanned?
-    self.card_labels.any? do |label|
+    card_labels.any? do |label|
       label['name'].include?('Unplanned')
     end
   end
@@ -95,13 +95,13 @@ class Card
 
   def fast_lane?
     # TODO: move to settings
-    self.card_labels.map{|l| l['name']}.include?('FastLane')
+    card_labels.map{|l| l['name']}.include?('FastLane')
   end
 
   # TODO: rethink storage for meta data for sprint
   def self.parse_yaml_from_description(description)
     description =~ /```(yaml)?\n(.*)```/m
-    yaml = $2
+    yaml = Regexp.last_match(2)
     if yaml
       return YAML.load(yaml) # throws an exception for invalid yaml
     else

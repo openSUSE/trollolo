@@ -38,7 +38,7 @@ class BurndownChart
     @data['meta']['sprint']
   end
 
-  def sprint= s
+  def sprint=(s)
     @data['meta']['sprint'] = s
   end
 
@@ -46,7 +46,7 @@ class BurndownChart
     @data['meta']['board_id']
   end
 
-  def board_id= id
+  def board_id=(id)
     @data['meta']['board_id'] = id
   end
 
@@ -82,7 +82,7 @@ class BurndownChart
     end
   end
 
-  def read_data filename
+  def read_data(filename)
     @data = YAML.load_file filename
     not_done_columns = @data['meta']['not_done_columns']
     if not_done_columns
@@ -90,9 +90,9 @@ class BurndownChart
     end
   end
 
-  def write_data filename
+  def write_data(filename)
     @data['days'].each do |day|
-      [ 'story_points_extra', 'tasks_extra' ].each do |key|
+      %w[story_points_extra tasks_extra].each do |key|
         if day[key] && day[key]['done'] == 0
           day.delete key
         end
@@ -172,7 +172,7 @@ class BurndownChart
     last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
-      current_sprint = $1.to_i
+      current_sprint = Regexp.last_match(1).to_i
       if current_sprint > last_sprint
         last_sprint = current_sprint
       end
@@ -189,7 +189,7 @@ class BurndownChart
     rescue Errno::ENOENT
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
-    return burndown_data_path
+    burndown_data_path
   end
 
   def update(options)
@@ -204,7 +204,7 @@ class BurndownChart
     write_data(burndown_data_path)
 
     if options[:plot] || options[:plot_to_board]
-      BurndownChart.plot(self.sprint, options)
+      BurndownChart.plot(sprint, options)
     end
 
     if options.has_key?('push-to-api')
@@ -224,7 +224,7 @@ class BurndownChart
 
   def create_next_sprint(burndown_dir, options = {})
     load_sprint(burndown_dir)
-    self.sprint = options[:sprint_number] || (self.sprint + 1)
+    self.sprint = options[:sprint_number] || (sprint + 1)
     @data['meta']['total_days'] = options[:total_days] if options[:total_days]
     @data['meta']['weekend_lines'] = options[:weekend_lines] unless options[:weekend_lines].blank?
     @data['days'] = []

@@ -22,7 +22,7 @@ class Settings
                 :done_column_name_regex, :todo_column_name_regex, :scrum,
                 :no_task_checklists
 
-  def initialize config_file_path
+  def initialize(config_file_path)
     @config_file_path = config_file_path
     if File.exists? config_file_path
       @config = YAML.load_file(config_file_path)

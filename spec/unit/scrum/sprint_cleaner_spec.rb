@@ -18,9 +18,9 @@ describe Scrum::SprintCleaner do
     end
 
     it 'generates new burndown data', vcr: 'sprint_cleanup', vcr_record: false do
-      expect {
+      expect do
         subject.cleanup('7Zar7bNm', '72tOJsGS')
-      }.to output(/^(New burndown data was generated automatically)/).to_stdout
+      end.to output(/^(New burndown data was generated automatically)/).to_stdout
     end
   end
 
@@ -30,9 +30,9 @@ describe Scrum::SprintCleaner do
     end
 
     it 'throws error', vcr: 'sprint_cleanup', vcr_record: false do
-      expect {
+      expect do
         subject.cleanup('7Zar7bNm', '72tOJsGS')
-      }.to raise_error /'Nonexisting List' not found/
+      end.to raise_error /'Nonexisting List' not found/
     end
   end
 end

@@ -4,7 +4,7 @@ class Backup
 
   attr_accessor :directory
 
-  def initialize settings
+  def initialize(settings)
     @settings = settings
     @directory = File.expand_path('~/.trollolo/backup')
   end
@@ -50,7 +50,7 @@ class Backup
       lists[list['id']].each do |card|
         out.puts '    ' + card['name']
         if options['show-descriptions']
-          if !card['desc'].empty?
+          unless card['desc'].empty?
             out.puts '      Description'
             out.puts '        ' + card['desc']
           end
