@@ -24,7 +24,7 @@ class Cli < Thor
   class_option :raw, type: :boolean, desc: 'Raw mode'
   class_option 'board-id', type: :string, desc: 'id of Trello board'
 
-  def self.settings= s
+  def self.settings=(s)
     @@settings = s
   end
 
@@ -155,7 +155,7 @@ EOT
   desc 'burndown-init', 'Initialize burndown chart'
   option :output, aliases: :o, desc: 'Output directory', required: false
   option 'board-id', desc: 'Id of Trello board', required: true
-  def burndown_init command = nil
+  def burndown_init(command = nil)
     process_global_options options
     require_trello_credentials
 
@@ -368,7 +368,7 @@ EOT
 
   private
 
-  def process_global_options options
+  def process_global_options(options)
     @@settings.verbose = options[:verbose]
     @@settings.raw = options[:raw]
   end

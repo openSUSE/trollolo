@@ -335,17 +335,6 @@ Style/IfUnlessModifier:
     - 'spec/integration/wrapper/credentials_input_wrapper'
     - 'spec/unit/support/update_webmock_data'
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: require_parentheses, require_no_parentheses, require_no_parentheses_except_multiline
-Style/MethodDefParentheses:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/burndown_chart.rb'
-    - 'lib/cli.rb'
-    - 'lib/settings.rb'
-
 # Offense count: 1
 Style/MultilineBlockChain:
   Exclude:

@@ -4,7 +4,7 @@ class Backup
 
   attr_accessor :directory
 
-  def initialize settings
+  def initialize(settings)
     @settings = settings
     @directory = File.expand_path('~/.trollolo/backup')
   end

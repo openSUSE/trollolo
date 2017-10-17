@@ -38,7 +38,7 @@ class BurndownChart
     @data['meta']['sprint']
   end
 
-  def sprint= s
+  def sprint=(s)
     @data['meta']['sprint'] = s
   end
 
@@ -46,7 +46,7 @@ class BurndownChart
     @data['meta']['board_id']
   end
 
-  def board_id= id
+  def board_id=(id)
     @data['meta']['board_id'] = id
   end
 
@@ -82,7 +82,7 @@ class BurndownChart
     end
   end
 
-  def read_data filename
+  def read_data(filename)
     @data = YAML.load_file filename
     not_done_columns = @data['meta']['not_done_columns']
     if not_done_columns
@@ -90,7 +90,7 @@ class BurndownChart
     end
   end
 
-  def write_data filename
+  def write_data(filename)
     @data['days'].each do |day|
       [ 'story_points_extra', 'tasks_extra' ].each do |key|
         if day[key] && day[key]['done'] == 0
