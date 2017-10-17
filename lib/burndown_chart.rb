@@ -204,7 +204,7 @@ class BurndownChart
     write_data(burndown_data_path)
 
     if options[:plot] || options[:plot_to_board]
-      BurndownChart.plot(self.sprint, options)
+      BurndownChart.plot(sprint, options)
     end
 
     if options.has_key?('push-to-api')
@@ -224,7 +224,7 @@ class BurndownChart
 
   def create_next_sprint(burndown_dir, options = {})
     load_sprint(burndown_dir)
-    self.sprint = options[:sprint_number] || (self.sprint + 1)
+    self.sprint = options[:sprint_number] || (sprint + 1)
     @data['meta']['total_days'] = options[:total_days] if options[:total_days]
     @data['meta']['weekend_lines'] = options[:weekend_lines] unless options[:weekend_lines].blank?
     @data['days'] = []
