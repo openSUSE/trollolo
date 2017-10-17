@@ -394,14 +394,6 @@ Style/RedundantParentheses:
   Exclude:
     - 'spec/unit/burndown_chart_spec.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/trello_service.rb'
-
 # Offense count: 5
 # Cop supports --auto-correct.
 Style/RedundantSelf:

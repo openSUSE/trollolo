@@ -189,7 +189,7 @@ class BurndownChart
     rescue Errno::ENOENT
       raise TrolloloError.new( "'#{burndown_data_path}' not found" )
     end
-    return burndown_data_path
+    burndown_data_path
   end
 
   def update(options)
