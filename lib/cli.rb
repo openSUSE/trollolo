@@ -300,7 +300,7 @@ EOT
     trello.get_member_boards(options['member-id']).sort_by { |board|
       board['name']
     }.each { |board|
-      puts "#{board["name"]} - #{board["id"]}"
+      puts "#{board['name']} - #{board['id']}"
     }
   end
 
