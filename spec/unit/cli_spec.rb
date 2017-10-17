@@ -44,16 +44,16 @@ Done Sprint 9
 Done Sprint 8
 Legend
 EOT
-    expect {
+    expect do
       @cli.get_lists
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
 
 
     # Using an alias
     @cli.options = {'board-id' => 'MyTrelloBoard'}
-    expect {
+    expect do
       @cli.get_lists
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
   end
 
   it 'gets cards' do
@@ -84,15 +84,15 @@ Sprint 8
 Purpose
 Background image
 EOT
-    expect {
+    expect do
       @cli.get_cards
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
 
     # Using an alias
     @cli.options = {'board-id' => 'MyTrelloBoard'}
-    expect {
+    expect do
       @cli.get_cards
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
   end
 
   it 'gets checklists' do
@@ -112,15 +112,15 @@ Tasks
 Tasks
 Tasks
 EOT
-    expect {
+    expect do
       @cli.get_checklists
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
 
     # Using an alias
     @cli.options = {'board-id' => 'MyTrelloBoard'}
-    expect {
+    expect do
       @cli.get_checklists
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
   end
 
   it 'gets description' do
@@ -141,9 +141,9 @@ EOT
     ).to_return(:status => 200, :body => body, :headers => {})
     @cli.options = {'card-id' => '54ae8485221b1cc5b173e713'}
     expected_output = "haml\n"
-    expect {
+    expect do
       @cli.get_description
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
   end
 
   it 'sets description' do
@@ -182,17 +182,17 @@ set priority to 11 for "P11: (3) Set up Concourse pipeline for BATs"
 set priority to 12 for "P12: Bike Shedding Feature"
 set priority to 13 for "P13: (3) Set up Concourse pipeline for os image building"
 EOT
-    expect {
+    expect do
       @cli.set_priorities
-    }.to output(expected_output).to_stdout
+    end.to output(expected_output).to_stdout
   end
 
   it 'sets priorities for specified planning list', vcr: 'prioritize_backlog_list', vcr_record: false do
     @cli.options = {'board-id' => 'neUHHzDo', 'backlog-list-name' => 'Nonexisting List'}
 
-    expect {
+    expect do
       @cli.set_priorities
-    }.to raise_error /'Nonexisting List' not found/
+    end.to raise_error /'Nonexisting List' not found/
   end
 
   context '#board_id' do

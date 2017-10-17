@@ -297,11 +297,11 @@ EOT
     require_trello_credentials
 
     trello = TrelloWrapper.new(@@settings)
-    trello.get_member_boards(options['member-id']).sort_by { |board|
+    trello.get_member_boards(options['member-id']).sort_by do |board|
       board['name']
-    }.each { |board|
+    end.each do |board|
       puts "#{board['name']} - #{board['id']}"
-    }
+    end
   end
 
   desc 'setup-scrum', 'Create necessary elements of our SCRUM setup'

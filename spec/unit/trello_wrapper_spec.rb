@@ -104,7 +104,7 @@ EOT
     let(:image_id) { '484cff21c7a33ff031f997a' }
     let(:image_name) { 'passed.jpg' }
     let(:client) { double }
-    let(:card_attachments_body) { <<-EOF
+    let(:card_attachments_body) do <<-EOF
       [
         {
           "id":"78d86ae7f25c748559b37ca",
@@ -116,7 +116,7 @@ EOT
         }
       ]
 EOF
-    }
+    end
 
     before(:each) do
       stub_request(:get, "https://api.trello.com/1/cards/#{card_id}/attachments?fields=name&key=mykey&token=mytoken").

@@ -281,23 +281,6 @@ Style/AccessorMethodName:
     - 'lib/burndown_data.rb'
     - 'lib/cli.rb'
 
-# Offense count: 17
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, ProceduralMethods, FunctionalMethods, IgnoredMethods.
-# SupportedStyles: line_count_based, semantic, braces_for_chaining
-# ProceduralMethods: benchmark, bm, bmbm, create, each_with_object, measure, new, realtime, tap, with_object
-# FunctionalMethods: let, let!, subject, watch
-# IgnoredMethods: lambda, proc, it
-Style/BlockDelimiters:
-  Exclude:
-    - 'lib/cli.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/scrum/backlog_mover_spec.rb'
-    - 'spec/unit/scrum/creator_spec.rb'
-    - 'spec/unit/scrum/prioritizer_spec.rb'
-    - 'spec/unit/scrum/sprint_cleaner_spec.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
-
 # Offense count: 14
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.

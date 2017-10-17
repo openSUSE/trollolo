@@ -8,9 +8,9 @@ describe Scrum::BacklogMover do
   end
 
   it 'fails without moving if sprint backlog is missing from sprint board', vcr: 'move_backlog_missing_backlog', vcr_record: false do
-    expect {
+    expect do
       subject.move('neUHHzDo', 'NzGCbEeN')
-    }.to raise_error('sprint board is missing Sprint Backlog list')
+    end.to raise_error('sprint board is missing Sprint Backlog list')
   end
 
   it 'moves cards to sprint board', vcr: 'move_backlog', vcr_record: false do
