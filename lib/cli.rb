@@ -19,16 +19,16 @@ class Cli < Thor
 
   default_task :global
 
-  class_option :version, :type => :boolean, :desc => 'Show version'
-  class_option :verbose, :type => :boolean, :desc => 'Verbose mode'
-  class_option :raw, :type => :boolean, :desc => 'Raw mode'
-  class_option 'board-id', :type => :string, :desc => 'id of Trello board'
+  class_option :version, type: :boolean, desc: 'Show version'
+  class_option :verbose, type: :boolean, desc: 'Verbose mode'
+  class_option :raw, type: :boolean, desc: 'Raw mode'
+  class_option 'board-id', type: :string, desc: 'id of Trello board'
 
   def self.settings= s
     @@settings = s
   end
 
-  desc 'global', 'Global options', :hide => true
+  desc 'global', 'Global options', hide: true
   def global
     if options[:version]
       puts "Trollolo: #{@@settings.version}"
@@ -69,7 +69,7 @@ EOT
   end
 
   desc 'get-lists', 'Get lists'
-  option 'board-id', :desc => 'Id of Trello board', :required => true
+  option 'board-id', desc: 'Id of Trello board', required: true
   def get_lists
     process_global_options options
     require_trello_credentials
@@ -88,7 +88,7 @@ EOT
   end
 
   desc 'get-cards', 'Get cards'
-  option 'board-id', :desc => 'Id of Trello board', :required => true
+  option 'board-id', desc: 'Id of Trello board', required: true
   def get_cards
     process_global_options options
     require_trello_credentials
@@ -113,7 +113,7 @@ EOT
   end
 
   desc 'get-checklists', 'Get checklists'
-  option 'board-id', :desc => 'Id of Trello board', :required => true
+  option 'board-id', desc: 'Id of Trello board', required: true
   def get_checklists
     process_global_options options
     require_trello_credentials
@@ -128,9 +128,9 @@ EOT
   end
 
   desc 'burndowns', 'run multiple burndowns'
-  option 'board-list', :desc => 'path to board-list.yaml', :required => true
-  option :plot, :type => :boolean, :desc => 'also plot the new data'
-  option :output, :aliases => :o, :desc => 'Output directory'
+  option 'board-list', desc: 'path to board-list.yaml', required: true
+  option :plot, type: :boolean, desc: 'also plot the new data'
+  option :output, aliases: :o, desc: 'Output directory'
   def burndowns
     process_global_options options
     board_list = YAML.load_file(options['board-list'])
@@ -153,8 +153,8 @@ EOT
   end
 
   desc 'burndown-init', 'Initialize burndown chart'
-  option :output, :aliases => :o, :desc => 'Output directory', :required => false
-  option 'board-id', :desc => 'Id of Trello board', :required => true
+  option :output, aliases: :o, desc: 'Output directory', required: false
+  option 'board-id', desc: 'Id of Trello board', required: true
   def burndown_init command = nil
     process_global_options options
     require_trello_credentials
@@ -165,16 +165,16 @@ EOT
   end
 
   desc 'burndown', 'Update burndown chart'
-  option :output, :aliases => :o, :desc => 'Output directory', :required => false
-  option :new_sprint, :aliases => :n, :desc => 'Create new sprint'
-  option :sprint_number, type: :numeric, :desc => 'Provide the number of the sprint'
+  option :output, aliases: :o, desc: 'Output directory', required: false
+  option :new_sprint, aliases: :n, desc: 'Create new sprint'
+  option :sprint_number, type: :numeric, desc: 'Provide the number of the sprint'
   option :total_days, type: :numeric, desc: 'Provide how many days the sprint longs. 10 days by default'
   option :weekend_lines, type: :array, desc: 'Set the weekend_lines. [3.5, 8.5] by default'
-  option :plot, :type => :boolean, :desc => 'also plot the new data'
-  option :plot_to_board, :type => :boolean, :desc => 'Send the plotted data to the board'
-  option 'with-fast-lane', :desc => 'Plot Fast Lane with new cards bars', :required => false, :type => :boolean
-  option 'no-tasks', :desc => 'Do not plot tasks line', :required => false, :type => :boolean
-  option 'push-to-api', :desc => 'Push collected data to api endpoint (in json)', :required => false
+  option :plot, type: :boolean, desc: 'also plot the new data'
+  option :plot_to_board, type: :boolean, desc: 'Send the plotted data to the board'
+  option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean
+  option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
+  option 'push-to-api', desc: 'Push collected data to api endpoint (in json)', required: false
   def burndown
     process_global_options options
     require_trello_credentials
@@ -193,16 +193,16 @@ EOT
   end
 
   desc 'plot SPRINT-NUMBER [--output] [--no-tasks] [--with-fast-lane]', 'Plot burndown chart for given sprint'
-  option :output, :aliases => :o, :desc => 'Output directory', :required => false
-  option 'with-fast-lane', :desc => 'Plot Fast Lane with new cards bars', :required => false, :type => :boolean
-  option 'no-tasks', :desc => 'Do not plot tasks line', :required => false, :type => :boolean
+  option :output, aliases: :o, desc: 'Output directory', required: false
+  option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean
+  option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
   def plot(sprint_number)
     process_global_options options
     BurndownChart.plot(sprint_number, options)
   end
 
   desc 'backup', 'Create backup of board'
-  option 'board-id', :desc => 'Id of Trello board', :required => true
+  option 'board-id', desc: 'Id of Trello board', required: true
   def backup
     process_global_options options
     require_trello_credentials
@@ -219,14 +219,14 @@ EOT
   end
 
   desc 'show-backup', 'Show backup of board'
-  option 'board-id', :desc => 'Id of Trello board', :required => true
-  option 'show-descriptions', :desc => 'Show descriptions of cards', :required => false, :type => :boolean
+  option 'board-id', desc: 'Id of Trello board', required: true
+  option 'show-descriptions', desc: 'Show descriptions of cards', required: false, type: :boolean
   def show_backup
     Backup.new(@@settings).show(board_id(options['board-id']), options)
   end
 
   desc 'organization', 'Show organization info'
-  option 'org-name', :desc => 'Name of organization', :required => true
+  option 'org-name', desc: 'Name of organization', required: true
   def organization
     process_global_options options
     require_trello_credentials
@@ -238,7 +238,7 @@ EOT
   end
 
   desc 'get-description', 'Reads description'
-  option 'card-id', :desc => 'Id of card', :required => true
+  option 'card-id', desc: 'Id of card', required: true
   def get_description
     process_global_options options
     require_trello_credentials
@@ -249,7 +249,7 @@ EOT
   end
 
   desc 'set-description', 'Writes description read from standard input'
-  option 'card-id', :desc => 'Id of card', :required => true
+  option 'card-id', desc: 'Id of card', required: true
   def set_description
     process_global_options options
     require_trello_credentials
@@ -258,7 +258,7 @@ EOT
   end
 
   desc 'organization-members', 'Show organization members'
-  option 'org-name', :desc => 'Name of organization', :required => true
+  option 'org-name', desc: 'Name of organization', required: true
   def organization_members
     process_global_options options
     require_trello_credentials
@@ -273,7 +273,7 @@ EOT
   end
 
   desc 'set-cover <filename>', 'Set cover picture'
-  option 'card-id', :desc => 'Id of card', :required => true
+  option 'card-id', desc: 'Id of card', required: true
   def set_cover(filename)
     process_global_options(options)
     require_trello_credentials
@@ -282,7 +282,7 @@ EOT
   end
 
   desc 'make-cover <filename>', 'Make existing picture the cover'
-  option 'card-id', :desc => 'Id of card', :required => true
+  option 'card-id', desc: 'Id of card', required: true
   def make_cover(filename)
     process_global_options(options)
     require_trello_credentials
@@ -291,7 +291,7 @@ EOT
   end
 
   desc 'list-member-boards', 'List name and id of all boards'
-  option 'member-id', :desc => 'Id of the member', :required => true
+  option 'member-id', desc: 'Id of the member', required: true
   def list_member_boards
     process_global_options options
     require_trello_credentials
@@ -323,8 +323,8 @@ EOT
   replace where already present. n is the current position of the list on
   the card.
 EOT
-  option 'board-id', :desc => 'Id of the board', :required => true
-  option 'backlog-list-name', :desc => 'Name of backlog list', :required => false
+  option 'board-id', desc: 'Id of the board', required: true
+  option 'backlog-list-name', desc: 'Name of backlog list', required: false
   def set_priorities
     process_global_options options
     require_trello_credentials
@@ -338,8 +338,8 @@ EOT
   After the sprint, move remaining cards from 'Sprint Backlog', 'Doing'
   and 'QA' lists back to the planning board into the 'Ready' list.
 EOT
-  option 'board-id', :desc => 'Id of the board', :required => true
-  option 'target-board-id', :desc => 'Id of the target board', :required => true
+  option 'board-id', desc: 'Id of the board', required: true
+  option 'target-board-id', desc: 'Id of the target board', required: true
   def cleanup_sprint
     process_global_options options
     require_trello_credentials

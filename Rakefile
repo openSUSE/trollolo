@@ -6,7 +6,7 @@ namespace :man_pages do
 end
 
 namespace :gem do
-  task :build => ['man_pages:build'] do
+  task build: ['man_pages:build'] do
     system 'gem build trollolo.gemspec'
   end
 end

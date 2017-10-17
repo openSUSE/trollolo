@@ -322,19 +322,6 @@ Style/GuardClause:
     - 'lib/scrum_board.rb'
     - 'lib/settings.rb'
 
-# Offense count: 108
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
-# SupportedStyles: ruby19, hash_rockets, no_mixed_keys, ruby19_no_mixed_keys
-Style/HashSyntax:
-  Exclude:
-    - 'Rakefile'
-    - 'lib/cli.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/spec_helper.rb'
-    - 'spec/unit/support/webmocks.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
-
 # Offense count: 14
 # Cop supports --auto-correct.
 # Configuration parameters: MaxLineLength.
