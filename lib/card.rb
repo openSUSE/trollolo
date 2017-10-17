@@ -101,7 +101,7 @@ class Card
   # TODO: rethink storage for meta data for sprint
   def self.parse_yaml_from_description(description)
     description =~ /```(yaml)?\n(.*)```/m
-    yaml = $2
+    yaml = Regexp.last_match(2)
     if yaml
       return YAML.load(yaml) # throws an exception for invalid yaml
     else

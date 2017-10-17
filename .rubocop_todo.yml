@@ -372,14 +372,6 @@ Style/PercentLiteralDelimiters:
 
 # Offense count: 3
 # Cop supports --auto-correct.
-Style/PerlBackrefs:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/card.rb'
-    - 'trollolo.gemspec'
-
-# Offense count: 3
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 # SupportedStyles: short, verbose
 Style/PreferredHashMethods:

@@ -172,7 +172,7 @@ class BurndownChart
     last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
-      current_sprint = $1.to_i
+      current_sprint = Regexp.last_match(1).to_i
       if current_sprint > last_sprint
         last_sprint = current_sprint
       end
