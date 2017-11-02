@@ -390,15 +390,8 @@ Style/RaiseArgs:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/RedundantParentheses:
-  Exclude:
-    - 'spec/unit/burndown_chart_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
 # SupportedStyles: slashes, percent_r, mixed
 Style/RegexpLiteral:
   Exclude:
     - 'trollolo.gemspec'
-
