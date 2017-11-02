@@ -79,7 +79,7 @@ class Settings
         'sprint_doing' => 'Doing',
         'planning_backlog' => 'Backlog',
         'planning_ready' => 'Ready for Estimation'
-      },
+      }
     }.freeze
   end
 end
