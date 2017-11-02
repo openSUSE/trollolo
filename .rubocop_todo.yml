@@ -436,8 +436,3 @@ Style/TrailingCommaInLiteral:
   Exclude:
     - 'lib/settings.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/UnneededInterpolation:
-  Exclude:
-    - 'spec/integration/command_line_spec.rb'
