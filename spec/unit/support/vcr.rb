@@ -40,7 +40,7 @@ end
 RSpec.configure do |c|
   c.around do |example|
     if (cassette = example.metadata[:vcr])
-      fail 'you need to use real_settings to re-record vcr data' if real_settings_needed?(example)
+      raise 'you need to use real_settings to re-record vcr data' if real_settings_needed?(example)
       VCR.use_cassette(cassette, record: vcr_record_mode(example)) do
         example.run
       end

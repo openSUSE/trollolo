@@ -402,14 +402,3 @@ Style/RegexpLiteral:
   Exclude:
     - 'trollolo.gemspec'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: only_raise, only_fail, semantic
-Style/SignalException:
-  Exclude:
-    - 'lib/scrum/backlog_mover.rb'
-    - 'lib/scrum/prioritizer.rb'
-    - 'lib/scrum/sprint_cleaner.rb'
-    - 'spec/unit/support/vcr.rb'
-

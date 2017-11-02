@@ -4,9 +4,9 @@ module Scrum
 
     def cleanup(board_id, target_board_id)
       @board = sprint_board(board_id)
-      fail "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
+      raise "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
       @target_board = Trello::Board.find(target_board_id)
-      fail "ready list '#{@settings.scrum.list_names['planning_ready']}' not found on planning board" unless target_list
+      raise "ready list '#{@settings.scrum.list_names['planning_ready']}' not found on planning board" unless target_list
 
       gen_burndown
 
