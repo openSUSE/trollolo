@@ -194,7 +194,7 @@ describe BurndownChart do
         @chart.add_data(@burndown_data)
 
         expect( @chart.data['days'].count ).to eq 3
-        expect( @chart.data['days'].last['date'] ).to eq ( '2014-05-30' )
+        expect( @chart.data['days'].last['date'] ).to eq '2014-05-30'
         expect( @chart.data['days'].last['story_points'] ).to eq ( {
           'total' => 23,
           'open' => 16

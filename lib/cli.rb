@@ -135,9 +135,7 @@ EOT
     process_global_options options
     board_list = YAML.load_file(options['board-list'])
     board_list.keys.each do |name|
-      if name =~ /[^[:alnum:]. _]/ # sanitize
-        raise 'invalid character in team name'
-      end
+      raise 'invalid character in team name' if name =~ /[^[:alnum:]. _]/ # sanitize
       board = board_list[name]
       if options['output']
         destdir = File.join(options['output'], name)
@@ -145,9 +143,7 @@ EOT
         destdir = name
       end
       chart = BurndownChart.new @@settings
-      unless File.directory?(destdir)
-        chart.setup(destdir, board['boardid'])
-      end
+      chart.setup(destdir, board['boardid']) unless File.directory?(destdir)
       chart.update({'output' => destdir, plot: options[:plot]})
     end
   end
@@ -389,9 +385,7 @@ EOT
       write_back = true
     end
 
-    if write_back
-      @@settings.save_config
-    end
+    @@settings.save_config if write_back
 
     if !@@settings.developer_public_key || !@@settings.member_token
       STDERR.puts 'Require trello credentials in config file'

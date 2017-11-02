@@ -85,17 +85,13 @@ class BurndownChart
   def read_data(filename)
     @data = YAML.load_file filename
     not_done_columns = @data['meta']['not_done_columns']
-    if not_done_columns
-      @settings.not_done_columns = not_done_columns
-    end
+    @settings.not_done_columns = not_done_columns if not_done_columns
   end
 
   def write_data(filename)
     @data['days'].each do |day|
       %w[story_points_extra tasks_extra].each do |key|
-        if day[key] && day[key]['done'] == 0
-          day.delete key
-        end
+        day.delete key if day[key] && day[key]['done'] == 0
       end
     end
 
@@ -173,9 +169,7 @@ class BurndownChart
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
       file =~ /burndown-data-(.*).yaml/
       current_sprint = Regexp.last_match(1).to_i
-      if current_sprint > last_sprint
-        last_sprint = current_sprint
-      end
+      last_sprint = current_sprint if current_sprint > last_sprint
     end
     last_sprint
   end
@@ -208,9 +202,7 @@ class BurndownChart
       BurndownChart.plot(sprint, options)
     end
 
-    if options.has_key?('push-to-api')
-      push_to_api(options['push-to-api'], data)
-    end
+    push_to_api(options['push-to-api'], data) if options.has_key?('push-to-api')
 
     if options[:plot_to_board]
       trello = TrelloWrapper.new(@settings)

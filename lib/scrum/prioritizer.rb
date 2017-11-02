@@ -4,7 +4,7 @@ module Scrum
 
     def prioritize(board_id, list_name = nil)
       @board = planning_board(board_id, list_name)
-      fail "list named '#{@board.backlog_list_name}' not found on board" unless @board.backlog_list
+      raise "list named '#{@board.backlog_list_name}' not found on board" unless @board.backlog_list
       update_priorities
     end
 

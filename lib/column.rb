@@ -26,11 +26,11 @@ class Column
   end
 
   def estimated_cards
-    cards.select{|x| x.estimated? }
+    cards.select(&:estimated?)
   end
 
   def sum
-    estimated_cards.map{|x| x.story_points}.sum
+    estimated_cards.map(&:story_points).sum
   end
 
   def tasks
@@ -42,11 +42,11 @@ class Column
   end
 
   def extra_cards
-    cards.select{|c| c.extra?}
+    cards.select(&:extra?)
   end
 
   def unplanned_cards
-    cards.select{|c| c.unplanned?}
+    cards.select(&:unplanned?)
   end
 
   def committed_cards
@@ -54,7 +54,7 @@ class Column
   end
 
   def fast_lane_cards
-    cards.select{|c| c.fast_lane?}
+    cards.select(&:fast_lane?)
   end
 
   def cards

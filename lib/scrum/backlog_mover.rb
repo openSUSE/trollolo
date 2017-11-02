@@ -12,10 +12,10 @@ module Scrum
 
     def setup(planning_board_id, sprint_board_id)
       @sprint_board = sprint_board(sprint_board_id)
-      fail "sprint board is missing #{@sprint_board.backlog_list_name} list" unless @sprint_board.backlog_list
+      raise "sprint board is missing #{@sprint_board.backlog_list_name} list" unless @sprint_board.backlog_list
 
       @planning_board = planning_board(planning_board_id)
-      fail 'backlog list not found on planning board' unless @planning_board.backlog_list
+      raise 'backlog list not found on planning board' unless @planning_board.backlog_list
 
       @waterline_card = @planning_board.waterline_card
       @seabed_card = @planning_board.seabed_card

@@ -322,19 +322,6 @@ Style/GuardClause:
     - 'lib/scrum_board.rb'
     - 'lib/settings.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: MaxLineLength.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/burndown_chart.rb'
-    - 'lib/card.rb'
-    - 'lib/cli.rb'
-    - 'lib/scrum/sprint_planning_board.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
-    - 'spec/unit/support/update_webmock_data'
-
 # Offense count: 1
 Style/MultilineBlockChain:
   Exclude:
@@ -390,54 +377,8 @@ Style/RaiseArgs:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/RedundantParentheses:
-  Exclude:
-    - 'spec/unit/burndown_chart_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
 # SupportedStyles: slashes, percent_r, mixed
 Style/RegexpLiteral:
   Exclude:
     - 'trollolo.gemspec'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: only_raise, only_fail, semantic
-Style/SignalException:
-  Exclude:
-    - 'lib/scrum/backlog_mover.rb'
-    - 'lib/scrum/prioritizer.rb'
-    - 'lib/scrum/sprint_cleaner.rb'
-    - 'spec/unit/support/vcr.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: MinSize, SupportedStyles.
-# SupportedStyles: percent, brackets
-Style/SymbolArray:
-  EnforcedStyle: brackets
-
-# Offense count: 5
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoredMethods.
-# IgnoredMethods: respond_to, define_method
-Style/SymbolProc:
-  Exclude:
-    - 'lib/column.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleForMultiline, SupportedStylesForMultiline.
-# SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInLiteral:
-  Exclude:
-    - 'lib/settings.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/UnneededInterpolation:
-  Exclude:
-    - 'spec/integration/command_line_spec.rb'

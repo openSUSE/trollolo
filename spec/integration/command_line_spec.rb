@@ -38,13 +38,13 @@ describe 'command line' do
 
     it 'inits burndown directory' do
       path = given_directory
-      result = run_command(cmd: trollolo_cmd, args: ['burndown-init', '-o', "#{path}", '--board-id=myboardid'])
+      result = run_command(cmd: trollolo_cmd, args: ['burndown-init', '-o', path.to_s, '--board-id=myboardid'])
       expect(result).to exit_with_success(/Preparing/)
     end
 
     it 'fails, if burndown data is not found' do
       path = given_directory
-      result = run_command(cmd: trollolo_cmd, args: ['burndown', '-o', "#{path}"])
+      result = run_command(cmd: trollolo_cmd, args: ['burndown', '-o', path.to_s])
       expect(result).to exit_with_error(1, /burndown-data-01.yaml' not found/)
     end
   end
