@@ -13,9 +13,7 @@ def scrub_file(file)
   json = JSON.parse(File.read(file))
   if json.is_a?(Hash) && json.has_key?('cards')
     json['cards'].each do |card|
-      if card.has_key?('email')
-        card['email'] = 'trello@example.com'
-      end
+      card['email'] = 'trello@example.com' if card.has_key?('email')
     end
   end
   File.open(file, 'w') do |f|

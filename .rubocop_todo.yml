@@ -322,19 +322,6 @@ Style/GuardClause:
     - 'lib/scrum_board.rb'
     - 'lib/settings.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: MaxLineLength.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'lib/backup.rb'
-    - 'lib/burndown_chart.rb'
-    - 'lib/card.rb'
-    - 'lib/cli.rb'
-    - 'lib/scrum/sprint_planning_board.rb'
-    - 'spec/integration/wrapper/credentials_input_wrapper'
-    - 'spec/unit/support/update_webmock_data'
-
 # Offense count: 1
 Style/MultilineBlockChain:
   Exclude:
