@@ -75,7 +75,7 @@ class TrelloWrapper < TrelloService
   end
 
   def get_board(board_id)
-    raise TrolloloError.new('Board id cannot be blank') if board_id.blank?
+    raise TrolloloError, 'Board id cannot be blank' if board_id.blank?
 
     client.get("/boards/#{board_id}?lists=open&cards=open&card_checklists=all")
   end

@@ -100,7 +100,7 @@ class BurndownChart
         file.write @data.to_yaml
       end
     rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{filename}' not found" )
+      raise TrolloloError, "'#{filename}' not found"
     end
   end
 
@@ -113,7 +113,7 @@ class BurndownChart
 
     begin
       uri       = URI.parse(url)
-      push      = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/json' })
+      push      = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
       push.body = burndown_data.to_hash.to_json
 
       Net::HTTP.start(uri.hostname, uri.port) do |http|
@@ -123,7 +123,7 @@ class BurndownChart
       # Instead of catching 20 different exceptions which can be
       # thrown by URI and Http::, StandardError is catched.
       # Fix this if there is a better solution
-      raise TrolloloError.new("pushing to endpoint failed: #{e.message}")
+      raise TrolloloError, "pushing to endpoint failed: #{e.message}"
     end
   end
 
@@ -181,7 +181,7 @@ class BurndownChart
     begin
       read_data burndown_data_path
     rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
+      raise TrolloloError, "'#{burndown_data_path}' not found"
     end
     burndown_data_path
   end
@@ -189,7 +189,7 @@ class BurndownChart
   def update(options)
     burndown_data_path = load_sprint(options['output'] || Dir.pwd, options[:sprint_number])
 
-    @data['meta']['board_id'] = options['board-id'] if options.has_key?('board-id')
+    @data['meta']['board_id'] = options['board-id'] if options.key?('board-id')
     burndown_data = BurndownData.new(@settings)
     burndown_data.board_id = board_id
     burndown_data.fetch
@@ -202,7 +202,7 @@ class BurndownChart
       BurndownChart.plot(sprint, options)
     end
 
-    push_to_api(options['push-to-api'], data) if options.has_key?('push-to-api')
+    push_to_api(options['push-to-api'], data) if options.key?('push-to-api')
 
     if options[:plot_to_board]
       trello = TrelloWrapper.new(@settings)

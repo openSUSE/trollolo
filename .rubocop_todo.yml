@@ -281,18 +281,6 @@ Style/AccessorMethodName:
     - 'lib/burndown_data.rb'
     - 'lib/cli.rb'
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: braces, no_braces, context_dependent
-Style/BracesAroundHashParameters:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/cli.rb'
-    - 'spec/unit/burndown_chart_spec.rb'
-    - 'spec/unit/burndown_data_spec.rb'
-    - 'spec/unit/settings_spec.rb'
-
 # Offense count: 1
 Style/ClassVars:
   Exclude:
@@ -356,24 +344,6 @@ Style/NumericPredicate:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'spec/unit/burndown_chart_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: short, verbose
-Style/PreferredHashMethods:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'spec/unit/support/update_webmock_data'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: compact, exploded
-Style/RaiseArgs:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/trello_wrapper.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
