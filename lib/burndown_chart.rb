@@ -189,7 +189,7 @@ class BurndownChart
   def update(options)
     burndown_data_path = load_sprint(options['output'] || Dir.pwd, options[:sprint_number])
 
-    @data['meta']['board_id'] = options['board-id'] if options.has_key?('board-id')
+    @data['meta']['board_id'] = options['board-id'] if options.key?('board-id')
     burndown_data = BurndownData.new(@settings)
     burndown_data.board_id = board_id
     burndown_data.fetch
@@ -202,7 +202,7 @@ class BurndownChart
       BurndownChart.plot(sprint, options)
     end
 
-    push_to_api(options['push-to-api'], data) if options.has_key?('push-to-api')
+    push_to_api(options['push-to-api'], data) if options.key?('push-to-api')
 
     if options[:plot_to_board]
       trello = TrelloWrapper.new(@settings)

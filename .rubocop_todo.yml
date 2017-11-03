@@ -345,15 +345,6 @@ Style/PercentLiteralDelimiters:
   Exclude:
     - 'spec/unit/burndown_chart_spec.rb'
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: short, verbose
-Style/PreferredHashMethods:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'spec/unit/support/update_webmock_data'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
