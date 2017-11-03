@@ -113,7 +113,7 @@ class BurndownChart
 
     begin
       uri       = URI.parse(url)
-      push      = Net::HTTP::Post.new(uri.path, { 'Content-Type' => 'application/json' })
+      push      = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
       push.body = burndown_data.to_hash.to_json
 
       Net::HTTP.start(uri.hostname, uri.port) do |http|

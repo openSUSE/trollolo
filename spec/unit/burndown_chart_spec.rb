@@ -101,15 +101,11 @@ describe BurndownChart do
         @chart.add_data(@burndown_data)
 
         expect( @chart.data['days'].first['story_points'] ).to eq(
-          {
-            'total' => 23,
-            'open' => 16
-          } )
+          'total' => 23,
+          'open' => 16 )
         expect( @chart.data['days'].first['tasks'] ).to eq(
-          {
-            'total' => 21,
-            'open' => 10
-          } )
+          'total' => 21,
+          'open' => 10 )
       end
 
       it "doesn't overwrite first data entry" do
@@ -130,15 +126,11 @@ describe BurndownChart do
         @chart.add_data(@burndown_data)
 
         expect( @chart.data['days'].first['story_points'] ).to eq(
-          {
-            'total' => 23,
-            'open' => 16
-          } )
+          'total' => 23,
+          'open' => 16 )
         expect( @chart.data['days'].first['tasks'] ).to eq(
-          {
-            'total' => 21,
-            'open' => 10
-          } )
+          'total' => 21,
+          'open' => 10 )
       end
 
       it 'does overwrite data entries after first one' do
@@ -167,15 +159,11 @@ describe BurndownChart do
         @chart.add_data(@burndown_data)
 
         expect( @chart.data['days'][1]['story_points'] ).to eq(
-          {
-            'total' => 23,
-            'open' => 15
-          } )
+          'total' => 23,
+          'open' => 15 )
         expect( @chart.data['days'][1]['tasks'] ).to eq(
-          {
-            'total' => 21,
-            'open' => 9
-          } )
+          'total' => 21,
+          'open' => 9 )
       end
 
       it 'adds data' do
@@ -373,32 +361,31 @@ EOT
       it 'loads the burndown from the 2nd sprint into data' do
         @chart.load_sprint(path)
         expect(@chart.data).to eq(
-          { 'meta' =>
+          'meta' =>
             { 'board_id' => '53186e8391ef8671265eba9d',
               'sprint' => 2,
               'total_days' => 9,
               'weekend_lines' => [3.5, 7.5]
             },
-            'days' => [
-              { 'date' => '2015-08-28',
-                'updated_at' => '2015-08-28T11:04:52+02:00',
-                'story_points' =>
-                  { 'total' => 24.0,
-                    'open' => 24.0
-                  },
-                'tasks' =>
-                  { 'total' => 43,
-                    'open' => 28
-                  },
-                'story_points_extra' =>
-                  { 'done' => 2.0
-                  },
-                'tasks_extra' =>
-                  { 'done' => 5
-                  }
-              }
-            ]
-          })
+          'days' => [
+            { 'date' => '2015-08-28',
+              'updated_at' => '2015-08-28T11:04:52+02:00',
+              'story_points' =>
+                { 'total' => 24.0,
+                  'open' => 24.0
+                },
+              'tasks' =>
+                { 'total' => 43,
+                  'open' => 28
+                },
+              'story_points_extra' =>
+                { 'done' => 2.0
+                },
+              'tasks_extra' =>
+                { 'done' => 5
+                }
+            }
+          ])
       end
 
       it 'returns the path of the last sprint' do
@@ -477,7 +464,7 @@ meta:
   - 16.5
 days: []
 EOT
-        chart.create_next_sprint(path, { total_days: 17, weekend_lines: [1.5, 6.5, 11.5, 16.5] })
+        chart.create_next_sprint(path, total_days: 17, weekend_lines: [1.5, 6.5, 11.5, 16.5])
 
         expect(File.exist?(next_sprint_file)).to be true
         expect(File.read(next_sprint_file)).to eq expected_file_content
@@ -509,7 +496,7 @@ EOT
       allow(described_class).to receive(:process_options).and_return(%w{ --test 1 --no-blah })
       allow(described_class).to receive(:plot_helper).and_return('mescript')
       expect(described_class).to receive(:system).with('python mescript 42 --test 1 --no-blah')
-      described_class.plot(42, {foo: 1, bar: 2})
+      described_class.plot(42, foo: 1, bar: 2)
     end
   end
 

@@ -74,11 +74,9 @@ describe BurndownData do
       end
 
       it 'returns meta data' do
-        expect( @burndown.meta ).to eq({
-          'sprint' => 10,
-          'total_days' => 18,
-          'weekend_lines' => [1.5, 6.5, 11.5, 16.5]
-        })
+        expect( @burndown.meta ).to eq( 'sprint' => 10,
+                                        'total_days' => 18,
+                                        'weekend_lines' => [1.5, 6.5, 11.5, 16.5])
       end
 
       it 'saves date and time' do

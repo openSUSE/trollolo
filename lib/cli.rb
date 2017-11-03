@@ -144,7 +144,7 @@ EOT
       end
       chart = BurndownChart.new @@settings
       chart.setup(destdir, board['boardid']) unless File.directory?(destdir)
-      chart.update({'output' => destdir, plot: options[:plot]})
+      chart.update('output' => destdir, plot: options[:plot])
     end
   end
 
