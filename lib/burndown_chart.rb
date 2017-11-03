@@ -100,7 +100,7 @@ class BurndownChart
         file.write @data.to_yaml
       end
     rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{filename}' not found" )
+      raise TrolloloError, "'#{filename}' not found"
     end
   end
 
@@ -123,7 +123,7 @@ class BurndownChart
       # Instead of catching 20 different exceptions which can be
       # thrown by URI and Http::, StandardError is catched.
       # Fix this if there is a better solution
-      raise TrolloloError.new("pushing to endpoint failed: #{e.message}")
+      raise TrolloloError, "pushing to endpoint failed: #{e.message}"
     end
   end
 
@@ -181,7 +181,7 @@ class BurndownChart
     begin
       read_data burndown_data_path
     rescue Errno::ENOENT
-      raise TrolloloError.new( "'#{burndown_data_path}' not found" )
+      raise TrolloloError, "'#{burndown_data_path}' not found"
     end
     burndown_data_path
   end

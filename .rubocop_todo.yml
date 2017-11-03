@@ -354,15 +354,6 @@ Style/PreferredHashMethods:
     - 'lib/burndown_chart.rb'
     - 'spec/unit/support/update_webmock_data'
 
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: compact, exploded
-Style/RaiseArgs:
-  Exclude:
-    - 'lib/burndown_chart.rb'
-    - 'lib/trello_wrapper.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, AllowInnerSlashes.
