@@ -21,6 +21,8 @@ which demonstrates the expected structure.
 
 ## Installation
 
+You need to have Ruby install. Trollolo works with Ruby 2.2-2.4.1, but currently it doesn't work with 2.4.2. See [#139](https://github.com/openSUSE/trollolo/issues/139) for more information.
+
 You can install Trollolo as gem with `gem install trollolo`.
 
 For the chart generation you will need a working matplotlib installation and
