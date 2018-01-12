@@ -14,6 +14,6 @@ group :test do
   gem 'pry'
   gem 'ronn', '>=0.7.3'
   gem 'rake'
-  gem 'rubocop', '~> 0.49.1'
+  gem 'rubocop', '0.52.1'
   gem 'rspec-mocks'
 end
