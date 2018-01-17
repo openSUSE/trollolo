@@ -2,6 +2,7 @@
 
 ## Master (unreleased)
 
+* Require Ruby to be >= 2.2.0 and < 2.4.2 until #139 is fixed.
 * `burndown-init` only requires the `--board-id` option. The `--output` option
   is optional and defaults to the current working directory. Fix #103.
 * Allow to define checklists that should not be parsed as task lists. Such lists
