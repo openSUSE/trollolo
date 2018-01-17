@@ -48,6 +48,10 @@ class TrelloWrapper < TrelloService
   def make_cover(card_id, image_name)
     attachment_id = attachment_id_by_name(card_id, image_name)
     raise("Error: The attachment with the name '#{image_name}' was not found") unless attachment_id
+    make_cover_with_id(card_id, attachment_id)
+  end
+
+  def make_cover_with_id(card_id, attachment_id)
     client.put("/cards/#{card_id}/idAttachmentCover?value=#{attachment_id}")
   end
 

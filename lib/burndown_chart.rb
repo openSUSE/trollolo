@@ -210,8 +210,12 @@ class BurndownChart
       name = options['output'] ? options['output'] : '.'
       name += "/burndown-#{sprint.to_s.rjust(2, '0')}.png"
       card_id = board.burndown_card_id
-      trello.add_attachment(card_id, name)
-      trello.make_cover(card_id, "burndown-#{sprint.to_s.rjust(2, '0')}.png")
+
+      response = trello.add_attachment(card_id, name)
+
+      if /{\"id\":\"(?<attachment_id>\w+)\"/ =~ response
+        trello.make_cover_with_id(card_id, attachment_id)
+      end
     end
   end
 
