@@ -7,6 +7,8 @@
 * Allow to define checklists that should not be parsed as task lists. Such lists
   can be added in the trollolorc as `no_task_checklists`.
 * Allow to provide a board id when calling `burndown`. Fix #100.
+* Set the attached image as cover in `burndown --plot-to-board`. Fix #124.
+
 
 ## Version 0.1.1
 
