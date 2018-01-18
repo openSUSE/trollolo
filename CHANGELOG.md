@@ -2,6 +2,9 @@
 
 ## Master (unreleased)
 
+
+## Version 0.2.0
+
 * Require Ruby to be >= 2.2.0 and < 2.4.2 until #139 is fixed.
 * `burndown-init` only requires the `--board-id` option. The `--output` option
   is optional and defaults to the current working directory. Fix #103.
@@ -9,7 +12,6 @@
   can be added in the trollolorc as `no_task_checklists`.
 * Allow to provide a board id when calling `burndown`. Fix #100.
 * Set the attached image as cover in `burndown --plot-to-board`. Fix #124.
-
 
 ## Version 0.1.1
 
