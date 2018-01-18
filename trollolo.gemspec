@@ -4,7 +4,7 @@ require File.expand_path('../lib/version', __FILE__)
 Gem::Specification.new do |s|
   s.name        = 'trollolo'
   s.version     = Trollolo::VERSION
-  s.license     = 'GPL-3'
+  s.license     = 'GPL-3.0'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Cornelius Schumacher']
   s.email       = ['cschum@suse.de']
