@@ -26,11 +26,15 @@ def parseCommandLine():
   parser = argparse.ArgumentParser(epilog=epilog, description=description)
   parser.add_argument('sprint', metavar='NUM', help='Sprint Number')
   parser.add_argument('--output', help='Location of data to process')
+  parser.add_argument('--location', help='Image file location')
   parser.add_argument('--no-tasks', action='store_true', help='Disable Tasks line in the chart', default=False)
   parser.add_argument('--with-fast-lane', action='store_true', help='Draw line for Fast Lane cards', default=False)
   parser.add_argument('--verbose', action='store_true', help='Verbose Output', default=False)
   parser.add_argument('--no-head', action='store_true', help='Run in headless mode', default=False)
   args = parser.parse_args()
+  
+  if args.location:
+    args.location = os.path.join(os.getcwd(),args.location)
 
   if args.output:
     os.chdir(args.output)
@@ -118,7 +122,7 @@ if args.with_fast_lane:
 
   graph_fast_lane.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label, plot)
   legend_list.append(graph_fast_lane.subplot)
-    
+
 # Draw legend
 plot.drawLegend(legend_list)
 

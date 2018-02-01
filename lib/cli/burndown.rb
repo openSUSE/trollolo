@@ -21,6 +21,7 @@ class CliBurndown < Thor
   option :weekend_lines, type: :array, desc: 'Set the weekend_lines. [3.5, 8.5] by default'
   option :plot, type: :boolean, desc: 'also plot the new data'
   option :plot_to_board, type: :boolean, desc: 'Send the plotted data to the board'
+  option :location, desc: 'Image output directory', required: false
   option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean
   option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
   option 'push-to-api', desc: 'Push collected data to api endpoint (in json)', required: false

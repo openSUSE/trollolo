@@ -34,6 +34,15 @@ describe 'create_burndown.py' do
     end
   end
 
+  it 'creates image file in given location' do
+    @working_dir = given_directory do
+      given_file('burndown-data-01.yaml', from: 'create_burndown_helper/burndown-data-01.yaml')
+    end
+    result = run_helper(@working_dir, '01', ['--location=test'])
+    expect(result).to exit_with_success('')
+    expect(File.exist?(File.join(@working_dir, 'test/burndown-01.png'))).to be true
+  end
+
   it 'creates burndown chart with varying number of total story points and tasks' do
     compare_images_for_sprint('23')
   end
