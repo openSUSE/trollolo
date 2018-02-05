@@ -134,7 +134,7 @@ EOT
   def burndowns
     process_global_options options
     board_list = YAML.load_file(options['board-list'])
-    board_list.keys.each do |name|
+    board_list.each_key do |name|
       raise 'invalid character in team name' if name =~ /[^[:alnum:]. _]/ # sanitize
       board = board_list[name]
       if options['output']

@@ -301,14 +301,6 @@ Naming/UncommunicativeMethodArgName:
     - 'lib/scrum/sprint_board.rb'
     - 'lib/scrum/sprint_planning_board.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect.
-Performance/HashEachMethods:
-  Exclude:
-    - 'lib/cli.rb'
-    - 'lib/scrum/creator.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Security/YAMLLoad:
