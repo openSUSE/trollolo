@@ -1,5 +1,9 @@
 inherit_from: .rubocop_todo.yml
 
+# This probably rather should be EnforcedStyle: brackets
+Style/WordArray:
+  Enabled: false
+
 #################### Metrics ###############################
 
 Metrics/AbcSize:

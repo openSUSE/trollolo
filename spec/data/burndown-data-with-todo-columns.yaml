@@ -1,0 +1,35 @@
+---
+meta:
+  board_id: myboardid
+  todo_columns:
+    - Swimlane Backlog
+    - Sprint Backlog
+  swimlanes:
+    - Swimlane One
+    - swimlanetwo
+  sprint: 2
+  total_days: 9
+  weekend_lines:
+  - 3.5
+  - 7.5
+days:
+- date: '2014-04-23'
+  updated_at: '2014-04-23T10:00:00+01:00'
+  story_points:
+    total: 30
+    open: 23
+  tasks:
+    total: 25
+    open: 21
+- date: '2014-04-24'
+  updated_at: '2014-04-24T19:00:00+01:00'
+  story_points:
+    total: 30
+    open: 21
+  tasks:
+    total: 26
+    open: 19
+  story_points_extra:
+    done: 3
+  tasks_extra:
+    done: 2

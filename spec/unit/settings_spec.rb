@@ -71,5 +71,4 @@ describe Settings do
       expect(File.read(@config_file)).to eq "---\ndeveloper_public_key: mypublickey\nmember_token: mymembertoken\n"
     end
   end
-
 end

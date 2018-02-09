@@ -180,4 +180,99 @@ EOT
       expect(@board.columns.first.cards.first.label?('imnolabel')).to be false
     end
   end
+
+  describe '#swimlane?' do
+    let :subject do
+      Card.new(board_data, 'card_id', settings)
+    end
+
+    let :settings do
+      settings = dummy_settings
+      settings.swimlanes = swimlanes
+      settings
+    end
+
+    let :board_data do
+      { 'cards' => [{ 'id' => 'card_id', 'labels' => labels }] }
+    end
+
+    let :labels do
+      []
+    end
+
+    context 'no swimlane' do
+      let :swimlanes do
+        []
+      end
+
+      it 'returns false' do
+        expect(subject.swimlane?).to be false
+      end
+    end
+
+    context 'one swimlane' do
+      let :swimlanes do
+        ['a_swimlane']
+      end
+
+      context 'matching label' do
+        let :labels do
+          [{ 'name' => 'a_swimlane' }]
+        end
+
+        it 'returns true' do
+          expect(subject.swimlane?).to be true
+        end
+      end
+
+      context 'non-matching label' do
+        let :labels do
+          [{ 'name' => 'something_completely_different' }]
+        end
+
+        it 'returns false' do
+          expect(subject.swimlane?).to be false
+        end
+      end
+    end
+
+    context 'two swimlanes' do
+      let :swimlanes do
+        %w[a_swimlane another_swimlane]
+      end
+
+      context 'matching label' do
+        let :labels do
+          [{ 'name' => 'another_swimlane' }]
+        end
+
+        it 'returns true' do
+          expect(subject.swimlane?).to be true
+        end
+      end
+
+      context 'one matching label of multiple labels' do
+        let :labels do
+          [
+            { 'name' => 'something_completely_different' },
+            { 'name' => 'another_swimlane' }
+          ]
+        end
+
+        it 'returns true' do
+          expect(subject.swimlane?).to be true
+        end
+      end
+
+      context 'non-matching label' do
+        let :labels do
+          [{ 'name' => 'something_completely_different' }]
+        end
+
+        it 'returns false' do
+          expect(subject.swimlane?).to be false
+        end
+      end
+    end
+  end
 end
