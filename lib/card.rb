@@ -55,6 +55,12 @@ class Card
     @card_data['labels']
   end
 
+  def has_label?(label_name)
+    card_labels.any? do |label|
+      label['name'].include?(label_name)
+    end
+  end
+
   def checklists
     @card_data['checklists'].map do |checklist|
       Checklist.new(checklist)
