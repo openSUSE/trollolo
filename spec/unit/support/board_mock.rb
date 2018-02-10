@@ -1,10 +1,9 @@
-require "securerandom"
+require 'securerandom'
 
 class BoardMock
   def self.board_method(*method_names)
-    if method_names.is_a?(Symbol)
-      method_names = [method_names]
-    end
+    method_names = [method_names] if method_names.is_a?(Symbol)
+
     method_names.each do |method_name|
       define_method :"#{method_name}" do
         board.send(method_name)
@@ -28,8 +27,8 @@ class BoardMock
   def list(name)
     @current_list_id = SecureRandom.hex
     list = {
-      "name" => name,
-      "id" => @current_list_id
+      'name' => name,
+      'id' => @current_list_id
     }
     @data['lists'].push(list)
     self
@@ -37,17 +36,17 @@ class BoardMock
 
   def card(name)
     @current_card = {
-      "name" => name,
-      "id" => SecureRandom.hex,
-      "idList" => @current_list_id
+      'name' => name,
+      'id' => SecureRandom.hex,
+      'idList' => @current_list_id
     }
     @data['cards'].push(@current_card)
     self
   end
 
   def label(name)
-    @current_card["labels"] ||= []
-    @current_card["labels"].push( { "name" => name })
+    @current_card['labels'] ||= []
+    @current_card['labels'].push('name' => name)
     self
   end
 end

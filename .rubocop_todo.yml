@@ -158,6 +158,7 @@ Layout/MultilineMethodCallIndentation:
   Exclude:
     - 'lib/burndown_chart.rb'
     - 'spec/unit/trello_wrapper_spec.rb'
+    - 'spec/unit/board_mock_spec.rb' # Indendation is used to express structure of board
 
 # Offense count: 2
 # Cop supports --auto-correct.
