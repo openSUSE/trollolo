@@ -165,19 +165,19 @@ EOT
     end
   end
 
-  describe "#has_label?" do
+  describe '#label?' do
     before do
       full_board_mock
       trello = TrelloWrapper.new(dummy_settings)
       @board = trello.board('53186e8391ef8671265eba9d')
     end
 
-    it "returns true if card has label" do
-      expect(@board.columns.first.cards.first.has_label?("Sticky")).to be true
+    it 'returns true if card has label' do
+      expect(@board.columns.first.cards.first.label?('Sticky')).to be true
     end
 
-    it "returns false if card does not have label" do
-      expect(@board.columns.first.cards.first.has_label?("imnolabel")).to be false
+    it 'returns false if card does not have label' do
+      expect(@board.columns.first.cards.first.label?('imnolabel')).to be false
     end
   end
 end
