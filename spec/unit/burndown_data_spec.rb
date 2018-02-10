@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 include GivenFilesystemSpecHelpers
 
 describe BurndownData do
-  context "with full board mock" do
+  context 'with full board mock' do
     before(:each) do
       @burndown = BurndownData.new(dummy_settings)
       @burndown.board_id = '53186e8391ef8671265eba9d'
@@ -148,14 +148,45 @@ describe BurndownData do
     end
   end
 
-  context "board with swimlanes" do
-    let :subject {
-      BurndownData.new(dummy_settings)
-      # Create dummy board with two cards, one with swimlane label
-    }
+  context 'board with swimlanes' do
+    let :subject do
+      settings = dummy_settings
+      settings.swimlanes = ['myswimlane']
 
-    it "ignores swim lane story points" do
-      expect(@burndown.story_points.open).to eq(1)
+      mock_board = BoardMock.new(settings)
+        .list('Sprint Backlog')
+          .card('(2) One')
+          .card('(1) Two')
+            .label('myswimlane')
+        .list('Doing')
+        .list('Done')
+
+      burndown = BurndownData.new(settings)
+      allow(burndown).to receive(:board).and_return mock_board
+      burndown.fetch
+      burndown
+    end
+
+    it 'ignores swimlane story points' do
+      expect(subject.story_points.open).to eq(2)
+    end
+
+    it 'records swimlane story points' do
+      expect(subject.swimlanes['myswimlane'].todo).to eq(1)
+      expect(subject.swimlanes['myswimlane'].doing).to eq(0)
+      expect(subject.swimlanes['myswimlane'].done).to eq(0)
+    end
+
+    it 'includes swimlane story points in hash' do
+      expected_hash = {
+        'myswimlane' => {
+          'todo' => 1,
+          'doing' => 0,
+          'done' => 0
+        }
+      }
+      expect(subject.to_hash.key?('swimlanes')).to be true
+      expect(subject.to_hash['swimlanes']).to eq(expected_hash)
     end
   end
 end

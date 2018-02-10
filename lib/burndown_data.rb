@@ -33,9 +33,31 @@ class BurndownData
     end
   end
 
+  class SwimlaneResult
+    attr_accessor :todo, :doing, :done
+
+    def add_todo(story_points)
+      @todo += story_points
+    end
+
+    def add_doing(story_points)
+      @doing += story_points
+    end
+
+    def add_done(story_points)
+      @done += story_points
+    end
+
+    def initialize
+      @todo = 0
+      @doing = 0
+      @done = 0
+    end
+  end
+
   attr_accessor :story_points, :tasks, :extra_story_points, :extra_tasks,
                 :unplanned_story_points, :unplanned_tasks,
-                :board_id, :fast_lane_cards, :date_time
+                :board_id, :fast_lane_cards, :date_time, :swimlanes
   attr_reader :meta
 
   def initialize(settings)
@@ -48,6 +70,11 @@ class BurndownData
     @unplanned_tasks        = Result.new
     @fast_lane_cards        = Result.new
     @date_time              = Time.now
+
+    @swimlanes              = {}
+    settings.swimlanes.each do |swimlane|
+      @swimlanes[swimlane] = SwimlaneResult.new
+    end
   end
 
   def to_hash
@@ -69,12 +96,9 @@ class BurndownData
         'done' => extra_tasks.done
       }
     }
-    if fast_lane_cards.total > 0
-      base['fast_lane'] = {
-        'total' => fast_lane_cards.total,
-        'open' => fast_lane_cards.open
-      }
-    end
+
+    base['fast_lane'] = fast_lane_to_hash if fast_lane_cards.total > 0
+
     if unplanned_story_points.total > 0
       base['unplanned_story_points'] = {
         'total' => unplanned_story_points.total,
@@ -85,7 +109,29 @@ class BurndownData
         'open' => unplanned_tasks.open
       }
     end
+
+    base['swimlanes'] = swimlanes_to_hash unless swimlanes.empty?
+
     base
+  end
+
+  def fast_lane_to_hash
+    {
+      'total' => fast_lane_cards.total,
+      'open' => fast_lane_cards.open
+    }
+  end
+
+  def swimlanes_to_hash
+    swimlanes_element = {}
+    swimlanes.each do |name, swimlane_result|
+      swimlanes_element[name] = {
+        'todo' => swimlane_result.todo,
+        'doing' => swimlane_result.doing,
+        'done' => swimlane_result.done
+      }
+    end
+    swimlanes_element
   end
 
   def trello
@@ -113,6 +159,29 @@ class BurndownData
     @fast_lane_cards.done    = board.done_fast_lane_cards_count
     @fast_lane_cards.open    = board.open_fast_lane_cards_count
     @date_time               = DateTime.now
+
+    fetch_swimlanes
+  end
+
+  def fetch_swimlanes
+    @settings.swimlanes.each do |swimlane|
+      board.todo_column.cards.each do |card|
+        @swimlanes[swimlane].add_todo(card.story_points) if card.label?(swimlane)
+      end
+
+      board.doing_columns.each do |column|
+        column.cards.each do |card|
+          @swimlanes[swimlane].add_doing(card.story_points) if card.label?(swimlane)
+        end
+      end
+
+      board.done_column.cards.each do |card|
+        @swimlanes[swimlane].add_done(card.story_points) if card.label?(swimlane)
+      end
+      board.accepted_column.cards.each do |card|
+        @swimlanes[swimlane].add_done(card.story_points) if card.label?(swimlane)
+      end
+    end
   end
 
   private

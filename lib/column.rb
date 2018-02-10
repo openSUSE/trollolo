@@ -50,7 +50,7 @@ class Column
   end
 
   def committed_cards
-    cards.select{|c| !c.extra? && !c.unplanned?}
+    cards.select{|c| !c.extra? && !c.unplanned? && !c.swimlane?}
   end
 
   def fast_lane_cards

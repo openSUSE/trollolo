@@ -11,13 +11,23 @@ class BoardMock
     end
   end
 
-  board_method :columns, :cards
+  board_method :columns, :cards, :meta_cards
+  board_method :open_cards
+  board_method :tasks, :closed_tasks
+  board_method :extra_tasks, :extra_closed_tasks
+  board_method :open_columns, :todo_column, :doing_columns, :done_column, :accepted_column
+  board_method :done_story_points, :open_story_points
+  board_method :extra_done_story_points, :extra_open_story_points
+  board_method :unplanned_done_story_points, :unplanned_open_story_points
+  board_method :unplanned_tasks, :unplanned_closed_tasks
+  board_method :done_fast_lane_cards_count, :open_fast_lane_cards_count
 
-  def initialize
+  def initialize(settings = nil)
     @data = {
       'lists' => [],
       'cards' => []
     }
+    @settings = settings
   end
 
   def board

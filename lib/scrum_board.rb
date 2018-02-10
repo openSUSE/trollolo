@@ -12,6 +12,14 @@ class ScrumBoard
     @columns ||= @board_data['lists'].map{|x| Column.new(@board_data, x['id'], @settings)}
   end
 
+  def todo_column
+    columns.select{|c| c.name == @settings.todo_column}.first
+  end
+
+  def doing_columns
+    columns.select{|c| @settings.doing_columns.include?(c.name) }
+  end
+
   def done_column
     done_columns = columns.select{|c| c.name =~ @settings.done_column_name_regex }
     if done_columns.empty?

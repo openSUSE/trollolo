@@ -238,6 +238,11 @@ describe BurndownChart do
         @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
         expect(@settings.not_done_columns).to eq ['Sprint Backlog', 'Doing', 'QA']
       end
+
+      it 'reads swimlanes' do
+        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-swimlanes.yaml')
+        expect(@settings.swimlanes).to eq ['Swimlane One', 'swimlanetwo']
+      end
     end
 
     describe '#write_data' do

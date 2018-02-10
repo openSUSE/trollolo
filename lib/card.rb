@@ -52,7 +52,7 @@ class Card
   end
 
   def card_labels
-    @card_data['labels']
+    @card_data['labels'] || []
   end
 
   def label?(label_name)
@@ -62,6 +62,7 @@ class Card
   end
 
   def checklists
+    return [] unless @card_data['checklists']
     @card_data['checklists'].map do |checklist|
       Checklist.new(checklist)
     end
@@ -88,6 +89,15 @@ class Card
     card_labels.any? do |label|
       label['name'].include?('Unplanned')
     end
+  end
+
+  def swimlane?
+    card_labels.each do |label|
+      @settings.swimlanes.each do |swimlane|
+        return true if label['name'].include?(swimlane)
+      end
+    end
+    false
   end
 
   def meta_card?
