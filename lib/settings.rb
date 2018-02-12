@@ -18,7 +18,7 @@
 class Settings
 
   attr_accessor :developer_public_key, :member_token, :board_aliases, :verbose,
-                :raw, :not_done_columns, :todo_column, :doing_columns, :accepted_column_name_regex,
+                :raw, :not_done_columns, :todo_columns, :doing_columns, :accepted_column_name_regex,
                 :done_column_name_regex, :todo_column_name_regex, :scrum,
                 :no_task_checklists, :swimlanes
 
@@ -34,7 +34,7 @@ class Settings
         @scrum                      = OpenStruct.new(@config['scrum'] || scrum_defaults)
         @not_done_columns           = @config['not_done_columns'].freeze || ['Sprint Backlog', 'Doing']
         @no_task_checklists         = @config['no_task_checklists'].freeze || ['Feedback']
-        @todo_column                = @config['todo_column'].freeze || 'Sprint Backlog'
+        @todo_columns               = @config['todo_columns'].freeze || ['Sprint Backlog']
         @doing_columns              = @config['doing_columns'].freeze || ['Doing']
         @done_column_name_regex     = @config['done_column_name_regex'].freeze || /\ADone/
         @accepted_column_name_regex = @config['accepted_column_name_regex'].freeze || /\AAccepted/

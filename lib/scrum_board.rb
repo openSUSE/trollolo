@@ -12,8 +12,8 @@ class ScrumBoard
     @columns ||= @board_data['lists'].map{|x| Column.new(@board_data, x['id'], @settings)}
   end
 
-  def todo_column
-    columns.select{|c| c.name == @settings.todo_column}.first
+  def todo_columns
+    columns.select{|c| @settings.todo_columns.include?(c.name)}
   end
 
   def doing_columns

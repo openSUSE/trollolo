@@ -151,15 +151,23 @@ describe BurndownData do
   context 'board with swimlanes' do
     let :subject do
       settings = dummy_settings
+      settings.todo_columns = ['Swimlane Backlog', 'Sprint Backlog']
       settings.swimlanes = ['myswimlane']
 
       mock_board = BoardMock.new(settings)
-        .list('Sprint Backlog')
-          .card('(2) One')
-          .card('(1) Two')
+        .list('Swimlane Backlog')
+          .card('(2) Three')
             .label('myswimlane')
+        .list('Sprint Backlog')
+          .card('(3) One')
+          .card('(5) Two')
         .list('Doing')
+          .card('(7) Two')
+            .label('myswimlane')
         .list('Done')
+          .card('(11) Four')
+          .card('(13) Five')
+            .label('myswimlane')
 
       burndown = BurndownData.new(settings)
       allow(burndown).to receive(:board).and_return mock_board
@@ -168,21 +176,22 @@ describe BurndownData do
     end
 
     it 'ignores swimlane story points' do
-      expect(subject.story_points.open).to eq(2)
+      expect(subject.story_points.open).to eq(8)
+      expect(subject.story_points.done).to eq(11)
     end
 
     it 'records swimlane story points' do
-      expect(subject.swimlanes['myswimlane'].todo).to eq(1)
-      expect(subject.swimlanes['myswimlane'].doing).to eq(0)
-      expect(subject.swimlanes['myswimlane'].done).to eq(0)
+      expect(subject.swimlanes['myswimlane'].todo).to eq(2)
+      expect(subject.swimlanes['myswimlane'].doing).to eq(7)
+      expect(subject.swimlanes['myswimlane'].done).to eq(13)
     end
 
     it 'includes swimlane story points in hash' do
       expected_hash = {
         'myswimlane' => {
-          'todo' => 1,
-          'doing' => 0,
-          'done' => 0
+          'todo' => 2,
+          'doing' => 7,
+          'done' => 13
         }
       }
       expect(subject.to_hash.key?('swimlanes')).to be true

@@ -1,11 +1,12 @@
 require_relative 'spec_helper'
 
 describe ScrumBoard do
-  describe '#todo_column' do
+  describe '#todo_columns' do
     let(:board) { ScrumBoard.new(JSON.parse(load_test_file('full-board.json')), dummy_settings) }
 
     it 'finds column' do
-      expect(board.todo_column.name).to eq('Sprint Backlog')
+      expect(board.todo_columns.count).to eq(1)
+      expect(board.todo_columns.first.name).to eq('Sprint Backlog')
     end
   end
 

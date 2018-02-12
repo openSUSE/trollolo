@@ -165,8 +165,10 @@ class BurndownData
 
   def fetch_swimlanes
     @settings.swimlanes.each do |swimlane|
-      board.todo_column.cards.each do |card|
-        @swimlanes[swimlane].add_todo(card.story_points) if card.label?(swimlane)
+      board.todo_columns.each do |column|
+        column.cards.each do |card|
+          @swimlanes[swimlane].add_todo(card.story_points) if card.label?(swimlane)
+        end
       end
 
       board.doing_columns.each do |column|
