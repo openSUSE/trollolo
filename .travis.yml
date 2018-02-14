@@ -1,7 +1,6 @@
 language: ruby
 cache: bundler
 before_install:
-  - gem --version
   - gem list bundler
 rvm:
   - "2.2.3"
