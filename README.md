@@ -139,7 +139,6 @@ The specified `URL` can contain placeholders which will be replaced:
      :board  => Board ID
 
 
-
 To generate the actual burndown chart, go to the working directory and call:
 
     trollolo plot SPRINT_NUMBER
@@ -155,6 +154,45 @@ Trello board.
 
 Some more info can be found in the command line help with `trollolo help` and
 `trollolo help burndown`.
+
+### Swimlanes
+
+You can define swimlanes to exclude certain cards from the normal burndown
+data. This can be useful when you track work of multiple projects on the same
+board and you don't want to apply the full Scrum framework to all of them. An
+example would be a side project which you limit to one card in process.
+
+Swimlanes are defined by putting a label with the name of the swimlane on all
+cards which belong to this swimlane. It does not matter in which column they
+are. To make Trollolo aware of the swimlane, you need to add an entry in the
+meta section of the burndown YAML such as:
+
+    meta:
+      swimlanes:
+        - My Side Project
+
+This lets Trollolo exclude all cards which have the label with the name
+`My Side Project` from the burndown chart.
+
+The data for swimlane cards is collected separately in the burndown YAML
+separated in `todo`, `doing`, and `done` values. This can be used to generate
+statistics for the swimlanes. Trollolo currently only writes the raw data
+but doesn't support any statistics such as generating graphs.
+
+### Column names
+
+Trollolo by default looks for columns named such as `Sprint Backlog`, `Doing`,
+or `Done`. If you need more or other names you can configure that in the burndown
+YAML. Here is an example:
+
+    meta:
+      todo_columns:
+        - Main Backlog
+        - Swimlane Backlog
+      doing_columns:
+        - Doing
+        - Review
+        - QA
 
 ### Example
 
