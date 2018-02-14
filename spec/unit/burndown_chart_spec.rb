@@ -234,6 +234,16 @@ describe BurndownChart do
         expect(@chart.data['days']).to eq @raw_data
       end
 
+      it 'reads todo columns' do
+        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-todo-columns.yaml')
+        expect(@settings.todo_columns).to eq ['Swimlane Backlog', 'Sprint Backlog']
+      end
+
+      it 'reads doing columns' do
+        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-doing-columns.yaml')
+        expect(@settings.doing_columns).to eq ['Doing', 'QA']
+      end
+
       it 'reads not done columns' do
         @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
         expect(@settings.not_done_columns).to eq ['Sprint Backlog', 'Doing', 'QA']

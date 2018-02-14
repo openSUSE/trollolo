@@ -85,6 +85,12 @@ class BurndownChart
   def read_data(filename)
     @data = YAML.load_file filename
 
+    todo_columns = @data['meta']['todo_columns']
+    @settings.todo_columns = todo_columns if todo_columns
+
+    doing_columns = @data['meta']['doing_columns']
+    @settings.doing_columns = doing_columns if doing_columns
+
     not_done_columns = @data['meta']['not_done_columns']
     @settings.not_done_columns = not_done_columns if not_done_columns
 
