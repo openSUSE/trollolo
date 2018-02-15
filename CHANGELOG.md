@@ -1,8 +1,5 @@
 # Trollolo Changelog
 
-## Master (unreleased)
-
-
 ## Version 0.2.0
 
 * Require Ruby to be >= 2.2.0 and < 2.4.2 until #139 is fixed.
