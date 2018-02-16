@@ -215,6 +215,18 @@ EOT
     end
   end
 
+  desc 'show-backlog', 'Show backlog of board'
+  option 'board-id', desc: 'Id of Trello board', required: true
+  def show_backlog
+    puts '| Title'
+
+    trello = TrelloWrapper.new(@@settings)
+    board = trello.board(options['board-id'])
+    board.planning_backlog_column.cards.each do |card|
+      puts "| #{card.name}"
+    end
+  end
+
   desc 'show-backup', 'Show backup of board'
   option 'board-id', desc: 'Id of Trello board', required: true
   option 'show-descriptions', desc: 'Show descriptions of cards', required: false, type: :boolean

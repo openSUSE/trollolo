@@ -123,6 +123,20 @@ EOT
     end.to output(expected_output).to_stdout
   end
 
+
+  it 'shows planning backlog', vcr: 'sprint_planning_board', vcr_record: false do
+    @cli.options = {'board-id' => 'QwlsiA2L'}
+    expected_output = <<EOT
+| Title
+| (7) Outra coisa a fazer
+| (3) Fazer outra coisa
+| (4) Mais uma coisa
+EOT
+    expect do
+      @cli.show_backlog
+    end.to output(expected_output).to_stdout
+  end
+
   it 'gets description' do
     skip('This tests fails after ruby-trello update')
     body = <<-EOT

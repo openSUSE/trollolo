@@ -12,6 +12,10 @@ class ScrumBoard
     @columns ||= @board_data['lists'].map{|x| Column.new(@board_data, x['id'], @settings)}
   end
 
+  def planning_backlog_column
+    columns.select{ |column| column.name == @settings.scrum['list_names']['planning_backlog'] }.first
+  end
+
   def todo_columns
     columns.select{|c| @settings.todo_columns.include?(c.name)}
   end
