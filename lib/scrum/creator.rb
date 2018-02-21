@@ -9,7 +9,7 @@ module Scrum
     private
 
     def create_labels(board_id)
-      @scrum.label_names.each { |_, name| Trello::Label.create(name: name, board_id: board_id) }
+      @scrum.label_names.each_value { |name| Trello::Label.create(name: name, board_id: board_id) }
     end
 
     def create_sprint_board
