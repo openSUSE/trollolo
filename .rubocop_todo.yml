@@ -21,15 +21,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'trollolo.gemspec'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: leading, trailing
-Layout/DotPosition:
-  Exclude:
-    - 'spec/integration/create_burndown_spec.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Layout/EmptyLineAfterMagicComment:

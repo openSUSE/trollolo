@@ -22,8 +22,8 @@ def compare_images_for_sprint(sprint_number, extra_args = [])
 
   result = run_helper(@working_dir, sprint_number, extra_args)
   expect(result).to exit_with_success('')
-  expect(File.join(@working_dir, "burndown-#{sprint_number}.png")).
-    to be_same_image_as("create_burndown_helper/burndown-#{sprint_number}.png")
+  expect(File.join(@working_dir, "burndown-#{sprint_number}.png"))
+    .to be_same_image_as("create_burndown_helper/burndown-#{sprint_number}.png")
 end
 
 describe 'create_burndown.py' do
