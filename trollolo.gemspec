@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'ruby-trello', '~> 1.5.0'
 
   s.files        = `git ls-files`.split("\n")
-  s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? Regexp.last_match(1) : nil}.compact
+  s.executables  = `git ls-files`.split("\n").map{|f| f =~ %r{/^bin\/(.*)/} ? Regexp.last_match(1) : nil}.compact
   s.require_path = 'lib'
 
   s.files += Dir['man/*.?']              # UNIX man pages
