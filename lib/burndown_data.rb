@@ -180,8 +180,10 @@ class BurndownData
       board.done_column.cards.each do |card|
         @swimlanes[swimlane].add_done(card.story_points) if card.label?(swimlane)
       end
-      board.accepted_column.cards.each do |card|
-        @swimlanes[swimlane].add_done(card.story_points) if card.label?(swimlane)
+      board.accepted_columns.each do |column|
+        column.cards.each do |card|
+          @swimlanes[swimlane].add_done(card.story_points) if card.label?(swimlane)
+        end
       end
     end
   end

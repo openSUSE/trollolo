@@ -168,6 +168,12 @@ describe BurndownData do
           .card('(11) Four')
           .card('(13) Five')
             .label('myswimlane')
+        .list('Accepted Sprint 2')
+          .card('(17) Six')
+            .label('myswimlane')
+        .list('Accepted Sprint 1')
+          .card('(21) Seven')
+            .label('myswimlane')
 
       burndown = BurndownData.new(settings)
       allow(burndown).to receive(:board).and_return mock_board
@@ -183,7 +189,7 @@ describe BurndownData do
     it 'records swimlane story points' do
       expect(subject.swimlanes['myswimlane'].todo).to eq(2)
       expect(subject.swimlanes['myswimlane'].doing).to eq(7)
-      expect(subject.swimlanes['myswimlane'].done).to eq(13)
+      expect(subject.swimlanes['myswimlane'].done).to eq(51)
     end
 
     it 'includes swimlane story points in hash' do
@@ -191,7 +197,7 @@ describe BurndownData do
         'myswimlane' => {
           'todo' => 2,
           'doing' => 7,
-          'done' => 13
+          'done' => 51
         }
       }
       expect(subject.to_hash.key?('swimlanes')).to be true

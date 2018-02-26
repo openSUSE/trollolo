@@ -191,4 +191,17 @@ describe ScrumBoard do
       end
     end
   end
+
+  describe '#accepted_columns' do
+    let :subject do
+      BoardMock.new(dummy_settings)
+        .list('Accepted Sprint 2')
+        .list('Accepted Sprint 1')
+    end
+
+    it 'returns list of accepted columns' do
+      expect(subject.accepted_columns.count).to eq(2)
+      expect(subject.accepted_columns.map(&:name)).to eq(['Accepted Sprint 2', 'Accepted Sprint 1'])
+    end
+  end
 end

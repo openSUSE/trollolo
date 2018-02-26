@@ -29,8 +29,11 @@ class ScrumBoard
     end
   end
 
+  def accepted_columns
+    columns.select{|c| c.name =~ @settings.accepted_column_name_regex }
+  end
+
   def accepted_column
-    accepted_columns = columns.select{|c| c.name =~ @settings.accepted_column_name_regex }
     if accepted_columns.empty?
       EmptyColumn.new
     else

@@ -15,7 +15,8 @@ class BoardMock
   board_method :open_cards
   board_method :tasks, :closed_tasks
   board_method :extra_tasks, :extra_closed_tasks
-  board_method :open_columns, :todo_columns, :doing_columns, :done_column, :accepted_column
+  board_method :open_columns, :todo_columns, :doing_columns, :done_column
+  board_method :accepted_column, :accepted_columns
   board_method :done_story_points, :open_story_points
   board_method :extra_done_story_points, :extra_open_story_points
   board_method :unplanned_done_story_points, :unplanned_open_story_points
