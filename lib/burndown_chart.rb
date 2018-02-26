@@ -167,6 +167,7 @@ class BurndownChart
         cli_switches << '--no-tasks'                 if hash['no-tasks']
         cli_switches << '--with-fast-lane'           if hash['with-fast-lane']
         cli_switches << "--output #{hash['output']}" if hash['output']
+        cli_switches << '--plot-to-board'            if hash['plot-to-board']
         cli_switches << '--verbose'                  if hash['verbose']
       end
     end
