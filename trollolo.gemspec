@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = 'trollolo'
 
   s.add_dependency 'thor', '~> 0.19'
-  s.add_dependency 'ruby-trello', '~> 1.5.0'
+  s.add_dependency 'ruby-trello', '~> 2.0'
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ %r{/^bin\/(.*)/} ? Regexp.last_match(1) : nil}.compact
