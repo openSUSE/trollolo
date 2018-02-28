@@ -105,6 +105,7 @@ class BurndownChart
     end
 
     begin
+      
       File.open( filename, 'w' ) do |file|
         file.write @data.to_yaml
       end
@@ -138,7 +139,7 @@ class BurndownChart
 
 
   def burndown_data_filename
-    "burndown-data-#{sprint.to_s.rjust(2, '0')}.yaml"
+    "burndown-data.yaml"
   end
 
   def setup(burndown_dir, board_id)
@@ -187,6 +188,7 @@ class BurndownChart
   def load_sprint(burndown_dir, number = nil)
     self.sprint = number || last_sprint(burndown_dir)
     burndown_data_path = File.join(burndown_dir, burndown_data_filename)
+    byebug
     begin
       read_data burndown_data_path
     rescue Errno::ENOENT
