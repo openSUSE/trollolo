@@ -1,5 +1,11 @@
 # Trollolo Changelog
 
+## Version 0.3.0
+
+* Support for Ruby >= 2.2, including Ruby 2.5
+* Add support for swimlanes, used for cards which are not part of the normal
+  sprint.
+
 ## Version 0.2.0
 
 * Require Ruby to be >= 2.2.0 and < 2.4.2 until #139 is fixed.
