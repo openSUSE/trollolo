@@ -1,5 +1,9 @@
 # Trollolo Changelog
 
+## Version 0.3.1
+
+* Fix Trollolo executable. Fix #181.
+
 ## Version 0.3.0
 
 * Support for Ruby >= 2.2, including Ruby 2.5
