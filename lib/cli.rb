@@ -193,6 +193,7 @@ EOT
   option :output, aliases: :o, desc: 'Output directory', required: false
   option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean
   option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
+  option 'plot-to-board', desc: 'Send the plotted chart to the first card of the Done column', required: false
   def plot(sprint_number)
     process_global_options options
     BurndownChart.plot(sprint_number, options)
