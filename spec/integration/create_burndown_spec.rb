@@ -17,7 +17,7 @@ end
 
 def compare_images_for_sprint(sprint_number, extra_args = [])
   @working_dir = given_directory do
-    given_file("burndown-data-#{sprint_number}.yaml", from: "create_burndown_helper/burndown-data-#{sprint_number}.yaml")
+    given_file("burndown-data-#{sprint_number}.yml", from: "create_burndown_helper/burndown-data-#{sprint_number}.yml")
   end
 
   result = run_helper(@working_dir, sprint_number, extra_args)

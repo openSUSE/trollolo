@@ -86,7 +86,7 @@ given directory. See the previous section for details on the update process.
 
 Plot the burndown chart for given sprint. This command assumes that you are in
 the burndown directory (initially created with `burndown-init`) and that the
-corresponding file `burndown-data-<sprint-number>.yaml` exists there.
+corresponding file `burndown-data-<sprint-number>.yml` exists there.
 
 ### fetch-burndown-data -- Read data for burndown chart
 

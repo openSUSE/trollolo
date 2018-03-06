@@ -12,7 +12,7 @@ describe Scrum::SprintCleaner do
     expect(subject.cleanup('7Zar7bNm', '72tOJsGS')).to be
   end
 
-  context 'given correct burndown-data-xx.yaml' do
+  context 'given correct burndown-data-xx.yml' do
     before do
       allow_any_instance_of(BurndownChart).to receive(:update)
     end

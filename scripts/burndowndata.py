@@ -17,7 +17,7 @@ class BurndownData:
     self.setScaleFactor(self.total_tasks[0], self.total_story_points[0])
 
   def readYAML(self, sprint_number):
-    with open('burndown-data-' + sprint_number + '.yaml', 'r') as f:
+    with open('burndown-data-' + sprint_number + '.yml', 'r') as f:
       burndown = yaml.load(f)
     return burndown
 

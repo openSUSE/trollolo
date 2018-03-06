@@ -105,7 +105,7 @@ option as follows:
     trollolo burndown-init --board-id=MYBOARDID --output=WORKING_DIR
 
 This will create a directory WORKING_DIR and put an initial data file there,
-which contains the meta data. The file is called `burndown-data-1.yaml`. You
+which contains the meta data. The file is called `burndown-data-1.yml`. You
 might want to keep this file in a git repository for safe storage and history.
 
 After each daily go to the working directory and call:
@@ -147,7 +147,7 @@ or fetch and plot data in one step with:
 
     trollolo burndown --plot
 
-This will take the data from the file `burndown-data-SPRINT_NUMBER.yaml` and
+This will take the data from the file `burndown-data-SPRINT_NUMBER.yml` and
 create a nice chart from it. It will show the chart and also create a file
 `burndown-SPRINT_NUMBER.png` you can upload as cover graphics to a card on your
 Trello board.

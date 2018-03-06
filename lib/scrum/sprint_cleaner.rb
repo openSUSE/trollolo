@@ -56,7 +56,7 @@ module Scrum
         chart.update({})
         puts 'New burndown data was generated automatically.'
       rescue TrolloloError => e
-        if e.message =~ /(burndown-data-)\d*.yaml' (not found)/
+        if e.message =~ /(burndown-data-)\d*.yml' (not found)/
           puts e.message + '. Skipping automatic burndown generation.'
         end
       end
