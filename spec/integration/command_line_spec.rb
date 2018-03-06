@@ -45,7 +45,7 @@ describe 'command line' do
     it 'fails, if burndown data is not found' do
       path = given_directory
       result = run_command(cmd: trollolo_cmd, args: ['burndown', '-o', path.to_s])
-      expect(result).to exit_with_error(1, /burndown-data-01.yaml' not found/)
+      expect(result).to exit_with_error(1, /burndown-data-01.yml' not found/)
     end
   end
 

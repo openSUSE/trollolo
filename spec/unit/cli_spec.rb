@@ -14,11 +14,11 @@ describe Cli do
   it 'fetches burndown data from board-list' do
     full_board_mock
     dir = given_directory
-    @cli.options = {'board-list' => 'spec/data/board-list.yaml',
+    @cli.options = {'board-list' => 'spec/data/board-list.yml',
                     'output' => dir}
     @cli.burndowns
-    expect(File.exist?(File.join(dir, 'orange/burndown-data-01.yaml'))).to be true
-    expect(File.exist?(File.join(dir, 'blue/burndown-data-01.yaml'))).to be true
+    expect(File.exist?(File.join(dir, 'orange/burndown-data-01.yml'))).to be true
+    expect(File.exist?(File.join(dir, 'blue/burndown-data-01.yml'))).to be true
   end
 
   it 'backups board' do

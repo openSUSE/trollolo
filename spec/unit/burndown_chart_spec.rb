@@ -229,28 +229,28 @@ describe BurndownChart do
 
     describe '#read_data' do
       it 'reads data' do
-        @chart.read_data given_file('burndown-data.yaml')
+        @chart.read_data given_file('burndown-data.yml')
 
         expect(@chart.data['days']).to eq @raw_data
       end
 
       it 'reads todo columns' do
-        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-todo-columns.yaml')
+        @chart.read_data given_file('burndown-data.yml', from: 'burndown-data-with-todo-columns.yml')
         expect(@settings.todo_columns).to eq ['Swimlane Backlog', 'Sprint Backlog']
       end
 
       it 'reads doing columns' do
-        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-doing-columns.yaml')
+        @chart.read_data given_file('burndown-data.yml', from: 'burndown-data-with-doing-columns.yml')
         expect(@settings.doing_columns).to eq ['Doing', 'QA']
       end
 
       it 'reads not done columns' do
-        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
+        @chart.read_data given_file('burndown-data.yml', from: 'burndown-data-with-config.yml')
         expect(@settings.not_done_columns).to eq ['Sprint Backlog', 'Doing', 'QA']
       end
 
       it 'reads swimlanes' do
-        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-swimlanes.yaml')
+        @chart.read_data given_file('burndown-data.yml', from: 'burndown-data-with-swimlanes.yml')
         expect(@settings.swimlanes).to eq ['Swimlane One', 'swimlanetwo']
       end
     end
@@ -265,11 +265,11 @@ describe BurndownChart do
 
         write_path = given_dummy_file
         @chart.write_data(write_path)
-        expect(File.read(write_path)). to eq load_test_file('burndown-data.yaml')
+        expect(File.read(write_path)). to eq load_test_file('burndown-data.yml')
       end
 
       it 'writes all data which was read' do
-        read_path = given_file('burndown-data.yaml')
+        read_path = given_file('burndown-data.yml')
         @chart.read_data(read_path)
 
         write_path = given_dummy_file
@@ -354,10 +354,10 @@ EOT
         path = given_directory
         @chart.setup(path, '53186e8391ef8671265eba9d')
 
-        expect(File.exist?(File.join(path, 'burndown-data-01.yaml'))).to be true
+        expect(File.exist?(File.join(path, 'burndown-data-01.yml'))).to be true
 
         chart = BurndownChart.new(@settings)
-        chart.read_data(File.join(path, 'burndown-data-01.yaml'))
+        chart.read_data(File.join(path, 'burndown-data-01.yml'))
 
         expect(chart.board_id).to eq '53186e8391ef8671265eba9d'
       end
@@ -404,7 +404,7 @@ EOT
       end
 
       it 'returns the path of the last sprint' do
-        expect(@chart.load_sprint(path)).to eq(File.join(path, 'burndown-data-02.yaml'))
+        expect(@chart.load_sprint(path)).to eq(File.join(path, 'burndown-data-02.yml'))
       end
     end
 
@@ -419,9 +419,9 @@ EOT
         expected_date_time = DateTime.parse(updated_at)
         allow(DateTime).to receive(:now).and_return(expected_date_time)
 
-        before.read_data(File.join(path, 'burndown-data-02.yaml'))
+        before.read_data(File.join(path, 'burndown-data-02.yml'))
         @chart.update(options)
-        after.read_data(File.join(path, 'burndown-data-02.yaml'))
+        after.read_data(File.join(path, 'burndown-data-02.yml'))
         expect(after.days.size).to eq before.days.size + 1
 
         expect(after.days.last['date']).to eq '2015-01-12'
@@ -429,10 +429,10 @@ EOT
       end
 
       it 'overwrites data on same date' do
-        before.read_data(File.join(path, 'burndown-data-02.yaml'))
+        before.read_data(File.join(path, 'burndown-data-02.yml'))
         @chart.update(options)
         @chart.update(options)
-        after.read_data(File.join(path, 'burndown-data-02.yaml'))
+        after.read_data(File.join(path, 'burndown-data-02.yml'))
         expect(after.days.size).to eq before.days.size + 1
       end
 
@@ -445,7 +445,7 @@ EOT
     describe 'create_next_sprint' do
       let(:path) { given_directory_from_data('burndown_dir') }
       let(:chart) { BurndownChart.new(@settings) }
-      let(:next_sprint_file) { File.join(path, 'burndown-data-03.yaml') }
+      let(:next_sprint_file) { File.join(path, 'burndown-data-03.yml') }
 
       it 'create new sprint file' do
         expected_file_content = <<EOT
@@ -492,7 +492,7 @@ EOT
 
     it 'merges meta data from board if present' do
       chart = BurndownChart.new(@settings)
-      chart.read_data(given_file('burndown-data-10.yaml'))
+      chart.read_data(given_file('burndown-data-10.yml'))
 
       expect(chart.data['meta']['weekend_lines']).to eq([3.5, 8.5])
 

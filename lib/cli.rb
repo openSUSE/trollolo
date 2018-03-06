@@ -128,7 +128,7 @@ EOT
   end
 
   desc 'burndowns', 'run multiple burndowns'
-  option 'board-list', desc: 'path to board-list.yaml', required: true
+  option 'board-list', desc: 'path to board-list.yml', required: true
   option :plot, type: :boolean, desc: 'also plot the new data'
   option :output, aliases: :o, desc: 'Output directory'
   def burndowns
