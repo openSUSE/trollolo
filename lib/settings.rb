@@ -20,7 +20,7 @@ class Settings
   attr_accessor :developer_public_key, :member_token, :board_aliases, :verbose,
                 :raw, :not_done_columns, :todo_columns, :doing_columns, :accepted_column_name_regex,
                 :done_column_name_regex, :todo_column_name_regex, :scrum,
-                :no_task_checklists, :swimlanes
+                :no_task_checklists, :swimlanes, :done_columns
 
   def initialize(config_file_path)
     @config_file_path = config_file_path
@@ -36,7 +36,7 @@ class Settings
         @no_task_checklists         = @config['no_task_checklists'].freeze || ['Feedback']
         @todo_columns               = @config['todo_columns'].freeze || ['Sprint Backlog']
         @doing_columns              = @config['doing_columns'].freeze || ['Doing']
-        @done_column_name_regex     = @config['done_column_name_regex'].freeze || /\ADone/
+        @done_columns               = @config['done_columns'].freeze || ['Done']
         @accepted_column_name_regex = @config['accepted_column_name_regex'].freeze || /\AAccepted/
         @todo_column_name_regex     = @config['todo_column_name_regex'].freeze || /\ATo Do\Z/
         @swimlanes                  = @config['swimlanes'].freeze || []
