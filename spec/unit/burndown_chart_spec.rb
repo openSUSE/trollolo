@@ -244,9 +244,10 @@ describe BurndownChart do
         expect(@settings.doing_columns).to eq ['Doing', 'QA']
       end
 
-      it 'reads not done columns' do
-        @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
-        expect(@settings.not_done_columns).to eq ['Sprint Backlog', 'Doing', 'QA']
+      it 'reads not done columns and throws depecration error' do
+        expect {
+          @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
+        }.to raise_error /deprecated/
       end
 
       it 'reads swimlanes' do

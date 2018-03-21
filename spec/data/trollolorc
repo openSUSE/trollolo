@@ -1,10 +1,9 @@
 developer_public_key: mykey
 member_token: mytoken
-not_done_columns:
+doing_columns:
   - Blocked
   - Doing
   - In review
-  - Sprint Backlog
 no_task_checklists:
   - Definition of done
   - Feedback

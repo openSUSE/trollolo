@@ -40,7 +40,7 @@ and cards and has functionality for extracting data for burndown charts.
 
 `trollolo help [COMMAND]`
 
-Displays help about the available trollolo commands. Can take a command as 
+Displays help about the available trollolo commands. Can take a command as
 an argument to display detailed information about it.
 
 ### burndown-init -- Initialize burndown chart
@@ -77,8 +77,8 @@ BOARDS`.
 
 `trollolo burndowns --board-list=<board list>`
 
-Updates the burndown data for all boards specified in the YAML file in the 
-given directory. See the previous section for details on the update process. 
+Updates the burndown data for all boards specified in the YAML file in the
+given directory. See the previous section for details on the update process.
 
 ### plot -- Plot burndown chart
 
@@ -130,7 +130,7 @@ part and API version as well as the credentials from the Trollolo configuration.
 
 `trollolo backup --board-id=<board id>`
 
-Save a local copy of a board as a JSON file. The backup will be stored in 
+Save a local copy of a board as a JSON file. The backup will be stored in
 '~/.trollolo/backup/<board-id>/'.
 
 ### list-backups -- List all backups
@@ -171,7 +171,7 @@ be an attachment of the given card. If you want to use a new picture use
 
 Get details of an organization.
 
-### organization-members -- Get a list of organization member 
+### organization-members -- Get a list of organization member
 
 `trollolo organization-members --org-name=<organization name>`
 
@@ -214,7 +214,7 @@ sprint is finished.
 `trollolo set-priorities --board-id=<board id>`
 
 Add 'P<n>: ' to the beginning of every cards title in the 'Backlog' list,
-replacing old values if present. 'n' is the current position of the card in the list. 
+replacing old values if present. 'n' is the current position of the card in the list.
 
 
 ## EXAMPLES
@@ -287,7 +287,7 @@ progress, and a list with a name starting with `Done`. If there are multiple
 lists starting with `Done` the first one is taken.
 
 Other names of columns with work in progress can be set in the YAML file in the
-`meta` section as an array of column names under the key `not_done_columns`.
+`meta` section as an array of column names under the key `doing_columns`.
 
 On work item cards the tool takes a bracketed number as suffix as size of the
 item in story points. E.g. a card with the title `(3) Build magic tool` would

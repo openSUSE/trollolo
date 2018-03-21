@@ -19,6 +19,39 @@ describe ScrumBoard do
     end
   end
 
+  describe '#open_columns' do
+    context 'default column names' do
+      let :subject do
+        BoardMock.new(dummy_settings)
+          .list('Sprint Backlog')
+          .list('Doing')
+          .list('Done')
+      end
+
+      it 'returns list of open columns' do
+        expect(subject.open_columns.count).to eq(2)
+        expect(subject.open_columns.map(&:name)).to eq(['Sprint Backlog', 'Doing'])
+      end
+    end
+
+    context 'custom doing columns' do
+      let :subject do
+        settings = dummy_settings
+        settings.doing_columns = ['Doing', 'Review / QA' ]
+
+        BoardMock.new(settings)
+          .list('Sprint Backlog')
+          .list('Review / QA')
+          .list('Done')
+      end
+
+      it 'returns list of open columns' do
+        expect(subject.open_columns.count).to eq(2)
+        expect(subject.open_columns.map(&:name)).to eq(['Sprint Backlog', 'Review / QA'])
+      end
+    end
+  end
+
   describe '#done_column' do
     it 'raises error when done column cannot be found' do
       settings = dummy_settings

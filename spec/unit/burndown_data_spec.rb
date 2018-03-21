@@ -204,4 +204,32 @@ describe BurndownData do
       expect(subject.to_hash['swimlanes']).to eq(expected_hash)
     end
   end
+  context 'board with custom doing' do
+    let :subject do
+      settings = dummy_settings
+      settings.doing_columns = ['Doing', 'Review / QA' ]
+
+      mock_board = BoardMock.new(settings)
+        .list('Sprint Backlog')
+          .card('(2) Three')
+        .list('Review / QA')
+          .card('(7) Two')
+            .label('myswimlane')
+        .list('Done')
+          .card('(11) Four')
+
+      burndown = BurndownData.new(settings)
+      allow(burndown).to receive(:board).and_return mock_board
+      burndown.fetch
+      burndown
+    end
+
+    it 'counts open story points' do
+      expect(subject.story_points.open).to eq(9)
+    end
+
+    it 'counts done story points' do
+      expect(subject.story_points.done).to eq(11)
+    end
+  end
 end

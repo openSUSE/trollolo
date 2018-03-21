@@ -50,7 +50,7 @@ class ScrumBoard
   end
 
   def open_columns
-    columns.select{ |col| @settings.not_done_columns.include?(col.name) }
+    todo_columns + doing_columns
   end
 
   def open_cards
