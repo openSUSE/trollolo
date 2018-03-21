@@ -1,9 +1,8 @@
 developer_public_key: mykey
 member_token: mytoken
-not_done_columns:
+doing_columns:
   - Blocked
   - Doing
   - In review
-  - Sprint Backlog
 board_aliases:
   MyTrelloBoard: 53186e8391ef8671265eba9d
