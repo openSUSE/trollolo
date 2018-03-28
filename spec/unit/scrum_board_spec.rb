@@ -37,7 +37,7 @@ describe ScrumBoard do
     context 'custom doing columns' do
       let :subject do
         settings = dummy_settings
-        settings.doing_columns = ['Doing', 'Review / QA' ]
+        settings.doing_columns = ['Doing', 'Review / QA']
 
         BoardMock.new(settings)
           .list('Sprint Backlog')

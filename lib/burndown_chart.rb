@@ -92,7 +92,7 @@ class BurndownChart
     @settings.doing_columns = doing_columns if doing_columns
 
     if @data['meta']['not_done_columns']
-      raise "`not_done_columns`` is deprecated. Use `todo_columns` and `doing_columns` instead."
+      raise '`not_done_columns` is deprecated. Use `todo_columns` and `doing_columns` instead.'
     end
 
     @settings.swimlanes = @data['meta']['swimlanes'] || []
