@@ -207,7 +207,7 @@ describe BurndownData do
   context 'board with custom doing' do
     let :subject do
       settings = dummy_settings
-      settings.doing_columns = ['Doing', 'Review / QA' ]
+      settings.doing_columns = ['Doing', 'Review / QA']
 
       mock_board = BoardMock.new(settings)
         .list('Sprint Backlog')

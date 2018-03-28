@@ -245,9 +245,9 @@ describe BurndownChart do
       end
 
       it 'reads not done columns and throws depecration error' do
-        expect {
+        expect do
           @chart.read_data given_file('burndown-data.yaml', from: 'burndown-data-with-config.yaml')
-        }.to raise_error /deprecated/
+        end.to raise_error(/deprecated/)
       end
 
       it 'reads swimlanes' do
