@@ -139,7 +139,7 @@ class BurndownChart
 
 
   def burndown_data_filename
-    "burndown-data-#{sprint.to_s.rjust(2, '0')}.yaml"
+    "burndown-data-#{sprint.to_s.rjust(2, '0')}.yml"
   end
 
   def setup(burndown_dir, board_id)
@@ -176,8 +176,8 @@ class BurndownChart
 
   def last_sprint(burndown_dir)
     last_sprint = sprint
-    Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
-      file =~ /burndown-data-(.*).yaml/
+    Dir.glob("#{burndown_dir}/*").collect do |file|
+      next if file !~ /burndown-data-(.*).ya?ml/
       current_sprint = Regexp.last_match(1).to_i
       last_sprint = current_sprint if current_sprint > last_sprint
     end
