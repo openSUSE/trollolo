@@ -1,11 +1,13 @@
 require_relative '../spec_helper'
 
 describe Scrum::SprintBoard do
-  subject!(:sprint_board) { described_class.new(dummy_settings.scrum) }
-  let!(:planning_board) { Scrum::SprintPlanningBoard.new(dummy_settings.scrum) }
+  let(:settings) { dummy_settings }
+
+  subject!(:sprint_board) { described_class.new(settings.scrum) }
+  let!(:planning_board) { Scrum::SprintPlanningBoard.new(settings.scrum) }
 
   before(:each) do
-    TrelloService.new(dummy_settings)
+    TrelloService.new(settings)
   end
 
   it 'places existing waterline card at bottom and removes from planning board', vcr: 'sprint_board', vcr_record: false do
