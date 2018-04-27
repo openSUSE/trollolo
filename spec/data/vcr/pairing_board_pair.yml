@@ -1,0 +1,835 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/UAUzYfm8?key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '299'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '99'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '199'
+      X-Server-Time:
+      - '1525266921452'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '827'
+      Etag:
+      - W/"33b-d4CpMjQljt46QBK8GY5UXQpO5mI"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:21 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:21 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345aac374e6711d50a596","name":"Pairing Board","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/UAUzYfm8/pairing-board","shortUrl":"https://trello.com/b/UAUzYfm8","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","backgroundBottomColor":"#0079BF","backgroundTopColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""}}'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:21 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Pairing%2823.05.2018%29&closed=false&idBoard=5ae345aac374e6711d50a596&pos&idListSource
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '91'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '298'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '98'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '198'
+      X-Server-Time:
+      - '1525266921821'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '137'
+      Etag:
+      - W/"89-XDCt/TbaMyeuIsBgF7ntpUc4Vs0"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:21 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae9b9e9fd9b833462b0f5a7","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":1024,"limits":{}}'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:21 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/5ae345aac374e6711d50a596/lists?filter=open&key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '297'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '97'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '197'
+      X-Server-Time:
+      - '1525266922069'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '559'
+      Etag:
+      - W/"22f-FGuZYfkhFOJ4xpPspSjhkVwRJzM"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:22 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:22 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '[{"id":"5ae9b9e9fd9b833462b0f5a7","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":1024,"subscribed":false},{"id":"5ae9b9d2bc4add50608ceaca","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":2048,"subscribed":false},{"id":"5ae345aba1c1de4ff96befb1","name":"Developers","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":4096,"subscribed":false},{"id":"5ae345abf8f3e118053a68ba","name":"Tracks","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":8192,"subscribed":false}]'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:22 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/UAUzYfm8?key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '296'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '96'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '196'
+      X-Server-Time:
+      - '1525266922415'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '827'
+      Etag:
+      - W/"33b-d4CpMjQljt46QBK8GY5UXQpO5mI"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:22 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:22 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345aac374e6711d50a596","name":"Pairing Board","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/UAUzYfm8/pairing-board","shortUrl":"https://trello.com/b/UAUzYfm8","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","backgroundBottomColor":"#0079BF","backgroundTopColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""}}'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:22 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/5ae345aac374e6711d50a596/lists?filter=open&key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '295'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '95'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '195'
+      X-Server-Time:
+      - '1525266922656'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '559'
+      Etag:
+      - W/"22f-FGuZYfkhFOJ4xpPspSjhkVwRJzM"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:22 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:22 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '[{"id":"5ae9b9e9fd9b833462b0f5a7","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":1024,"subscribed":false},{"id":"5ae9b9d2bc4add50608ceaca","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":2048,"subscribed":false},{"id":"5ae345aba1c1de4ff96befb1","name":"Developers","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":4096,"subscribed":false},{"id":"5ae345abf8f3e118053a68ba","name":"Tracks","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":8192,"subscribed":false}]'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:22 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/lists/5ae345aba1c1de4ff96befb1/cards?filter=open&key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '294'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '94'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '194'
+      X-Server-Time:
+      - '1525266922891'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '851'
+      Etag:
+      - W/"353-Nt330bMetxv/jEreBSIyaRAKTT4"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:22 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:22 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '[{"id":"5ae990790199fc07e61fee7d","checkItemStates":null,"closed":false,"dateLastActivity":"2018-05-02T10:19:21.545Z","desc":"","descData":null,"idBoard":"5ae345aac374e6711d50a596","idList":"5ae345aba1c1de4ff96befb1","idMembersVoted":[],"idShort":1,"idAttachmentCover":null,"idLabels":[],"manualCoverAttachment":false,"name":"SUSE","pos":65535,"shortLink":"mX6nZJze","badges":{"votes":0,"attachmentsByType":{"trello":{"board":0,"card":0}},"viewingMemberVoted":false,"subscribed":true,"fogbugz":"","checkItems":0,"checkItemsChecked":0,"comments":0,"attachments":0,"description":false,"due":null,"dueComplete":false},"dueComplete":false,"due":null,"idChecklists":[],"idMembers":["574e8fb6d0d5fc4ce7fe3914","4e727168cb2ac700002cf6b6"],"labels":[],"shortUrl":"https://trello.com/c/mX6nZJze","subscribed":true,"url":"https://trello.com/c/mX6nZJze/1-suse"}]'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:22 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/UAUzYfm8?key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '293'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '93'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '193'
+      X-Server-Time:
+      - '1525266923163'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '827'
+      Etag:
+      - W/"33b-d4CpMjQljt46QBK8GY5UXQpO5mI"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:23 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:23 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345aac374e6711d50a596","name":"Pairing Board","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/UAUzYfm8/pairing-board","shortUrl":"https://trello.com/b/UAUzYfm8","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","backgroundBottomColor":"#0079BF","backgroundTopColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""}}'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:23 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/boards/5ae345aac374e6711d50a596/lists?filter=open&key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '292'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '92'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '192'
+      X-Server-Time:
+      - '1525266923426'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '559'
+      Etag:
+      - W/"22f-FGuZYfkhFOJ4xpPspSjhkVwRJzM"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Wed, 02 May 2018 13:15:23 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:23 GMT; Secure
+    body:
+      encoding: UTF-8
+      string: '[{"id":"5ae9b9e9fd9b833462b0f5a7","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":1024,"subscribed":false},{"id":"5ae9b9d2bc4add50608ceaca","name":"Pairing(23.05.2018)","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":2048,"subscribed":false},{"id":"5ae345aba1c1de4ff96befb1","name":"Developers","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":4096,"subscribed":false},{"id":"5ae345abf8f3e118053a68ba","name":"Tracks","closed":false,"idBoard":"5ae345aac374e6711d50a596","pos":8192,"subscribed":false}]'
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:23 GMT
+- request:
+    method: get
+    uri: https://api.trello.com/1/lists/5ae345abf8f3e118053a68ba/cards?filter=open&key=mykey&token=mytoken
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '0'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '291'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '91'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '191'
+      X-Server-Time:
+      - '1525266923716'
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"9b2-BbrkxxEKYSxGJveKtPg5iVJwjPY"
+      Vary:
+      - Accept-Encoding
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '619'
+      Date:
+      - Wed, 02 May 2018 13:15:23 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - dsc=12345
+        Expires=Sat, 05 May 2018 13:15:23 GMT; Secure
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+1Vy07jMBT9lSrrpnHiOEm7g85DwxQEFGYxiIXt3LQekjiynSIG9d/HefSFkEZIFWLB7tq+x/f4nBzl7tkRqTNxCIXxOPATBCxgAUlZBCgJMu4MHb4E/vDDQDE31IB2JmWd53Y7lxosNKO5hqGT2rMZ1eaEG7ES5sneGSA/cRFxUXDjo0lAJhiPksj/be9MQXPb0VdfqKGba0V6KqnqKeGQUMpxHEIU+35KECXjyGmaZkKbXQ/LkgyDb+kTTKOE0bbnHAoGSv+SpuF5d9/szZdSWWDQ1CfGUL4soDRTuQK1YzCjDHLdQQpa1jRvG3b921eXtABL45IKJcrFYA5qJTjY6ZW0+IgQTIaObmbORPlgO5fZWXH281rZFkbTRSPns7OSra5o6NDtCH36dPNUQXNsFOS5bCrWSWMbeVes10NnJeDRDu9e2z+2p6drprkSbG8rkwtWL/524m+t7abvltOmgn6ULFpCLwm268Y+JSojZLn7FGrYaGnLqSyqHAz0x+vXNg8wIm2n59ZhvbGtt7Jb5nv2tNreqryR1phKTzyvk2tkaXvc29P7FTHq/wO9wK06d13du7seHoQGYxLzgIVxTHiY4MwPjxoaQkZBRD5CaPBxQzOfXt+eD74BNbWyCvWZ8bGPYv8wNPpPVaELdPsZmvcJzZ7ebwvNBuhh16Lqws027r7ITBgc/Gjsh3rEzEQTH43spR8hM+FxM3NaqzKVj+VguqTKDL5DCYoaqbbpGUcRig/T8/WEXoYXV1ef6Xmf9Ozp/bb0bIBe6LLeZ5c3PruLrc/r+39YdkxIsgkAAA==
+    http_version: 
+  recorded_at: Wed, 02 May 2018 13:15:23 GMT
+recorded_with: VCR 4.0.0

@@ -1,7 +1,15 @@
 module Scrum
   module CardTypeDetection
     def sticky?(card)
-      card.labels.any? { |l| l.name == @settings.label_names['sticky'] }
+      by_label(card, 'sticky')
+    end
+
+    def ci?(card)
+      by_label(card, 'ci')
+    end
+
+    def interrupt?(card)
+      by_label(card, 'interrupt')
     end
 
     def waterline?(card)
@@ -18,6 +26,12 @@ module Scrum
 
     def seabed_card
       @backlog_list.cards.find { |card| seabed?(card) }
+    end
+
+    private
+
+    def by_label(card, label)
+      card.labels.any? { |l| l.name == @settings.label_names[label] }
     end
   end
 end

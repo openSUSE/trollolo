@@ -1,0 +1,18 @@
+developer_public_key: mykey
+member_token: mytoken
+doing_columns:
+  - Blocked
+  - Doing
+  - In review
+no_task_checklists:
+  - Definition of done
+  - Feedback
+scrum:
+  board_names:
+    planning: Planning A
+    sprint: Sprint B
+pairing:
+  board_names:
+    pairing: Team Pairing Board
+  labels:
+    ci: Pipelines

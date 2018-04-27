@@ -1,0 +1,561 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.trello.com/1/boards?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Pairing+Brett
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '18'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '293'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '93'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '193'
+      X-Server-Time:
+      - '1524843948594'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '839'
+      Etag:
+      - W/"347-L9BJCMTyqhReKxJ5wJWbeOAXVp8"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345acc8d35e0ab1c8d1c4","name":"Pairing Brett","desc":"","descData":null,"closed":false,"idOrganization":null,"pinned":false,"url":"https://trello.com/b/57AQ1NZT/pairing-brett","shortUrl":"https://trello.com/b/57AQ1NZT","prefs":{"permissionLevel":"private","voting":"disabled","comments":"members","invitations":"members","selfJoin":true,"cardCovers":true,"cardAging":"regular","calendarFeedEnabled":false,"background":"blue","backgroundImage":null,"backgroundImageScaled":null,"backgroundTile":false,"backgroundBrightness":"dark","backgroundColor":"#0079BF","backgroundBottomColor":"#0079BF","backgroundTopColor":"#0079BF","canBePublic":true,"canBeOrg":true,"canBePrivate":true,"canInvite":true},"labelNames":{"green":"","yellow":"","orange":"","red":"","purple":"","blue":"","sky":"","lime":"","pink":"","black":""},"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:48 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Tracks&closed=false&idBoard=5ae345acc8d35e0ab1c8d1c4&pos&idListSource
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '292'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '92'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '192'
+      X-Server-Time:
+      - '1524843948885'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '124'
+      Etag:
+      - W/"7c-LgIdeGmvJzrM3UBgAnN7yIgs8PU"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345ace85fbeedee5a5842","name":"Tracks","closed":false,"idBoard":"5ae345acc8d35e0ab1c8d1c4","pos":8192,"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:48 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/lists?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Developers&closed=false&idBoard=5ae345acc8d35e0ab1c8d1c4&pos&idListSource
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '78'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '291'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '91'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '191'
+      X-Server-Time:
+      - '1524843949200'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '128'
+      Etag:
+      - W/"80-xGZH9n0A/qH9dKyx3DQ+bscra0o"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:49 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345ad97f12018bd6de948","name":"Developers","closed":false,"idBoard":"5ae345acc8d35e0ab1c8d1c4","pos":4096,"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:49 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Sticky&color&idBoard=5ae345acc8d35e0ab1c8d1c4
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '50'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '290'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '90'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '190'
+      X-Server-Time:
+      - '1524843949513'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '111'
+      Etag:
+      - W/"6f-cFVCP8a7IRDAKEQID/qoHVnpEjE"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:49 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345ad20f6c8872478f585","idBoard":"5ae345acc8d35e0ab1c8d1c4","name":"Sticky","color":null,"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:49 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=Community&color&idBoard=5ae345acc8d35e0ab1c8d1c4
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '53'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '289'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '89'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '189'
+      X-Server-Time:
+      - '1524843949782'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '114'
+      Etag:
+      - W/"72-qniWx+VfPTpyhefvZOtlM90G20c"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:49 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345adf2e6d12ed3ccb543","idBoard":"5ae345acc8d35e0ab1c8d1c4","name":"Community","color":null,"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:49 GMT
+- request:
+    method: post
+    uri: https://api.trello.com/1/labels?key=mykey&token=mytoken
+    body:
+      encoding: UTF-8
+      string: name=CI&color&idBoard=5ae345acc8d35e0ab1c8d1c4
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.5.0p0
+      Content-Length:
+      - '46'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - api.trello.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Dns-Prefetch-Control:
+      - 'off'
+      X-Frame-Options:
+      - DENY
+      Strict-Transport-Security:
+      - max-age=15552000
+      X-Download-Options:
+      - noopen
+      Surrogate-Control:
+      - no-store
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Trello-Version:
+      - '318'
+      X-Trello-Environment:
+      - Production
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, PUT, POST, DELETE
+      Access-Control-Allow-Headers:
+      - Authorization, Accept, Content-Type
+      X-Rate-Limit-Api-Key-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Key-Max:
+      - '300'
+      X-Rate-Limit-Api-Key-Remaining:
+      - '299'
+      X-Rate-Limit-Api-Token-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Api-Token-Max:
+      - '100'
+      X-Rate-Limit-Api-Token-Remaining:
+      - '99'
+      X-Rate-Limit-Member-Interval-Ms:
+      - '10000'
+      X-Rate-Limit-Member-Max:
+      - '200'
+      X-Rate-Limit-Member-Remaining:
+      - '199'
+      X-Server-Time:
+      - '1524843950058'
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '107'
+      Etag:
+      - W/"6b-K0qREDTt0QrTVS8ROWzm9EL6uMs"
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Fri, 27 Apr 2018 15:45:50 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":"5ae345aec444c281fa7e8854","idBoard":"5ae345acc8d35e0ab1c8d1c4","name":"CI","color":null,"limits":{}}'
+    http_version: 
+  recorded_at: Fri, 27 Apr 2018 15:45:50 GMT
+recorded_with: VCR 4.0.0

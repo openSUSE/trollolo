@@ -29,9 +29,32 @@ describe Settings do
       end
 
       context 'when setting does exist' do
+        before do
+          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_custom_config', __FILE__) )
+        end
         it 'returns name' do
-          expect(@settings.scrum['board_names']['sprint']).to eq('Sprint Board')
-          expect(@settings.scrum.board_names['planning']).to eq('Planning Board')
+          expect(@settings.scrum['board_names']['sprint']).to eq('Sprint B')
+          expect(@settings.scrum.board_names['planning']).to eq('Planning A')
+        end
+      end
+    end
+
+    context '#pairing' do
+      context 'when setting is missing' do
+        it 'returns default settings' do
+          expect(@settings.pairing['board_names']).to eq('pairing' => 'Pairing Board')
+          expect(@settings.pairing['label_names']).to eq('sticky' => 'Sticky', 'interrupt' => 'Community', 'ci' => 'CI')
+          expect(@settings.pairing['list_names']).to eq('day' => 'Pairing(%s)', 'tracks' => 'Tracks', 'devs' => 'Developers')
+        end
+      end
+
+      context 'when setting does exist' do
+        before do
+          @settings = Settings.new( File.expand_path('../../data/trollolorc_with_custom_config', __FILE__) )
+        end
+        it 'returns name' do
+          expect(@settings.pairing['board_names']['pairing']).to eq('Team Pairing Board')
+          expect(@settings.pairing.labels['ci']).to eq('Pipelines')
         end
       end
     end

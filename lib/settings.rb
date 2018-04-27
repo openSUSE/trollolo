@@ -20,7 +20,7 @@ class Settings
   attr_accessor :developer_public_key, :member_token, :board_aliases, :verbose,
                 :raw, :todo_columns, :doing_columns, :accepted_column_name_regex,
                 :done_column_name_regex, :todo_column_name_regex, :scrum,
-                :no_task_checklists, :swimlanes
+                :pairing, :no_task_checklists, :swimlanes
 
   def initialize(config_file_path)
     @config_file_path = config_file_path
@@ -32,6 +32,7 @@ class Settings
         @member_token               = @config['member_token']
         @board_aliases              = @config['board_aliases'] || {}
         @scrum                      = OpenStruct.new(@config['scrum'] || scrum_defaults)
+        @pairing                    = OpenStruct.new(@config['pairing'] || pairing_defaults)
         @no_task_checklists         = @config['no_task_checklists'].freeze || ['Feedback']
         @todo_columns               = @config['todo_columns'].freeze || ['Sprint Backlog']
         @doing_columns              = @config['doing_columns'].freeze || ['Doing']
@@ -80,6 +81,24 @@ class Settings
         'sprint_doing' => 'Doing',
         'planning_backlog' => 'Backlog',
         'planning_ready' => 'Ready for Estimation'
+      }
+    }.freeze
+  end
+
+  def pairing_defaults
+    {
+      'board_names' => {
+        'pairing' => 'Pairing Board'
+      },
+      'label_names' => {
+        'sticky' => 'Sticky',
+        'interrupt' => 'Community',
+        'ci' => 'CI'
+      },
+      'list_names' => {
+        'day' => 'pairing(%s)',
+        'tracks' => 'Tracks',
+        'devs' => 'Developers'
       }
     }.freeze
   end

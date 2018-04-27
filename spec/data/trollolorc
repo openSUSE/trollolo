@@ -20,3 +20,14 @@ scrum:
     sprint_doing: Doing
     planning_backlog: Backlog
     planning_ready: Ready for Estimation
+pairing:
+  board_names:
+    pairing: Pairing Board
+  label_names:
+    sticky: Sticky
+    interrupt: Community
+    ci: CI
+  list_names:
+    day: Pairing(%s)
+    tracks: Tracks
+    devs: Developers

@@ -375,6 +375,33 @@ EOT
     m.move(board_id(options['planning-board-id']), board_id(options['sprint-board-id']))
   end
 
+  desc 'setup-pairing', 'Create necessary elements of our Pairing setup'
+  long_desc <<-EOT
+  Will create board, lists and labels with names as configured in trollolorc,
+  or use the defaults.
+  EOT
+  def setup_pairing
+    process_global_options options
+    require_trello_credentials
+
+    c = Pairing::Creator.new(@@settings)
+    c.create
+  end
+
+  desc 'create-pairs', 'Create the daily pairs'
+  long_desc <<EOT
+  Create a new lists and cards for every track, assign members to
+  each track.
+EOT
+  option 'board-id', desc: 'Id of the board', required: true
+  def create_pairs
+    process_global_options options
+    require_trello_credentials
+
+    p = Pairing::PairingBoard.setup(@@settings, board_id(options['board-id']))
+    p.pair
+  end
+
   private
 
   def process_global_options(options)
