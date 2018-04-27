@@ -138,7 +138,6 @@ EOT
   end
 
   it 'gets description' do
-    skip('This tests fails after ruby-trello update')
     body = <<-EOT
 {
   "id": "54ae8485221b1cc5b173e713",
@@ -147,12 +146,6 @@ EOT
 EOT
     stub_request(
       :get, 'https://api.trello.com/1/cards/54ae8485221b1cc5b173e713?key=mykey&token=mytoken'
-    ).with(
-      headers: {
-        'Accept' => '*/*; q=0.5, application/xml',
-        'Accept-Encoding' => 'gzip, deflate',
-        'User-Agent' => 'Ruby'
-      }
     ).to_return(status: 200, body: body, headers: {})
     @cli.options = {'card-id' => '54ae8485221b1cc5b173e713'}
     expected_output = "haml\n"
@@ -162,18 +155,9 @@ EOT
   end
 
   it 'sets description' do
-    skip('This tests fails after ruby-trello update')
     expect(STDIN).to receive(:read).and_return('My description')
     stub_request(
       :put, 'https://api.trello.com/1/cards/54ae8485221b1cc5b173e713/desc?key=mykey&token=mytoken&value=My%20description'
-    ).with(
-      headers: {
-        'Accept' => '*/*; q=0.5, application/xml',
-        'Accept-Encoding' => 'gzip, deflate',
-        'Content-Length' => '0',
-        'Content-Type' => 'application/x-www-form-urlencoded',
-        'User-Agent' => 'Ruby'
-      }
     ).to_return(status: 200, body: '', headers: {})
     @cli.options = {'card-id' => '54ae8485221b1cc5b173e713'}
     @cli.set_description
