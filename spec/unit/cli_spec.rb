@@ -139,7 +139,6 @@ EOT
   end
 
   it 'gets description' do
-    skip('This tests fails after ruby-trello update')
     body = <<-EOT
 {
   "id": "54ae8485221b1cc5b173e713",
