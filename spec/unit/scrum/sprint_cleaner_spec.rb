@@ -37,7 +37,7 @@ describe Scrum::SprintCleaner do
     end
 
     it 'moves remaining cards to target board' do
-      expect(STDOUT).to receive(:puts).exactly(3).times
+      expect(STDOUT).to receive(:puts).exactly(4).times
       expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
       expect(old_story_card).to receive(:add_label).exactly(3).times
       sprint_cleaner.cleanup(set_last_sprint_label: true)
@@ -45,7 +45,7 @@ describe Scrum::SprintCleaner do
   end
 
   it 'moves remaining cards to target board' do
-    expect(STDOUT).to receive(:puts).exactly(3).times
+    expect(STDOUT).to receive(:puts).exactly(4).times
     expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
     sprint_cleaner.cleanup
   end
@@ -70,6 +70,7 @@ describe Scrum::SprintCleaner do
       allow_any_instance_of(BurndownChart).to receive(:update)
     end
 
+<<<<<<< HEAD
     it 'does not generate new burndown data per default' do
       expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
       expect do
@@ -82,6 +83,13 @@ describe Scrum::SprintCleaner do
       expect do
         sprint_cleaner.cleanup(run_burndown: true)
       end.to output(/^(Update data for sprint 1)*/).to_stdout
+=======
+    it 'generates new burndown data' do
+      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
+      expect do
+        sprint_cleaner.cleanup
+      end.to output(/^(New burndown data was generated automatically)/).to_stdout
+>>>>>>> Remove VCR from tests
     end
   end
 

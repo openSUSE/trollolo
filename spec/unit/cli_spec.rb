@@ -124,18 +124,32 @@ Tasks
       end.to output(expected_output).to_stdout
     end
 
+  context 'when showing backlog' do
+    let(:wrapper) { double('trello-wrapper') }
+    let(:scrum_board) { double('scrum-board') }
+    let(:backlog_list) { double('backlog-list', cards: [card1, card2, card3]) }
+    let(:card1) { double('card', name: '(7) Outra coisa a fazer') }
+    let(:card2) { double('card', name: '(3) Fazer outra coisa') }
+    let(:card3) { double('card', name: '(4) Mais uma coisa') }
 
-  it 'shows planning backlog', vcr: 'sprint_planning_board', vcr_record: false do
-    @cli.options = {'board-id' => 'QwlsiA2L'}
-    expected_output = <<EOT
+    before do
+      allow(TrelloWrapper).to receive(:new).and_return(wrapper)
+    end
+
+    it 'shows planning backlog' do
+      expect(wrapper).to receive(:board).with('QwlsiA2L').and_return(scrum_board)
+      expect(scrum_board).to receive(:planning_backlog_column).and_return(backlog_list)
+      @cli.options = {'board-id' => 'QwlsiA2L'}
+      expected_output = <<EOT
 | Title
 | (7) Outra coisa a fazer
 | (3) Fazer outra coisa
 | (4) Mais uma coisa
 EOT
-    expect do
-      @cli.show_backlog
-    end.to output(expected_output).to_stdout
+      expect do
+        @cli.show_backlog
+      end.to output(expected_output).to_stdout
+    end
   end
 
   it 'gets description' do
