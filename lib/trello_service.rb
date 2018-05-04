@@ -6,10 +6,6 @@ class TrelloService
     init_trello
   end
 
-  def self.find_list(board, name)
-    board.lists.find { |l| l.name == name }
-  end
-
   protected
 
   def init_trello

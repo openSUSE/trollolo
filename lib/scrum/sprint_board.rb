@@ -1,6 +1,7 @@
 module Scrum
   class SprintBoard
     include CardTypeDetection
+    include TrelloHelpers
 
     def initialize(settings)
       @under_waterline = false
@@ -10,7 +11,7 @@ module Scrum
 
     def setup(board)
       @board = board
-      @backlog_list = TrelloService.find_list(board, backlog_list_name)
+      @backlog_list = find_list(backlog_list_name)
       self
     end
 
@@ -19,11 +20,11 @@ module Scrum
     end
 
     def doing_list
-      @doing_list ||= @board.lists.find { |l| l.name == doing_list_name }
+      @doing_list ||= find_list(doing_list_name)
     end
 
     def qa_list
-      @qa_list ||= @board.lists.find { |l| l.name == qa_list_name }
+      @qa_list ||= find_list(qa_list_name)
     end
 
     def receive(card)
