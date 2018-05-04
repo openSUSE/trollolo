@@ -8,8 +8,9 @@ module Scrum
     end
     attr_reader :backlog_list
 
-    def setup(id)
-      @board, @backlog_list = TrelloService.find_list(id, backlog_list_name)
+    def setup(board)
+      @board = board
+      @backlog_list = TrelloService.find_list(board, backlog_list_name)
       self
     end
 

@@ -339,7 +339,7 @@ EOT
     require_trello_credentials
 
     p = Scrum::Prioritizer.new(@@settings)
-    p.prioritize(board_id(options['board-id']), options['backlog-list-name'])
+    p.prioritize(board_from_id(options['board-id']), options['backlog-list-name'])
   end
 
   desc 'cleanup-sprint', 'Move remaining cards to the planning board'
@@ -354,8 +354,8 @@ EOT
     require_trello_credentials
 
     s = Scrum::SprintCleaner.new(@@settings)
-    s.cleanup(board_id(options['board-id']),
-              board_id(options['target-board-id']))
+    s.cleanup(board_from_id(options['board-id']),
+              board_from_id(options['target-board-id']))
   end
 
   desc 'move-backlog', 'Move the planning backlog to the sprint board'
@@ -372,7 +372,7 @@ EOT
     require_trello_credentials
 
     m = Scrum::BacklogMover.new(@@settings)
-    m.move(board_id(options['planning-board-id']), board_id(options['sprint-board-id']))
+    m.move(board_from_id(options['planning-board-id']), board_from_id(options['sprint-board-id']))
   end
 
   private
@@ -410,5 +410,9 @@ EOT
   # is returned.
   def board_id(id_or_alias)
     @@settings.board_aliases[id_or_alias] || id_or_alias
+  end
+
+  def board_from_id(id_or_alias)
+    Trello::Board.find(board_id(id_or_alias))
   end
 end

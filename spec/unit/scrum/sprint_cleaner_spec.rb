@@ -3,13 +3,16 @@ require_relative '../spec_helper'
 describe Scrum::SprintCleaner do
   subject { described_class.new(dummy_settings) }
 
+  let(:sprint_board) { Trello::Board.find('7Zar7bNm') }
+  let(:planning_board) { Trello::Board.find('72tOJsGS') }
+
   it 'creates new sprint cleanup' do
     expect(subject).to be
   end
 
   it 'moves remaining cards to target board', vcr: 'sprint_cleanup', vcr_record: false do
     expect(STDOUT).to receive(:puts).exactly(13).times
-    expect(subject.cleanup('7Zar7bNm', '72tOJsGS')).to be
+    expect(subject.cleanup(sprint_board, planning_board)).to be
   end
 
   context 'given correct burndown-data-xx.yaml' do
@@ -19,7 +22,7 @@ describe Scrum::SprintCleaner do
 
     it 'generates new burndown data', vcr: 'sprint_cleanup', vcr_record: false do
       expect do
-        subject.cleanup('7Zar7bNm', '72tOJsGS')
+        subject.cleanup(sprint_board, planning_board)
       end.to output(/^(New burndown data was generated automatically)/).to_stdout
     end
   end
@@ -31,7 +34,7 @@ describe Scrum::SprintCleaner do
 
     it 'throws error', vcr: 'sprint_cleanup', vcr_record: false do
       expect do
-        subject.cleanup('7Zar7bNm', '72tOJsGS')
+        subject.cleanup(sprint_board, planning_board)
       end.to raise_error /'Nonexisting List' not found/
     end
   end
