@@ -261,19 +261,3 @@ Lookup the ID of the created boards and use them as arguments:
     trollolo move-backlog --planning-board-id=GHi456 --sprint-board-id=123abC
 
 You can use aliases, as described in the configuration section, instead of IDs.
-
-## Updating VCR specs
-
-Some specs use VCR to reply with stored Trello API replies. The specs are annotated with `vcr:` and `vcr_record:`. To
-re-record the stored replies, set `vcr_record:` to true and replace `dummy_settings` with `real_settings`.
-
-    describe Scrum::BacklogMover do
-      subject { described_class.new(real_settings) }
-
-      it "fails without moving if sprint backlog is missing from sprint board", vcr: "move_backlog_missing_backlog", vcr_record: false do
-        expect {
-        }.to raise_error("sprint board is missing Sprint Backlog list")
-      end
-    end
-
-The VCR support methods will replace your Trello token and key with dummy values, before saving the replies.

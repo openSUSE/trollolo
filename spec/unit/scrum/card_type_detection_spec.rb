@@ -1,8 +1,9 @@
 require_relative '../spec_helper'
 
 describe Scrum::CardTypeDetection do
-  let(:dummy_class) { Class.new { include Scrum::CardTypeDetection } }
   subject { dummy_class.new }
+
+  let(:dummy_class) { Class.new { include Scrum::CardTypeDetection } }
   let(:waterline_card) { instance_double('Card', name: 'waterline') }
   let(:upcase_waterline_card) { instance_double('Card', name: 'Waterline') }
   let(:fancy_waterline_card) { instance_double('Card', name: '~~~ WaTeR lInE ~~~') }
