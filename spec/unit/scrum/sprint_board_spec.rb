@@ -6,22 +6,40 @@ describe Scrum::SprintBoard do
   subject!(:sprint_board) { described_class.new(settings.scrum) }
   let!(:planning_board) { Scrum::SprintPlanningBoard.new(settings.scrum) }
 
-  let(:trello_sprint_board) { Trello::Board.find('NzGCbEeN') }
-  let(:trello_planning_board) { Trello::Board.find('neUHHzDo') }
+  let(:trello_sprint_board) { double('trello-sprint-board', id: 123) }
+  let(:trello_planning_board) { double('trello-planning-board', id: 345) }
+  let(:planning_backlog) { double('list', name: 'Backlog', cards: [planning_waterline_card], id: 234) }
+  let(:planning_waterline_card) { double('card', name: 'planning-waterline', labels: []) }
+  let(:waterline_card) { double('card', name: 'waterline', labels: []) }
 
   before(:each) do
     TrelloService.new(settings)
+    expect(trello_sprint_board).to receive(:lists).and_return([sprint_backlog])
+    expect(trello_planning_board).to receive(:lists).and_return([planning_backlog])
   end
 
-  it 'places existing waterline card at bottom and removes from planning board', vcr: 'sprint_board', vcr_record: false do
-    sprint_board.setup(trello_sprint_board)
-    planning_board.setup(trello_planning_board)
-    sprint_board.place_waterline(planning_board.waterline_card)
+  context 'when waterline card exists on sprint board' do
+    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: [waterline_card], id: 456) }
+
+    it 'places existing waterline card at bottom and removes from planning board' do
+      sprint_board.setup(trello_sprint_board)
+      planning_board.setup(trello_planning_board)
+
+      expect(waterline_card).to receive(:pos=).with('bottom')
+      expect(waterline_card).to receive(:save)
+      sprint_board.place_waterline(planning_board.waterline_card)
+    end
   end
 
-  it 'moves waterline card from planning to bottom', vcr: 'sprint_board_no_waterline', vcr_record: false do
-    sprint_board.setup(trello_sprint_board)
-    planning_board.setup(trello_planning_board)
-    sprint_board.place_waterline(planning_board.waterline_card)
+  context 'when waterline card is missing from sprint board' do
+    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: [], id: 456) }
+
+    it 'moves waterline card from planning to bottom' do
+      sprint_board.setup(trello_sprint_board)
+      planning_board.setup(trello_planning_board)
+
+      expect(planning_waterline_card).to receive(:move_to_board).with(trello_sprint_board, sprint_backlog)
+      sprint_board.place_waterline(planning_board.waterline_card)
+    end
   end
 end
