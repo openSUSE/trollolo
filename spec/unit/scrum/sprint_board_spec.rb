@@ -13,9 +13,8 @@ describe Scrum::SprintBoard do
   let(:waterline_card) { double('card', name: 'waterline', labels: []) }
 
   before(:each) do
-    TrelloService.new(settings)
-    expect(trello_sprint_board).to receive(:lists).and_return([sprint_backlog])
-    expect(trello_planning_board).to receive(:lists).and_return([planning_backlog])
+    allow(trello_sprint_board).to receive(:lists).and_return([sprint_backlog])
+    allow(trello_planning_board).to receive(:lists).and_return([planning_backlog])
   end
 
   context 'when waterline card exists on sprint board' do

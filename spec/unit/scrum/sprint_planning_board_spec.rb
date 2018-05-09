@@ -2,13 +2,12 @@ require_relative '../spec_helper'
 
 describe Scrum::SprintPlanningBoard do
   subject(:planning_board) { described_class.new(dummy_settings.scrum) }
-  let(:trello_board) { Trello::Board.find('neUHHzDo') }
+  let(:trello_board) { double('trello-board', id: 123) }
+  let(:waterline_card) { double('card', name: 'waterline', labels: []) }
+  let(:sprint_backlog) { double('list', name: 'Backlog', cards: [waterline_card], id: 456) }
 
-  before :each do
-    TrelloService.new(dummy_settings)
-  end
-
-  it 'has a waterline card', vcr: 'sprint_planning_board', vcr_record: false do
+  it 'has a waterline card' do
+    expect(trello_board).to receive(:lists).and_return([sprint_backlog])
     planning_board.setup(trello_board)
     expect(planning_board.waterline_card).to be
   end
