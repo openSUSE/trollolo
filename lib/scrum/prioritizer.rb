@@ -1,14 +1,16 @@
 module Scrum
   class Prioritizer < TrelloService
-    include ScrumBoards
-
-    def prioritize(board, list_name = nil)
-      @board = planning_board(board, list_name)
-      raise "list named '#{@board.backlog_list_name}' not found on board" unless @board.backlog_list
+    def prioritize
+      load
       update_priorities
     end
 
     private
+
+    def load
+      @board = @boards.planning_board
+      raise "list named '#{@board.backlog_list_name}' not found on board" unless @board.backlog_list
+    end
 
     def update_priorities
       n = 1

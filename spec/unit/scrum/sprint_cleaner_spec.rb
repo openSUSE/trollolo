@@ -1,10 +1,17 @@
 require_relative '../spec_helper'
 
 describe Scrum::SprintCleaner do
-  subject(:sprint_cleaner) { described_class.new(dummy_settings) }
+  subject(:sprint_cleaner) do
+    described_class.new(
+      dummy_settings,
+      sprint_board: boards.sprint_board(sprint_board),
+      target_board: target_board
+    )
+  end
 
+  let(:boards) { Scrum::Boards.new(dummy_settings.scrum) }
   let(:sprint_board) { double('trello-sprint-board') }
-  let(:planning_board) { double('trello-planning-board') }
+  let(:target_board) { double('trello-planning-board') }
 
   let(:sprint_backlog) { double('sprint-list', name: 'Sprint Backlog', cards: [old_story_card]) }
   let(:sprint_doing) { double('sprint-list', name: 'Doing', cards: [old_story_card]) }
@@ -17,7 +24,7 @@ describe Scrum::SprintCleaner do
 
   before(:each) do
     allow(sprint_board).to receive(:lists).and_return([sprint_backlog, sprint_doing, sprint_qa])
-    allow(planning_board).to receive(:lists).and_return([planning_backlog, ready_for_estimation])
+    allow(target_board).to receive(:lists).and_return([planning_backlog, ready_for_estimation])
   end
 
   it 'creates new sprint cleanup' do
@@ -26,8 +33,8 @@ describe Scrum::SprintCleaner do
 
   it 'moves remaining cards to target board' do
     expect(STDOUT).to receive(:puts).exactly(4).times
-    expect(old_story_card).to receive(:move_to_board).with(planning_board, ready_for_estimation).exactly(3).times
-    expect(sprint_cleaner.cleanup(sprint_board, planning_board)).to be
+    expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
+    expect(sprint_cleaner.cleanup).to be
   end
 
   context 'given correct burndown-data-xx.yaml' do
@@ -36,9 +43,9 @@ describe Scrum::SprintCleaner do
     end
 
     it 'generates new burndown data' do
-      expect(old_story_card).to receive(:move_to_board).with(planning_board, ready_for_estimation).exactly(3).times
+      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
       expect do
-        sprint_cleaner.cleanup(sprint_board, planning_board)
+        sprint_cleaner.cleanup
       end.to output(/^(New burndown data was generated automatically)/).to_stdout
     end
   end
@@ -50,7 +57,7 @@ describe Scrum::SprintCleaner do
 
     it 'throws error' do
       expect do
-        sprint_cleaner.cleanup(sprint_board, planning_board)
+        sprint_cleaner.cleanup
       end.to raise_error /'Nonexisting List' not found/
     end
   end

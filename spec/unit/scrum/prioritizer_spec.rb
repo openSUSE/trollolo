@@ -1,10 +1,17 @@
 require_relative '../spec_helper'
 
 describe Scrum::Prioritizer do
-  subject(:prioritizer) { described_class.new(dummy_settings) }
+  subject(:prioritizer) do
+    described_class.new(
+      dummy_settings,
+      planning_board: boards.planning_board(trello_planning_board)
+    )
+  end
 
+  let(:boards) { Scrum::Boards.new(dummy_settings.scrum) }
   let(:trello_planning_board) { double(lists: lists) }
   let(:lists) { [list] }
+  let(:list) { double('list', name: 'Backlog', cards: []) }
 
   it 'creates new prioritizer' do
     expect(prioritizer).to be
@@ -14,7 +21,7 @@ describe Scrum::Prioritizer do
     let(:lists) { [] }
 
     it 'raises an exception if list is not on board' do
-      expect { prioritizer.prioritize(trello_planning_board) }.to raise_error("list named 'Backlog' not found on board")
+      expect { prioritizer.prioritize }.to raise_error("list named 'Backlog' not found on board")
     end
   end
 
@@ -27,29 +34,46 @@ describe Scrum::Prioritizer do
       expect(card).to receive(:name=).with('P1: Task 1')
       expect(card).to receive(:save)
       expect(STDOUT).to receive(:puts).exactly(1).times
-      expect { prioritizer.prioritize(trello_planning_board) }.not_to raise_error
+      expect { prioritizer.prioritize }.not_to raise_error
     end
   end
 
   context 'when specifying backlog list as argument' do
-    let(:list) { double('list', name: 'Backlog', cards: []) }
-
-    before do
-      prioritizer.settings.scrum.list_names['planning_backlog'] = 'Nonexisting List'
+    subject(:prioritizer) do
+      described_class.new(
+        dummy_settings,
+        planning_board: boards.planning_board(trello_planning_board, list_name)
+      )
     end
 
-    it 'finds backlog list' do
-      expect do
-        prioritizer.prioritize(trello_planning_board, 'Backlog')
-      end.not_to raise_error
+    context 'when list exists' do
+      let(:list_name) { 'Backlog' }
+
+      it 'finds backlog list' do
+        expect do
+          prioritizer.prioritize
+        end.not_to raise_error
+      end
     end
 
-    it 'throws error when default list does not exist' do
-      expect { prioritizer.prioritize(trello_planning_board) }.to raise_error("list named 'Nonexisting List' not found on board")
+    context 'when list is missing' do
+      let(:list_name) { 'My Backlog' }
+
+      it 'throws error when specified list does not exist' do
+        expect { prioritizer.prioritize }.to raise_error("list named 'My Backlog' not found on board")
+      end
+    end
+  end
+
+  context 'when settings specify different list' do
+    let(:boards) do
+      settings = dummy_settings.scrum.dup
+      settings.list_names['planning_backlog'] = 'Nonexisting List'
+      Scrum::Boards.new(settings)
     end
 
-    it 'throws error when specified list does not exist' do
-      expect { prioritizer.prioritize(trello_planning_board, 'My Backlog') }.to raise_error("list named 'My Backlog' not found on board")
+    it 'throws error' do
+      expect { prioritizer.prioritize }.to raise_error("list named 'Nonexisting List' not found on board")
     end
   end
 end

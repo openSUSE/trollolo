@@ -1,12 +1,7 @@
 module Scrum
   class SprintCleaner < TrelloService
-    include ScrumBoards
-
-    def cleanup(board, target_board)
-      @board = sprint_board(board)
-      raise "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
-      @target_board = target_board
-      raise "ready list '#{@settings.scrum.list_names['planning_ready']}' not found on planning board" unless target_list
+    def cleanup
+      load
 
       gen_burndown
 
@@ -16,6 +11,13 @@ module Scrum
     end
 
     private
+
+    def load
+      @board = @boards.sprint_board
+      raise "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
+      @target_board = @boards.target_board
+      raise "ready list '#{@settings.scrum.list_names['planning_ready']}' not found on planning board" unless target_list
+    end
 
     def target_list
       @target_list ||= @target_board.lists.find { |l| l.name == @settings.scrum.list_names['planning_ready'] }
