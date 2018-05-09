@@ -1,14 +1,14 @@
 require_relative '../spec_helper'
 
 describe Scrum::SprintBoard do
-  let(:settings) { dummy_settings }
-
   subject!(:sprint_board) { described_class.new(settings.scrum) }
+
+  let(:settings) { dummy_settings }
   let!(:planning_board) { Scrum::SprintPlanningBoard.new(settings.scrum) }
 
-  let(:trello_sprint_board) { double('trello-sprint-board', id: 123) }
-  let(:trello_planning_board) { double('trello-planning-board', id: 345) }
-  let(:planning_backlog) { double('list', name: 'Backlog', cards: [planning_waterline_card], id: 234) }
+  let(:trello_sprint_board) { double('trello-sprint-board') }
+  let(:trello_planning_board) { double('trello-planning-board') }
+  let(:planning_backlog) { double('list', name: 'Backlog', cards: [planning_waterline_card]) }
   let(:planning_waterline_card) { double('card', name: 'planning-waterline', labels: []) }
   let(:waterline_card) { double('card', name: 'waterline', labels: []) }
 
@@ -18,7 +18,7 @@ describe Scrum::SprintBoard do
   end
 
   context 'when waterline card exists on sprint board' do
-    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: [waterline_card], id: 456) }
+    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: [waterline_card]) }
 
     it 'places existing waterline card at bottom and removes from planning board' do
       sprint_board.setup(trello_sprint_board)
@@ -31,7 +31,7 @@ describe Scrum::SprintBoard do
   end
 
   context 'when waterline card is missing from sprint board' do
-    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: [], id: 456) }
+    let(:sprint_backlog) { double('list', name: 'Sprint Backlog', cards: []) }
 
     it 'moves waterline card from planning to bottom' do
       sprint_board.setup(trello_sprint_board)

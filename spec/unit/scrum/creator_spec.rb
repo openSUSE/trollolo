@@ -1,19 +1,20 @@
 require_relative '../spec_helper'
 
 describe Scrum::Creator do
-  subject { described_class.new(dummy_settings) }
-  let(:custom_subject) do
+  subject(:scrum_creator) { described_class.new(dummy_settings) }
+  subject(:custom_creator) do
     custom_settings = dummy_settings
     custom_settings.scrum.board_names['planning'] = 'Planungs Brett'
     described_class.new(custom_settings)
   end
-  let(:board_id) { 123 }
+
+  let(:board_id) { 1 }
   let(:board) { double('trello-board', id: board_id) }
-  let(:planning_board_id) { 999 }
+  let(:planning_board_id) { 2 }
   let(:planning_board) { double('other-trello-board', id: planning_board_id) }
 
   it 'creates new creator' do
-    expect(subject).to be
+    expect(scrum_creator).to be
   end
 
   context 'default' do
@@ -23,7 +24,7 @@ describe Scrum::Creator do
 
       expect_scrum_lists_and_labels
 
-      expect { subject.create }.not_to raise_error
+      expect { scrum_creator.create }.not_to raise_error
     end
 
     it 'creates boards according to existing config' do
@@ -32,7 +33,7 @@ describe Scrum::Creator do
 
       expect_scrum_lists_and_labels
 
-      expect { custom_subject.create }.not_to raise_error
+      expect { custom_creator.create }.not_to raise_error
     end
   end
 
