@@ -339,12 +339,10 @@ EOT
     require_trello_credentials
 
     boards = Scrum::Boards.new(@@settings.scrum)
-    p = Scrum::Prioritizer.new(
-      @@settings,
-      planning_board: boards.planning_board(
-        board_from_id(options['board-id']),
-        options['backlog-list-name']
-      )
+    p = Scrum::Prioritizer.new(@@settings)
+    p.setup_boards(
+      planning_board: boards.planning_board(board_from_id(options['board-id']),
+                                            options['backlog-list-name'])
     )
     p.prioritize
   end
@@ -361,8 +359,8 @@ EOT
     require_trello_credentials
 
     boards = Scrum::Boards.new(@@settings.scrum)
-    s = Scrum::SprintCleaner.new(
-      @@setting,
+    s = Scrum::SprintCleaner.new(@@setting)
+    s.setup_boards(
       planning_board: boards.planning_board(board_from_id(options['board-id'])),
       target_board: board_from_id(options['target-board-id'])
     )
@@ -383,8 +381,8 @@ EOT
     require_trello_credentials
 
     boards = Scrum::Boards.new(@@settings.scrum)
-    m = Scrum::BacklogMover.new(
-      @@settings,
+    m = Scrum::BacklogMover.new(@@settings)
+    m.setup_boards(
       planning_board: board.planning_board(board_from_id(options['planning-board-id'])),
       sprint_board: boards.sprint_board(board_from_id(options['sprint-board-id']))
     )

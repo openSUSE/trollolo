@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe Scrum::BacklogMover do
   subject(:backlog_mover) do
-    described_class.new(
-      dummy_settings,
+    backlog_mover = described_class.new(dummy_settings)
+    backlog_mover.setup_boards(
       sprint_board: boards.sprint_board(sprint_board),
       planning_board: boards.planning_board(planning_board)
     )

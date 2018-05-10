@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe Scrum::Prioritizer do
   subject(:prioritizer) do
-    described_class.new(
-      dummy_settings,
+    prioritizer = described_class.new(dummy_settings)
+    prioritizer.setup_boards(
       planning_board: boards.planning_board(trello_planning_board)
     )
   end
@@ -40,10 +40,8 @@ describe Scrum::Prioritizer do
 
   context 'when specifying backlog list as argument' do
     subject(:prioritizer) do
-      described_class.new(
-        dummy_settings,
-        planning_board: boards.planning_board(trello_planning_board, list_name)
-      )
+      prioritizer = described_class.new(dummy_settings)
+      prioritizer.setup_boards(planning_board: boards.planning_board(trello_planning_board, list_name))
     end
 
     context 'when list exists' do

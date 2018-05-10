@@ -1,5 +1,7 @@
 module Scrum
   class SprintCleaner < TrelloService
+    include BoardLocator
+
     def cleanup
       load
 

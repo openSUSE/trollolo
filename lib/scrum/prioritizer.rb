@@ -1,5 +1,7 @@
 module Scrum
   class Prioritizer < TrelloService
+    include BoardLocator
+
     def prioritize
       load
       update_priorities

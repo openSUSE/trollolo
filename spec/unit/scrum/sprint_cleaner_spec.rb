@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe Scrum::SprintCleaner do
   subject(:sprint_cleaner) do
-    described_class.new(
-      dummy_settings,
+    sprint_cleaner = described_class.new(dummy_settings)
+    sprint_cleaner.setup_boards(
       sprint_board: boards.sprint_board(sprint_board),
       target_board: target_board
     )

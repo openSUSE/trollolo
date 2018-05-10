@@ -1,5 +1,7 @@
 module Scrum
   class BacklogMover < TrelloService
+    include BoardLocator
+
     def move
       load
       inspect_backlog

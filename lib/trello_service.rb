@@ -1,12 +1,8 @@
 class TrelloService
-  require 'ostruct'
-
   attr_reader :settings
 
-  def initialize(settings, boards = {})
+  def initialize(settings)
     @settings = settings
-    @boards = OpenStruct.new(boards)
-
     init_trello
   end
 
