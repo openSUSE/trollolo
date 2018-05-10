@@ -3,17 +3,19 @@ require_relative '../spec_helper'
 describe Scrum::Prioritizer do
   subject(:prioritizer) do
     prioritizer = described_class.new(dummy_settings)
-    prioritizer.setup_boards(
-      planning_board: boards.planning_board(trello_planning_board)
-    )
+    prioritizer.setup_boards(planning_board: planning_board)
   end
 
-  let(:boards) { Scrum::Boards.new(dummy_settings.scrum) }
-  let(:trello_planning_board) { double(lists: lists) }
-  let(:lists) { [list] }
-  let(:list) { double('list', name: 'Backlog', cards: [sticky_card, card]) }
-  let(:sticky_card) { double('sticky-card', labels: [double(name: 'Sticky')]) }
-  let(:card) { double('card', name: 'Task 1', labels: []) }
+  let(:planning_board) { double('planning-board', backlog_cards: [sticky_card, card], backlog_list: double) }
+  let(:sticky_card) { double('sticky-card') }
+  let(:card) { double('card', name: 'Task 1') }
+
+  before do
+    allow(planning_board).to receive(:backlog_list_name).and_return('Backlog')
+    allow(planning_board).to receive(:sticky?).with(card)
+    allow(planning_board).to receive(:sticky?).with(sticky_card).and_return(true)
+    allow(planning_board).to receive(:waterline?)
+  end
 
   it 'creates new prioritizer' do
     expect(prioritizer).to be
