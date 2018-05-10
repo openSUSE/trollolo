@@ -21,7 +21,7 @@ describe Scrum::Prioritizer do
     let(:lists) { [] }
 
     it 'raises an exception if list is not on board' do
-      expect { prioritizer.prioritize }.to raise_error("list named 'Backlog' not found on board")
+      expect { prioritizer.prioritize }.to raise_error("planning board is missing the backlog list named: 'Backlog'")
     end
   end
 
@@ -58,7 +58,7 @@ describe Scrum::Prioritizer do
       let(:list_name) { 'My Backlog' }
 
       it 'throws error when specified list does not exist' do
-        expect { prioritizer.prioritize }.to raise_error("list named 'My Backlog' not found on board")
+        expect { prioritizer.prioritize }.to raise_error("planning board is missing the backlog list named: 'My Backlog'")
       end
     end
   end
@@ -71,7 +71,7 @@ describe Scrum::Prioritizer do
     end
 
     it 'throws error' do
-      expect { prioritizer.prioritize }.to raise_error("list named 'Nonexisting List' not found on board")
+      expect { prioritizer.prioritize }.to raise_error("planning board is missing the backlog list named: 'Nonexisting List'")
     end
   end
 end

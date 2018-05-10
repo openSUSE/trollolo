@@ -11,7 +11,6 @@ module Scrum
 
     def load
       @board = @boards.planning_board
-      raise "list named '#{@board.backlog_list_name}' not found on board" unless @board.backlog_list
     end
 
     def update_priorities

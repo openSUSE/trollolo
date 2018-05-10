@@ -234,7 +234,7 @@ EOT
 
       expect do
         @cli.set_priorities
-      end.to raise_error /'Nonexisting List' not found/
+      end.to raise_error /missing the backlog list named: 'Nonexisting List'/
     end
   end
 

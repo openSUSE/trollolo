@@ -21,20 +21,20 @@ describe Scrum::BacklogMover do
     allow(planning_board).to receive(:lists).and_return([planning_backlog])
   end
 
-  it 'creates new move backlog' do
-    expect(backlog_mover).to be
-  end
-
   context 'when backlog is missing from sprint board' do
     it 'fails without moving' do
       expect do
         backlog_mover.move
-      end.to raise_error('sprint board is missing Sprint Backlog list')
+      end.to raise_error("sprint board is missing the backlog list named: 'Sprint Backlog'")
     end
   end
 
   context 'when board is setup correctly' do
     let(:sprint_board) { double('trello-sprint-board', lists: [sprint_backlog]) }
+
+    it 'creates new move backlog' do
+      expect(backlog_mover).to be
+    end
 
     it 'moves cards to sprint board' do
       expect(story_card).to receive(:move_to_board).with(sprint_board, sprint_backlog).exactly(2).times

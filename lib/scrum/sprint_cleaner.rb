@@ -16,7 +16,7 @@ module Scrum
 
     def load
       @board = @boards.sprint_board
-      raise "backlog list '#{@board.backlog_list_name}' not found on sprint board" unless @board.backlog_list
+
       @target_board = @boards.target_board
       raise "ready list '#{@settings.scrum.list_names['planning_ready']}' not found on planning board" unless target_list
     end
