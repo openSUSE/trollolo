@@ -10,7 +10,7 @@ describe Scrum::BacklogMover do
   end
 
   let(:boards) { Scrum::Boards.new(dummy_settings.scrum) }
-  let(:sprint_board) { double('trello-sprint-board', lists: []) }
+  let(:sprint_board) { double('trello-sprint-board', lists: [sprint_backlog]) }
   let(:sprint_backlog) { double('sprint-list', name: 'Sprint Backlog', cards: []) }
 
   let(:planning_board) { double('trello-planning-board') }
@@ -21,25 +21,13 @@ describe Scrum::BacklogMover do
     allow(planning_board).to receive(:lists).and_return([planning_backlog])
   end
 
-  context 'when backlog is missing from sprint board' do
-    it 'fails without moving' do
-      expect do
-        backlog_mover.move
-      end.to raise_error("sprint board is missing the backlog list named: 'Sprint Backlog'")
-    end
+  it 'creates new move backlog' do
+    expect(backlog_mover).to be
   end
 
-  context 'when board is setup correctly' do
-    let(:sprint_board) { double('trello-sprint-board', lists: [sprint_backlog]) }
-
-    it 'creates new move backlog' do
-      expect(backlog_mover).to be
-    end
-
-    it 'moves cards to sprint board' do
-      expect(story_card).to receive(:move_to_board).with(sprint_board, sprint_backlog).exactly(2).times
-      expect(STDOUT).to receive(:puts).exactly(2).times
-      backlog_mover.move
-    end
+  it 'moves cards to sprint board' do
+    expect(story_card).to receive(:move_to_board).with(sprint_board, sprint_backlog).exactly(2).times
+    expect(STDOUT).to receive(:puts).exactly(2).times
+    backlog_mover.move
   end
 end
