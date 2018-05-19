@@ -1,20 +1,19 @@
 module Scrum
   class BacklogMover < TrelloService
-    include ScrumBoards
+    include BoardLocator
 
-    def move(planning_board_id, sprint_board_id)
-      setup(planning_board_id, sprint_board_id)
+    def move
+      load
       inspect_backlog
       @sprint_board.place_seabed(@seabed_card) if @seabed_card
     end
 
     private
 
-    def setup(planning_board_id, sprint_board_id)
-      @sprint_board = sprint_board(sprint_board_id)
-      raise "sprint board is missing #{@sprint_board.backlog_list_name} list" unless @sprint_board.backlog_list
+    def load
+      @sprint_board = @boards.sprint_board
 
-      @planning_board = planning_board(planning_board_id)
+      @planning_board = @boards.planning_board
       raise 'backlog list not found on planning board' unless @planning_board.backlog_list
 
       @waterline_card = @planning_board.waterline_card

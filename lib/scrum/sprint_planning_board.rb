@@ -1,6 +1,7 @@
 module Scrum
   class SprintPlanningBoard
     include CardTypeDetection
+    include TrelloHelpers
 
     attr_reader :backlog_list_name
 
@@ -11,9 +12,10 @@ module Scrum
 
     attr_accessor :backlog_list
 
-    def setup(id, list_name = nil)
+    def setup(board, list_name = nil)
+      @board = board
       @backlog_list_name = list_name if list_name
-      @board, @backlog_list = TrelloService.find_list(id, @backlog_list_name)
+      @backlog_list = find_list(@backlog_list_name)
       self
     end
 

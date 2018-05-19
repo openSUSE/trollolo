@@ -1,45 +1,30 @@
 require_relative '../spec_helper'
 
 describe Scrum::Prioritizer do
-  subject { described_class.new(dummy_settings) }
+  subject(:prioritizer) do
+    prioritizer = described_class.new(dummy_settings)
+    prioritizer.setup_boards(planning_board: planning_board)
+  end
+
+  let(:planning_board) { double('planning-board', backlog_cards: [sticky_card, card], backlog_list: double) }
+  let(:sticky_card) { double('sticky-card') }
+  let(:card) { double('card', name: 'Task 1') }
+
+  before do
+    allow(planning_board).to receive(:backlog_list_name).and_return('Backlog')
+    allow(planning_board).to receive(:sticky?).with(card)
+    allow(planning_board).to receive(:sticky?).with(sticky_card).and_return(true)
+    allow(planning_board).to receive(:waterline?)
+  end
 
   it 'creates new prioritizer' do
-    expect(subject).to be
+    expect(prioritizer).to be
   end
 
-  context 'default' do
-    it 'raises an exception if board is not found', vcr: 'prioritize_no_backlog_list', vcr_record: false do
-      expect { subject.prioritize('xxxxx123') }.to raise_error(Trello::Error)
-    end
-
-    it 'raises an exception if list is not on board', vcr: 'prioritize_no_backlog_list', vcr_record: false do
-      expect { subject.prioritize('neUHHzDo') }.to raise_error("list named 'Backlog' not found on board")
-    end
-
-    it 'adds priority text to card titles', vcr: 'prioritize_backlog_list', vcr_record: false do
-      expect(STDOUT).to receive(:puts).exactly(13).times
-      expect { subject.prioritize('neUHHzDo') }.not_to raise_error
-    end
-  end
-
-  context 'specifying backlog list as argument' do
-    before do
-      subject.settings.scrum.list_names['planning_backlog'] = 'Nonexisting List'
-    end
-
-    it 'finds backlog list', vcr: 'prioritize_backlog_list', vcr_record: false do
-      expect(STDOUT).to receive(:puts).exactly(13).times
-      expect do
-        subject.prioritize('neUHHzDo', 'Backlog')
-      end.not_to raise_error
-    end
-
-    it 'throws error when default list does not exist', vcr: 'prioritize_backlog_list', vcr_record: false  do
-      expect { subject.prioritize('neUHHzDo') }.to raise_error("list named 'Nonexisting List' not found on board")
-    end
-
-    it 'throws error when specified list does not exist', vcr: 'prioritize_backlog_list', vcr_record: false  do
-      expect { subject.prioritize('neUHHzDo', 'My Backlog') }.to raise_error("list named 'My Backlog' not found on board")
-    end
+  it 'adds priority text to card titles' do
+    expect(card).to receive(:name=).with('P1: Task 1')
+    expect(card).to receive(:save)
+    expect(STDOUT).to receive(:puts).exactly(1).times
+    expect { prioritizer.prioritize }.not_to raise_error
   end
 end

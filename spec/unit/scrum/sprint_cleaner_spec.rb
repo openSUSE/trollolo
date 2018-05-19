@@ -1,15 +1,54 @@
 require_relative '../spec_helper'
 
 describe Scrum::SprintCleaner do
-  subject { described_class.new(dummy_settings) }
-
-  it 'creates new sprint cleanup' do
-    expect(subject).to be
+  subject(:sprint_cleaner) do
+    sprint_cleaner = described_class.new(dummy_settings)
+    sprint_cleaner.setup_boards(sprint_board: sprint_board, target_board: target_board)
   end
 
-  it 'moves remaining cards to target board', vcr: 'sprint_cleanup', vcr_record: false do
-    expect(STDOUT).to receive(:puts).exactly(13).times
-    expect(subject.cleanup('7Zar7bNm', '72tOJsGS')).to be
+  let(:sprint_board) { double('sprint-board', backlog_list: sprint_backlog, doing_list: sprint_doing, qa_list: sprint_qa) }
+  let(:sprint_backlog) { double('sprint-list', cards: [old_story_card, sticky_card]) }
+  let(:sprint_doing) { double('sprint-list', cards: [old_story_card]) }
+  let(:sprint_qa) { double('sprint-list', cards: [old_story_card]) }
+  let(:old_story_card) { double('old-card', name: 'task', labels: [], members: []) }
+  let(:sticky_card) { double('sticky-card') }
+  let(:waterline_label) { double('waterline-label') }
+  let(:unplanned_label) { double('unplanned-label') }
+
+  let(:target_board) { double('trello-planning-board', lists: [planning_backlog, ready_for_estimation]) }
+  let(:planning_backlog) { double('planning-list', name: 'Backlog') }
+  let(:ready_for_estimation) { double('ready-list', name: 'Ready for Estimation') }
+
+  before(:each) do
+    allow(sprint_board).to receive(:sticky?)
+    allow(sprint_board).to receive(:sticky?).with(sticky_card).and_return(true)
+    allow(sprint_board).to receive(:find_waterline_label)
+    allow(sprint_board).to receive(:find_unplanned_label)
+  end
+
+  it 'creates new sprint cleanup' do
+    expect(sprint_cleaner).to be
+  end
+
+  it 'moves remaining cards to target board' do
+    expect(STDOUT).to receive(:puts).exactly(4).times
+    expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
+    sprint_cleaner.cleanup
+  end
+
+  context 'when labels are present' do
+    before do
+      allow(STDOUT).to receive(:puts)
+      allow(sprint_board).to receive(:find_waterline_label).and_return(waterline_label)
+      allow(sprint_board).to receive(:find_unplanned_label).and_return(unplanned_label)
+    end
+
+    it 'removes labels before moving cards' do
+      expect(old_story_card).to receive(:remove_label).with(waterline_label).exactly(3).times
+      expect(old_story_card).to receive(:remove_label).with(unplanned_label).exactly(3).times
+      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
+      sprint_cleaner.cleanup
+    end
   end
 
   context 'given correct burndown-data-xx.yaml' do
@@ -17,21 +56,22 @@ describe Scrum::SprintCleaner do
       allow_any_instance_of(BurndownChart).to receive(:update)
     end
 
-    it 'generates new burndown data', vcr: 'sprint_cleanup', vcr_record: false do
+    it 'generates new burndown data' do
+      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
       expect do
-        subject.cleanup('7Zar7bNm', '72tOJsGS')
+        sprint_cleaner.cleanup
       end.to output(/^(New burndown data was generated automatically)/).to_stdout
     end
   end
 
   context 'with non-existing target list on target board' do
     before do
-      subject.settings.scrum.list_names['planning_ready'] = 'Nonexisting List'
+      sprint_cleaner.settings.scrum.list_names['planning_ready'] = 'Nonexisting List'
     end
 
-    it 'throws error', vcr: 'sprint_cleanup', vcr_record: false do
+    it 'throws error' do
       expect do
-        subject.cleanup('7Zar7bNm', '72tOJsGS')
+        sprint_cleaner.cleanup
       end.to raise_error /'Nonexisting List' not found/
     end
   end
