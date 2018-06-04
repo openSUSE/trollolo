@@ -20,7 +20,7 @@ require_relative '../lib/trollolo'
 
 config_path = ENV['TROLLOLO_CONFIG_PATH'] || File.expand_path('~/.trollolorc')
 
-Cli.settings = Settings.new(config_path)
+CliSettings.settings = Settings.new(config_path)
 
 # Set debug flag, so thor throws exceptions on error
 ENV['THOR_DEBUG'] = '1'
