@@ -70,26 +70,11 @@ describe Scrum::SprintCleaner do
       allow_any_instance_of(BurndownChart).to receive(:update)
     end
 
-<<<<<<< HEAD
-    it 'does not generate new burndown data per default' do
-      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
-      expect do
-        sprint_cleaner.cleanup
-      end.not_to output(/^(Update data for sprint 1)/).to_stdout
-    end
-
-    it 'generates new burndown data when run_burndown parameter is true' do
-      expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
-      expect do
-        sprint_cleaner.cleanup(run_burndown: true)
-      end.to output(/^(Update data for sprint 1)*/).to_stdout
-=======
     it 'generates new burndown data' do
       expect(old_story_card).to receive(:move_to_board).with(target_board, ready_for_estimation).exactly(3).times
       expect do
         sprint_cleaner.cleanup
       end.to output(/^(New burndown data was generated automatically)/).to_stdout
->>>>>>> Remove VCR from tests
     end
   end
 
