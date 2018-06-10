@@ -17,8 +17,10 @@
 
 require 'thor'
 require 'json'
+require 'json-diff'
 require 'yaml'
 require 'erb'
+require 'pp'
 
 require_relative 'array'
 require_relative 'version'
