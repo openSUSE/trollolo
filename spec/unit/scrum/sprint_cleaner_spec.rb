@@ -7,9 +7,19 @@ describe Scrum::SprintCleaner do
     expect(subject).to be
   end
 
-  it 'moves remaining cards to target board', vcr: 'sprint_cleanup', vcr_record: false do
-    expect(STDOUT).to receive(:puts).exactly(13).times
-    expect(subject.cleanup('7Zar7bNm', '72tOJsGS')).to be
+  context 'given set-last-sprint-label flag is true' do
+    before do
+      allow(Trello::Label).to receive(:create)
+      allow_any_instance_of(Trello::Card).to receive(:add_label)
+    end
+
+    it 'moves remaining cards to target board', vcr: 'sprint_cleanup', vcr_record: false do
+      expect(STDOUT).to receive(:puts).exactly(13).times
+      expect(subject.cleanup('7Zar7bNm', '72tOJsGS', set_last_sprint_label: true)).to be
+      subject.sprint_board('7Zar7bNm').backlog_list.cards.each do |card|
+        expect(card).to receive(:add_label).once
+      end
+    end
   end
 
   context 'given correct burndown-data-xx.yaml' do

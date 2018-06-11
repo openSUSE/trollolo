@@ -72,7 +72,8 @@ class Settings
       },
       'label_names' => {
         'sticky' => 'Sticky',
-        'waterline' => 'Under waterline'
+        'waterline' => 'Under waterline',
+        'in_last_sprint' => 'In last sprint'
       },
       'list_names' => {
         'sprint_backlog' => 'Sprint Backlog',
