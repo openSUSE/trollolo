@@ -32,6 +32,12 @@ describe BurndownChart do
     end
   end
 
+  describe 'burndown_data_filename' do
+    it 'returns filename' do
+      expect(@chart.burndown_data_filename).to eq 'burndown-data-01.yml'
+    end
+  end
+
   describe 'data' do
     use_given_filesystem
 
@@ -367,7 +373,7 @@ EOT
     describe 'last_sprint' do
       it 'gets the last sprint based on the burndown files' do
         path = given_directory_from_data('burndown_dir')
-        expect(@chart.last_sprint(path)).to eq(2)
+        expect(@chart.last_sprint(path)).to eq(3)
       end
     end
 
