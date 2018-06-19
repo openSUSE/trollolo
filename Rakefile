@@ -10,3 +10,13 @@ namespace :gem do
     system 'gem build trollolo.gemspec'
   end
 end
+
+namespace :stylecheck do
+  task :ruby do
+    system 'bundle exec rubocop -D'
+  end
+
+  task :python do
+    system 'pycodestyle scripts/'
+  end
+end
