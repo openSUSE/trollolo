@@ -365,7 +365,7 @@ EOT
       planning_board: boards.planning_board(board_from_id(options['board-id'])),
       target_board: board_from_id(options['target-board-id'])
     )
-    s.cleanup(options['set-last-sprint-label'])
+    s.cleanup(set_last_sprint_label: options['set-last-sprint-label'])
   end
 
   desc 'move-backlog', 'Move the planning backlog to the sprint board'

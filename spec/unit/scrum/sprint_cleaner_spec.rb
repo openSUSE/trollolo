@@ -65,9 +65,9 @@ describe Scrum::SprintCleaner do
     end
   end
 
-  context 'with named parameter not given', :focus do
+  context 'with named parameter not given' do
     it 'should raise ArgumentError' do
-      expect { subject.cleanup('7Zar7bNm', '72tOJsGS', true) }.to raise_error(ArgumentError)
+      expect { subject.cleanup(true) }.to raise_error(ArgumentError)
     end
   end
 
