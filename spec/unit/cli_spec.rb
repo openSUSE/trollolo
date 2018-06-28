@@ -253,4 +253,13 @@ EOT
       expect(@cli.send(:board_id, 'MyTrelloBoard')).to eq('53186e8391ef8671265eba9d')
     end
   end
+
+  context 'sprint cleanup' do
+    it 'should not return ArgumentError' do
+      @cli.options = {'board-id' => '1234', 'target-board-id' => '123'}
+      expect do
+        @cli.cleanup_sprint
+      end.not_to raise_error(ArgumentError)
+    end
+  end
 end

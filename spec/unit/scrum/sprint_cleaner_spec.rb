@@ -65,6 +65,12 @@ describe Scrum::SprintCleaner do
     end
   end
 
+  context 'with named parameter not given', :focus do
+    it 'should raise ArgumentError' do
+      expect { subject.cleanup('7Zar7bNm', '72tOJsGS', true) }.to raise_error(ArgumentError)
+    end
+  end
+
   context 'given correct burndown-data-xx.yaml' do
     before do
       allow_any_instance_of(BurndownChart).to receive(:update)
