@@ -360,7 +360,7 @@ EOT
     require_trello_credentials
 
     boards = Scrum::Boards.new(@@settings.scrum)
-    s = Scrum::SprintCleaner.new(@@setting)
+    s = Scrum::SprintCleaner.new(@@settings)
     s.setup_boards(
       planning_board: boards.planning_board(board_from_id(options['board-id'])),
       target_board: board_from_id(options['target-board-id'])
