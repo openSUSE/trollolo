@@ -254,12 +254,26 @@ EOT
     end
   end
 
-  context 'sprint cleanup' do
-    it 'should not return ArgumentError' do
-      @cli.options = {'board-id' => '1234', 'target-board-id' => '123'}
+  context 'sprint cleanup', :focus do
+    let(:planning_board) { double('planning-board', id: 1) }
+    let(:target_board) { double('target-board', id: 2) }
+    let(:backlog_list) { double('backlog-list', name: 'Backlog', cards: [card1, card2]) }
+    let(:card1) { double('card', name: '(7) Outra coisa a fazer') }
+    let(:card2) { double('card', name: '(3) Fazer outra coisa') }
+
+    before do
+      allow(Trello::Board).to receive(:find).with('neUHHzDo').and_return(target_board)
+      allow(Trello::Board).to receive(:find).with('P4kJA4bE').and_return(planning_board)
+      allow(planning_board).to receive(:lists).and_return([backlog_list])
+      expect_any_instance_of(Scrum::SprintCleaner).to receive(:cleanup).with(set_last_sprint_label: false)
+    end
+
+    it 'should not raise error' do
+      full_board_mock
+      @cli.options = {'board-id' => 'P4kJA4bE', 'target-board-id' => 'neUHHzDo', 'set-last-sprint-label' => false}
       expect do
         @cli.cleanup_sprint
-      end.not_to raise_error(ArgumentError)
+      end.to_not raise_error
     end
   end
 end
