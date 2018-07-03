@@ -358,14 +358,13 @@ EOT
   def cleanup_sprint
     process_global_options options
     require_trello_credentials
-
     boards = Scrum::Boards.new(@@settings.scrum)
     s = Scrum::SprintCleaner.new(@@settings)
     s.setup_boards(
       planning_board: boards.planning_board(board_from_id(options['board-id'])),
       target_board: board_from_id(options['target-board-id'])
     )
-    s.cleanup(options['set-last-sprint-label'])
+    s.cleanup(set_last_sprint_label: options['set-last-sprint-label'])
   end
 
   desc 'move-backlog', 'Move the planning backlog to the sprint board'
