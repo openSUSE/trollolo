@@ -2,10 +2,10 @@ module Scrum
   class SprintCleaner < TrelloService
     include BoardLocator
 
-    def cleanup(set_last_sprint_label: false)
+    def cleanup(set_last_sprint_label: false, run_burndown: false)
       load
 
-      gen_burndown
+      gen_burndown if run_burndown
 
       move_cards(@board.backlog_list, set_last_sprint_label)
       move_cards(@board.doing_list, set_last_sprint_label) if @board.doing_list
@@ -64,7 +64,7 @@ module Scrum
       chart = BurndownChart.new(@settings)
       begin
         chart.update({})
-        puts 'New burndown data was generated automatically.'
+        puts "Updated data for sprint #{chart.sprint}"
       rescue TrolloloError => e
         if e.message =~ /(burndown-data-)\d*.yaml' (not found)/
           puts e.message + '. Skipping automatic burndown generation.'
