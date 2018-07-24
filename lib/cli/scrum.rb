@@ -42,13 +42,16 @@ class CliScrum < Thor
   EOT
   option 'board-id', desc: 'Id of the board', required: true
   option 'target-board-id', desc: 'Id of the target board', required: true
+  option 'burndown-update', desc: 'Generate new burndown data', type: :boolean, default: false
   def end_sprint
     CliSettings.process_global_options options
     CliSettings.require_trello_credentials
 
-    s = Scrum::SprintCleaner.new(CliSettings.settings)
-    s.cleanup(CliSettings.board_id(options['board-id']),
-              CliSettings.board_id(options['target-board-id']))
+    boards = Scrum::Boards.new(CliSettings.settings.scrum)
+    cleaner = Scrum::SprintCleaner.new(CliSettings.settings)
+    cleaner.setup_boards(sprint_board: boards.sprint_board(CliSettings.board_from_id(options['board-id'])),
+                         target_board: CliSettings.board_from_id(options['target-board-id']))
+    cleaner.cleanup(run_burndown: options['burndown-update'])
   end
 
   desc 'start', 'Move the planning backlog to the sprint board'
