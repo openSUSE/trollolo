@@ -42,6 +42,17 @@ class CliBurndown < Thor
     end
   end
 
+  desc 'remote', 'remote burndown'
+  option 'board-id', desc: 'Id of Trello board', required: true
+  option :init, type: :boolean, desc: 'init'
+  def remote
+    process_global_options options
+    require_trello_credentials
+
+    remote_burndown = RemoteBurndown.new(@@settings, board_id(options['board-id']), options[:init])
+    remote_burndown.update
+  end
+
   desc 'plot SPRINT-NUMBER [--output] [--no-tasks] [--with-fast-lane]', 'Plot burndown chart for given sprint'
   option :output, aliases: :o, desc: 'Output directory', required: false
   option 'with-fast-lane', desc: 'Plot Fast Lane with new cards bars', required: false, type: :boolean

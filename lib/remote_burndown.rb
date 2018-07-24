@@ -1,7 +1,7 @@
 class RemoteBurndown
   attr_accessor :data
 
-  def initialize(settings, board_id)
+  def initialize(settings, board_id, is_init)
     @settings = settings
     @board_id = board_id
     @data = {
@@ -13,8 +13,7 @@ class RemoteBurndown
       },
       'days' => []
     }
-
-    write_data
+    write_data if is_init
   end
 
   def update
@@ -51,7 +50,8 @@ class RemoteBurndown
 
   def update_data(burndown_data)
     new_entry = burndown_data.to_hash
-    if entry_exists?(burndown_data.date_time.to_date) && @data['days'].length > 1
+
+    if entry_exists?(burndown_data.date_time.to_date) && @data['days'].empty?
       replace_entry(burndown_data.date_time.to_date, new_entry)
     else
       @data['days'].push(new_entry)
