@@ -2,7 +2,6 @@ language: ruby
 cache: bundler
 before_install:
   - gem list bundler
-  - sudo pip install pycodestyle
 rvm:
   - "2.2.3"
   - "2.3.1"
@@ -10,7 +9,6 @@ rvm:
   - "2.5.0"
 script:
   - 'bundle exec rubocop -D'
-  - 'pycodestyle --first scripts/'
   - 'bundle exec rspec spec/unit'
 sudo: false
 

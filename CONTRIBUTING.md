@@ -40,16 +40,11 @@ Install the gem:
 
 `gem install trollolo-<version>.gem`
 
-### To run style checkers
+### To run rubocop
 
-* **Ruby**: We are using RuboCop as a Ruby static code analyzer. It will enforce many of the guidelines outlined in the community Ruby Style Guide. To run Rubocop displaying cop names in offense messages:
-`bundle exec rake stylecheck:ruby`
+To run Rubocop displaying cop names in offense messages:
 
-* **Python**: We are using pycodestyle (formerly pep8) as a tool to check Python code against some of the style conventions in PEP 8.
-`bundle exec rake stylecheck:python`
-
->You need install `pycodestyle` package first, by the following command: 
-`pip install pycodestyle` 
+`bundle exec rubocop -D`
 
 ## Code of Conduct
 

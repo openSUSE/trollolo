@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 import matplotlib
 import imp
+try:
+  imp.find_module('TkAgg')
+  mac_backend_available = True
+except ImportError:
+  mac_backend_available = False
+
+if mac_backend_available:
+  matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as plt
 import argparse
 import os
@@ -8,39 +17,32 @@ import os
 import burndowndata
 import plot
 import graph
-try:
-    imp.find_module('TkAgg')
-    mac_backend_available = True
-except ImportError:
-    mac_backend_available = False
-
-if mac_backend_available:
-    matplotlib.use('TkAgg')
 
 
 def parseCommandLine():
-    epilog = "Look at https://github.com/openSUSE/trollolo for details"
-    description = "Generates Scrum Burndown Chart from YAML file"
+  epilog = "Look at https://github.com/openSUSE/trollolo for details"
+  description = "Generates Scrum Burndown Chart from YAML file"
 
-    parser = argparse.ArgumentParser(epilog=epilog, description=description)
-    parser.add_argument('sprint', metavar='NUM', help='Sprint Number')
-    parser.add_argument('--output', help='Location of data to process')
-    parser.add_argument('--no-tasks', action='store_true', help='Disable Tasks line in the chart', default=False)
-    parser.add_argument('--with-fast-lane', action='store_true', help='Draw line for Fast Lane cards', default=False)
-    parser.add_argument('--verbose', action='store_true', help='Verbose Output', default=False)
-    parser.add_argument('--no-head', action='store_true', help='Run in headless mode', default=False)
-    args = parser.parse_args()
+  parser = argparse.ArgumentParser(epilog=epilog, description=description)
+  parser.add_argument('sprint', metavar='NUM', help='Sprint Number')
+  parser.add_argument('--output', help='Location of data to process')
+  parser.add_argument('--no-tasks', action='store_true', help='Disable Tasks line in the chart', default=False)
+  parser.add_argument('--with-fast-lane', action='store_true', help='Draw line for Fast Lane cards', default=False)
+  parser.add_argument('--verbose', action='store_true', help='Verbose Output', default=False)
+  parser.add_argument('--no-head', action='store_true', help='Run in headless mode', default=False)
+  args = parser.parse_args()
 
-    if args.output:
-        os.chdir(args.output)
+  if args.output:
+    os.chdir(args.output)
 
-    if args.verbose:
-        print args
+  if args.verbose:
+    print args
 
-    return args
+  return args
 
 
-# MAIN
+
+### MAIN ###
 
 # parseCommandLine() needs to be called at the beginning to retrieve the
 # command line parameters or provide help on these. It returns a dict
@@ -63,7 +65,6 @@ def parseCommandLine():
 #
 # --verbose          Verbose output
 #
-
 args = parseCommandLine()
 
 # Create burndown data object
@@ -98,28 +99,29 @@ graph_story_points.draw(y_label, color, color_unplanned, marker, linestyle, line
 legend_list.append(graph_story_points.subplot)
 
 if not args.no_tasks:
-    graph_tasks = graph.Graph(plot.tasks())
+  graph_tasks = graph.Graph(plot.tasks())
 
-    y_label = "Tasks"
-    color = "green"
-    color_unplanned = "chartreuse"
-    label_unplanned = "Unplanned Tasks"
+  y_label = "Tasks"
+  color = "green"
+  color_unplanned = "chartreuse"
+  label_unplanned = "Unplanned Tasks"
 
-    graph_tasks.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label_unplanned, plot)
-    legend_list.append(graph_tasks.subplot)
+  graph_tasks.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label_unplanned, plot)
+  legend_list.append(graph_tasks.subplot)
 
 if args.with_fast_lane:
-    graph_fast_lane = graph.Graph(plot.fastLane())
+  graph_fast_lane = graph.Graph(plot.fastLane())
 
-    y_label = "Fast Lane"
-    color = "red"
-    label = "Fast Lane"
+  y_label = "Fast Lane"
+  color = "red"
+  label = "Fast Lane"
 
-    graph_fast_lane.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label, plot)
-    legend_list.append(graph_fast_lane.subplot)
-
+  graph_fast_lane.draw(y_label, color, color_unplanned, marker, linestyle, linewidth, label, plot)
+  legend_list.append(graph_fast_lane.subplot)
+    
 # Draw legend
 plot.drawLegend(legend_list)
 
 # Save the burndown chart
 plot.saveImage(args)
+
