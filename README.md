@@ -1,3 +1,4 @@
+Just testing something
 # Trollolo
 
 [![Build Status](https://travis-ci.org/openSUSE/trollolo.svg?branch=master)](https://travis-ci.org/openSUSE/trollolo)
