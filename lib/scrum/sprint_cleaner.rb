@@ -2,7 +2,7 @@ module Scrum
   class SprintCleaner < TrelloService
     include BoardLocator
 
-    def cleanup(set_last_sprint_label: false, run_burndown: false)
+    def cleanup(set_last_sprint_label: false)
       load
 
       gen_burndown if run_burndown
