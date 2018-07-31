@@ -1,6 +1,7 @@
 require_relative '../spec_helper'
 
 describe CliGet do
+  include GivenFilesystemSpecHelpers
   use_given_filesystem
 
   before(:each) do

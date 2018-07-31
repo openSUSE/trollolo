@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe Backup do
+  include GivenFilesystemSpecHelpers
+
   it 'sets backup directory' do
     backup = Backup.new(dummy_settings)
     expect(backup.directory).to match File.expand_path('~/.trollolo/backup')

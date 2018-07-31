@@ -1,8 +1,5 @@
 require_relative 'integration_spec_helper'
 
-include GivenFilesystemSpecHelpers
-include CliTester
-
 def run_helper(working_dir, sprint_number, extra_args = [])
   helper_dir = File.expand_path('../../../scripts', __FILE__)
   args = ['run']
@@ -28,6 +25,8 @@ end
 
 describe 'create_burndown.py' do
   use_given_filesystem(keep_files: true)
+  include GivenFilesystemSpecHelpers
+  include CliTester
 
   before(:all) do
     if `docker images -q trollolo-matplotlib`.empty?

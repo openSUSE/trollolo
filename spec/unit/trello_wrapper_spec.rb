@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe TrelloWrapper do
+  include GivenFilesystemSpecHelpers
 
   let!(:settings){ double('settings', developer_public_key: 'mykey', member_token: 'mytoken') }
   subject { described_class.new(settings) }
