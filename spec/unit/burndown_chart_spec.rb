@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe BurndownChart do
+  include GivenFilesystemSpecHelpers
 
   subject { BurndownChart.new(dummy_settings) }
 

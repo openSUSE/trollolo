@@ -1,8 +1,7 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe Cli do
+  include GivenFilesystemSpecHelpers
   use_given_filesystem
 
   before(:each) do

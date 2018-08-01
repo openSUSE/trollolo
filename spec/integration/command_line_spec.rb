@@ -1,8 +1,5 @@
 require_relative 'integration_spec_helper'
 
-include GivenFilesystemSpecHelpers
-include CliTester
-
 def trollolo_cmd
   File.expand_path('../wrapper/trollolo_wrapper', __FILE__)
 end
@@ -16,6 +13,8 @@ def credentials_input_wrapper
 end
 
 describe 'command line' do
+  include GivenFilesystemSpecHelpers
+  include CliTester
 
   it 'processes help option' do
     result = run_command(args: ['-h'])

@@ -1,7 +1,5 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe BurndownData do
   context 'with full board mock' do
     before(:each) do

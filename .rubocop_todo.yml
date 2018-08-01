@@ -340,17 +340,6 @@ Style/IfUnlessModifier:
     - 'spec/integration/integration_spec_helper.rb'
     - 'spec/unit/spec_helper.rb'
 
-# Offense count: 9
-Style/MixinUsage:
-  Exclude:
-    - 'spec/integration/command_line_spec.rb'
-    - 'spec/integration/create_burndown_spec.rb'
-    - 'spec/unit/backup_spec.rb'
-    - 'spec/unit/burndown_chart_spec.rb'
-    - 'spec/unit/burndown_data_spec.rb'
-    - 'spec/unit/cli_spec.rb'
-    - 'spec/unit/trello_wrapper_spec.rb'
-
 # Offense count: 1
 Style/MultilineBlockChain:
   Exclude:
