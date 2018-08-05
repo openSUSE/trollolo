@@ -26,13 +26,13 @@ class RemoteBurndown
   end
 
   def plot
-    f = File.open( burndown_data_filename, 'w' ) do |file|
+    File.open(burndown_data_filename, 'w') do |file|
       file.write @data.to_yaml
     end
 
     BurndownPlot.plot(@data['meta']['sprint'], nil)
     plot_to_board
-    
+
     File.delete(burndown_data_filename)
     File.delete(burndown_name)
   end
@@ -62,7 +62,7 @@ class RemoteBurndown
 
   def update_data(burndown_data)
     new_entry = burndown_data.to_hash
-    
+
     if entry_exists?(burndown_data.date_time.to_date)
       replace_entry(burndown_data.date_time.to_date, new_entry)
     else
