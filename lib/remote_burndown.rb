@@ -25,6 +25,18 @@ class RemoteBurndown
     write_data
   end
 
+  def plot
+    f = File.open( burndown_data_filename, 'w' ) do |file|
+      file.write @data.to_yaml
+    end
+
+    BurndownPlot.plot(@data['meta']['sprint'], nil)
+    plot_to_board
+    
+    File.delete(burndown_data_filename)
+    File.delete(burndown_name)
+  end
+
   def read_data
     trello = TrelloWrapper.new(@settings)
     board = trello.board(@board_id)
@@ -50,8 +62,8 @@ class RemoteBurndown
 
   def update_data(burndown_data)
     new_entry = burndown_data.to_hash
-
-    if entry_exists?(burndown_data.date_time.to_date) && @data['days'].empty?
+    
+    if entry_exists?(burndown_data.date_time.to_date)
       replace_entry(burndown_data.date_time.to_date, new_entry)
     else
       @data['days'].push(new_entry)
@@ -88,5 +100,22 @@ class RemoteBurndown
     @data['days'].each_with_index do |entry, idx|
       @data['days'][idx] = new_entry if entry['date'] == date.to_s
     end
+  end
+
+  def plot_to_board
+    trello = TrelloWrapper.new(@settings)
+    board = trello.board(@board_id)
+    burndown_name = "burndown-#{@data['meta']['sprint'].to_s.rjust(2, '0')}.png"
+    card_id = board.burndown_card_id
+
+    response = trello.add_attachment(card_id, burndown_name)
+
+    if /{\"id\":\"(?<attachment_id>\w+)\"/ =~ response
+      trello.make_cover_with_id(card_id, attachment_id)
+    end
+  end
+
+  def burndown_data_filename
+    "burndown-data-#{@data['meta']['sprint'].to_s.rjust(2, '0')}.yaml"
   end
 end

@@ -46,11 +46,12 @@ class CliBurndown < Thor
   option 'board-id', desc: 'Id of Trello board', required: true
   option :init, type: :boolean, desc: 'init'
   def remote
-    process_global_options options
-    require_trello_credentials
+    CliSettings.process_global_options options
+    CliSettings.require_trello_credentials
 
-    remote_burndown = RemoteBurndown.new(@@settings, board_id(options['board-id']), options[:init])
+    remote_burndown = RemoteBurndown.new(CliSettings.settings, CliSettings.board_id(options['board-id']), options[:init])
     remote_burndown.update
+    remote_burndown.plot
   end
 
   desc 'plot SPRINT-NUMBER [--output] [--no-tasks] [--with-fast-lane]', 'Plot burndown chart for given sprint'
@@ -59,7 +60,7 @@ class CliBurndown < Thor
   option 'no-tasks', desc: 'Do not plot tasks line', required: false, type: :boolean
   def plot(sprint_number)
     CliSettings.process_global_options options
-    BurndownChart.plot(sprint_number, options)
+    BurndownPlot.plot(sprint_number, options)
   end
 
   desc 'multi-update', 'run multiple burndowns updates'
