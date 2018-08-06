@@ -681,7 +681,7 @@
       ],
       "closed": false,
       "dateLastActivity": "2016-10-13T11:25:39.830Z",
-      "desc": "",
+      "desc": "```yaml\n---\nmeta:\n  board_id: P4kJA4bE\n  sprint: 1\n  total_days: 10\n  weekend_lines:\n  - 3.5\n  - 8.5\ndays: []\n```",
       "descData": null,
       "idBoard": "57ff6f33a8d18219092685d4",
       "idList": "57ff6f33a8d18219092685d7",
