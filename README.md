@@ -77,7 +77,7 @@ board_aliases:
 You can issue the command:
 
 ```
-  trollolo get-cards --board-id=MyTrelloBoard
+  trollolo get cards --board-id=MyTrelloBoard
 ```
 
 ## Creating burndown charts
@@ -96,13 +96,13 @@ The work flow goes as follows:
 Start the workflow by using the current directory as working directory and
 initialize it for the burndown chart generation:
 
-    trollolo burndown-init --board-id=MYBOARDID
+    trollolo burndown init --board-id=MYBOARDID
 
 By default, trollolo uses the current directory as working directory, if you
 want to specify another directory as working directory, use the `--output`
 option as follows:
 
-    trollolo burndown-init --board-id=MYBOARDID --output=WORKING_DIR
+    trollolo burndown init --board-id=MYBOARDID --output=WORKING_DIR
 
 This will create a directory WORKING_DIR and put an initial data file there,
 which contains the meta data. The file is called `burndown-data-1.yaml`. You
@@ -110,7 +110,7 @@ might want to keep this file in a git repository for safe storage and history.
 
 After each daily go to the working directory and call:
 
-    trollolo burndown
+    trollolo burndown update
 
 This will get the current data from the Trello board and update the data file
 with the data from the current day. If there already was some data in the file
@@ -119,7 +119,7 @@ for the same day it will be overridden.
 When the sprint is over and you want to start with the next sprint, go to the
 working directory and call:
 
-    trollolo burndown --new-sprint
+    trollolo burndown update --new-sprint
 
 This will create a new data file for the next sprint number and populate it
 with initial data taken from the Trello board. You are ready to go for the
@@ -127,7 +127,7 @@ sprint now and can continue with calling `trollolo burndown` after each daily.
 
 To push the current state of the scrum process (current day) to an api endpoint call:
 
-    trollolo burndown --push-to-api URL
+    trollolo burndown update --push-to-api URL
 
 Trollolo will send a json encoded POST request to `URL` with the same structure as the generated burndown yaml file.
 
@@ -141,11 +141,11 @@ The specified `URL` can contain placeholders which will be replaced:
 
 To generate the actual burndown chart, go to the working directory and call:
 
-    trollolo plot SPRINT_NUMBER
+    trollolo burndown plot SPRINT_NUMBER
 
 or fetch and plot data in one step with:
 
-    trollolo burndown --plot
+    trollolo burndown update --plot
 
 This will take the data from the file `burndown-data-SPRINT_NUMBER.yaml` and
 create a nice chart from it. It will show the chart and also create a file
@@ -249,15 +249,15 @@ Since several boards can share the same name, they are only used when creating t
 
 Create the boards and lists:
 
-    trollolo setup-scrum
+    trollolo scrum init
 
 Lookup the ID of the created boards and use them as arguments:
 
     # https://trello.com/b/123abC/sprint-board
     # https://trello.com/b/GHi456/planning-board
 
-    trollolo cleanup-sprint --board-id=123abC --target-board-id=GHi456
-    trollolo set-priorities --board-id=GHi456
-    trollolo move-backlog --planning-board-id=GHi456 --sprint-board-id=123abC
+    trollolo scrum end --board-id=123abC --target-board-id=GHi456
+    trollolo scrum prioritize --board-id=GHi456
+    trollolo scrum start --planning-board-id=GHi456 --sprint-board-id=123abC
 
 You can use aliases, as described in the configuration section, instead of IDs.
