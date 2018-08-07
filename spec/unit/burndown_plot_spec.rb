@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
 
-include GivenFilesystemSpecHelpers
-
 describe BurndownPlot do
+  include GivenFilesystemSpecHelpers
+
   describe '.plot' do
     it 'sends joined parsed options to python script' do
       allow(described_class).to receive(:process_options).and_return(%w{ --test 1 --no-blah })
