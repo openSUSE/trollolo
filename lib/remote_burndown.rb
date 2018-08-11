@@ -26,15 +26,17 @@ class RemoteBurndown
   end
 
   def plot
-    File.open(burndown_data_filename, 'w') do |file|
+    Dir.mkdir './trollolotemp'
+    File.open(File.join('./trollolotemp', burndown_data_filename), 'w') do |file|
       file.write @data.to_yaml
     end
 
-    BurndownPlot.plot(@data['meta']['sprint'], nil)
+    BurndownPlot.plot(@data['meta']['sprint'], 'output' => './trollolotemp/', 'headless' => true)
     plot_to_board
 
-    File.delete(burndown_data_filename)
-    File.delete(burndown_name)
+    File.delete(File.join('./trollolotemp', burndown_data_filename))
+    File.delete(File.join('./trollolotemp', burndown_image_name))
+    Dir.rmdir('./trollolotemp')
   end
 
   def read_data
@@ -105,14 +107,17 @@ class RemoteBurndown
   def plot_to_board
     trello = TrelloWrapper.new(@settings)
     board = trello.board(@board_id)
-    burndown_name = "burndown-#{@data['meta']['sprint'].to_s.rjust(2, '0')}.png"
     card_id = board.burndown_card_id
 
-    response = trello.add_attachment(card_id, burndown_name)
+    response = trello.add_attachment(card_id, File.join('./trollolotemp', burndown_image_name))
 
     if /{\"id\":\"(?<attachment_id>\w+)\"/ =~ response
       trello.make_cover_with_id(card_id, attachment_id)
     end
+  end
+
+  def burndown_image_name
+    "burndown-#{@data['meta']['sprint'].to_s.rjust(2, '0')}.png"
   end
 
   def burndown_data_filename

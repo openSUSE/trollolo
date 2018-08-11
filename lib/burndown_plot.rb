@@ -16,6 +16,7 @@ class BurndownPlot
       cli_switches << '--with-fast-lane'           if hash['with-fast-lane']
       cli_switches << "--output #{hash['output']}" if hash['output']
       cli_switches << '--verbose'                  if hash['verbose']
+      cli_switches << '--no-head'                  if hash['headless']
     end
   end
 end
