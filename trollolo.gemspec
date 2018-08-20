@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'thor', '~> 0.19'
   s.add_dependency 'ruby-trello', '~> 2.0'
   s.add_dependency 'activemodel', '~> 5.1.5'
+  s.add_dependency 'json-diff', '~> 0.4.1'
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ %r{^bin/(.*)} ? Regexp.last_match(1) : nil}.compact
