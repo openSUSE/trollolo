@@ -148,32 +148,6 @@ class BurndownChart
     write_data File.join(burndown_dir, burndown_data_filename)
   end
 
-  class << self
-
-    def plot_helper
-      File.expand_path('../../scripts/create_burndown.py', __FILE__ )
-    end
-
-    def plot(sprint_number, options)
-      sprint_number = sprint_number.to_s.rjust(2, '0')
-      cli_switches = process_options(options)
-      system "python #{plot_helper} #{sprint_number} #{cli_switches.join(' ')}"
-    end
-
-    private
-
-    def process_options(hash)
-      return [] unless hash
-      [].tap do |cli_switches|
-        cli_switches << '--no-tasks'                 if hash['no-tasks']
-        cli_switches << '--with-fast-lane'           if hash['with-fast-lane']
-        cli_switches << "--output #{hash['output']}" if hash['output']
-        cli_switches << '--verbose'                  if hash['verbose']
-      end
-    end
-
-  end
-
   def last_sprint(burndown_dir)
     last_sprint = sprint
     Dir.glob("#{burndown_dir}/burndown-data-*.yaml").each do |file|
@@ -209,7 +183,7 @@ class BurndownChart
     write_data(burndown_data_path)
 
     if options[:plot] || options[:plot_to_board]
-      BurndownChart.plot(sprint, options)
+      BurndownPlot.plot(sprint, options)
     end
 
     push_to_api(options['push-to-api'], data) if options.key?('push-to-api')
@@ -237,5 +211,4 @@ class BurndownChart
     @data['days'] = []
     write_data File.join(burndown_dir, burndown_data_filename)
   end
-
 end
