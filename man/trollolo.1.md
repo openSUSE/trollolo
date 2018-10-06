@@ -73,6 +73,11 @@ For correct generation of the burndown chart, the Trello board has to follow
 a few convention. They are described in the section `CONVENTIONS for SCRUM
 BOARDS`.
 
+`trollolo burndown update --output=<output_directory> --location=<location_directory> --plot`
+
+Update the burndown data in output_directory and plot the burndown chart for 
+the data and save the file in location_directory.
+
 ### burndown multi-update -- Process data for multiple burndown charts at once
 
 `trollolo burndown multi-update --board-list=<board list>`

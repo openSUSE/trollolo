@@ -169,6 +169,7 @@ class BurndownChart
         cli_switches << '--with-fast-lane'           if hash['with-fast-lane']
         cli_switches << "--output #{hash['output']}" if hash['output']
         cli_switches << '--verbose'                  if hash['verbose']
+        cli_switches << "--location #{hash['location']}" if hash['location']
       end
     end
 

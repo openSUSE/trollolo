@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import matplotlib.pyplot as plt
+import os
 
 
 class Plot:
@@ -68,9 +69,15 @@ class Plot:
     return
 
   def saveImage(self, args):
-    plt.savefig('burndown-' + args.sprint + '.png',bbox_inches='tight')
+    path = args.location
+    image_path = 'burndown-' + args.sprint + '.png'
+    if path:
+        if not os.path.exists(path):
+            os.makedirs(path)
+        image_path = os.path.join(path,image_path)
+    plt.savefig(image_path,bbox_inches='tight')
     if not args.no_head:
-      plt.show()
+        plt.show()
     return
 
   def createSubplot(self):
