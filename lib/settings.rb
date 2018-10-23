@@ -24,7 +24,7 @@ class Settings
 
   def initialize(config_file_path)
     @config_file_path = config_file_path
-    if File.exists? config_file_path
+    if File.exist? config_file_path
       @config = YAML.load_file(config_file_path)
 
       if @config
